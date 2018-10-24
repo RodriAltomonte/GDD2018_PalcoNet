@@ -256,7 +256,34 @@ GO
 
 
 ------------------------------FOREING KEYS---------------------------------
-------------------------------EJECUTO MIGRACION---------------------------------
+ALTER TABLE LOS_DE_GESTION.Premio_Canjeado ADD FOREIGN KEY ([id_premio]) REFERENCES [LOS_DE_GESTION].Premio
+ALTER TABLE LOS_DE_GESTION.Premio_Canjeado ADD FOREIGN KEY ([usuario_cliente]) REFERENCES [LOS_DE_GESTION].Cliente
+
+ALTER TABLE LOS_DE_GESTION.Usuario ADD FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol
+
+ALTER TABLE LOS_DE_GESTION.Rol_X_Funcionalidad ADD FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol
+ALTER TABLE LOS_DE_GESTION.Rol_X_Funcionalidad ADD FOREIGN KEY (id_Funcionalidad) REFERENCES [LOS_DE_GESTION].Funcionalidad
+
+ALTER TABLE LOS_DE_GESTION.Publicacion ADD FOREIGN KEY (id_Rubro) REFERENCES [LOS_DE_GESTION].Rubro
+ALTER TABLE LOS_DE_GESTION.Publicacion ADD FOREIGN KEY (id_Grado_Publicacion) REFERENCES [LOS_DE_GESTION].Grado_Publicacion
+ALTER TABLE LOS_DE_GESTION.Publicacion ADD FOREIGN KEY (usuario_empresa_vendedora) REFERENCES [LOS_DE_GESTION].Empresa
+ALTER TABLE LOS_DE_GESTION.Publicacion ADD FOREIGN KEY (id_Estado_Publicacion) REFERENCES [LOS_DE_GESTION].Estado_Publicacion
+
+ALTER TABLE LOS_DE_GESTION.Item_Rendicion ADD FOREIGN KEY (id_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
+
+ALTER TABLE LOS_DE_GESTION.Rendicion ADD FOREIGN KEY (usuario_empresa_a_rendir) REFERENCES [LOS_DE_GESTION].Empresa
+
+ALTER TABLE LOS_DE_GESTION.Compra ADD FOREIGN KEY (usuario_cliente_comprador) REFERENCES [LOS_DE_GESTION].Cliente
+ALTER TABLE LOS_DE_GESTION.Compra ADD FOREIGN KEY (id_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
+
+ALTER TABLE LOS_DE_GESTION.Empresa ADD FOREIGN KEY (username) REFERENCES [LOS_DE_GESTION].Usuario
+
+ALTER TABLE LOS_DE_GESTION.Ubicacion ADD FOREIGN KEY (cod_publicacion) REFERENCES [LOS_DE_GESTION].Publicacion
+ALTER TABLE LOS_DE_GESTION.Ubicacion ADD FOREIGN KEY (id_Tipo_Ubicacion) REFERENCES [LOS_DE_GESTION].Tipo_Ubicacion
+ALTER TABLE LOS_DE_GESTION.Ubicacion ADD FOREIGN KEY (id_Compra) REFERENCES [LOS_DE_GESTION].Compra
+
+GO
+------------------------------EJECUTO MIGRACION-----------------------------
 EXECUTE LOS_DE_GESTION.PR_MIGRACION
 GO
 
