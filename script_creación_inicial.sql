@@ -6,6 +6,9 @@ IF OBJECT_ID('LOS_DE_GESTION.PR_MIGRACION') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_MIGRACION;
 
 ------------------------------DROP FUNCIONES------------------------------
+IF OBJECT_ID('LOS_DE_GESTION.FN_HASHPASS','FN') IS NOT NULL
+DROP FUNCTION LOS_DE_GESTION.FN_HASHPASS
+go
 ------------------------------DROP VISTAS---------------------------------
 ------------------------------DROP TRIGGERS ------------------------------
 
@@ -307,6 +310,12 @@ CREATE TABLE LOS_DE_GESTION.Premio(
 -----------------------------TRIGGERS-------------------------------------
 -----------------------------VISTAS---------------------------------------
 -----------------------------FUNCIONES------------------------------------
+CREATE FUNCTION LOS_DE_GESTION.FN_HASHPASS(@password nvarchar(255))
+RETURNS nvarchar(255)
+AS
+BEGIN
+	RETURN CONVERT(nvarchar(255),HASHBYTES('SHA2_256',@password),1)
+END
 -----------------------------STORE PROCEDURE------------------------------
 ------------------------------MIGRACION-----------------------------------
  
