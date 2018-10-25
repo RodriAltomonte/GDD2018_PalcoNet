@@ -351,6 +351,38 @@ GO
 EXECUTE LOS_DE_GESTION.PR_MIGRACION
 GO
 
+------------------------------INSERTS INICIALES-----------------------------
+INSERT INTO LOS_DE_GESTION.Rol (id_Rol, nombre, habilitado) VALUES
+(1, 'Administrativo', 1),
+(2, 'Cliente', 1),
+(3, 'Empresa', 1)
+go
+
+INSERT INTO LOS_DE_GESTION.Funcionalidad (id_Funcionalidad, nombre) VALUES
+(1, 'ABM de Rol'), --Admin
+(2, 'Registro de Usuario'),--Admin
+(3, 'ABM de Clientes'),--Admin
+(4, 'ABM de Empresa de Espectaculos'),--Admin
+(5, 'ABM de Rubro'),--Admin
+(6, 'ABM de Grado de Publicacion'),--
+(7, 'Generar Publicacion'),--Empresa
+(8, 'Editar Publicacion'),--Empresa
+(9, 'Comprar'),--Cliente
+(10, 'Historial de Cliente'),--Cliente
+(11, 'Generar rendicion de comisiones'),--Admin
+(12, 'Listado Estadistico'),--Admin
+(13, 'Modificar password'),--Cliente,Admin
+(14, 'Dar de baja un usuario')--Admin
+go
+
+/*INSERT INTO LOS_DE_GESTION.Rol_X_Funcionalidad (id_Rol, id_Funcionalidad) VALUES(0, 0);
+go*/
+
+
+
+
+------------------------------GENERACION DE ADMINISTRADOR GENERAL-----------------------------
+
 
 --select* from gd_esquema.Maestra
 
