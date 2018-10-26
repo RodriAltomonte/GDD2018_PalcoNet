@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.ABMEmpresaEspectaculo
 {
-    partial class Form1
+    partial class ABMEmpresaEspectaculoForm
     {
         /// <summary>
         /// Required designer variable.
