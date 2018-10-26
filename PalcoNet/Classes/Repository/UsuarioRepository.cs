@@ -23,7 +23,7 @@ namespace PalcoNet.Classes.Repository
             {
                 return ConnectionFactory.Instance()
                     .CreateConnection()
-                    .ExecuteStoredProcedureWithSingleOutput<Boolean>(SpNames.ValidarLogin, parameters, "@loginCorrecto");
+                    .ExecuteSingleOutputStoredProcedure<Boolean>(SpNames.ValidarLogin, parameters, "@loginCorrecto");
             }
             catch (SqlException e)
             {

@@ -38,7 +38,7 @@ namespace Classes.DatabaseConnection
         }
 
         #region Stored procedure execution
-        public TOutput ExecuteStoredProcedureWithSingleOutput<TOutput>(string procedureName, StoredProcedureParameterMap parameters, string outputParameterName)
+        public TOutput ExecuteSingleOutputStoredProcedure<TOutput>(string procedureName, StoredProcedureParameterMap parameters, string outputParameterName)
         {
             using(sqlConnection)
             using(SqlCommand command = new SqlCommand(procedureName, sqlConnection))
