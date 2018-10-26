@@ -1,5 +1,14 @@
 USE GD2C2018
-DROp PROCEDURE LOS_DE_GESTION.PR_Validar_login
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_Validar_login') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_Validar_login
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.TRG_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO') IS NOT NULL
+DROP TRIGGER LOS_DE_GESTION.TRG_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO
+go
+
 CREATE PROCEDURE LOS_DE_GESTION.PR_Validar_login @username nvarchar(255), @password nvarchar(255),@loginCorrecto bit OUTPUT
 AS 
 BEGIN
@@ -45,6 +54,9 @@ BEGIN
 				END
 		END		
 END
+go
+
+
 
 CREATE TRIGGER LOS_DE_GESTION.TRG_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO ON LOS_DE_GESTION.Usuario AFTER UPDATE
 AS
@@ -52,7 +64,4 @@ BEGIN
 	IF (select intentos_login from inserted)>3
 		update LOS_DE_GESTION.Usuario set bloqueado_login_fallidos = 1 where username = (select username from inserted)
 END
-
-declare @re bit
-exec LOS_DE_GESTION.PR_Validar_login 'user','pass',@re output
-select @re
+go
