@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data;
+using PalcoNet.Classes.DatabaseConnection;
 
 namespace Classes.DatabaseConnection
 {
     class Connection
     {
         private SqlConnection sqlConnection;
-
+        
         public Connection(string connectionString)
         {
             sqlConnection = new SqlConnection(connectionString);
         }
+
 
         public void OpenConnection()
         {
@@ -33,6 +36,25 @@ namespace Classes.DatabaseConnection
             command.ExecuteReader();
             CloseConnection();
         }
+
+        #region Stored procedure execution
+        public TOutput ExecuteStoredProcedureWithSingleOutput<TOutput>(string procedureName, StoredProcedureParameterMap parameters, string outputParameterName)
+        {
+            using(sqlConnection)
+            using(SqlCommand command = new SqlCommand(procedureName, sqlConnection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                parameters.AddParametersToCommand(command);
+
+                command.Parameters.Add(outputParameterName, SqlDbTypes.Of(typeof(TOutput))).Direction = ParameterDirection.Output;
+
+                OpenConnection();
+                command.ExecuteNonQuery();
+
+                return (TOutput)command.Parameters[outputParameterName].Value;
+            }
+        }
+        #endregion
     }
 
 }

@@ -1,5 +1,5 @@
 USE GD2C2018
-
+DROp PROCEDURE LOS_DE_GESTION.PR_Validar_login
 CREATE PROCEDURE LOS_DE_GESTION.PR_Validar_login @username nvarchar(255), @password nvarchar(255),@loginCorrecto bit OUTPUT
 AS 
 BEGIN
@@ -9,7 +9,7 @@ BEGIN
 	
 	IF NOT EXISTS (select * from LOS_DE_GESTION.Usuario where username = @username)
 		BEGIN
-			THROW 50001, 'El username o password no existe',1
+			THROW 50001, 'El username/password no existe.',1
 		END
 	ELSE
 		BEGIN
@@ -19,7 +19,7 @@ BEGIN
 					BEGIN TRAN;
 						update LOS_DE_GESTION.Usuario set intentos_login = intentos_login + 1--Ejecuta trigger
 					COMMIT TRAN;
-					THROW 50001, 'El username o password no existe',1
+					THROW 50002, 'El username/password no existe.',1
 				END
 			ELSE --Password valido
 				BEGIN
@@ -28,11 +28,11 @@ BEGIN
 					
 					IF (@estaHabilitado = 0) 
 						BEGIN
-							THROW 50002, 'El usuario fue deshabilitado por el administrador.',1
+							THROW 50003, 'El usuario fue deshabilitado por el administrador.',1
 						END
 					ELSE IF (@estaBloqueadoPorLoginFallido = 1) 
 						BEGIN
-							THROW 50003, 'El usuario fue deshabilitado por exceder la cantidad de intentos de login.',1
+							THROW 50004, 'El usuario fue deshabilitado por exceder la cantidad de intentos de login.',1
 						END
 					ELSE 
 						BEGIN
@@ -53,4 +53,6 @@ BEGIN
 		update LOS_DE_GESTION.Usuario set bloqueado_login_fallidos = 1 where username = (select username from inserted)
 END
 
-
+declare @re bit
+exec LOS_DE_GESTION.PR_Validar_login 'user','pass',@re output
+select @re

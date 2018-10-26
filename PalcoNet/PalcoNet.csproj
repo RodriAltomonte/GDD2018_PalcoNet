@@ -82,9 +82,16 @@
     </Compile>
     <Compile Include="Classes\Configuration\Configuration.cs" />
     <Compile Include="Classes\Configuration\Exception\ConfigurationPropertyNotFoundException.cs" />
+    <Compile Include="Classes\Constants\SpNames.cs" />
+    <Compile Include="Classes\CustomException\BlockedUserByAdminException.cs" />
+    <Compile Include="Classes\CustomException\BlockedUserByFailedLoginException.cs" />
+    <Compile Include="Classes\CustomException\StoredProcedureException.cs" />
+    <Compile Include="Classes\CustomException\UsernameOrPasswordNotValidException.cs" />
     <Compile Include="Classes\DatabaseConnection\Connection.cs" />
     <Compile Include="Classes\DatabaseConnection\ConnectionFactory.cs" />
     <Compile Include="Classes\Constants\RolConstants.cs" />
+    <Compile Include="Classes\DatabaseConnection\SqlDbTypes.cs" />
+    <Compile Include="Classes\DatabaseConnection\StoredProcedureParameterMap.cs" />
     <Compile Include="Classes\Factory\Form\ABMClienteEmpresaFormFactory.cs" />
     <Compile Include="Classes\Factory\UsuarioFactory.cs" />
     <Compile Include="Classes\Model\Cliente.cs" />

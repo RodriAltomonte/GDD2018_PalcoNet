@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.grpLogin = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
             this.btnRegistro = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.grpLogin.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpLogin
             // 
-            this.grpLogin.Controls.Add(this.textBox2);
-            this.grpLogin.Controls.Add(this.textBox1);
+            this.grpLogin.Controls.Add(this.txtPassword);
+            this.grpLogin.Controls.Add(this.txtUsername);
             this.grpLogin.Controls.Add(this.btnRegistro);
             this.grpLogin.Controls.Add(this.btnLogin);
             this.grpLogin.Controls.Add(this.lblPassword);
@@ -53,12 +53,12 @@
             this.grpLogin.TabStop = false;
             this.grpLogin.Text = "Bienvenido al sistema";
             // 
-            // textBox1
+            // txtUsername
             // 
-            this.textBox1.Location = new System.Drawing.Point(33, 49);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(204, 20);
-            this.textBox1.TabIndex = 4;
+            this.txtUsername.Location = new System.Drawing.Point(33, 49);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(204, 20);
+            this.txtUsername.TabIndex = 4;
             // 
             // btnRegistro
             // 
@@ -98,13 +98,13 @@
             this.lblUsername.TabIndex = 0;
             this.lblUsername.Text = "Nombre de usuario";
             // 
-            // textBox2
+            // txtPassword
             // 
-            this.textBox2.Location = new System.Drawing.Point(33, 88);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(204, 20);
-            this.textBox2.TabIndex = 5;
-            this.textBox2.UseSystemPasswordChar = true;
+            this.txtPassword.Location = new System.Drawing.Point(33, 88);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(204, 20);
+            this.txtPassword.TabIndex = 5;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // LoginForm
             // 
@@ -123,11 +123,11 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grpLogin;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Button btnRegistro;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblUsername;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtPassword;
     }
 }

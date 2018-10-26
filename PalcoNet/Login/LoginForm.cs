@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Classes.Repository;
 using PalcoNet.RegistroUsuario;
+using PalcoNet.Classes.CustomException;
 
 namespace PalcoNet.Login
 {
@@ -26,14 +27,15 @@ namespace PalcoNet.Login
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (usuarioRepository.ExisteUsuarioYContrasenia(lblUsername.Text,lblPassword.Text))
+            try
             {
-                decimal idRol = rolRepository.IdRolDeUsuario(lblUsername.Text);
+                usuarioRepository.ExisteUsuarioYContrasenia(txtUsername.Text, txtPassword.Text);
             }
-            else
+            catch (StoredProcedureException ex)
             {
-                MessageBox.Show("El usuario/contraseña ingresado es inválido.");
+                MessageBox.Show(ex.Message);
             }
+
         }
 
         private void btnRegistro_Click(object sender, EventArgs e)
@@ -41,8 +43,6 @@ namespace PalcoNet.Login
             RegistroDeUsuarioForm registroForm = new RegistroDeUsuarioForm(this);
             Hide();
             registroForm.Show();
-        }
-
-
+        }       
     }
 }
