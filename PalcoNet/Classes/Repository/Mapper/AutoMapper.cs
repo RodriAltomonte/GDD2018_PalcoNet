@@ -17,7 +17,7 @@ namespace PalcoNet.Classes.Repository.Mapper
             IList<T> mappedRows = new List<T>();
             FieldInfo[] fields = typeof(T).GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
 
-            if (fields.Length != dataTable.Rows.Count)
+            if (fields.Length != dataTable.Columns.Count)
             {
                 throw new AutoMappingException("Error al intentar mapear el resultado de un DataTable contra una clase. La cantidad de columnas retornadas no coinciden con la cantidad de atributos.");
             }
