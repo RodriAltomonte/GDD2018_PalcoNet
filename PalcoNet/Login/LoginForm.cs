@@ -11,6 +11,7 @@ using PalcoNet.Classes.Repository;
 using PalcoNet.RegistroUsuario;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.Form.Interfaces;
+using PalcoNet.Classes.Model;
 
 namespace PalcoNet.Login
 {
@@ -31,7 +32,8 @@ namespace PalcoNet.Login
             try
             {
                 usuarioRepository.ExisteUsuarioYContrasenia(txtUsername.Text, txtPassword.Text);
-                this.ForwardTo(new SeleccionarFuncionalidadForm(this));
+                Rol userRol = rolRepository.IdRolDeUsuario(txtUsername.Text);
+                this.ForwardTo(new SeleccionarFuncionalidadForm(this, userRol));
             }
             catch (StoredProcedureException ex)
             {

@@ -14,6 +14,10 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_FUNCIONALIDADES_DE_UN_ROL') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_FUNCIONALIDADES_DE_UN_ROL
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_ROL_DE_USUARIO') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_ROL_DE_USUARIO
+go
+
 ------------------------------DROP FUNCIONES------------------------------
 IF OBJECT_ID('LOS_DE_GESTION.FN_HASHPASS','FN') IS NOT NULL
 DROP FUNCTION LOS_DE_GESTION.FN_HASHPASS
@@ -392,6 +396,13 @@ AS BEGIN
 	where rf.id_Rol = @idRol
 END
 go
+
+create procedure LOS_DE_GESTION.PR_ROL_DE_USUARIO @username nvarchar(255)
+as begin
+	select r.* from LOS_DE_GESTION.Rol r inner join LOS_DE_GESTION.Usuario u on r.id_Rol = u.id_Rol
+	where u.username = @username
+end
+go
 ------------------------------MIGRACION-----------------------------------
  
  CREATE PROCEDURE LOS_DE_GESTION.PR_MIGRACION
@@ -481,4 +492,3 @@ go
 
 
 --select* from gd_esquema.Maestra
-

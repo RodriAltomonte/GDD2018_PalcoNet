@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Classes.Form.Interfaces;
 using PalcoNet.Classes.Repository;
+using PalcoNet.Classes.Util.Form;
+using PalcoNet.Classes.Model;
 
 namespace PalcoNet.Login
 {
@@ -16,11 +18,19 @@ namespace PalcoNet.Login
     {
         private Form previousForm;
         private FuncionalidadRepository funcionalidadRepository;
+        private Rol userRol;
 
-        public SeleccionarFuncionalidadForm(Form previousForm)
+        public SeleccionarFuncionalidadForm(Form previousForm, Rol userRol)
         {
             InitializeComponent();
-            this.previousForm = previousForm;            
+            this.previousForm = previousForm;
+            this.userRol = userRol;
+
+            funcionalidadRepository = new FuncionalidadRepository();
+            ComboBoxFiller<Funcionalidad, decimal>.Fill(cmbFuncionalidades)
+                .KeyAs(funcionalidad => funcionalidad.Id)
+                .ValueAs(funcionalidad => funcionalidad.Descripcion)
+                .With(funcionalidadRepository.FuncionalidadesDeUnRol(userRol.IdRol));
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -30,6 +40,11 @@ namespace PalcoNet.Login
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            if (cmbFuncionalidades.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione una funcionalidad.");
+            }
+
 
         }
 

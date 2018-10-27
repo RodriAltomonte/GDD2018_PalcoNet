@@ -11,5 +11,6 @@ namespace PalcoNet.Classes.Constants
         private const string Schema = "LOS_DE_GESTION.";
         public const string ValidarLogin = Schema + "PR_Validar_login";
         public const string FuncionaliadesDeUnRol = Schema + "PR_FUNCIONALIDADES_DE_UN_ROL";
+        public const string RolDeUsuario = Schema + "PR_ROL_DE_USUARIO";
     }
 }
