@@ -28,7 +28,7 @@ namespace PalcoNet.Classes.Repository.Mapper
                 
                 for (int i = 0; i < fields.Length; i++)
                 {
-                  fields[i].SetValue(mapped, row[i]);                    
+                    fields[i].SetValue(mapped, row[i]);                    
                 }
 
                 mappedRows.Add(mapped);
