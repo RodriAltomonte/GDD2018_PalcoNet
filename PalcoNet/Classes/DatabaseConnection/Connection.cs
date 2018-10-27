@@ -44,7 +44,10 @@ namespace Classes.DatabaseConnection
             using(SqlCommand command = new SqlCommand(procedureName, sqlConnection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                parameters.AddParametersToCommand(command);
+                if (parameters != null)
+                {
+                    parameters.AddParametersToCommand(command);
+                }                
 
                 command.Parameters.Add(outputParameterName, SqlDbTypes.Of(typeof(TOutput))).Direction = ParameterDirection.Output;
 
@@ -53,6 +56,32 @@ namespace Classes.DatabaseConnection
 
                 return (TOutput)command.Parameters[outputParameterName].Value;
             }
+        }
+
+        public DataTable ExecuteDataTableStoredProcedure(string procedureName, StoredProcedureParameterMap inputParameters)
+        {
+            DataTable dataTable = new DataTable();
+            using(sqlConnection)
+            using(SqlCommand command = new SqlCommand(procedureName, sqlConnection))
+            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                if (inputParameters != null)
+                {
+                    inputParameters.AddParametersToCommand(command);
+                }
+
+                dataAdapter.Fill(dataTable);
+            }
+
+            return dataTable;
+        }
+
+        public IList<TMapped> ExecuteMappedStoredProcedure<TMapped>(string procedureName, StoredProcedureParameterMap inputParameters, IStoredProcedureResultMapper<TMapped> mapper)
+        {
+            DataTable result = this.ExecuteDataTableStoredProcedure(procedureName, inputParameters);
+            return mapper.Map(result);
         }
         #endregion
     }

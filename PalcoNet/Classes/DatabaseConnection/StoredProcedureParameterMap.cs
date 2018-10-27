@@ -21,9 +21,10 @@ namespace PalcoNet.Classes.DatabaseConnection
             this.parametersMap = parametersMap;
         }
 
-        public void AddParameter(string key, object value)
+        public StoredProcedureParameterMap AddParameter(string key, object value)
         {
             parametersMap.Add(key, value);
+            return this;
         }
 
         public void AddParametersToCommand(SqlCommand command)

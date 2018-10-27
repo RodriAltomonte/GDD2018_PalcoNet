@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using PalcoNet.Classes.Repository;
 using PalcoNet.RegistroUsuario;
 using PalcoNet.Classes.CustomException;
+using PalcoNet.Classes.Form.Interfaces;
 
 namespace PalcoNet.Login
 {
-    public partial class LoginForm : Form
+    public partial class LoginForm : Form, IForwardableForm
     {
         private UsuarioRepository usuarioRepository;
         private RolRepository rolRepository;
@@ -30,6 +31,7 @@ namespace PalcoNet.Login
             try
             {
                 usuarioRepository.ExisteUsuarioYContrasenia(txtUsername.Text, txtPassword.Text);
+                this.ForwardTo(new SeleccionarFuncionalidadForm(this));
             }
             catch (StoredProcedureException ex)
             {
@@ -43,6 +45,12 @@ namespace PalcoNet.Login
             RegistroDeUsuarioForm registroForm = new RegistroDeUsuarioForm(this);
             Hide();
             registroForm.Show();
-        }       
+        }
+
+        public void ForwardTo(Form nextForm)
+        {            
+            this.Hide();
+            nextForm.Show();
+        }
     }
 }

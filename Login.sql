@@ -5,6 +5,10 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_Validar_login') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_Validar_login
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_FUNCIONALIDADES_DE_UN_ROL') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_Validar_login
+go
+
 IF OBJECT_ID(N'LOS_DE_GESTION.TRG_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO') IS NOT NULL
 DROP TRIGGER LOS_DE_GESTION.TRG_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO
 go
@@ -65,3 +69,12 @@ BEGIN
 		update LOS_DE_GESTION.Usuario set bloqueado_login_fallidos = 1 where username = (select username from inserted)
 END
 go
+
+Create procedure LOS_DE_GESTION.PR_FUNCIONALIDADES_DE_UN_ROL @idRol decimal
+AS BEGIN
+	select f.* from LOS_DE_GESTION.Funcionalidad f inner join LOS_DE_GESTION.Rol_X_Funcionalidad rf on f.id_Funcionalidad = rf.id_Funcionalidad
+	where rf.id_Rol = @idRol
+END
+go
+
+exec LOS_DE_GESTION.PR_FUNCIONALIDADES

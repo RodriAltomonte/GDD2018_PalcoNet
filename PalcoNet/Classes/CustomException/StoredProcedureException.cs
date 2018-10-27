@@ -9,5 +9,7 @@ namespace PalcoNet.Classes.CustomException
     class StoredProcedureException : Exception
     {
         public StoredProcedureException(string message) : base(message) { }
+
+        public StoredProcedureException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

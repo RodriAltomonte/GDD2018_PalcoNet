@@ -15,9 +15,9 @@ namespace PalcoNet.Classes.Repository
     {
         public Boolean ExisteUsuarioYContrasenia(string username, string contrasenia)
         {
-            StoredProcedureParameterMap parameters = new StoredProcedureParameterMap();
-            parameters.AddParameter("@username", username);
-            parameters.AddParameter("@password", contrasenia);
+            StoredProcedureParameterMap parameters = new StoredProcedureParameterMap()
+                .AddParameter("@username", username)
+                .AddParameter("@password", contrasenia);
 
             try
             {
