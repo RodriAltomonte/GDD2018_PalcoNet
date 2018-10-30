@@ -14,5 +14,7 @@ namespace PalcoNet.Classes.Constants
         public const string RolDeUsuario = Schema + "PR_ROL_DE_USUARIO";
         public const string AltaDeUsuario = Schema + "PR_ALTA_DE_USUARIO";
         public const string RolesClienteYEmpresa = Schema + "PR_ROLES_CLIENTE_Y_EMPRESA";
+        public const string CambiarPassword = Schema + "PR_CAMBIAR_PASSWORD";
+        public const string DarDeBajaUsuarioPorAdmin = Schema + "PR_DAR_BAJA_USUARIO_POR_ADMIN";
     }
 }

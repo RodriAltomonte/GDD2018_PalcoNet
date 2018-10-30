@@ -32,7 +32,6 @@ namespace PalcoNet.Classes.Repository
             }
         }
 
-
         public void AltaDeUsuario(Usuario usuario)
         {
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
@@ -51,6 +50,27 @@ namespace PalcoNet.Classes.Repository
                 throw new StoredProcedureException(e.Message);
             }
         
+        }
+
+        public void CambiarPassword(string username, string newPassword)
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
+                .AddParameter("@username", username)
+                .AddParameter("@password", newPassword);
+
+            ConnectionFactory.Instance()
+                .CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.CambiarPassword, inputParameters);
+        }
+
+        public void DarDeBajaUnUsuarioPorAdmin(string username)
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
+                .AddParameter("@username", username);
+
+            ConnectionFactory.Instance()
+                .CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.DarDeBajaUsuarioPorAdmin, inputParameters);
         }
 
     }
