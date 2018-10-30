@@ -25,5 +25,12 @@ namespace PalcoNet.Classes.Repository
 
             return roles.First<Rol>();
         }
+
+        public IList<Rol> RolesDeClienteYEmpresa()
+        {
+            return ConnectionFactory.Instance()
+                .CreateConnection()
+                .ExecuteMappedStoredProcedure<Rol>(SpNames.RolesClienteYEmpresa, null, new Mapper.AutoMapper<Rol>());
+        }
     }
 }

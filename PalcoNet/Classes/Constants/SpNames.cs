@@ -12,5 +12,7 @@ namespace PalcoNet.Classes.Constants
         public const string ValidarLogin = Schema + "PR_Validar_login";
         public const string FuncionaliadesDeUnRol = Schema + "PR_FUNCIONALIDADES_DE_UN_ROL";
         public const string RolDeUsuario = Schema + "PR_ROL_DE_USUARIO";
+        public const string AltaDeUsuario = Schema + "PR_ALTA_DE_USUARIO";
+        public const string RolesClienteYEmpresa = Schema + "PR_ROLES_CLIENTE_Y_EMPRESA";
     }
 }

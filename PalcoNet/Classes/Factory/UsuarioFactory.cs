@@ -19,10 +19,16 @@ namespace PalcoNet.Classes.Factory
             usuariosPorRol.Add(RolConstants.Empresa, typeof(Empresa));
         }
 
-        public static Classes.Model.Usuario CrearUsuario(decimal idRol) 
+        public static Classes.Model.Usuario CrearNuevoUsuario(decimal idRol, string username, string password) 
         {
             Type usuarioType = usuariosPorRol[idRol];
-            return (Usuario)Activator.CreateInstance(usuarioType);
+            Usuario nuevoUsuario = (Usuario)Activator.CreateInstance(usuarioType);
+
+            nuevoUsuario.Username = username;
+            nuevoUsuario.Password = password;
+            nuevoUsuario.IdRol = idRol;
+
+            return nuevoUsuario;
         }
     }
 }

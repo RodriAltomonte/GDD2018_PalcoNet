@@ -8,6 +8,7 @@ using PalcoNet.Classes.DatabaseConnection;
 using System.Data.SqlClient;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.Constants;
+using PalcoNet.Classes.Model;
 
 namespace PalcoNet.Classes.Repository
 {
@@ -30,5 +31,27 @@ namespace PalcoNet.Classes.Repository
                 throw new StoredProcedureException(e.Message);
             }
         }
+
+
+        public void AltaDeUsuario(Usuario usuario)
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
+                .AddParameter("@username", usuario.Username)
+                .AddParameter("@password", usuario.Password)
+                .AddParameter("@idRol", usuario.IdRol);
+
+            try
+            {
+                ConnectionFactory.Instance()
+                    .CreateConnection()
+                    .ExecuteDataTableStoredProcedure(SpNames.AltaDeUsuario, inputParameters);
+            }
+            catch (SqlException e)
+            {
+                throw new StoredProcedureException(e.Message);
+            }
+        
+        }
+
     }
 }

@@ -22,5 +22,6 @@ namespace PalcoNet.Classes.Factory.Form
             Type tipoForm = tiposDeFormPorRol[idRol];
             return (System.Windows.Forms.Form)Activator.CreateInstance(tipoForm);
         }
+
     }
 }
