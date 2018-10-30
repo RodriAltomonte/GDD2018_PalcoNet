@@ -1,6 +1,6 @@
-﻿namespace PalcoNet.ABMGrado
+﻿namespace PalcoNet.ListadoEstadistico
 {
-    partial class Form1
+    partial class ListadoEstadisticoForm
     {
         /// <summary>
         /// Required designer variable.

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PalcoNet.EditarPublicacion
+namespace PalcoNet.HistorialCliente
 {
-    public partial class Form1 : Form
+    public partial class HistorialClienteForm : Form
     {
-        public Form1()
+        public HistorialClienteForm()
         {
             InitializeComponent();
         }

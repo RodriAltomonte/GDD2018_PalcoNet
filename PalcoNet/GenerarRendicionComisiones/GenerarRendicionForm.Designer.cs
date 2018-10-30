@@ -1,6 +1,6 @@
-﻿namespace PalcoNet.ABMRubro
+﻿namespace PalcoNet.GenerarRendicionComisiones
 {
-    partial class Form1
+    partial class GenerarRendicionForm
     {
         /// <summary>
         /// Required designer variable.

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PalcoNet.ABMGrado
+namespace PalcoNet.CanjePuntos
 {
-    public partial class Form1 : Form
+    public partial class CanjePuntosForm : Form
     {
-        public Form1()
+        public CanjePuntosForm()
         {
             InitializeComponent();
         }

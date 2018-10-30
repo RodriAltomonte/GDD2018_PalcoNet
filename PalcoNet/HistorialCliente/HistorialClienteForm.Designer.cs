@@ -1,6 +1,6 @@
-﻿namespace PalcoNet.GenerarPublicacion
+﻿namespace PalcoNet.HistorialCliente
 {
-    partial class Form1
+    partial class HistorialClienteForm
     {
         /// <summary>
         /// Required designer variable.

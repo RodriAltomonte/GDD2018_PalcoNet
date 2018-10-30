@@ -1,6 +1,6 @@
-﻿namespace PalcoNet.EditarPublicacion
+﻿namespace PalcoNet.ABMGrado
 {
-    partial class Form1
+    partial class ABMGradoPublicacionForm
     {
         /// <summary>
         /// Required designer variable.

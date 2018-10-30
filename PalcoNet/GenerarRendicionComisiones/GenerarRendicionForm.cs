@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PalcoNet.GenerarRendicionComisiones
 {
-    public partial class Form1 : Form
+    public partial class GenerarRendicionForm : Form
     {
-        public Form1()
+        public GenerarRendicionForm()
         {
             InitializeComponent();
         }

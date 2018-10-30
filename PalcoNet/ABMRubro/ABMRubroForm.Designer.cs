@@ -1,6 +1,6 @@
-﻿namespace PalcoNet.Comprar
+﻿namespace PalcoNet.ABMRubro
 {
-    partial class Form1
+    partial class ABMRubroForm
     {
         /// <summary>
         /// Required designer variable.

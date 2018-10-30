@@ -1,6 +1,6 @@
-﻿namespace PalcoNet.ListadoEstadistico
+﻿namespace PalcoNet.GenerarPublicacion
 {
-    partial class Form1
+    partial class GenerarPublicacionForm
     {
         /// <summary>
         /// Required designer variable.

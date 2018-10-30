@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PalcoNet.CanjePuntos
+namespace PalcoNet.ABMRubro
 {
-    public partial class Form1 : Form
+    public partial class ABMRubroForm : Form
     {
-        public Form1()
+        public ABMRubroForm()
         {
             InitializeComponent();
         }

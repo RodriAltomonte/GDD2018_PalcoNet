@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PalcoNet.ListadoEstadistico
+namespace PalcoNet.Comprar
 {
-    public partial class Form1 : Form
+    public partial class ComprarForm : Form
     {
-        public Form1()
+        public ComprarForm()
         {
             InitializeComponent();
         }

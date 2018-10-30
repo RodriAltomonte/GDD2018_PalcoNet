@@ -1,6 +1,6 @@
-﻿namespace PalcoNet.HistorialCliente
+﻿namespace PalcoNet.CanjePuntos
 {
-    partial class Form1
+    partial class CanjePuntosForm
     {
         /// <summary>
         /// Required designer variable.

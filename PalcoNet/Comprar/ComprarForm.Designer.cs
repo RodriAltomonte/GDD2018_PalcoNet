@@ -1,6 +1,6 @@
-﻿namespace PalcoNet.CanjePuntos
+﻿namespace PalcoNet.Comprar
 {
-    partial class Form1
+    partial class ComprarForm
     {
         /// <summary>
         /// Required designer variable.
