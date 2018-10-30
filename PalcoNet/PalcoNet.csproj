@@ -56,11 +56,11 @@
     <Compile Include="ABMEmpresaEspectaculo\ABMEmpresaEspectaculoForm.Designer.cs">
       <DependentUpon>ABMEmpresaEspectaculoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABMGrado\Form1.cs">
+    <Compile Include="ABMGrado\ABMGradoPublicacionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABMGrado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABMGrado\ABMGradoPublicacionForm.Designer.cs">
+      <DependentUpon>ABMGradoPublicacionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ABMRol\Form1.cs">
       <SubType>Form</SubType>
@@ -68,20 +68,21 @@
     <Compile Include="ABMRol\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABMRubro\Form1.cs">
+    <Compile Include="ABMRubro\ABMRubroForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABMRubro\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABMRubro\ABMRubroForm.Designer.cs">
+      <DependentUpon>ABMRubroForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CanjePuntos\Form1.cs">
+    <Compile Include="CanjePuntos\CanjePuntosForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CanjePuntos\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CanjePuntos\CanjePuntosForm.Designer.cs">
+      <DependentUpon>CanjePuntosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Configuration\Configuration.cs" />
     <Compile Include="Classes\Configuration\Exception\ConfigurationPropertyNotFoundException.cs" />
+    <Compile Include="Classes\Constants\FuncionalidadConstants.cs" />
     <Compile Include="Classes\Constants\SpNames.cs" />
     <Compile Include="Classes\CustomException\AutoMappingException.cs" />
     <Compile Include="Classes\CustomException\BlockedUserByAdminException.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Classes\DatabaseConnection\SqlDbTypes.cs" />
     <Compile Include="Classes\DatabaseConnection\StoredProcedureParameterMap.cs" />
     <Compile Include="Classes\Factory\Form\ABMClienteEmpresaFormFactory.cs" />
+    <Compile Include="Classes\Factory\Form\PostLoginFormFactory.cs" />
     <Compile Include="Classes\Factory\UsuarioFactory.cs" />
     <Compile Include="Classes\Interfaces\Form\IForwardableForm.cs" />
     <Compile Include="Classes\Interfaces\Form\IBackwardableForm.cs" />
@@ -111,17 +113,17 @@
     <Compile Include="Classes\Util\Form\ComboBoxFiller.cs" />
     <Compile Include="Classes\Util\Form\ComboBoxItem.cs" />
     <Compile Include="Classes\Util\StringUtil.cs" />
-    <Compile Include="Comprar\Form1.cs">
+    <Compile Include="Comprar\ComprarForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Comprar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Comprar\ComprarForm.Designer.cs">
+      <DependentUpon>ComprarForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditarPublicacion\Form1.cs">
+    <Compile Include="EditarPublicacion\EditarPublicacionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditarPublicacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="EditarPublicacion\EditarPublicacionForm.Designer.cs">
+      <DependentUpon>EditarPublicacionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
@@ -129,29 +131,29 @@
     <Compile Include="Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="GenerarPublicacion\Form1.cs">
+    <Compile Include="GenerarPublicacion\GenerarPublicacionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenerarPublicacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GenerarPublicacion\GenerarPublicacionForm.Designer.cs">
+      <DependentUpon>GenerarPublicacionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GenerarRendicionComisiones\Form1.cs">
+    <Compile Include="GenerarRendicionComisiones\GenerarRendicionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenerarRendicionComisiones\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GenerarRendicionComisiones\GenerarRendicionForm.Designer.cs">
+      <DependentUpon>GenerarRendicionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HistorialCliente\Form1.cs">
+    <Compile Include="HistorialCliente\HistorialClienteForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HistorialCliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="HistorialCliente\HistorialClienteForm.Designer.cs">
+      <DependentUpon>HistorialClienteForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListadoEstadistico\Form1.cs">
+    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListadoEstadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ListadoEstadistico\ListadoEstadisticoForm.Designer.cs">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\LoginForm.cs">
       <SubType>Form</SubType>
@@ -173,8 +175,14 @@
     <Compile Include="RegistroUsuario\RegistroDeUsuarioForm.Designer.cs">
       <DependentUpon>RegistroDeUsuarioForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ABMGrado\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="ABMGrado\ABMGradoPublicacionForm.resx">
+      <DependentUpon>ABMGradoPublicacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\ComprarForm.resx">
+      <DependentUpon>ComprarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerarPublicacion\GenerarPublicacionForm.resx">
+      <DependentUpon>GenerarPublicacionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

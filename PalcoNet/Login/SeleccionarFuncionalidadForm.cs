@@ -11,6 +11,7 @@ using PalcoNet.Classes.Form.Interfaces;
 using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Model;
+using PalcoNet.Classes.Factory.Form;
 
 namespace PalcoNet.Login
 {
@@ -45,13 +46,17 @@ namespace PalcoNet.Login
                 MessageBox.Show("Seleccione una funcionalidad.");
             }
 
+            decimal selectedItemId = ((ComboBoxItem<decimal>)cmbFuncionalidades.SelectedItem).Value;
+            Form nextForm = PostLoginFormFactory.CreateForm(selectedItemId, this);
 
+            ForwardTo(nextForm);
         }
 
 
         public void ForwardTo(Form nextForm)
         {
-            throw new NotImplementedException();
+            this.Hide();
+            nextForm.Show();
         }
 
         public void Backward()
