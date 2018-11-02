@@ -1,6 +1,4 @@
 
----¡REVISAR TODOS ANTES DE ENVIAR!--------
----LAS BAJAS SACAR LO DE DELETE SOLO CAMBIAR EL HABILITADO
 ----------------------ABM ROL--------------------
 ----------------------ALTA-----------------------
 CREATE PROCEDURE LOS_DE_GESTION.RolNuevo @RolNombre NVARCHAR(255),@habilitado BIT
@@ -137,8 +135,10 @@ END CATCH
 END
 GO
 
-CREATE PROCEDURE ModificarFuncionalidad @id_funcionalidad NUMERIC(18,0)
-AS
+--CREATE PROCEDURE ModificarFuncionalidad @id_funcionalidad NUMERIC(18,0)
+--AS
+
+
 -------------------------------ABM USUARIOS----------------------------------------
 ------------------------------ALTA CLIENTE------------------------------------------------
 CREATE PROCEDURE LOS_DE_GESTION.NuevoCliente
@@ -165,17 +165,17 @@ AS
 BEGIN
 DECLARE @result NUMERIC(12)
 DECLARE @fecha_nacimiento DATETIME
-DECLARE @fecha_creac DATETIME
+DECLARE @fecha_de_creac DATETIME
 SET @fecha_nacimiento = CONVERT(DATETIME,@fecha_de_nacimiento,121)
 SET @fecha_de_creac = CONVERT(DATETIME,@fecha_de_creacion,121)
 BEGIN TRAN nuclie
 
 BEGIN TRY 
 		IF(@nro_documento NOT IN (SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE username = @username)
-			AND @cuil NOT IN (SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE @username=username))
+			AND @cuil NOT IN (SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE @cuil=cuil))
 			BEGIN 
 				INSERT INTO LOS_DE_GESTION.Cliente(username,nombre,apellido,tipo_documento,numero_documento,
-				cuil,mail,telefono,calle,nro_piso,depto,localidad,codigo_postal,fecha_nacimiento,fecha_creaacion,tarjeta)
+				cuil,mail,telefono,calle,nro_piso,depto,localidad,codigo_postal,fecha_nacimiento,fecha_creacion,tarjeta)
 				VALUES (@username,@nombre,@apellido,@tipo_documento,@nro_documento,@cuil,@mail,@telefono,
 				@direccion_calle,@numero_piso,@departamento,@localidad,@codigo_postal,@fecha_nacimiento,@fecha_creac,@tarjeta)
 
@@ -268,7 +268,7 @@ AND SUBSTRING(cuil,3,10) = @dni OR @dni IS NULL
 
 --DELETE FROM LOS_DE_GESTION.Usuario
 
-update LOS_DE_GESTION.Usuario
+UPDATE LOS_DE_GESTION.Usuario
 set habilitado = 0
 WHERE username = (SELECT username FROM LOS_DE_GESTION.Cliente WHERE nombre = @nombre)
 SET @result =1
@@ -320,38 +320,6 @@ GO
 
 
 --------------------MODIFICACION CLIENTE----------------------------
-CREATE PROCEDURE LOS_DE_GESTION.ModificarEstadoCliente @username NVARCHAR(255)
-AS
-BEGIN
-DECLARE @result NUMERIC(12)
-BEGIN TRAN modestado
-BEGIN TRY 
-IF((SELECT habilitado FROM LOS_DE_GESTION.Cliente WHERE username = @username)=0)
-BEGIN 
-UPDATE LOS_DE_GESTION.Cliente
-SET habilitado = 1
-WHERE username = @username;
-SET @result = 0
-END
-
-ELSE
-BEGIN 
-UPDATE LOS_DE_GESTION.Cliente
-SET habilitado=0
-WHERE username = @username
-SET @result =1 
-END
-SELECT @result AS resultado
-COMMIT TRAN modestado
-END TRY
-BEGIN CATCH
-ROLLBACK TRAN modestado
-SET @result =2
-SELECT @result AS resultado
-END CATCH
-END
-GO
-
 CREATE PROCEDURE LOS_DE_GESTION.ModificarPasswordCliente @username NVARCHAR(255),@passwordNuevo NVARCHAR(255)
 AS
 BEGIN
@@ -391,7 +359,7 @@ CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
 @depto NVARCHAR(255),
 @localidad NVARCHAR(255),
 @codigo_postal NVARCHAR(255),
-@fecha_nacimiento DATETIME
+@fecha_nacimiento DATETIME,
 @fecha_de_creacion DATETIME
 
 AS
@@ -399,12 +367,24 @@ BEGIN
 DECLARE @result NUMERIC(12)
 BEGIN TRAN modclie
 BEGIN TRY
-UPDATE LOS_DE_GESTION.CLiente 
+UPDATE LOS_DE_GESTION.Cliente 
 SET nombre =@nombre,
 	apellido = @apellido,
 	cuil =@cuil,
 	mail = @email,
+	tipo_documento=@tipo_documento,
+	numero_documento=@nro_documento,
+	telefono=@telefono,
+	calle=@dir_calle,
+	nro_piso=@nro_piso,
+	depto=@depto,
+	localidad=@localidad,
+	codigo_postal=@codigo_postal,
+	fecha_nacimiento= @fecha_nacimiento,
+	fecha_creacion=@fecha_de_creacion
 
+WHERE nombre = @nombre OR @nombre IS NULL AND apellido=@apellido OR @apellido IS NULL AND cuil=@cuil OR @cuil IS NULL
+AND mail=@mail OR @mail IS NULL
 COMMIT TRAN modclie
 END TRY
 
@@ -419,7 +399,7 @@ GO
 
 -------------------MODIFICACION EMPRESA------------------------
 --TODO
-CREATE PROCEDURE LOS_DE_GESTION.ModificarPasswordEmpresa @username NVARCHAR(255),@passwordNuevo NVARCHAR(255)
+--CREATE PROCEDURE LOS_DE_GESTION.ModificarPasswordEmpresa @username NVARCHAR(255),@passwordNuevo NVARCHAR(255)
 
 
 CREATE PROCEDURE LOS_DE_GESTION.ModificarEstadoEmpresa
