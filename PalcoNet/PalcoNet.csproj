@@ -105,6 +105,7 @@
     <Compile Include="Classes\Model\Funcionalidad.cs" />
     <Compile Include="Classes\Model\Rol.cs" />
     <Compile Include="Classes\Model\Usuario.cs" />
+    <Compile Include="Classes\Repository\ClienteRepository.cs" />
     <Compile Include="Classes\Repository\FuncionalidadRepository.cs" />
     <Compile Include="Classes\Repository\Mapper\AutoMapper.cs" />
     <Compile Include="Classes\Repository\Mapper\FuncionalidadMapper.cs" />

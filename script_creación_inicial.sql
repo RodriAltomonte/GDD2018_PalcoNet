@@ -34,6 +34,10 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_DAR_BAJA_USUARIO_POR_ADMIN') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_DAR_BAJA_USUARIO_POR_ADMIN
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_VALIDAR_VENCIMIENTO_DE_PUNTOS') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_VALIDAR_VENCIMIENTO_DE_PUNTOS
+go
+
 ------------------------------DROP FUNCIONES------------------------------
 IF OBJECT_ID('LOS_DE_GESTION.FN_HASHPASS','FN') IS NOT NULL
 DROP FUNCTION LOS_DE_GESTION.FN_HASHPASS
@@ -457,6 +461,21 @@ BEGIN
 	WHERE username = @username
 END
 go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_VALIDAR_VENCIMIENTO_DE_PUNTOS @clienteUsername nvarchar(255), @fechaHoy datetime
+AS
+BEGIN
+	IF((select c.fecha_vencimiento_puntos from LOS_DE_GESTION.Cliente c where c.username = @clienteUsername) < @fechaHoy )
+	BEGIN
+		UPDATE LOS_DE_GESTION.Cliente
+		SET puntos_vencidos = puntos_vencidos + puntos_acum_validos,
+			puntos_acum_validos = 0,
+			fecha_vencimiento_puntos = DATEADD(year, 1 , fecha_vencimiento_puntos)
+		WHERE username = @clienteUsername
+	END
+END
+go
+select dateadd(year,1,getdate())
 ------------------------------MIGRACION-----------------------------------
  
 CREATE PROCEDURE LOS_DE_GESTION.PR_MIGRACION
