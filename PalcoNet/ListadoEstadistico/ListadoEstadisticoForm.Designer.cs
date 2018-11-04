@@ -37,10 +37,10 @@
             this.cmbTrimestre = new System.Windows.Forms.ComboBox();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.grpResultados = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvResultados = new System.Windows.Forms.DataGridView();
             this.grpBusqueda.SuspendLayout();
             this.grpResultados.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResultados)).BeginInit();
             this.SuspendLayout();
             // 
             // grpBusqueda
@@ -123,7 +123,7 @@
             // 
             // grpResultados
             // 
-            this.grpResultados.Controls.Add(this.dataGridView1);
+            this.grpResultados.Controls.Add(this.dgvResultados);
             this.grpResultados.Location = new System.Drawing.Point(13, 181);
             this.grpResultados.Name = "grpResultados";
             this.grpResultados.Size = new System.Drawing.Size(503, 228);
@@ -131,16 +131,16 @@
             this.grpResultados.TabStop = false;
             this.grpResultados.Text = "Resultados";
             // 
-            // dataGridView1
+            // dgvResultados
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 36);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(491, 168);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvResultados.AllowUserToAddRows = false;
+            this.dgvResultados.AllowUserToDeleteRows = false;
+            this.dgvResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResultados.Location = new System.Drawing.Point(6, 36);
+            this.dgvResultados.Name = "dgvResultados";
+            this.dgvResultados.ReadOnly = true;
+            this.dgvResultados.Size = new System.Drawing.Size(491, 168);
+            this.dgvResultados.TabIndex = 0;
             // 
             // ListadoEstadisticoForm
             // 
@@ -155,7 +155,7 @@
             this.grpBusqueda.ResumeLayout(false);
             this.grpBusqueda.PerformLayout();
             this.grpResultados.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResultados)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -171,6 +171,6 @@
         private System.Windows.Forms.Label lblAnio;
         private System.Windows.Forms.Label lblTipoListado;
         private System.Windows.Forms.GroupBox grpResultados;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvResultados;
     }
 }

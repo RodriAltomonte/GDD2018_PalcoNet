@@ -17,5 +17,8 @@ namespace PalcoNet.Classes.Constants
         public const string CambiarPassword = Schema + "PR_CAMBIAR_PASSWORD";
         public const string DarDeBajaUsuarioPorAdmin = Schema + "PR_DAR_BAJA_USUARIO_POR_ADMIN";
         public const string ValidarVencimientoDePuntos = Schema + "PR_VALIDAR_VENCIMIENTO_DE_PUNTOS";
+        public const string EmpresasConMasLocalidadesNoVendidas = Schema + "PR_EMPRESAS_CON_MAS_LOCALIDADES_NO_VENDIDAS";
+        public const string ClientesConMasPuntosVencidos = Schema + "PR_CLIENTES_CON_MAS_PUNTOS_VENCIDOS";
+        public const string ClientesConMasCompras = Schema + "PR_CLIENTES_CON_MAS_COMPRAS";
     }
 }

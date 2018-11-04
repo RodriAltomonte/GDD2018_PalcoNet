@@ -38,6 +38,22 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_VALIDAR_VENCIMIENTO_DE_PUNTOS') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_VALIDAR_VENCIMIENTO_DE_PUNTOS
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_CLIENTES_CON_MAS_COMPRAS') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_CLIENTES_CON_MAS_COMPRAS
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_EMPRESAS_CON_MAS_LOCALIDADES_NO_VENDIDAS') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_EMPRESAS_CON_MAS_LOCALIDADES_NO_VENDIDAS
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_CLIENTES_CON_MAS_PUNTOS_VENCIDOS') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_CLIENTES_CON_MAS_PUNTOS_VENCIDOS
+go
+
+/*IF OBJECT_ID(N'') IS NOT NULL
+DROP PROCEDURE 
+go*/
+
 ------------------------------DROP FUNCIONES------------------------------
 IF OBJECT_ID('LOS_DE_GESTION.FN_HASHPASS','FN') IS NOT NULL
 DROP FUNCTION LOS_DE_GESTION.FN_HASHPASS
@@ -475,7 +491,41 @@ BEGIN
 	END
 END
 go
-select dateadd(year,1,getdate())
+
+/*LISTADO ESTADISTICO*/
+CREATE PROCEDURE LOS_DE_GESTION.PR_CLIENTES_CON_MAS_COMPRAS @fechaDesde datetime, @fechaHasta datetime
+AS
+BEGIN
+	select top 5 c.usuario_cliente_comprador as Cliente, e.razon_social as Empresa, count(*) as 'Cantidad de compras'
+	from LOS_DE_GESTION.Compra c
+	inner join LOS_DE_GESTION.Ubicacion u on u.id_Compra = c.id_Compra
+	inner join LOS_DE_GESTION.Publicacion p on u.cod_publicacion = p.cod_publicacion
+	inner join LOS_DE_GESTION.Empresa e on e.username = p.usuario_empresa_vendedora
+	where c.fecha_compra between @fechaDesde and @fechaHasta
+	group by c.usuario_cliente_comprador, e.razon_social
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_EMPRESAS_CON_MAS_LOCALIDADES_NO_VENDIDAS @fechaDesde datetime, @fechaHasta datetime, @fechaHoy datetime
+AS
+BEGIN
+	select top 5 e.razon_social as Empresa, count(*) as 'Localidades no vendidas', (select descripcion from LOS_DE_GESTION.Grado_Publicacion where id_Grado_Publicacion = g.id_Grado_Publicacion) as 'Grado de publicacion' 
+	from LOS_DE_GESTION.Empresa e
+	inner join LOS_DE_GESTION.Publicacion p on p.usuario_empresa_vendedora = e.username
+	inner join LOS_DE_GESTION.Grado_Publicacion g on g.id_Grado_Publicacion = p.id_Grado_Publicacion
+	inner join LOS_DE_GESTION.Ubicacion u on u.cod_publicacion = p.cod_publicacion
+	where p.fecha_publicacion < @fechaHoy and p.fecha_publicacion between @fechaDesde and @fechaHasta
+	group by e.razon_social, g.id_Grado_Publicacion, year(p.fecha_publicacion), month(p.fecha_publicacion)
+	order by year(p.fecha_publicacion), month(p.fecha_publicacion), g.id_Grado_Publicacion desc
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_CLIENTES_CON_MAS_PUNTOS_VENCIDOS @fechaDesde datetime, @fechaHasta datetime
+AS
+BEGIN
+	select 1 as TODO
+END
+go
 ------------------------------MIGRACION-----------------------------------
  
 CREATE PROCEDURE LOS_DE_GESTION.PR_MIGRACION
