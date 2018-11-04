@@ -78,3 +78,8 @@ END
 go
 
 exec LOS_DE_GESTION.PR_FUNCIONALIDADES
+
+INSERT INTO GD2C2018.LOS_DE_GESTION.Usuario
+(username, password, intentos_login, bloqueado_login_fallidos, habilitado, id_Rol)
+VALUES('user', LOS_DE_GESTION.FN_HASHPASS('pass'), 0, 0, 1, 2)
+

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using PalcoNet.Classes.DatabaseConnection;
+using PalcoNet.Classes.CustomException;
 
 namespace Classes.DatabaseConnection
 {
@@ -44,17 +45,21 @@ namespace Classes.DatabaseConnection
             using(SqlCommand command = new SqlCommand(procedureName, sqlConnection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                if (parameters != null)
-                {
-                    parameters.AddParametersToCommand(command);
-                }                
 
+                this.AddInputParametersToCommandIfTheyAreNotNull(parameters, command);
                 command.Parameters.Add(outputParameterName, SqlDbTypes.Of(typeof(TOutput))).Direction = ParameterDirection.Output;
 
                 OpenConnection();
-                command.ExecuteNonQuery();
 
-                return (TOutput)command.Parameters[outputParameterName].Value;
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return (TOutput)command.Parameters[outputParameterName].Value;
+                }
+                catch (SqlException e)
+                {
+                    throw new StoredProcedureException(e.Message, e);
+                }
             }
         }
 
@@ -66,15 +71,17 @@ namespace Classes.DatabaseConnection
             using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
             {
                 command.CommandType = CommandType.StoredProcedure;
+                this.AddInputParametersToCommandIfTheyAreNotNull(inputParameters, command);
 
-                if (inputParameters != null)
+                try
                 {
-                    inputParameters.AddParametersToCommand(command);
+                    dataAdapter.Fill(dataTable);
                 }
-
-                dataAdapter.Fill(dataTable);
+                catch (SqlException e)
+                {
+                    throw new StoredProcedureException(e.Message, e);
+                }
             }
-
             return dataTable;
         }
 
@@ -82,6 +89,16 @@ namespace Classes.DatabaseConnection
         {
             DataTable result = this.ExecuteDataTableStoredProcedure(procedureName, inputParameters);
             return mapper.Map(result);
+        }
+        #endregion
+
+        #region Private methods
+        private void AddInputParametersToCommandIfTheyAreNotNull(StoredProcedureParameterMap inputParameters, SqlCommand command)
+        {
+            if (inputParameters != null)
+            {
+                inputParameters.AddParametersToCommand(command);
+            }
         }
         #endregion
     }

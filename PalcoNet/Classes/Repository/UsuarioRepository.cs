@@ -19,17 +19,11 @@ namespace PalcoNet.Classes.Repository
             StoredProcedureParameterMap parameters = new StoredProcedureParameterMap()
                 .AddParameter("@username", username)
                 .AddParameter("@password", contrasenia);
+            
+            return ConnectionFactory.Instance()
+                .CreateConnection()
+                .ExecuteSingleOutputStoredProcedure<Boolean>(SpNames.ValidarLogin, parameters, "@loginCorrecto");
 
-            try
-            {
-                return ConnectionFactory.Instance()
-                    .CreateConnection()
-                    .ExecuteSingleOutputStoredProcedure<Boolean>(SpNames.ValidarLogin, parameters, "@loginCorrecto");
-            }
-            catch (SqlException e)
-            {
-                throw new StoredProcedureException(e.Message);
-            }
         }
 
         public void AltaDeUsuario(Usuario usuario)
@@ -39,17 +33,9 @@ namespace PalcoNet.Classes.Repository
                 .AddParameter("@password", usuario.Password)
                 .AddParameter("@idRol", usuario.IdRol);
 
-            try
-            {
-                ConnectionFactory.Instance()
-                    .CreateConnection()
-                    .ExecuteDataTableStoredProcedure(SpNames.AltaDeUsuario, inputParameters);
-            }
-            catch (SqlException e)
-            {
-                throw new StoredProcedureException(e.Message);
-            }
-        
+            ConnectionFactory.Instance()
+                .CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.AltaDeUsuario, inputParameters);
         }
 
         public void CambiarPassword(string username, string newPassword)
