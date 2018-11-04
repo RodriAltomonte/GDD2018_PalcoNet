@@ -197,6 +197,9 @@
     <EmbeddedResource Include="GenerarPublicacion\GenerarPublicacionForm.resx">
       <DependentUpon>GenerarPublicacionForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
