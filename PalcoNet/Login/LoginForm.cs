@@ -37,7 +37,7 @@ namespace PalcoNet.Login
             }
             catch (StoredProcedureException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
             }
 
         }

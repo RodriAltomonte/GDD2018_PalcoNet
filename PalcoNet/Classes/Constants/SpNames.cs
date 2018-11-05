@@ -20,5 +20,9 @@ namespace PalcoNet.Classes.Constants
         public const string EmpresasConMasLocalidadesNoVendidas = Schema + "PR_EMPRESAS_CON_MAS_LOCALIDADES_NO_VENDIDAS";
         public const string ClientesConMasPuntosVencidos = Schema + "PR_CLIENTES_CON_MAS_PUNTOS_VENCIDOS";
         public const string ClientesConMasCompras = Schema + "PR_CLIENTES_CON_MAS_COMPRAS";
+        public const string PremiosDisponibles = Schema + "PR_TODOS_LOS_PREMIOS_DISPONIBLES";
+        public const string CanjearPremio = Schema + "PR_CANJEAR_PREMIO";
+        public const string PuntosDeUsuario = Schema + "PR_PUNTOS_DE_USUARIO";
+
     }
 }

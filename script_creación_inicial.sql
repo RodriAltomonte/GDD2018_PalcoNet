@@ -50,6 +50,18 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_CLIENTES_CON_MAS_PUNTOS_VENCIDOS') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_CLIENTES_CON_MAS_PUNTOS_VENCIDOS
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_TODOS_LOS_PREMIOS_DISPONIBLES') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_TODOS_LOS_PREMIOS_DISPONIBLES
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_CANJEAR_PREMIO') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_CANJEAR_PREMIO
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_PUNTOS_DE_USUARIO') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_PUNTOS_DE_USUARIO
+go
+
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -57,6 +69,10 @@ go*/
 ------------------------------DROP FUNCIONES------------------------------
 IF OBJECT_ID('LOS_DE_GESTION.FN_HASHPASS','FN') IS NOT NULL
 DROP FUNCTION LOS_DE_GESTION.FN_HASHPASS
+go
+
+IF OBJECT_ID('LOS_DE_GESTION.FN_CLIENTE_TIENE_PUNTOS_SUFICIENTES') IS NOT NULL
+DROP FUNCTION LOS_DE_GESTION.FN_CLIENTE_TIENE_PUNTOS_SUFICIENTES
 go
 ------------------------------DROP VISTAS---------------------------------
 ------------------------------DROP TRIGGERS ------------------------------
@@ -377,6 +393,22 @@ BEGIN
 	RETURN CONVERT(nvarchar(255),HASHBYTES('SHA2_256',@password),1)
 END
 go
+
+CREATE FUNCTION LOS_DE_GESTION.FN_CLIENTE_TIENE_PUNTOS_SUFICIENTES(@clienteUsername nvarchar(255), @idPremio numeric(18,0))
+RETURNS bit
+AS
+BEGIN
+	DECLARE @returnValue bit
+	
+	IF((select c.puntos_acum_validos from LOS_DE_GESTION.Cliente c where c.username = @clienteUsername) >= (select p.puntos_requeridos from LOS_DE_GESTION.Premio p where p.id_Premio = @idPremio))
+		SET @returnValue = 1
+	ELSE
+		SET @returnValue = 0
+	
+	RETURN @returnValue
+END
+go
+
 -----------------------------STORE PROCEDURE------------------------------
 /*LOGIN*/
 CREATE PROCEDURE LOS_DE_GESTION.PR_Validar_login @username nvarchar(255), @password nvarchar(255),@loginCorrecto bit OUTPUT
@@ -492,7 +524,39 @@ BEGIN
 END
 go
 
-/*LISTADO ESTADISTICO*/
+/*12.CANJE Y ADMINISTRACION DE PUNTOS*/
+CREATE PROCEDURE LOS_DE_GESTION.PR_TODOS_LOS_PREMIOS_DISPONIBLES
+AS
+BEGIN
+	SELECT id_Premio, descripcion, puntos_requeridos
+	FROM LOS_DE_GESTION.Premio
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_CANJEAR_PREMIO @username nvarchar(255), @idPremio numeric(18,0)
+AS
+BEGIN
+	IF((select LOS_DE_GESTION.FN_CLIENTE_TIENE_PUNTOS_SUFICIENTES(@username, @idPremio)) = 1)
+		BEGIN 
+		INSERT INTO GD2C2018.LOS_DE_GESTION.Premio_Canjeado (id_premio, usuario_cliente, fecha_canje) VALUES(@idPremio, @username, getdate())
+		
+		UPDATE LOS_DE_GESTION.Cliente SET puntos_acum_validos = puntos_acum_validos - (select p.puntos_requeridos from LOS_DE_GESTION.Premio p where p.id_Premio = @idPremio)
+		WHERE username = @username		
+		END
+	ELSE
+		BEGIN
+			THROW 50001, 'No posee los puntos suficientes para canjear el item seleccionado.', 1
+		END
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_PUNTOS_DE_USUARIO @username nvarchar(255)
+AS
+BEGIN
+	select username, puntos_acum_validos, fecha_vencimiento_puntos from LOS_DE_GESTION.Cliente where username = @username
+END
+go
+/*14.LISTADO ESTADISTICO*/
 CREATE PROCEDURE LOS_DE_GESTION.PR_CLIENTES_CON_MAS_COMPRAS @fechaDesde datetime, @fechaHasta datetime
 AS
 BEGIN
