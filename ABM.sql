@@ -297,13 +297,12 @@ BEGIN
 DECLARE @result NUMERIC(12)
 BEGIN TRAN delemp
 BEGIN TRY
-DELETE FROM LOS_DE_GESTION.Empresa
-WHERE razon_social = @razon_social OR @razon_social IS NULL
-AND cuit = @cuit OR @cuit IS NULL
-AND mail = @email OR @email IS NULL
+UPDATE LOS_DE_GESTION.Usuario
+SET habilitado=0
+WHERE username = (SELECT username from LOS_DE_GESTION.Empresa WHERE razon_social = @razon_social 
+				 OR @razon_social IS NULL AND cuit = @cuit OR @cuit IS NULL
+				 AND mail = @email OR @email IS NULL )
 
-DELETE FROM LOS_DE_GESTION.Usuario
-WHERE username = (SELECT username FROM LOS_DE_GESTION.Empresa WHERE razon_social = @razon_social)
 SET @result = 1
 SELECT @result AS resultado
 COMMIT TRAN delemp
