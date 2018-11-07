@@ -262,15 +262,11 @@ BEGIN
 DECLARE @result NUMERIC(12)
 BEGIN TRAN delclie
 BEGIN TRY
-DELETE FROM LOS_DE_GESTION.Cliente
-WHERE nombre=@nombre OR @nombre IS NULL AND apellido = @apellido OR @apellido IS NULL
-AND SUBSTRING(cuil,3,10) = @dni OR @dni IS NULL
-
---DELETE FROM LOS_DE_GESTION.Usuario
-
 UPDATE LOS_DE_GESTION.Usuario
 set habilitado = 0
-WHERE username = (SELECT username FROM LOS_DE_GESTION.Cliente WHERE nombre = @nombre)
+WHERE username = (SELECT username FROM LOS_DE_GESTION.Cliente
+				  WHERE nombre=@nombre OR @nombre IS NULL AND apellido = @apellido OR @apellido IS NULL
+				  AND SUBSTRING(cuil,3,10) = @dni OR @dni IS NULL)
 SET @result =1
 SELECT @result AS resultado
 COMMIT TRAN delclie
