@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PalcoNet.Classes.Form.Interfaces;
 using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Model;
@@ -15,7 +14,7 @@ using PalcoNet.Classes.Factory.Form;
 
 namespace PalcoNet.Login
 {
-    public partial class SeleccionarFuncionalidadForm : Form, IBackwardableForm, IForwardableForm
+    public partial class SeleccionarFuncionalidadForm : Form
     {
         private Form previousForm;
         private FuncionalidadRepository funcionalidadRepository;
@@ -36,34 +35,19 @@ namespace PalcoNet.Login
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            this.Backward();
+            NavigableFormUtil.BackwardTo(this, previousForm);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (cmbFuncionalidades.SelectedItem == null)
             {
-                MessageBox.Show("Seleccione una funcionalidad.");
+                MessageBoxUtil.ShowError("Seleccione una funcionalidad.");
             }
 
             decimal selectedItemId = ((ComboBoxItem<decimal>)cmbFuncionalidades.SelectedItem).Value;
-            Form nextForm = PostLoginFormFactory.CreateForm(selectedItemId, this);
 
-            ForwardTo(nextForm);
-        }
-
-
-        public void ForwardTo(Form nextForm)
-        {
-            this.Hide();
-            nextForm.Show();
-        }
-
-        public void Backward()
-        {
-            this.Dispose();
-            this.Close();
-            previousForm.Show();
+            NavigableFormUtil.ForwardTo(this, PostLoginFormFactory.CreateForm(selectedItemId, this));
         }
     }
 }

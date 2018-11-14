@@ -12,7 +12,6 @@ using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Factory.Form;
 using PalcoNet.Classes.Factory;
 using PalcoNet.Classes.Repository;
-using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.CustomException;
 
 namespace PalcoNet.RegistroUsuario
@@ -48,7 +47,7 @@ namespace PalcoNet.RegistroUsuario
             }
             catch (StoredProcedureException ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBoxUtil.ShowError(ex.Message);
             }
         }
                 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.Classes.Form.Interfaces
 {
+    [Obsolete]
     interface IBackwardableForm
     {
         void Backward();

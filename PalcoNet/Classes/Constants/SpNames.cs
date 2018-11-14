@@ -25,6 +25,7 @@ namespace PalcoNet.Classes.Constants
         public const string PuntosDeUsuario = Schema + "PR_PUNTOS_DE_USUARIO";
         public const string EsUsuarioMigrado = Schema + "PR_ES_USUARIO_MIGRADO";
         public const string BuscarUsuarios = Schema + "PR_BUSCAR_USUARIOS";
+        public const string ActualizarUsuarioMigrado = Schema + "PR_ACTUALIZAR_USUARIO_MIGRADO";
 
     }
 }

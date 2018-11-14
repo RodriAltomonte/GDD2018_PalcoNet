@@ -77,5 +77,11 @@ namespace PalcoNet.Classes.Repository
                 .ExecuteDataTableStoredProcedure(SpNames.BuscarUsuarios, inputParameters);        
         }
 
+        public void ActualizarUsuarioMigrado(string username)
+        {
+            ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.ActualizarUsuarioMigrado, StoredProcedureParameterMap.Of("@username", username));        
+        }
+
     }
 }

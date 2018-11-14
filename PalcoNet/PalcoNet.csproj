@@ -87,6 +87,7 @@
     <Compile Include="Classes\CustomException\AutoMappingException.cs" />
     <Compile Include="Classes\CustomException\BlockedUserByAdminException.cs" />
     <Compile Include="Classes\CustomException\BlockedUserByFailedLoginException.cs" />
+    <Compile Include="Classes\CustomException\SessionIsClosedException.cs" />
     <Compile Include="Classes\CustomException\StoredProcedureException.cs" />
     <Compile Include="Classes\CustomException\UsernameOrPasswordNotValidException.cs" />
     <Compile Include="Classes\DatabaseConnection\Connection.cs" />
@@ -115,8 +116,11 @@
     <Compile Include="Classes\Repository\PremioRepository.cs" />
     <Compile Include="Classes\Repository\RolRepository.cs" />
     <Compile Include="Classes\Repository\UsuarioRepository.cs" />
+    <Compile Include="Classes\Session\Session.cs" />
     <Compile Include="Classes\Util\Form\ComboBoxFiller.cs" />
     <Compile Include="Classes\Util\Form\ComboBoxItem.cs" />
+    <Compile Include="Classes\Util\Form\MessageBoxUtil.cs" />
+    <Compile Include="Classes\Util\Form\NavigableFormUtil.cs" />
     <Compile Include="Classes\Util\StringUtil.cs" />
     <Compile Include="Comprar\ComprarForm.cs">
       <SubType>Form</SubType>
@@ -180,6 +184,12 @@
     <Compile Include="RegistroUsuario\DarDeBajaUsuarioForm.Designer.cs">
       <DependentUpon>DarDeBajaUsuarioForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegistroUsuario\ModificarPasswordPorAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistroUsuario\ModificarPasswordPorAdmin.Designer.cs">
+      <DependentUpon>ModificarPasswordPorAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegistroUsuario\ModificarPasswordUsuarioForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +232,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RegistroUsuario\DarDeBajaUsuarioForm.resx">
+      <DependentUpon>DarDeBajaUsuarioForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistroUsuario\ModificarPasswordPorAdmin.resx">
+      <DependentUpon>ModificarPasswordPorAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistroUsuario\ModificarPasswordUsuarioForm.resx">
+      <DependentUpon>ModificarPasswordUsuarioForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RegistroUsuario\RegistroDeUsuarioForm.resx">
       <DependentUpon>RegistroDeUsuarioForm.cs</DependentUpon>
     </EmbeddedResource>

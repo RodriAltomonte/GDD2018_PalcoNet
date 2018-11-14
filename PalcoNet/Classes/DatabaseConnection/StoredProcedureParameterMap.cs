@@ -16,6 +16,12 @@ namespace PalcoNet.Classes.DatabaseConnection
             parametersMap = new Dictionary<string, object>();
         }
 
+        public static StoredProcedureParameterMap Of(string key, object value)
+        {
+            return new StoredProcedureParameterMap().AddParameter(key, value);
+        }
+
+
         public StoredProcedureParameterMap(IDictionary<string, object> parametersMap)
         {
             this.parametersMap = parametersMap;
