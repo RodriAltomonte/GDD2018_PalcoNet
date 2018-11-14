@@ -99,6 +99,9 @@ GO
 IF OBJECT_ID('LOS_DE_GESTION.Premio_Canjeado') IS NOT NULL AND OBJECT_ID('LOS_DE_GESTION.FK_Premio_Canjeado_Cliente','F') IS NOT NULL
 ALTER TABLE LOS_DE_GESTION.Premio_Canjeado DROP CONSTRAINT FK_Premio_Canjeado_Cliente
 GO
+IF OBJECT_ID('LOS_DE_GESTION.Historial_puntos_vencidos') IS NOT NULL AND OBJECT_ID('LOS_DE_GESTION.FK_Historial_puntos_vencidos_Cliente','F') IS NOT NULL
+ALTER TABLE LOS_DE_GESTION.FK_Historial_puntos_vencidos_Cliente DROP CONSTRAINT FK_Historial_puntos_vencidos_Cliente
+GO
 IF OBJECT_ID('LOS_DE_GESTION.Usuario') IS NOT NULL AND OBJECT_ID('LOS_DE_GESTION.FK_Usuario_Rol','F') IS NOT NULL
 ALTER TABLE LOS_DE_GESTION.Usuario DROP CONSTRAINT FK_Usuario_Rol
 GO
@@ -188,6 +191,9 @@ DROP TABLE LOS_DE_GESTION.Empresa;
 go
 IF OBJECT_ID('LOS_DE_GESTION.Premio_Canjeado') IS NOT NULL
 DROP TABLE LOS_DE_GESTION.Premio_Canjeado;
+go
+IF OBJECT_ID('LOS_DE_GESTION.Historial_puntos_vencidos') IS NOT NULL
+DROP TABLE LOS_DE_GESTION.Historial_puntos_vencidos;
 go
 IF OBJECT_ID('LOS_DE_GESTION.Cliente') IS NOT NULL
 DROP TABLE LOS_DE_GESTION.Cliente;
@@ -387,6 +393,14 @@ CREATE TABLE LOS_DE_GESTION.Premio(
 	id_Compra numeric(18, 0)
  )
  go
+ 
+ CREATE TABLE LOS_DE_GESTION.Historial_puntos_vencidos(
+	id_historial_puntos_vencidos numeric(18,0) PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	usuario_cliente nvarchar(255) NOT NULL,
+	puntos_vencidos int NOT NULL,
+	fecha_de_vencimiento datetime NOT NULL
+ )
+ go
 -----------------------------TRIGGERS-------------------------------------
 /*LOGIN*/
 CREATE TRIGGER LOS_DE_GESTION.TRG_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO ON LOS_DE_GESTION.Usuario AFTER UPDATE
@@ -543,12 +557,20 @@ go
 CREATE PROCEDURE LOS_DE_GESTION.PR_VALIDAR_VENCIMIENTO_DE_PUNTOS @clienteUsername nvarchar(255), @fechaHoy datetime
 AS
 BEGIN
+	declare @puntosAVencer int
+	declare @fechaDeVencimiento datetime
 	IF((select c.fecha_vencimiento_puntos from LOS_DE_GESTION.Cliente c where c.username = @clienteUsername) < @fechaHoy )
 	BEGIN
+		select @puntosAVencer = puntos_acum_validos, @fechaDeVencimiento = fecha_vencimiento_puntos from LOS_DE_GESTION.Cliente where username = @clienteUsername
+		
+		INSERT INTO LOS_DE_GESTION.Historial_puntos_vencidos
+		(usuario_cliente, puntos_vencidos, fecha_de_vencimiento)
+		VALUES(@clienteUsername, @puntosAVencer, @fechaDeVencimiento)		
+	
 		UPDATE LOS_DE_GESTION.Cliente
-		SET puntos_vencidos = puntos_vencidos + puntos_acum_validos,
+		SET puntos_vencidos = puntos_vencidos + @puntosAVencer,
 			puntos_acum_validos = 0,
-			fecha_vencimiento_puntos = DATEADD(year, 1 , fecha_vencimiento_puntos)
+			fecha_vencimiento_puntos = DATEADD(year, 1 , @fechaDeVencimiento)
 		WHERE username = @clienteUsername
 	END
 END
@@ -645,6 +667,8 @@ GO
 ------------------------------FOREING KEYS---------------------------------
 ALTER TABLE LOS_DE_GESTION.Premio_Canjeado ADD CONSTRAINT FK_Premio_Canjeado_Premio FOREIGN KEY ([id_premio]) REFERENCES [LOS_DE_GESTION].Premio
 ALTER TABLE LOS_DE_GESTION.Premio_Canjeado ADD CONSTRAINT FK_Premio_Canjeado_Cliente FOREIGN KEY ([usuario_cliente]) REFERENCES [LOS_DE_GESTION].Cliente
+
+ALTER TABLE LOS_DE_GESTION.Historial_puntos_vencidos ADD CONSTRAINT FK_Historial_puntos_vencidos_Cliente FOREIGN KEY ([usuario_cliente]) REFERENCES [LOS_DE_GESTION].Cliente
 
 ALTER TABLE LOS_DE_GESTION.Usuario ADD CONSTRAINT FK_Usuario_Rol FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol
 
