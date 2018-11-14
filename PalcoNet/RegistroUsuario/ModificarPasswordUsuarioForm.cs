@@ -38,26 +38,31 @@ namespace PalcoNet.RegistroUsuario
                     MessageBoxUtil.ShowInfo("Contraseña modificada correctamente. Acceda nuevamente.");
                     NavigableFormUtil.BackwardTo(this, new Login.LoginForm());
                 }
-                else
-                {
-                    MessageBox.Show("Las contraseñas ingresadas no coinciden.", "Error", MessageBoxButtons.OK);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Complete ambos campos.", "Error", MessageBoxButtons.OK);
             }
 
         }
 
+        #region Auxiliary methods
         private Boolean ValidarPasswordNoVacio() 
         {
-            return txtNuevoPassword.Text != "" && txtConfirmarPassword.Text != "";
+            if (txtNuevoPassword.Text == "" || txtConfirmarPassword.Text == "")
+            {
+                MessageBoxUtil.ShowError("Las contraseñas ingresadas no coinciden.");
+                return false;
+            }
+            return true;
         }
 
         private Boolean ValidarPasswordNuevo() 
         {
-            return txtNuevoPassword.Text.Equals(txtConfirmarPassword.Text);        
+            if (!txtNuevoPassword.Text.Equals(txtConfirmarPassword.Text))
+            {
+                MessageBoxUtil.ShowError("Las contraseñas ingresadas no coinciden.");
+                return false;
+            }
+            return true;
+
         }
+        #endregion
     }
 }

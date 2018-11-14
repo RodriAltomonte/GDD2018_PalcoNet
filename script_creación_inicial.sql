@@ -256,10 +256,10 @@ CREATE TABLE LOS_DE_GESTION.Premio(
  go
 
  CREATE TABLE LOS_DE_GESTION.Premio_Canjeado(
-	id_premio numeric(18, 0) ,
-	usuario_cliente nvarchar(255) ,
-	fecha_canje datetime,
-	PRIMARY KEY(id_premio,usuario_cliente)
+ 	id_premio_canjeado numeric(18,0) PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	id_premio numeric(18, 0) NOT NULL,
+	usuario_cliente nvarchar(255) NOT NULL,
+	fecha_canje datetime
  )
  go
 
