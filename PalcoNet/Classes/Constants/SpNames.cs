@@ -23,6 +23,8 @@ namespace PalcoNet.Classes.Constants
         public const string PremiosDisponibles = Schema + "PR_TODOS_LOS_PREMIOS_DISPONIBLES";
         public const string CanjearPremio = Schema + "PR_CANJEAR_PREMIO";
         public const string PuntosDeUsuario = Schema + "PR_PUNTOS_DE_USUARIO";
+        public const string EsUsuarioMigrado = Schema + "PR_ES_USUARIO_MIGRADO";
+        public const string BuscarUsuarios = Schema + "PR_BUSCAR_USUARIOS";
 
     }
 }

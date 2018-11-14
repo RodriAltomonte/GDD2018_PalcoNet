@@ -12,6 +12,7 @@ using PalcoNet.RegistroUsuario;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.Form.Interfaces;
 using PalcoNet.Classes.Model;
+//using PalcoNet.Classes.Session;
 
 namespace PalcoNet.Login
 {
@@ -32,8 +33,19 @@ namespace PalcoNet.Login
             try
             {
                 usuarioRepository.ExisteUsuarioYContrasenia(txtUsername.Text, txtPassword.Text);
-                Rol userRol = rolRepository.IdRolDeUsuario(txtUsername.Text);
-                this.ForwardTo(new SeleccionarFuncionalidadForm(this, userRol));
+
+                if (usuarioRepository.EsUsuarioMigrado(txtUsername.Text))
+                {
+                    this.ForwardTo(new RegistroUsuario.ModificarPasswordUsuarioForm());
+                }
+                else
+                {
+                    //Session.Instance().OpenSession(txtUsername.Text);
+
+                    Rol userRol = rolRepository.IdRolDeUsuario(txtUsername.Text);
+                    this.ForwardTo(new SeleccionarFuncionalidadForm(this, userRol));
+                }
+
             }
             catch (StoredProcedureException ex)
             {

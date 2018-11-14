@@ -11,14 +11,14 @@ using PalcoNet.Classes.Repository;
 
 namespace PalcoNet.RegistroUsuario
 {
-    public partial class DarDeBajaUsuarioForm : Form
+    public partial class ModificarPasswordPorAdmin : Form
     {
         private UsuarioRepository usuarioRepository;
 
-        public DarDeBajaUsuarioForm()
+        public ModificarPasswordPorAdmin()
         {
             InitializeComponent();
-            this.usuarioRepository = new UsuarioRepository();
+            usuarioRepository = new UsuarioRepository();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -26,7 +26,12 @@ namespace PalcoNet.RegistroUsuario
             dgvUsuarios.DataSource = usuarioRepository.BuscarUsuarios(txtBuscar.Text);
         }
 
-        private void btnBaja_Click(object sender, EventArgs e)
+        private void dgvUsuarios_SelectionChanged(object sender, EventArgs e)
+        {
+            txtUsuarioSeleccionado.Text = dgvUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
         {
             if (txtUsuarioSeleccionado.Text == "")
             {
@@ -34,14 +39,8 @@ namespace PalcoNet.RegistroUsuario
             }
             else
             {
-                usuarioRepository.DarDeBajaUnUsuarioPorAdmin(txtUsuarioSeleccionado.Text);
-                MessageBox.Show("Usuario dado de baja correctamente.", "Info", MessageBoxButtons.OK);
+                usuarioRepository.CambiarPassword(txtUsuarioSeleccionado.Text, txtNuevoPass.Text);
             }
-        }
-
-        private void dgvUsuarios_SelectionChanged(object sender, EventArgs e)
-        {
-            txtUsuarioSeleccionado.Text = dgvUsuarios.SelectedRows[0].Cells[0].Value.ToString();
         }
     }
 }

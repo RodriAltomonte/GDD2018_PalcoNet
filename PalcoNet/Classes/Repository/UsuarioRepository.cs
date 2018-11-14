@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.Constants;
 using PalcoNet.Classes.Model;
+using System.Data;
 
 namespace PalcoNet.Classes.Repository
 {
@@ -57,6 +58,23 @@ namespace PalcoNet.Classes.Repository
             ConnectionFactory.Instance()
                 .CreateConnection()
                 .ExecuteDataTableStoredProcedure(SpNames.DarDeBajaUsuarioPorAdmin, inputParameters);
+        }
+
+        public Boolean EsUsuarioMigrado(string username) 
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
+                .AddParameter("@username", username);
+
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteSingleOutputStoredProcedure<Boolean>(SpNames.EsUsuarioMigrado, inputParameters, "@esMigrado");
+        }
+
+        public DataTable BuscarUsuarios(string filtroUsername)
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap().AddParameter("@usernameFilter", filtroUsername);
+
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.BuscarUsuarios, inputParameters);        
         }
 
     }

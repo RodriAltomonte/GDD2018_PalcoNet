@@ -62,6 +62,14 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_PUNTOS_DE_USUARIO') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_PUNTOS_DE_USUARIO
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_ES_USUARIO_MIGRADO') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_ES_USUARIO_MIGRADO
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_BUSCAR_USUARIOS') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_BUSCAR_USUARIOS
+go
+
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -472,6 +480,18 @@ as begin
 end
 go
 
+create procedure LOS_DE_GESTION.PR_ES_USUARIO_MIGRADO @username nvarchar(255), @esMigrado bit output
+as
+begin
+	if(exists(select * from LOS_DE_GESTION.Usuario u where u.username = @username and u.intentos_login = -1))
+		set @esMigrado = 1
+	else
+		set @esMigrado = 0
+	
+	return
+end
+go
+
 /*REGISTRO DE USUARIO*/
 CREATE PROCEDURE LOS_DE_GESTION.PR_ALTA_DE_USUARIO @username nvarchar(255), @password nvarchar(255), @idRol numeric(18,0)
 AS
@@ -521,6 +541,13 @@ BEGIN
 			fecha_vencimiento_puntos = DATEADD(year, 1 , fecha_vencimiento_puntos)
 		WHERE username = @clienteUsername
 	END
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_BUSCAR_USUARIOS @usernameFilter nvarchar(255)
+AS
+BEGIN
+	select u.username from LOS_DE_GESTION.Usuario u where u.username like '%'+ @usernameFilter +'%'
 END
 go
 
