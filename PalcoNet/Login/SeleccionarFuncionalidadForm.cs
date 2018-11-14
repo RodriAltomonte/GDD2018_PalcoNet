@@ -44,10 +44,13 @@ namespace PalcoNet.Login
             {
                 MessageBoxUtil.ShowError("Seleccione una funcionalidad.");
             }
+            else
+            {
+                decimal selectedItemId = ((ComboBoxItem<decimal>)cmbFuncionalidades.SelectedItem).Value;
 
-            decimal selectedItemId = ((ComboBoxItem<decimal>)cmbFuncionalidades.SelectedItem).Value;
+                NavigableFormUtil.ForwardTo(this, PostLoginFormFactory.CreateForm(selectedItemId, this));
+            }
 
-            NavigableFormUtil.ForwardTo(this, PostLoginFormFactory.CreateForm(selectedItemId, this));
         }
     }
 }

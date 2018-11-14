@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Classes.Repository;
+using PalcoNet.Classes.Util.Form;
 
 namespace PalcoNet.RegistroUsuario
 {
@@ -33,7 +34,9 @@ namespace PalcoNet.RegistroUsuario
                     if (usuarioRepository.EsUsuarioMigrado(usuarioAModificar))
                     {
                         usuarioRepository.ActualizarUsuarioMigrado(usuarioAModificar);
-                    }
+                    }                    
+                    MessageBoxUtil.ShowInfo("Contraseña modificada correctamente. Acceda nuevamente.");
+                    NavigableFormUtil.BackwardTo(this, new Login.LoginForm());
                 }
                 else
                 {

@@ -12,7 +12,7 @@ using PalcoNet.RegistroUsuario;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.Util.Form;
-//using PalcoNet.Classes.Session;
+using PalcoNet.Classes.Session;
 
 namespace PalcoNet.Login
 {
@@ -26,6 +26,8 @@ namespace PalcoNet.Login
             InitializeComponent();
             usuarioRepository = new UsuarioRepository();
             rolRepository = new RolRepository();
+
+            Session.Instance().CloseSession();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -36,11 +38,12 @@ namespace PalcoNet.Login
 
                 if (usuarioRepository.EsUsuarioMigrado(txtUsername.Text))
                 {
+                    MessageBoxUtil.ShowInfo("Debe modificar su contraseña.");
                     NavigableFormUtil.ForwardTo(this, new RegistroUsuario.ModificarPasswordUsuarioForm(txtUsername.Text));
                 }
                 else
                 {
-                    //Session.Instance().OpenSession(txtUsername.Text);
+                    Session.Instance().OpenSession(txtUsername.Text);
 
                     Rol userRol = rolRepository.IdRolDeUsuario(txtUsername.Text);
                     NavigableFormUtil.ForwardTo(this, new SeleccionarFuncionalidadForm(this, userRol));

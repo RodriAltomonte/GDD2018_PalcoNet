@@ -11,6 +11,7 @@ using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.Util.Form;
+using PalcoNet.Classes.Session;
 
 namespace PalcoNet.CanjePuntos
 {
@@ -18,22 +19,24 @@ namespace PalcoNet.CanjePuntos
     {
         private PremioRepository premioRepository;
         private ClienteRepository clienteRepository;
+        private Form previousForm;
 
-        public CanjePuntosForm()
+        public CanjePuntosForm(Form previousForm)
         {
             InitializeComponent();
             this.premioRepository = new PremioRepository();
             this.clienteRepository = new ClienteRepository();
+            this.previousForm = previousForm;
 
             //TODO reemplazar string
-            clienteRepository.ValidarVencimientoDePuntosDeCliente("username");
+            clienteRepository.ValidarVencimientoDePuntosDeCliente(Session.Instance().LoggedUsername);
 
             ComboBoxFiller<Premio, decimal>.Fill(cmbPremios)
                 .KeyAs(premio => premio.IdPremio)
                 .ValueAs(premio => premio.Descripcion + " - " + premio.PuntosRequeridos + " puntos requeridos")
                 .With(premioRepository.PremiosDisponibles());
             //TODO reemplazar string
-            this.ActualizarPuntosYFechaDeVencimiento(premioRepository.PuntosDeUsuario("username"));
+            this.ActualizarPuntosYFechaDeVencimiento(premioRepository.PuntosDeUsuario(Session.Instance().LoggedUsername));
         }
 
         private void btnCanjear_Click(object sender, EventArgs e)
@@ -45,15 +48,15 @@ namespace PalcoNet.CanjePuntos
                     //TODO reemplazar string
                     decimal idPremio = ((ComboBoxItem<decimal>)cmbPremios.SelectedItem).Value;
 
-                    this.premioRepository.CanjearPremio("username", idPremio);
-                    this.ActualizarPuntosYFechaDeVencimiento(premioRepository.PuntosDeUsuario("username"));
+                    this.premioRepository.CanjearPremio(Session.Instance().LoggedUsername, idPremio);
+                    this.ActualizarPuntosYFechaDeVencimiento(premioRepository.PuntosDeUsuario(Session.Instance().LoggedUsername));
 
-                    MessageBox.Show("Item canjeado correctamente.", "", MessageBoxButtons.OK);    
+                    MessageBoxUtil.ShowInfo("Item canjeado correctamente.");
                 }                
             }
             catch (StoredProcedureException ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
+                MessageBoxUtil.ShowError(ex.Message);
             }
 
         }
@@ -63,7 +66,7 @@ namespace PalcoNet.CanjePuntos
         {
             if (cmbPremios.SelectedItem == null)
             {
-                MessageBox.Show("Seleccione un premio.", "Error", MessageBoxButtons.OK);
+                MessageBoxUtil.ShowError("Seleccione un premio.");
                 return false;
             }
             return true;

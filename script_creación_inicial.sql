@@ -423,6 +423,7 @@ go
 
 -----------------------------STORE PROCEDURE------------------------------
 /*LOGIN*/
+DROP procedure LOS_DE_GESTION.PR_Validar_login
 CREATE PROCEDURE LOS_DE_GESTION.PR_Validar_login @username nvarchar(255), @password nvarchar(255),@loginCorrecto bit OUTPUT
 AS 
 BEGIN
@@ -440,7 +441,7 @@ BEGIN
 			IF NOT EXISTS(select * from LOS_DE_GESTION.Usuario where username = @username and password = LOS_DE_GESTION.FN_HASHPASS(@password))
 				BEGIN
 					BEGIN TRAN;
-						update LOS_DE_GESTION.Usuario set intentos_login = intentos_login + 1--Ejecuta trigger
+						update LOS_DE_GESTION.Usuario set intentos_login = intentos_login + 1 where username = @username--Ejecuta trigger
 					COMMIT TRAN;
 					THROW 50002, 'El username/password no existe.',1
 				END
@@ -457,7 +458,12 @@ BEGIN
 						BEGIN
 							THROW 50004, 'El usuario fue deshabilitado por exceder la cantidad de intentos de login.',1
 						END
-					ELSE 
+					ELSE IF EXISTS(select * from LOS_DE_GESTION.Usuario where username = @username and intentos_login = -1)
+						BEGIN
+							set @loginCorrecto = 1
+							RETURN;
+						END
+					ELSE
 						BEGIN
 							set @loginCorrecto = 1
 							BEGIN TRAN;
@@ -712,6 +718,11 @@ go
 /*FUNCIONALIDADES DEL ADMINISTRADOR*/
 
 
+/*PREMIOS*/
+INSERT INTO GD2C2018.LOS_DE_GESTION.Premio
+(descripcion, puntos_requeridos)
+VALUES('Prueba', 500)
+go
 
 ------------------------------GENERACION DE ADMINISTRADOR GENERAL-----------------------------
 
