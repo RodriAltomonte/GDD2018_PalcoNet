@@ -29,6 +29,8 @@ namespace PalcoNet.Classes.Constants
         public const string TodosLosRubros = Schema + "PR_TODOS_LOS_RUBROS";
         public const string TodosLosGrados = Schema + "PR_TODOS_LOS_GRADOS";
         public const string TodosLosEstados = Schema + "PR_TODOS_LOS_ESTADOS";
+        public const string TodosLosTiposDeUbicacion = Schema + "PR_TODOS_LOS_TIPOS_DE_UBICACION";
+        public const string CrearPublicacion = Schema + "PR_CREAR_PUBLICACION";
 
     }
 }

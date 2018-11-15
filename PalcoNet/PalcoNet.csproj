@@ -107,9 +107,11 @@
     <Compile Include="Classes\Model\Funcionalidad.cs" />
     <Compile Include="Classes\Model\GradoDePublicacion.cs" />
     <Compile Include="Classes\Model\Premio.cs" />
+    <Compile Include="Classes\Model\Publicacion.cs" />
     <Compile Include="Classes\Model\PuntosDeUsuario.cs" />
     <Compile Include="Classes\Model\Rol.cs" />
     <Compile Include="Classes\Model\Rubro.cs" />
+    <Compile Include="Classes\Model\TipoDeUbicacion.cs" />
     <Compile Include="Classes\Model\Usuario.cs" />
     <Compile Include="Classes\Repository\ClienteRepository.cs" />
     <Compile Include="Classes\Repository\EstadoDePublicacionRepository.cs" />
@@ -119,8 +121,10 @@
     <Compile Include="Classes\Repository\Mapper\AutoMapper.cs" />
     <Compile Include="Classes\Repository\Mapper\FuncionalidadMapper.cs" />
     <Compile Include="Classes\Repository\PremioRepository.cs" />
+    <Compile Include="Classes\Repository\PublicacionRepository.cs" />
     <Compile Include="Classes\Repository\RolRepository.cs" />
     <Compile Include="Classes\Repository\RubroRepository.cs" />
+    <Compile Include="Classes\Repository\TIpoDeUbicacionRepository.cs" />
     <Compile Include="Classes\Repository\UsuarioRepository.cs" />
     <Compile Include="Classes\Session\Session.cs" />
     <Compile Include="Classes\Util\Form\ComboBoxFiller.cs" />

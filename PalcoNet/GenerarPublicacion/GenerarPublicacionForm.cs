@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Model;
+using PalcoNet.Classes.CustomException;
 
 namespace PalcoNet.GenerarPublicacion
 {
@@ -19,21 +20,28 @@ namespace PalcoNet.GenerarPublicacion
         private RubroRepository rubroRepository;
         private GradoDePublicacionRepository gradoRepository;
         private EstadoDePublicacionRepository estadoRepository;
+        private TipoDeUbicacionRepository tipoUbicacionRepository;
+        private PublicacionRepository publicacionRepository;
 
         public GenerarPublicacionForm(Form previousForm)
         {
             InitializeComponent();
             this.previousForm = previousForm;
-            this.rubroRepository = new RubroRepository();
-            this.gradoRepository = new GradoDePublicacionRepository();
-            this.estadoRepository = new EstadoDePublicacionRepository();
-
+            this.InitializeRepositories();
             this.InitializeControls();
         }
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
-
+            //TODO
+            try
+            {
+                publicacionRepository.CrearPublicacion(this.BuildPublicacion());
+            }
+            catch (StoredProcedureException ex)
+            {
+                MessageBoxUtil.ShowError("Error al generar la publicacion.");
+            }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -59,6 +67,22 @@ namespace PalcoNet.GenerarPublicacion
                 .ValueAs(estado => estado.Descripcion)
                 .With(estadoRepository.TodosLosEstadosDePublicacion());
         }
+
+        private void InitializeRepositories()
+        {            
+            this.rubroRepository = new RubroRepository();
+            this.gradoRepository = new GradoDePublicacionRepository();
+            this.estadoRepository = new EstadoDePublicacionRepository();
+            this.tipoUbicacionRepository = new TipoDeUbicacionRepository();
+            this.publicacionRepository = new PublicacionRepository();
+        }
+
+        //TODO
+        private Publicacion BuildPublicacion()
+        {
+            return new Publicacion();
+        }
+
         #endregion
 
     }

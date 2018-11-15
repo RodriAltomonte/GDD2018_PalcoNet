@@ -10,12 +10,12 @@ using PalcoNet.Classes.Constants;
 
 namespace PalcoNet.Classes.Repository
 {
-    class GradoDePublicacionRepository
+    class TipoDeUbicacionRepository
     {
-        public IList<GradoDePublicacion> TodosLosGradosDePublicacion()
+        public IList<TipoDeUbicacion> TodosLosTiposDeUbicacion()
         {
             return ConnectionFactory.Instance().CreateConnection()
-                .ExecuteMappedStoredProcedure(SpNames.TodosLosGrados, null, new Mapper.AutoMapper<GradoDePublicacion>());
+                .ExecuteMappedStoredProcedure(SpNames.TodosLosTiposDeUbicacion, null, new Mapper.AutoMapper<TipoDeUbicacion>());
         }
     }
 }
