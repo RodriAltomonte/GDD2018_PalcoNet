@@ -26,6 +26,9 @@ namespace PalcoNet.Classes.Constants
         public const string EsUsuarioMigrado = Schema + "PR_ES_USUARIO_MIGRADO";
         public const string BuscarUsuarios = Schema + "PR_BUSCAR_USUARIOS";
         public const string ActualizarUsuarioMigrado = Schema + "PR_ACTUALIZAR_USUARIO_MIGRADO";
+        public const string TodosLosRubros = Schema + "PR_TODOS_LOS_RUBROS";
+        public const string TodosLosGrados = Schema + "PR_TODOS_LOS_GRADOS";
+        public const string TodosLosEstados = Schema + "PR_TODOS_LOS_ESTADOS";
 
     }
 }
