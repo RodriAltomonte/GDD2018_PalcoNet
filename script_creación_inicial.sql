@@ -707,46 +707,68 @@ BEGIN
 	select 1 as TODO
 END
 go
+
 ------------------------------MIGRACION-----------------------------------
  
 CREATE PROCEDURE LOS_DE_GESTION.PR_MIGRACION
 AS
+BEGIN
+/*si intentos_login -1 -> el usuario viene de migracion*/
+/* inserto Usuarios de Empresas*/
+		 insert into LOS_DE_GESTION.Usuario(username, password, intentos_login, bloqueado_login_fallidos, habilitado, id_Rol)
+		 SELECT distinct Espec_Empresa_Mail,HashBytes('SHA2_256', Espec_Empresa_Cuit),-1, 0,1,3
+		 FROM gd_esquema.Maestra
+	
+/* inserto Empresas*/
+		 insert into LOS_DE_GESTION.Empresa(username,cuit, razon_social, fecha_creacion, mail, calle, nro_calle, nro_piso,depto, codigo_postal)
+		 SELECT distinct Espec_Empresa_Mail,Espec_Empresa_Cuit,Espec_Empresa_Razon_Social, Espec_Empresa_Fecha_Creacion,Espec_Empresa_Mail,Espec_Empresa_Dom_Calle,
+						 Espec_Empresa_Nro_Calle,Espec_Empresa_Piso,Espec_Empresa_Depto, Espec_Empresa_Cod_Postal
+		 FROM gd_esquema.Maestra
+	
 
+/* inserto Usuarios de clientes*/
+		 insert into LOS_DE_GESTION.Usuario(username, password, intentos_login, bloqueado_login_fallidos, habilitado, id_Rol)
+		 SELECT distinct Cli_Dni,HashBytes('SHA2_256', convert(nvarchar(255), Cli_Dni)),-1, 0,1,2
+		 FROM gd_esquema.Maestra where Cli_Dni is not NULL
+	
+/* inserto clientes*/
+		 insert into LOS_DE_GESTION.Cliente(username,tipo_documento,numero_documento, apellido,nombre,fecha_nacimiento, mail,calle,nro_calle,nro_piso,depto,codigo_postal)
+		 SELECT distinct Cli_Dni,'DNI',Cli_Dni, Cli_Apeliido,Cli_Nombre,Cli_Fecha_Nac,Cli_Mail, Cli_Dom_Calle,Cli_Nro_Calle,Cli_Piso, Cli_Depto,Cli_Cod_Postal
+		 FROM gd_esquema.Maestra where Cli_Mail is not NULL
+/*decision de implementacion*/
+/* deshabilito Clientes con mismo mail*/
+		 update LOS_DE_GESTION.Usuario
+		 set habilitado = 0
+		 where id_Rol = 2 and 
+			   username in (SELECT a.numero_documento FROM LOS_DE_GESTION.Cliente a ,LOS_DE_GESTION.Cliente b 
+							where  b.mail = a.mail and b.numero_documento != a.numero_documento )
+  
+/* inserto Estado Publicacion*/
+		 insert into LOS_DE_GESTION.Estado_Publicacion(id_Estado_Publicacion,descripcion)
+		 SELECT distinct 1, Espectaculo_Estado
+		 FROM gd_esquema.Maestra
+
+	insert into  LOS_DE_GESTION.Estado_Publicacion(id_Estado_Publicacion,descripcion) 
+	values (2,'Borrador'), (3,'Finalizada')
+
+/* inserto Publicacion*/
+
+
+/* inserto tipo_Ubicacion*/
+		 insert into LOS_DE_GESTION.Tipo_Ubicacion(id_Tipo_Ubicacion,descripcion)
+		 SELECT distinct Ubicacion_Tipo_Codigo, Ubicacion_Tipo_Descripcion
+		 FROM gd_esquema.Maestra
+
+
+/* inserto Ubicacion*/
+		 insert into LOS_DE_GESTION.Ubicacion(fila,asiento,ubicacion_sin_numerar,precio)
+		 SELECT distinct Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio
+		 FROM gd_esquema.Maestra
+
+END
 GO
 
 
-------------------------------FOREING KEYS---------------------------------
-ALTER TABLE LOS_DE_GESTION.Premio_Canjeado ADD CONSTRAINT FK_Premio_Canjeado_Premio FOREIGN KEY ([id_premio]) REFERENCES [LOS_DE_GESTION].Premio
-ALTER TABLE LOS_DE_GESTION.Premio_Canjeado ADD CONSTRAINT FK_Premio_Canjeado_Cliente FOREIGN KEY ([usuario_cliente]) REFERENCES [LOS_DE_GESTION].Cliente
-
-ALTER TABLE LOS_DE_GESTION.Historial_puntos_vencidos ADD CONSTRAINT FK_Historial_puntos_vencidos_Cliente FOREIGN KEY ([usuario_cliente]) REFERENCES [LOS_DE_GESTION].Cliente
-
-ALTER TABLE LOS_DE_GESTION.Usuario ADD CONSTRAINT FK_Usuario_Rol FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol
-
-ALTER TABLE LOS_DE_GESTION.Rol_X_Funcionalidad ADD CONSTRAINT FK_Rol_X_Funcionalidad_Rol FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol
-ALTER TABLE LOS_DE_GESTION.Rol_X_Funcionalidad ADD CONSTRAINT FK_Rol_X_Funcionalidad_Funcionalidad FOREIGN KEY (id_Funcionalidad) REFERENCES [LOS_DE_GESTION].Funcionalidad
-
-ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Rubro FOREIGN KEY (id_Rubro) REFERENCES [LOS_DE_GESTION].Rubro
-ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Grado_Publicacion FOREIGN KEY (id_Grado_Publicacion) REFERENCES [LOS_DE_GESTION].Grado_Publicacion
-ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Empresa FOREIGN KEY (usuario_empresa_vendedora) REFERENCES [LOS_DE_GESTION].Empresa
-ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Estado_Publicacion FOREIGN KEY (id_Estado_Publicacion) REFERENCES [LOS_DE_GESTION].Estado_Publicacion
-
-ALTER TABLE LOS_DE_GESTION.Item_Rendicion ADD CONSTRAINT FK_Item_Rendicion_Rendicion FOREIGN KEY (id_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
-
-ALTER TABLE LOS_DE_GESTION.Rendicion ADD CONSTRAINT FK_Rendicion_Empresa FOREIGN KEY (usuario_empresa_a_rendir) REFERENCES [LOS_DE_GESTION].Empresa
-
-ALTER TABLE LOS_DE_GESTION.Compra ADD CONSTRAINT FK_Compra_Cliente FOREIGN KEY (usuario_cliente_comprador) REFERENCES [LOS_DE_GESTION].Cliente
-ALTER TABLE LOS_DE_GESTION.Compra ADD CONSTRAINT FK_Compra_Rendicion FOREIGN KEY (id_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
-
-ALTER TABLE LOS_DE_GESTION.Empresa ADD CONSTRAINT FK_Empresa_Usuario FOREIGN KEY (username) REFERENCES [LOS_DE_GESTION].Usuario
-
-ALTER TABLE LOS_DE_GESTION.Cliente ADD CONSTRAINT FK_Cliente_Usuario FOREIGN KEY (username) REFERENCES [LOS_DE_GESTION].Usuario
-
-ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Publicacion FOREIGN KEY (cod_publicacion) REFERENCES [LOS_DE_GESTION].Publicacion
-ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Tipo_Ubicacion FOREIGN KEY (id_Tipo_Ubicacion) REFERENCES [LOS_DE_GESTION].Tipo_Ubicacion
-ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Compra FOREIGN KEY (id_Compra) REFERENCES [LOS_DE_GESTION].Compra
-
-GO
 
 ------------------------------EJECUTO MIGRACION-----------------------------
 EXECUTE LOS_DE_GESTION.PR_MIGRACION
@@ -800,6 +822,7 @@ VALUES('Prueba', 500)
 go
 
 -----------------------GENERACION DE ADMINISTRADOR GENERAL----------------
+
 -----------------------------TRIGGERS-------------------------------------
 /*LOGIN*/
 CREATE TRIGGER LOS_DE_GESTION.TRG_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO ON LOS_DE_GESTION.Usuario AFTER UPDATE
@@ -809,5 +832,39 @@ BEGIN
 		update LOS_DE_GESTION.Usuario set bloqueado_login_fallidos = 1 where username = (select username from inserted)
 END
 go
+
+
+------------------------------FOREING KEYS---------------------------------
+ALTER TABLE LOS_DE_GESTION.Premio_Canjeado ADD CONSTRAINT FK_Premio_Canjeado_Premio FOREIGN KEY ([id_premio]) REFERENCES [LOS_DE_GESTION].Premio
+ALTER TABLE LOS_DE_GESTION.Premio_Canjeado ADD CONSTRAINT FK_Premio_Canjeado_Cliente FOREIGN KEY ([usuario_cliente]) REFERENCES [LOS_DE_GESTION].Cliente
+
+ALTER TABLE LOS_DE_GESTION.Historial_puntos_vencidos ADD CONSTRAINT FK_Historial_puntos_vencidos_Cliente FOREIGN KEY ([usuario_cliente]) REFERENCES [LOS_DE_GESTION].Cliente
+
+ALTER TABLE LOS_DE_GESTION.Usuario ADD CONSTRAINT FK_Usuario_Rol FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol
+
+ALTER TABLE LOS_DE_GESTION.Rol_X_Funcionalidad ADD CONSTRAINT FK_Rol_X_Funcionalidad_Rol FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol
+ALTER TABLE LOS_DE_GESTION.Rol_X_Funcionalidad ADD CONSTRAINT FK_Rol_X_Funcionalidad_Funcionalidad FOREIGN KEY (id_Funcionalidad) REFERENCES [LOS_DE_GESTION].Funcionalidad
+
+ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Rubro FOREIGN KEY (id_Rubro) REFERENCES [LOS_DE_GESTION].Rubro
+ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Grado_Publicacion FOREIGN KEY (id_Grado_Publicacion) REFERENCES [LOS_DE_GESTION].Grado_Publicacion
+ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Empresa FOREIGN KEY (usuario_empresa_vendedora) REFERENCES [LOS_DE_GESTION].Empresa
+ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Estado_Publicacion FOREIGN KEY (id_Estado_Publicacion) REFERENCES [LOS_DE_GESTION].Estado_Publicacion
+
+ALTER TABLE LOS_DE_GESTION.Item_Rendicion ADD CONSTRAINT FK_Item_Rendicion_Rendicion FOREIGN KEY (id_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
+
+ALTER TABLE LOS_DE_GESTION.Rendicion ADD CONSTRAINT FK_Rendicion_Empresa FOREIGN KEY (usuario_empresa_a_rendir) REFERENCES [LOS_DE_GESTION].Empresa
+
+ALTER TABLE LOS_DE_GESTION.Compra ADD CONSTRAINT FK_Compra_Cliente FOREIGN KEY (usuario_cliente_comprador) REFERENCES [LOS_DE_GESTION].Cliente
+ALTER TABLE LOS_DE_GESTION.Compra ADD CONSTRAINT FK_Compra_Rendicion FOREIGN KEY (id_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
+
+ALTER TABLE LOS_DE_GESTION.Empresa ADD CONSTRAINT FK_Empresa_Usuario FOREIGN KEY (username) REFERENCES [LOS_DE_GESTION].Usuario
+
+ALTER TABLE LOS_DE_GESTION.Cliente ADD CONSTRAINT FK_Cliente_Usuario FOREIGN KEY (username) REFERENCES [LOS_DE_GESTION].Usuario
+
+ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Publicacion FOREIGN KEY (cod_publicacion) REFERENCES [LOS_DE_GESTION].Publicacion
+ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Tipo_Ubicacion FOREIGN KEY (id_Tipo_Ubicacion) REFERENCES [LOS_DE_GESTION].Tipo_Ubicacion
+ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Compra FOREIGN KEY (id_Compra) REFERENCES [LOS_DE_GESTION].Compra
+
+GO
 
 --select* from gd_esquema.Maestra
