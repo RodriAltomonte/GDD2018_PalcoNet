@@ -127,6 +127,7 @@
     <Compile Include="Classes\Repository\TIpoDeUbicacionRepository.cs" />
     <Compile Include="Classes\Repository\UsuarioRepository.cs" />
     <Compile Include="Classes\Session\Session.cs" />
+    <Compile Include="Classes\Util\DateTimeUtil.cs" />
     <Compile Include="Classes\Util\Form\ComboBoxFiller.cs" />
     <Compile Include="Classes\Util\Form\ComboBoxItem.cs" />
     <Compile Include="Classes\Util\Form\MessageBoxUtil.cs" />
@@ -143,6 +144,18 @@
     </Compile>
     <Compile Include="EditarPublicacion\EditarPublicacionForm.Designer.cs">
       <DependentUpon>EditarPublicacionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenerarPublicacion\AgregarFechaHora.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerarPublicacion\AgregarFechaHora.Designer.cs">
+      <DependentUpon>AgregarFechaHora.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenerarPublicacion\AgregarUbicacionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerarPublicacion\AgregarUbicacionForm.Designer.cs">
+      <DependentUpon>AgregarUbicacionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
@@ -220,6 +233,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comprar\ComprarForm.resx">
       <DependentUpon>ComprarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerarPublicacion\AgregarFechaHora.resx">
+      <DependentUpon>AgregarFechaHora.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerarPublicacion\AgregarUbicacionForm.resx">
+      <DependentUpon>AgregarUbicacionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenerarPublicacion\GenerarPublicacionForm.resx">
       <DependentUpon>GenerarPublicacionForm.cs</DependentUpon>

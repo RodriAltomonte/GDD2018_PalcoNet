@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Util.Form;
+using PalcoNet.Classes.Util;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.CustomException;
 
@@ -84,6 +85,34 @@ namespace PalcoNet.GenerarPublicacion
         }
 
         #endregion
+
+        private void btnAgregarUbicacion_Click(object sender, EventArgs e)
+        {
+            new AgregarUbicacionForm().ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLimpiarUbicaciones_Click(object sender, EventArgs e)
+        {
+            lvUbicaciones.Items.Clear();
+        }
+
+        private void btnAgregarFechaHora_Click(object sender, EventArgs e)
+        {
+            new AgregarFechaHora(this).ShowDialog();
+        }
+
+        public void AgregarItemFechaYHora(DateTime fecha, DateTime hora) 
+        {
+            ListViewItem item = new ListViewItem();
+            item.SubItems.Add(fecha.Date.ToShortDateString());
+            item.SubItems.Add(hora.TimeOfDay.ToString());
+            lvFechaHora.Items.Add(item);
+        }
 
     }
 }
