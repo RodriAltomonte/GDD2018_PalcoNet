@@ -421,15 +421,7 @@ CREATE TABLE LOS_DE_GESTION.Premio(
 	fecha_de_vencimiento datetime NOT NULL
  )
  go
------------------------------TRIGGERS-------------------------------------
-/*LOGIN*/
-CREATE TRIGGER LOS_DE_GESTION.TRG_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO ON LOS_DE_GESTION.Usuario AFTER UPDATE
-AS
-BEGIN
-	IF (select intentos_login from inserted)>3
-		update LOS_DE_GESTION.Usuario set bloqueado_login_fallidos = 1 where username = (select username from inserted)
-END
-go
+
 -----------------------------VISTAS---------------------------------------
 -----------------------------FUNCIONES------------------------------------
 CREATE FUNCTION LOS_DE_GESTION.FN_HASHPASS(@password nvarchar(255))
@@ -805,7 +797,15 @@ INSERT INTO GD2C2018.LOS_DE_GESTION.Premio
 VALUES('Prueba', 500)
 go
 
-------------------------------GENERACION DE ADMINISTRADOR GENERAL-----------------------------
-
+-----------------------GENERACION DE ADMINISTRADOR GENERAL----------------
+-----------------------------TRIGGERS-------------------------------------
+/*LOGIN*/
+CREATE TRIGGER LOS_DE_GESTION.TRG_BLOQUEAR_USUARIO_POR_LOGIN_FALLIDO ON LOS_DE_GESTION.Usuario AFTER UPDATE
+AS
+BEGIN
+	IF (select intentos_login from inserted)>3
+		update LOS_DE_GESTION.Usuario set bloqueado_login_fallidos = 1 where username = (select username from inserted)
+END
+go
 
 --select* from gd_esquema.Maestra
