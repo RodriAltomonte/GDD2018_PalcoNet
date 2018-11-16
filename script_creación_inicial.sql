@@ -389,8 +389,9 @@ CREATE TABLE LOS_DE_GESTION.Premio(
  )
  go
 
-  CREATE TABLE LOS_DE_GESTION.Publicacion(
+   CREATE TABLE LOS_DE_GESTION.Publicacion(
 	cod_publicacion numeric(18, 0) PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	maestra_Espectaculo_Cod numeric(18, 0),
 	descripcion nvarchar(255),
 	fecha_publicacion datetime,
 	fecha_vencimiento_publicacion datetime,
