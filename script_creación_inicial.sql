@@ -120,7 +120,8 @@ IF OBJECT_ID('LOS_DE_GESTION.Premio_Canjeado') IS NOT NULL AND OBJECT_ID('LOS_DE
 ALTER TABLE LOS_DE_GESTION.Premio_Canjeado DROP CONSTRAINT FK_Premio_Canjeado_Cliente
 GO
 IF OBJECT_ID('LOS_DE_GESTION.Historial_puntos_vencidos') IS NOT NULL AND OBJECT_ID('LOS_DE_GESTION.FK_Historial_puntos_vencidos_Cliente','F') IS NOT NULL
-ALTER TABLE LOS_DE_GESTION.FK_Historial_puntos_vencidos_Cliente DROP CONSTRAINT FK_Historial_puntos_vencidos_Cliente
+/*ALTER TABLE LOS_DE_GESTION.FK_Historial_puntos_vencidos_Cliente DROP CONSTRAINT FK_Historial_puntos_vencidos_Cliente*/
+ALTER TABLE LOS_DE_GESTION.Historial_puntos_vencidos DROP CONSTRAINT FK_Historial_puntos_vencidos_Cliente
 GO
 IF OBJECT_ID('LOS_DE_GESTION.Usuario') IS NOT NULL AND OBJECT_ID('LOS_DE_GESTION.FK_Usuario_Rol','F') IS NOT NULL
 ALTER TABLE LOS_DE_GESTION.Usuario DROP CONSTRAINT FK_Usuario_Rol
@@ -449,7 +450,7 @@ go
 
 -----------------------------STORE PROCEDURE------------------------------
 /*LOGIN*/
-DROP procedure LOS_DE_GESTION.PR_Validar_login
+/*DROP procedure LOS_DE_GESTION.PR_Validar_login desp saar*/
 CREATE PROCEDURE LOS_DE_GESTION.PR_Validar_login @username nvarchar(255), @password nvarchar(255),@loginCorrecto bit OUTPUT
 AS 
 BEGIN
@@ -628,16 +629,17 @@ go
 CREATE PROCEDURE LOS_DE_GESTION.PR_TODOS_LOS_TIPOS_DE_UBICACION
 AS 
 BEGIN
-	select t.* from LOS_DE_GESTION.Tipo_Ubicacion;
+	select t.* from LOS_DE_GESTION.Tipo_Ubicacion t;
 END
 go
-
+/*
 --TODO
 CREATE PROCEDURE LOS_DE_GESTION.PR_CREAR_PUBLICACION
 AS
 BEGIN
 	
 END
+*/
 go
 /*12.CANJE Y ADMINISTRACION DE PUNTOS*/
 CREATE PROCEDURE LOS_DE_GESTION.PR_TODOS_LOS_PREMIOS_DISPONIBLES
