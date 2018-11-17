@@ -12,6 +12,7 @@ using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Util;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.CustomException;
+using PalcoNet.Classes.Session;
 
 namespace PalcoNet.GenerarPublicacion
 {
@@ -23,6 +24,7 @@ namespace PalcoNet.GenerarPublicacion
         private EstadoDePublicacionRepository estadoRepository;
         private TipoDeUbicacionRepository tipoUbicacionRepository;
         private PublicacionRepository publicacionRepository;
+        private UbicacionRepository ubicacionRepository;
 
         public GenerarPublicacionForm(Form previousForm)
         {
@@ -33,11 +35,21 @@ namespace PalcoNet.GenerarPublicacion
         }
 
         private void btnCrear_Click(object sender, EventArgs e)
-        {
-            //TODO
+        {            
             try
             {
-                publicacionRepository.CrearPublicacion(this.BuildPublicacion());
+                IList<Publicacion> publicaciones = this.CrearListaDePublicaciones();
+                foreach (Publicacion publicacion in publicaciones)
+                {
+                    decimal codPublicacionNueva = publicacionRepository.CrearPublicacion(publicacion);
+
+                    IList<UbicacionPersistente> ubicaciones = this.CrearListaDeUbicaciones(codPublicacionNueva);
+
+                    ubicacionRepository.InsertarListaDeUbicaciones(ubicaciones);
+
+                    MessageBoxUtil.ShowInfo("Publicación creada correctamente.");
+                }
+                
             }
             catch (StoredProcedureException)
             {
@@ -51,6 +63,57 @@ namespace PalcoNet.GenerarPublicacion
         }
 
         #region Auxiliary methods
+        private IList<Publicacion> CrearListaDePublicaciones() 
+        {
+            IList<Publicacion> publicaciones = new List<Publicacion>();
+
+            foreach (ListViewItem item in lvFechaHora.Items)
+            {
+                Publicacion nuevaPublicacion = new Publicacion();
+                nuevaPublicacion.Descripcion = rTxtDescripcion.Text;
+                nuevaPublicacion.FechaDePublicacion = dtpFechaPublicacion.Value;
+                nuevaPublicacion.IdRubro = ((ComboBoxItem<decimal>)cmbRubro.SelectedItem).Value;
+                nuevaPublicacion.DireccionEspectaculo = txtDireccion.Text;
+                nuevaPublicacion.IdGradoDePublicacion = ((ComboBoxItem<decimal>)cmbGrado.SelectedItem).Value;
+                nuevaPublicacion.IdEstado = ((ComboBoxItem<decimal>)cmbEstado.SelectedItem).Value;
+                nuevaPublicacion.FechaDeVencimiento = dtpVencimiento.Value;
+                nuevaPublicacion.UsuarioEmpresa = Session.Instance().LoggedUsername;
+                nuevaPublicacion.FechaHoraDeEspectaculo = DateTimeUtil.Of(item.Text, item.SubItems[1].Text);
+
+                publicaciones.Add(nuevaPublicacion);
+                
+            }
+            return publicaciones;
+        }
+
+        private IList<UbicacionPersistente> CrearListaDeUbicaciones(decimal codPublicacionNueva)
+        {
+            IList<UbicacionPersistente> ubicaciones = new List<UbicacionPersistente>();
+            foreach (ListViewItem item in lvUbicaciones.Items)
+            {
+                UbicacionPersistente nuevaUbicacion = new UbicacionPersistente();
+
+                if (item.Text == "Sin numerar")
+                {
+                    nuevaUbicacion.Fila = item.Text;
+                    nuevaUbicacion.SinNumerar = true;
+                }
+                else
+                {
+                    nuevaUbicacion.Fila = item.Text.Split(' ')[1];
+                    nuevaUbicacion.SinNumerar = false;
+                }
+
+                nuevaUbicacion.CantidadDeLugares = Convert.ToInt32(item.SubItems[1].Text);
+                nuevaUbicacion.IdTipoUbicacion = 1;
+                nuevaUbicacion.Precio = item.SubItems[2].Text;
+                nuevaUbicacion.CodPublicacion = codPublicacionNueva;
+
+                ubicaciones.Add(nuevaUbicacion);
+            }
+            return ubicaciones;
+        }
+
         private void InitializeControls() 
         {
             ComboBoxFiller<Rubro, decimal>.Fill(cmbRubro)
@@ -76,14 +139,8 @@ namespace PalcoNet.GenerarPublicacion
             this.estadoRepository = new EstadoDePublicacionRepository();
             this.tipoUbicacionRepository = new TipoDeUbicacionRepository();
             this.publicacionRepository = new PublicacionRepository();
+            this.ubicacionRepository = new UbicacionRepository();
         }
-
-        //TODO
-        private Publicacion BuildPublicacion()
-        {
-            return new Publicacion();
-        }
-
         #endregion
 
         #region Ubicacion

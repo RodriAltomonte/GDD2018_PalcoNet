@@ -37,3 +37,10 @@ VALUES('empresa', 'pass', 0, 0, 1, 3)
 INSERT INTO GD2C2018.LOS_DE_GESTION.Empresa
 (username, razon_social, cuit, mail, telefono, calle, nro_calle, nro_piso, depto, localidad, codigo_postal, ciudad, fecha_creacion)
 VALUES('empresa', 'asd', '123123', 'asdasd@mail.com', 123123, 'asdasd', 123, 1, '1', 'asdasd', '1231', 'asdasdasd asdasd', getdate())
+
+declare @codPub numeric(18,0);
+EXEC LOS_DE_GESTION.PR_CREAR_PUBLICACION 'nueva', getdate(), getdate(), getdate(), 1, 'asd',1,'empresa', 1 ,@codPub output
+EXEC LOS_DE_GESTION.PR_CREAR_UBICACIONES @codPub, null, 1, 10, 1000,1
+
+delete from LOS_DE_GESTION.Ubicacion
+delete from LOS_DE_GESTION.Publicacion

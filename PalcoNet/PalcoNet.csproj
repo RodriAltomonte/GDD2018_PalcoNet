@@ -113,6 +113,7 @@
     <Compile Include="Classes\Model\Rubro.cs" />
     <Compile Include="Classes\Model\TipoDeUbicacion.cs" />
     <Compile Include="Classes\Model\Ubicacion.cs" />
+    <Compile Include="Classes\Model\UbicacionPersistente.cs" />
     <Compile Include="Classes\Model\Usuario.cs" />
     <Compile Include="Classes\Repository\ClienteRepository.cs" />
     <Compile Include="Classes\Repository\EstadoDePublicacionRepository.cs" />

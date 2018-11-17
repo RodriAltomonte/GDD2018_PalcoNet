@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.btnVolver = new System.Windows.Forms.Button();
             this.grpGenerarPublicacion = new System.Windows.Forms.GroupBox();
+            this.lblVencimiento = new System.Windows.Forms.Label();
+            this.dtpVencimiento = new System.Windows.Forms.DateTimePicker();
             this.lvFechaHora = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -68,7 +70,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(13, 560);
+            this.btnVolver.Location = new System.Drawing.Point(13, 593);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 1;
@@ -78,6 +80,8 @@
             // 
             // grpGenerarPublicacion
             // 
+            this.grpGenerarPublicacion.Controls.Add(this.lblVencimiento);
+            this.grpGenerarPublicacion.Controls.Add(this.dtpVencimiento);
             this.grpGenerarPublicacion.Controls.Add(this.lvFechaHora);
             this.grpGenerarPublicacion.Controls.Add(this.lvUbicaciones);
             this.grpGenerarPublicacion.Controls.Add(this.btnLimpiarFechaHora);
@@ -103,10 +107,28 @@
             this.grpGenerarPublicacion.Controls.Add(this.rTxtDescripcion);
             this.grpGenerarPublicacion.Location = new System.Drawing.Point(13, 13);
             this.grpGenerarPublicacion.Name = "grpGenerarPublicacion";
-            this.grpGenerarPublicacion.Size = new System.Drawing.Size(533, 541);
+            this.grpGenerarPublicacion.Size = new System.Drawing.Size(533, 574);
             this.grpGenerarPublicacion.TabIndex = 2;
             this.grpGenerarPublicacion.TabStop = false;
             this.grpGenerarPublicacion.Text = "Nueva publicación";
+            // 
+            // lblVencimiento
+            // 
+            this.lblVencimiento.AutoSize = true;
+            this.lblVencimiento.Location = new System.Drawing.Point(46, 370);
+            this.lblVencimiento.Name = "lblVencimiento";
+            this.lblVencimiento.Size = new System.Drawing.Size(112, 13);
+            this.lblVencimiento.TabIndex = 28;
+            this.lblVencimiento.Text = "Fecha de vencimiento";
+            // 
+            // dtpVencimiento
+            // 
+            this.dtpVencimiento.CustomFormat = "dd/MM/yyyy";
+            this.dtpVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpVencimiento.Location = new System.Drawing.Point(172, 364);
+            this.dtpVencimiento.Name = "dtpVencimiento";
+            this.dtpVencimiento.Size = new System.Drawing.Size(112, 20);
+            this.dtpVencimiento.TabIndex = 27;
             // 
             // lvFechaHora
             // 
@@ -232,7 +254,7 @@
             // 
             // btnCrear
             // 
-            this.btnCrear.Location = new System.Drawing.Point(431, 504);
+            this.btnCrear.Location = new System.Drawing.Point(431, 534);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(75, 23);
             this.btnCrear.TabIndex = 16;
@@ -243,7 +265,7 @@
             // lblEstado
             // 
             this.lblEstado.AutoSize = true;
-            this.lblEstado.Location = new System.Drawing.Point(43, 458);
+            this.lblEstado.Location = new System.Drawing.Point(43, 488);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(112, 13);
             this.lblEstado.TabIndex = 15;
@@ -253,7 +275,7 @@
             // 
             this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEstado.FormattingEnabled = true;
-            this.cmbEstado.Location = new System.Drawing.Point(172, 455);
+            this.cmbEstado.Location = new System.Drawing.Point(172, 485);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(334, 21);
             this.cmbEstado.TabIndex = 14;
@@ -261,7 +283,7 @@
             // lblGrado
             // 
             this.lblGrado.AutoSize = true;
-            this.lblGrado.Location = new System.Drawing.Point(47, 431);
+            this.lblGrado.Location = new System.Drawing.Point(47, 461);
             this.lblGrado.Name = "lblGrado";
             this.lblGrado.Size = new System.Drawing.Size(108, 13);
             this.lblGrado.TabIndex = 13;
@@ -271,14 +293,14 @@
             // 
             this.cmbGrado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGrado.FormattingEnabled = true;
-            this.cmbGrado.Location = new System.Drawing.Point(172, 428);
+            this.cmbGrado.Location = new System.Drawing.Point(172, 458);
             this.cmbGrado.Name = "cmbGrado";
             this.cmbGrado.Size = new System.Drawing.Size(334, 21);
             this.cmbGrado.TabIndex = 12;
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(172, 402);
+            this.txtDireccion.Location = new System.Drawing.Point(172, 432);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(334, 20);
             this.txtDireccion.TabIndex = 11;
@@ -286,7 +308,7 @@
             // lblDireccion
             // 
             this.lblDireccion.AutoSize = true;
-            this.lblDireccion.Location = new System.Drawing.Point(103, 405);
+            this.lblDireccion.Location = new System.Drawing.Point(103, 435);
             this.lblDireccion.Name = "lblDireccion";
             this.lblDireccion.Size = new System.Drawing.Size(52, 13);
             this.lblDireccion.TabIndex = 10;
@@ -296,7 +318,7 @@
             // 
             this.cmbRubro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRubro.FormattingEnabled = true;
-            this.cmbRubro.Location = new System.Drawing.Point(172, 375);
+            this.cmbRubro.Location = new System.Drawing.Point(172, 405);
             this.cmbRubro.Name = "cmbRubro";
             this.cmbRubro.Size = new System.Drawing.Size(334, 21);
             this.cmbRubro.TabIndex = 9;
@@ -313,7 +335,7 @@
             // lblRubro
             // 
             this.lblRubro.AutoSize = true;
-            this.lblRubro.Location = new System.Drawing.Point(119, 378);
+            this.lblRubro.Location = new System.Drawing.Point(119, 408);
             this.lblRubro.Name = "lblRubro";
             this.lblRubro.Size = new System.Drawing.Size(36, 13);
             this.lblRubro.TabIndex = 6;
@@ -367,7 +389,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 595);
+            this.ClientSize = new System.Drawing.Size(560, 628);
             this.Controls.Add(this.grpGenerarPublicacion);
             this.Controls.Add(this.btnVolver);
             this.Name = "GenerarPublicacionForm";
@@ -414,5 +436,7 @@
         private System.Windows.Forms.ListView lvFechaHora;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.Label lblVencimiento;
+        private System.Windows.Forms.DateTimePicker dtpVencimiento;
     }
 }
