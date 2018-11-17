@@ -94,6 +94,10 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_CREAR_PUBLICACION') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_CREAR_PUBLICACION 
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_CREAR_UBICACIONES') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_CREAR_UBICACIONES
+go
+
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -633,15 +637,59 @@ BEGIN
 	select t.* from LOS_DE_GESTION.Tipo_Ubicacion t;
 END
 go
-/*
---TODO
-CREATE PROCEDURE LOS_DE_GESTION.PR_CREAR_PUBLICACION
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_CREAR_PUBLICACION 
+@descripcion nvarchar(255),
+@fechaDePublicacion datetime,
+@fechaVencimiento datetime,
+@fechaHoraEspectaculo datetime,
+@idRubro numeric(18,0),
+@direccion nvarchar(255),
+@idGradoPublicacion numeric(18,0),
+@usuarioEmpresa nvarchar(255),
+@idEstadoPublicacion numeric(18,0),
+@codPublicacionNueva numeric(18,0) output
 AS
 BEGIN
-	
+	INSERT INTO LOS_DE_GESTION.Publicacion
+	(descripcion, fecha_publicacion, fecha_vencimiento_publicacion, fecha_hora_espectaculo, id_Rubro, direccion_espectaculo, id_Grado_Publicacion, usuario_empresa_vendedora, id_Estado_Publicacion)
+	VALUES(@descripcion, @fechaDePublicacion, @fechaVencimiento, @fechaHoraEspectaculo, @idRubro, @direccion, @idGradoPublicacion, @usuarioEmpresa, @idEstadoPublicacion)
+	set @codPublicacionNueva = SCOPE_IDENTITY()
+	return	
 END
-*/
 go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_CREAR_UBICACIONES
+@codPublicacion numeric(18,0),
+@fila varchar(3),
+@sinNumerar bit,
+@cantidad int,
+@precio numeric(18,0),
+@idTipoUbicacion numeric(18,0)
+AS
+BEGIN
+	declare @contador int
+	set @contador = 1
+	
+	WHILE @contador <= @cantidad
+	BEGIN
+		IF @sinNumerar = 1
+		BEGIN
+			INSERT INTO LOS_DE_GESTION.Ubicacion
+			(cod_publicacion, fila, asiento, ubicacion_sin_numerar, precio, id_Tipo_Ubicacion)
+			VALUES(@codPublicacion, null, null, 1, @precio, @idTipoUbicacion)			
+		END
+		ELSE
+		BEGIN
+			INSERT INTO GD2C2018.LOS_DE_GESTION.Ubicacion
+			(cod_publicacion, fila, asiento, ubicacion_sin_numerar, precio, id_Tipo_Ubicacion)
+			VALUES(@codPublicacion, @fila, @contador, 0, @precio, @idTipoUbicacion)
+		END
+		set @contador = @contador+1
+	END
+END
+go
+
 /*12.CANJE Y ADMINISTRACION DE PUNTOS*/
 CREATE PROCEDURE LOS_DE_GESTION.PR_TODOS_LOS_PREMIOS_DISPONIBLES
 AS

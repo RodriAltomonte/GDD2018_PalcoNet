@@ -24,3 +24,16 @@ INSERT INTO GD2C2018.LOS_DE_GESTION.Rubro
 (id_Rubro, descripcion)
 VALUES(1, 'Rubro1'),(2, 'Rubro2'),(3, 'Rubro3'),(4, 'Rubro4')
 
+INSERT INTO GD2C2018.LOS_DE_GESTION.Tipo_Ubicacion
+(id_Tipo_Ubicacion, descripcion, puntos_cliente_frecuente)
+VALUES(1, 'Ubicacion A', 50),(2, 'Ubicacion B', 100),(3, 'Ubicacion C', 200)
+
+
+INSERT INTO GD2C2018.LOS_DE_GESTION.Usuario
+(username, password, intentos_login, bloqueado_login_fallidos, habilitado, id_Rol)
+VALUES('empresa', 'pass', 0, 0, 1, 3)
+
+
+INSERT INTO GD2C2018.LOS_DE_GESTION.Empresa
+(username, razon_social, cuit, mail, telefono, calle, nro_calle, nro_piso, depto, localidad, codigo_postal, ciudad, fecha_creacion)
+VALUES('empresa', 'asd', '123123', 'asdasd@mail.com', 123123, 'asdasd', 123, 1, '1', 'asdasd', '1231', 'asdasdasd asdasd', getdate())

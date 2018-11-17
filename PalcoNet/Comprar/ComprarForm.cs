@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PalcoNet.Classes.Form.Interfaces;
+using PalcoNet.Classes.Util.Form;
 
 namespace PalcoNet.Comprar
 {
-    public partial class ComprarForm : Form, IBackwardableForm
+    public partial class ComprarForm : Form
     {
         private Form previousForm;
 
@@ -23,14 +23,7 @@ namespace PalcoNet.Comprar
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            Backward();
-        }
-
-        public void Backward()
-        {
-            this.Dispose();
-            this.Close();
-            previousForm.Show();
+            NavigableFormUtil.BackwardTo(this, previousForm);
         }
 
         private void ComprarForm_FormClosed(object sender, FormClosedEventArgs e)

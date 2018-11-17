@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.grpAgregarUbicacion = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblPrecio = new System.Windows.Forms.Label();
-            this.lblTipoUbicacion = new System.Windows.Forms.Label();
-            this.rdbSinNumerar = new System.Windows.Forms.RadioButton();
-            this.rdbFilasAsientos = new System.Windows.Forms.RadioButton();
-            this.cmbTipoUbicacion = new System.Windows.Forms.ComboBox();
-            this.txtPrecio = new System.Windows.Forms.TextBox();
-            this.txtFila = new System.Windows.Forms.TextBox();
-            this.lblFila = new System.Windows.Forms.Label();
-            this.lblAsientos = new System.Windows.Forms.Label();
-            this.txtAsientos = new System.Windows.Forms.TextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
+            this.txtAsientos = new System.Windows.Forms.TextBox();
+            this.lblAsientos = new System.Windows.Forms.Label();
+            this.lblFila = new System.Windows.Forms.Label();
+            this.txtFila = new System.Windows.Forms.TextBox();
+            this.txtPrecio = new System.Windows.Forms.TextBox();
+            this.cmbTipoUbicacion = new System.Windows.Forms.ComboBox();
+            this.rdbFilasAsientos = new System.Windows.Forms.RadioButton();
+            this.rdbSinNumerar = new System.Windows.Forms.RadioButton();
+            this.lblTipoUbicacion = new System.Windows.Forms.Label();
+            this.lblPrecio = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.grpAgregarUbicacion.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,43 +65,63 @@
             this.grpAgregarUbicacion.TabStop = false;
             this.grpAgregarUbicacion.Text = "Agregar ubicación";
             // 
-            // label1
+            // btnAceptar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
-            this.label1.TabIndex = 0;
+            this.btnAceptar.Location = new System.Drawing.Point(166, 183);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
+            this.btnAceptar.TabIndex = 15;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // lblPrecio
+            // txtAsientos
             // 
-            this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Location = new System.Drawing.Point(77, 72);
-            this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(37, 13);
-            this.lblPrecio.TabIndex = 1;
-            this.lblPrecio.Text = "Precio";
+            this.txtAsientos.Location = new System.Drawing.Point(119, 124);
+            this.txtAsientos.Name = "txtAsientos";
+            this.txtAsientos.Size = new System.Drawing.Size(122, 20);
+            this.txtAsientos.TabIndex = 14;
             // 
-            // lblTipoUbicacion
+            // lblAsientos
             // 
-            this.lblTipoUbicacion.AutoSize = true;
-            this.lblTipoUbicacion.Location = new System.Drawing.Point(22, 98);
-            this.lblTipoUbicacion.Name = "lblTipoUbicacion";
-            this.lblTipoUbicacion.Size = new System.Drawing.Size(92, 13);
-            this.lblTipoUbicacion.TabIndex = 2;
-            this.lblTipoUbicacion.Text = "Tipo de ubicación";
+            this.lblAsientos.AutoSize = true;
+            this.lblAsientos.Location = new System.Drawing.Point(13, 127);
+            this.lblAsientos.Name = "lblAsientos";
+            this.lblAsientos.Size = new System.Drawing.Size(101, 13);
+            this.lblAsientos.TabIndex = 13;
+            this.lblAsientos.Text = "Cantidad de lugares";
             // 
-            // rdbSinNumerar
+            // lblFila
             // 
-            this.rdbSinNumerar.AutoSize = true;
-            this.rdbSinNumerar.Location = new System.Drawing.Point(23, 23);
-            this.rdbSinNumerar.Name = "rdbSinNumerar";
-            this.rdbSinNumerar.Size = new System.Drawing.Size(81, 17);
-            this.rdbSinNumerar.TabIndex = 5;
-            this.rdbSinNumerar.TabStop = true;
-            this.rdbSinNumerar.Text = "Sin numerar";
-            this.rdbSinNumerar.UseVisualStyleBackColor = true;
-            this.rdbSinNumerar.CheckedChanged += new System.EventHandler(this.rdbSinNumerar_CheckedChanged);
+            this.lblFila.AutoSize = true;
+            this.lblFila.Location = new System.Drawing.Point(81, 153);
+            this.lblFila.Name = "lblFila";
+            this.lblFila.Size = new System.Drawing.Size(23, 13);
+            this.lblFila.TabIndex = 10;
+            this.lblFila.Text = "Fila";
+            // 
+            // txtFila
+            // 
+            this.txtFila.Location = new System.Drawing.Point(119, 150);
+            this.txtFila.Name = "txtFila";
+            this.txtFila.Size = new System.Drawing.Size(121, 20);
+            this.txtFila.TabIndex = 9;
+            // 
+            // txtPrecio
+            // 
+            this.txtPrecio.Location = new System.Drawing.Point(121, 69);
+            this.txtPrecio.Name = "txtPrecio";
+            this.txtPrecio.Size = new System.Drawing.Size(120, 20);
+            this.txtPrecio.TabIndex = 8;
+            // 
+            // cmbTipoUbicacion
+            // 
+            this.cmbTipoUbicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoUbicacion.FormattingEnabled = true;
+            this.cmbTipoUbicacion.Location = new System.Drawing.Point(120, 95);
+            this.cmbTipoUbicacion.Name = "cmbTipoUbicacion";
+            this.cmbTipoUbicacion.Size = new System.Drawing.Size(121, 21);
+            this.cmbTipoUbicacion.TabIndex = 7;
             // 
             // rdbFilasAsientos
             // 
@@ -115,62 +135,43 @@
             this.rdbFilasAsientos.UseVisualStyleBackColor = true;
             this.rdbFilasAsientos.CheckedChanged += new System.EventHandler(this.rdbFilasAsientos_CheckedChanged);
             // 
-            // cmbTipoUbicacion
+            // rdbSinNumerar
             // 
-            this.cmbTipoUbicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipoUbicacion.FormattingEnabled = true;
-            this.cmbTipoUbicacion.Location = new System.Drawing.Point(120, 95);
-            this.cmbTipoUbicacion.Name = "cmbTipoUbicacion";
-            this.cmbTipoUbicacion.Size = new System.Drawing.Size(121, 21);
-            this.cmbTipoUbicacion.TabIndex = 7;
+            this.rdbSinNumerar.AutoSize = true;
+            this.rdbSinNumerar.Location = new System.Drawing.Point(23, 23);
+            this.rdbSinNumerar.Name = "rdbSinNumerar";
+            this.rdbSinNumerar.Size = new System.Drawing.Size(81, 17);
+            this.rdbSinNumerar.TabIndex = 5;
+            this.rdbSinNumerar.TabStop = true;
+            this.rdbSinNumerar.Text = "Sin numerar";
+            this.rdbSinNumerar.UseVisualStyleBackColor = true;
+            this.rdbSinNumerar.CheckedChanged += new System.EventHandler(this.rdbSinNumerar_CheckedChanged);
             // 
-            // txtPrecio
+            // lblTipoUbicacion
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(121, 69);
-            this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(120, 20);
-            this.txtPrecio.TabIndex = 8;
+            this.lblTipoUbicacion.AutoSize = true;
+            this.lblTipoUbicacion.Location = new System.Drawing.Point(22, 98);
+            this.lblTipoUbicacion.Name = "lblTipoUbicacion";
+            this.lblTipoUbicacion.Size = new System.Drawing.Size(92, 13);
+            this.lblTipoUbicacion.TabIndex = 2;
+            this.lblTipoUbicacion.Text = "Tipo de ubicación";
             // 
-            // txtFila
+            // lblPrecio
             // 
-            this.txtFila.Location = new System.Drawing.Point(121, 121);
-            this.txtFila.Name = "txtFila";
-            this.txtFila.Size = new System.Drawing.Size(121, 20);
-            this.txtFila.TabIndex = 9;
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Location = new System.Drawing.Point(77, 72);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(37, 13);
+            this.lblPrecio.TabIndex = 1;
+            this.lblPrecio.Text = "Precio";
             // 
-            // lblFila
+            // label1
             // 
-            this.lblFila.AutoSize = true;
-            this.lblFila.Location = new System.Drawing.Point(91, 124);
-            this.lblFila.Name = "lblFila";
-            this.lblFila.Size = new System.Drawing.Size(23, 13);
-            this.lblFila.TabIndex = 10;
-            this.lblFila.Text = "Fila";
-            // 
-            // lblAsientos
-            // 
-            this.lblAsientos.AutoSize = true;
-            this.lblAsientos.Location = new System.Drawing.Point(8, 150);
-            this.lblAsientos.Name = "lblAsientos";
-            this.lblAsientos.Size = new System.Drawing.Size(106, 13);
-            this.lblAsientos.TabIndex = 13;
-            this.lblAsientos.Text = "Cantidad de asientos";
-            // 
-            // txtAsientos
-            // 
-            this.txtAsientos.Location = new System.Drawing.Point(120, 147);
-            this.txtAsientos.Name = "txtAsientos";
-            this.txtAsientos.Size = new System.Drawing.Size(122, 20);
-            this.txtAsientos.TabIndex = 14;
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Location = new System.Drawing.Point(167, 173);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 15;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 0;
             // 
             // AgregarUbicacionForm
             // 

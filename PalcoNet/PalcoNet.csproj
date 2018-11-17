@@ -112,6 +112,7 @@
     <Compile Include="Classes\Model\Rol.cs" />
     <Compile Include="Classes\Model\Rubro.cs" />
     <Compile Include="Classes\Model\TipoDeUbicacion.cs" />
+    <Compile Include="Classes\Model\Ubicacion.cs" />
     <Compile Include="Classes\Model\Usuario.cs" />
     <Compile Include="Classes\Repository\ClienteRepository.cs" />
     <Compile Include="Classes\Repository\EstadoDePublicacionRepository.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Classes\Repository\RolRepository.cs" />
     <Compile Include="Classes\Repository\RubroRepository.cs" />
     <Compile Include="Classes\Repository\TIpoDeUbicacionRepository.cs" />
+    <Compile Include="Classes\Repository\UbicacionRepository.cs" />
     <Compile Include="Classes\Repository\UsuarioRepository.cs" />
     <Compile Include="Classes\Session\Session.cs" />
     <Compile Include="Classes\Util\DateTimeUtil.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="GenerarPublicacion\AgregarUbicacionForm.Designer.cs">
       <DependentUpon>AgregarUbicacionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GenerarPublicacion\UbicacionFiller.cs" />
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
     </Compile>

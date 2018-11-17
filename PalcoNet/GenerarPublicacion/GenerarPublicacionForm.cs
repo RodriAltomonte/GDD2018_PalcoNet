@@ -39,7 +39,7 @@ namespace PalcoNet.GenerarPublicacion
             {
                 publicacionRepository.CrearPublicacion(this.BuildPublicacion());
             }
-            catch (StoredProcedureException ex)
+            catch (StoredProcedureException)
             {
                 MessageBoxUtil.ShowError("Error al generar la publicacion.");
             }
@@ -86,14 +86,10 @@ namespace PalcoNet.GenerarPublicacion
 
         #endregion
 
+        #region Ubicacion
         private void btnAgregarUbicacion_Click(object sender, EventArgs e)
         {
-            new AgregarUbicacionForm().ShowDialog();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
+            new AgregarUbicacionForm(this).ShowDialog();
         }
 
         private void btnLimpiarUbicaciones_Click(object sender, EventArgs e)
@@ -101,18 +97,65 @@ namespace PalcoNet.GenerarPublicacion
             lvUbicaciones.Items.Clear();
         }
 
-        private void btnAgregarFechaHora_Click(object sender, EventArgs e)
+        private void btnRemoveUbicacion_Click(object sender, EventArgs e)
         {
-            new AgregarFechaHora(this).ShowDialog();
+            if (lvUbicaciones.SelectedItems.Count > 0)
+            {
+                lvUbicaciones.SelectedItems[0].Remove();
+            }
         }
 
-        public void AgregarItemFechaYHora(DateTime fecha, DateTime hora) 
+        public void AgregarUbicacion(string fila, string asientos, string precio, string tipoDeUbicacion)
         {
-            ListViewItem item = new ListViewItem();
-            item.SubItems.Add(fecha.Date.ToShortDateString());
+            ListViewItem item = new ListViewItem(fila);
+            item.SubItems.Add(asientos);
+            item.SubItems.Add(precio);
+            item.SubItems.Add(tipoDeUbicacion);
+            lvUbicaciones.Items.Add(item);
+        }
+        #endregion
+
+        #region FechaHora
+        private void btnAgregarFechaHora_Click(object sender, EventArgs e)
+        {
+            if (lvFechaHora.Items.Count == 0)
+            {
+                new AgregarFechaHora(this, dtpFechaPublicacion.Value).ShowDialog();
+                dtpFechaPublicacion.Enabled = false;
+            }
+            else
+            {
+                new AgregarFechaHora(this, DateTimeUtil.Of(
+                    Convert.ToDateTime(lvFechaHora.Items[lvFechaHora.Items.Count - 1].SubItems[0].Text),
+                    Convert.ToDateTime(lvFechaHora.Items[lvFechaHora.Items.Count - 1].SubItems[1].Text)
+                    )).ShowDialog();
+            }
+        }
+        
+        private void btnRemoverFechaHora_Click(object sender, EventArgs e)
+        {
+            if (lvFechaHora.Items.Count > 0)
+            {
+                lvFechaHora.SelectedItems[0].Remove();
+                if (lvFechaHora.Items.Count == 0)
+                {
+                    dtpFechaPublicacion.Enabled = true;
+                }                
+            }
+        }
+
+        private void btnLimpiarFechaHora_Click(object sender, EventArgs e)
+        {
+            lvFechaHora.Items.Clear();
+            dtpFechaPublicacion.Enabled = true;
+        }
+
+        public void AgregarItemFechaYHora(DateTime fecha, DateTime hora)
+        {
+            ListViewItem item = new ListViewItem(fecha.Date.ToShortDateString());
             item.SubItems.Add(hora.TimeOfDay.ToString());
             lvFechaHora.Items.Add(item);
         }
-
+        #endregion
     }
 }

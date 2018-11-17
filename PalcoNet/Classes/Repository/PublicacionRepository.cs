@@ -12,13 +12,21 @@ namespace PalcoNet.Classes.Repository
 {
     class PublicacionRepository
     {
-        public void CrearPublicacion(Publicacion publicacion) 
-        { 
-            //TODO
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+        public decimal CrearPublicacion(Publicacion publicacion) 
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
+                .AddParameter("@descripcion", publicacion.Descripcion)
+                .AddParameter("@fechaDePublicacion", publicacion.FechaDePublicacion)
+                .AddParameter("@fechaVencimiento", publicacion.FechaDeVencimiento)
+                .AddParameter("@fechaHoraEspectaculo", publicacion.FechaHoraDeEspectaculo)
+                .AddParameter("@idRubro", publicacion.IdRubro)
+                .AddParameter("@direccion", publicacion.DireccionEspectaculo)
+                .AddParameter("@idGradoPublicacion", publicacion.IdGradoDePublicacion)
+                .AddParameter("@usuarioEmpresa", publicacion.UsuarioEmpresa)
+                .AddParameter("@idEstadoPublicacion", publicacion.IdEstado);
 
-            ConnectionFactory.Instance().CreateConnection()
-                .ExecuteDataTableStoredProcedure(SpNames.CrearPublicacion, inputParameters);
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteSingleOutputStoredProcedure<decimal>(SpNames.CrearPublicacion, inputParameters, "@codPublicacionNueva");
         }
     }
 }
