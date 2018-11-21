@@ -822,6 +822,17 @@ BEGIN
 		 SELECT distinct Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio
 		 FROM gd_esquema.Maestra
 
+/* inserto rendicion*/
+		 insert into LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
+		 SELECT distinct Factura_Nro, null,null,Factura_Total,Factura_Fecha,Espec_Empresa_Mail,Forma_Pago_Desc
+		 FROM gd_esquema.Maestra where Factura_Nro is not null
+
+/* inserto Item_Rendicion*/
+		 insert into LOS_DE_GESTION.Item_Rendicion(id_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones)
+		 SELECT distinct Factura_Nro, null,null,Item_Factura_Monto,Item_Factura_Descripcion,Item_Factura_Cantidad
+		 FROM gd_esquema.Maestra where Factura_Nro is not null
+
+
 END
 GO
 
@@ -924,7 +935,10 @@ ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Compra FOREIGN 
 
 GO
 
-
+--select* from LOS_DE_GESTION.Cliente
+--select* from LOS_DE_GESTION.Usuario
+--select* from LOS_DE_GESTION.Tipo_Ubicacion
+--select* from LOS_DE_GESTION.Rubro
 --select* from LOS_DE_GESTION.Publicacion
 --select* from LOS_DE_GESTION.Ubicacion
 --select* from gd_esquema.Maestra
