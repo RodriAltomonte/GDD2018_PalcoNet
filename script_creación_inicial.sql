@@ -816,8 +816,13 @@ BEGIN
 		 SELECT distinct Ubicacion_Tipo_Codigo, Ubicacion_Tipo_Descripcion
 		 FROM gd_esquema.Maestra
 
+/* inserto Compra*/
+		 insert into LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,id_Rendicion,cantidad_ubicaciones)
+		 SELECT distinct null,Compra_Fecha,Cli_Dni,null,Factura_Nro,Compra_Cantidad
+		 FROM gd_esquema.Maestra where Compra_Cantidad is not null
 
-/* inserto Ubicacion*/
+		 
+/* inserto Ubicacion*/--revisar id_compra
 		 insert into LOS_DE_GESTION.Ubicacion(fila,asiento,ubicacion_sin_numerar,precio)
 		 SELECT distinct Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio
 		 FROM gd_esquema.Maestra
@@ -832,7 +837,7 @@ BEGIN
 		 SELECT distinct Factura_Nro, null,null,Item_Factura_Monto,Item_Factura_Descripcion,Item_Factura_Cantidad
 		 FROM gd_esquema.Maestra where Factura_Nro is not null
 
-
+		 
 END
 GO
 
@@ -935,6 +940,7 @@ ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Compra FOREIGN 
 
 GO
 
+--select* from LOS_DE_GESTION.Empresa
 --select* from LOS_DE_GESTION.Cliente
 --select* from LOS_DE_GESTION.Usuario
 --select* from LOS_DE_GESTION.Tipo_Ubicacion
