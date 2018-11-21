@@ -800,8 +800,16 @@ BEGIN
 	insert into  LOS_DE_GESTION.Estado_Publicacion(id_Estado_Publicacion,descripcion) 
 	values (2,'Borrador'), (3,'Finalizada')
 
-/* inserto Publicacion*/
+/*decision de implementacion*/
+/* inserto rubro vacio*/
+	insert into  LOS_DE_GESTION.Rubro(id_Rubro,descripcion) 
+	values (1,' ')
 
+/*decision de implementacion*/ -- fecha_publicacion,id_Rubro,direccion_espectaculo,id_Grado_Publicacion estan en null y id_Estado_Publicacion,id_Rubro en 1
+/* inserto Publicacion*/
+		 insert into LOS_DE_GESTION.Publicacion(maestra_Espectaculo_Cod,descripcion,fecha_publicacion,fecha_vencimiento_publicacion,fecha_hora_espectaculo,id_Rubro,direccion_espectaculo,id_Grado_Publicacion,usuario_empresa_vendedora,id_Estado_Publicacion)
+		 SELECT distinct Espectaculo_Cod, Espectaculo_Descripcion,null,Espectaculo_Fecha_Venc,Espectaculo_Fecha,1,null,null,Espec_Empresa_Mail,1
+		 FROM gd_esquema.Maestra
 
 /* inserto tipo_Ubicacion*/
 		 insert into LOS_DE_GESTION.Tipo_Ubicacion(id_Tipo_Ubicacion,descripcion)
@@ -916,4 +924,8 @@ ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Compra FOREIGN 
 
 GO
 
+
+--select* from LOS_DE_GESTION.Publicacion
+--select* from LOS_DE_GESTION.Ubicacion
 --select* from gd_esquema.Maestra
+
