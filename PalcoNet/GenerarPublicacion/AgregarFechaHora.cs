@@ -28,13 +28,13 @@ namespace PalcoNet.GenerarPublicacion
         {
             if (DateTimeUtil.Before(lastDate, DateTimeUtil.Of(dtpFecha.Value, dtpHora.Value)))
             {
-                callerForm.AgregarItemFechaYHora(dtpFecha.Value, dtpHora.Value);
+                callerForm.AgregarItemFechaYHora(DateTimeUtil.Of(dtpFecha.Value, dtpHora.Value));
                 this.Close();
                 this.Dispose();
             }
             else
             {
-                MessageBoxUtil.ShowError("La fecha y hora deben ser posteriores a " + lastDate.ToString());
+                MessageBoxUtil.ShowError("La fecha y hora deben ser posteriores a " + lastDate.ToString("dd/MM/yyyy HH:mm"));
             }
         }
     }

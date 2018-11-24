@@ -125,7 +125,7 @@
             // 
             this.dtpVencimiento.CustomFormat = "dd/MM/yyyy";
             this.dtpVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpVencimiento.Location = new System.Drawing.Point(172, 364);
+            this.dtpVencimiento.Location = new System.Drawing.Point(172, 370);
             this.dtpVencimiento.Name = "dtpVencimiento";
             this.dtpVencimiento.Size = new System.Drawing.Size(112, 20);
             this.dtpVencimiento.TabIndex = 27;
@@ -327,7 +327,7 @@
             // 
             this.dtpFechaPublicacion.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaPublicacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaPublicacion.Location = new System.Drawing.Point(172, 227);
+            this.dtpFechaPublicacion.Location = new System.Drawing.Point(172, 233);
             this.dtpFechaPublicacion.Name = "dtpFechaPublicacion";
             this.dtpFechaPublicacion.Size = new System.Drawing.Size(112, 20);
             this.dtpFechaPublicacion.TabIndex = 7;

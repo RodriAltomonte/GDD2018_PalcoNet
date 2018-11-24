@@ -32,22 +32,24 @@ namespace PalcoNet.GenerarPublicacion
             this.previousForm = previousForm;
             this.InitializeRepositories();
             this.InitializeControls();
+            Session.Instance().OpenSession("empresa");
         }
 
         private void btnCrear_Click(object sender, EventArgs e)
         {            
             try
             {
-                IList<Publicacion> publicaciones = this.CrearListaDePublicaciones();
-                foreach (Publicacion publicacion in publicaciones)
+                if (ValidarExistenciaDeUbicaciones() && ValidarExistenciaDeFechas() && ValidarFechaDeVencimiento())
                 {
-                    decimal codPublicacionNueva = publicacionRepository.CrearPublicacion(publicacion);
+                    IList<Publicacion> publicaciones = this.CrearListaDePublicaciones();
+                    foreach (Publicacion publicacion in publicaciones)
+                    {
+                        decimal codPublicacionNueva = publicacionRepository.CrearPublicacion(publicacion);
+                        IList<UbicacionPersistente> ubicaciones = this.CrearListaDeUbicaciones(codPublicacionNueva);
 
-                    IList<UbicacionPersistente> ubicaciones = this.CrearListaDeUbicaciones(codPublicacionNueva);
-
-                    ubicacionRepository.InsertarListaDeUbicaciones(ubicaciones);
-
-                    MessageBoxUtil.ShowInfo("Publicación creada correctamente.");
+                        ubicacionRepository.InsertarListaDeUbicaciones(ubicaciones);                                       
+                    }
+                    MessageBoxUtil.ShowInfo("Publicación creada correctamente.");                    
                 }
                 
             }
@@ -71,12 +73,12 @@ namespace PalcoNet.GenerarPublicacion
             {
                 Publicacion nuevaPublicacion = new Publicacion();
                 nuevaPublicacion.Descripcion = rTxtDescripcion.Text;
-                nuevaPublicacion.FechaDePublicacion = dtpFechaPublicacion.Value;
+                nuevaPublicacion.FechaDePublicacion = DateTimeUtil.DateOnly(dtpFechaPublicacion.Value);
                 nuevaPublicacion.IdRubro = ((ComboBoxItem<decimal>)cmbRubro.SelectedItem).Value;
                 nuevaPublicacion.DireccionEspectaculo = txtDireccion.Text;
                 nuevaPublicacion.IdGradoDePublicacion = ((ComboBoxItem<decimal>)cmbGrado.SelectedItem).Value;
                 nuevaPublicacion.IdEstado = ((ComboBoxItem<decimal>)cmbEstado.SelectedItem).Value;
-                nuevaPublicacion.FechaDeVencimiento = dtpVencimiento.Value;
+                nuevaPublicacion.FechaDeVencimiento = DateTimeUtil.DateOnly(dtpVencimiento.Value);
                 nuevaPublicacion.UsuarioEmpresa = Session.Instance().LoggedUsername;
                 nuevaPublicacion.FechaHoraDeEspectaculo = DateTimeUtil.Of(item.Text, item.SubItems[1].Text);
 
@@ -177,7 +179,7 @@ namespace PalcoNet.GenerarPublicacion
         {
             if (lvFechaHora.Items.Count == 0)
             {
-                new AgregarFechaHora(this, dtpFechaPublicacion.Value).ShowDialog();
+                new AgregarFechaHora(this, DateTimeUtil.DateOnly(dtpFechaPublicacion.Value)).ShowDialog();
                 dtpFechaPublicacion.Enabled = false;
             }
             else
@@ -212,6 +214,46 @@ namespace PalcoNet.GenerarPublicacion
             ListViewItem item = new ListViewItem(fecha.Date.ToShortDateString());
             item.SubItems.Add(hora.TimeOfDay.ToString());
             lvFechaHora.Items.Add(item);
+        }
+
+        public void AgregarItemFechaYHora(DateTime date)
+        {
+            ListViewItem item = new ListViewItem(date.Date.ToShortDateString());
+            item.SubItems.Add(date.ToString("HH:mm"));
+            lvFechaHora.Items.Add(item);
+        }
+
+        #endregion
+
+        #region Validations
+        private bool ValidarExistenciaDeFechas()
+        {
+            if (lvFechaHora.Items.Count<1)
+            {
+                MessageBoxUtil.ShowError("Debe ingresar al menos una fecha de espectaculo.");
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidarFechaDeVencimiento() 
+        {
+            if (!DateTimeUtil.Before(lvFechaHora.Items[lvFechaHora.Items.Count - 1].Text, DateTimeUtil.DateOnly(dtpVencimiento.Value).ToShortDateString()))
+            {
+                MessageBoxUtil.ShowError("La fecha de vencimiento debe ser posterior al ultimo espectaculo.");
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidarExistenciaDeUbicaciones()
+        {
+            if (lvUbicaciones.Items.Count < 1)
+            {
+                MessageBoxUtil.ShowError("Debe ingresar al menos una ubicacion.");
+                return false;
+            }
+            return true;
         }
         #endregion
     }
