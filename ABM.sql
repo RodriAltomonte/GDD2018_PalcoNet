@@ -69,7 +69,7 @@ BEGIN TRAN delrol
 BEGIN TRY
 UPDATE LOS_DE_GESTION.Rol
 SET habilitado=0
-WHERE id_Rol =@id_Rol
+WHERE nombre =@id_Rol
 SET @result=1
 SELECT @result as resultado
 COMMIT TRAN delrol
