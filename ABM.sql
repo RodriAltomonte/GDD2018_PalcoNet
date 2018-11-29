@@ -61,7 +61,7 @@ AS
 GO
 
 -------------------------------------------BAJA---------------------------------------------
-CREATE PROCEDURE LOS_DE_GESTION.BorrarRol @id_Rol NUMERIC(18,0)
+CREATE PROCEDURE LOS_DE_GESTION.BorrarRol @nombreRol NUMERIC(18,0)
 AS
 BEGIN
 DECLARE @result NUMERIC(12)
@@ -69,7 +69,7 @@ BEGIN TRAN delrol
 BEGIN TRY
 UPDATE LOS_DE_GESTION.Rol
 SET habilitado=0
-WHERE id_Rol = @id_Rol
+WHERE id_Rol = (SELECT id_rol FROM LOS_DE_GESTION.Rol WHERE nombre = @nombreRol)
 SET @result=1
 SELECT @result as resultado
 COMMIT TRAN delrol
