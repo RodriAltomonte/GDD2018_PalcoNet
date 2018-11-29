@@ -69,7 +69,7 @@ BEGIN TRAN delrol
 BEGIN TRY
 UPDATE LOS_DE_GESTION.Rol
 SET habilitado=0
-WHERE nombre =@id_Rol
+WHERE id_Rol = @id_Rol
 SET @result=1
 SELECT @result as resultado
 COMMIT TRAN delrol
@@ -81,31 +81,6 @@ SELECT @result AS resultado
 END CATCH
 END
 GO
-
-CREATE PROCEDURE LOS_DE_GESTION.BorrarFuncionalidades @RolNombre NVARCHAR(255)
-AS
-BEGIN 
-DECLARE @result NUMERIC(12)
-BEGIN TRAN delfuncs
-BEGIN TRY
-DELETE FROM LOS_DE_GESTION.Rol_X_Funcionalidad
-WHERE id_Rol = @RolNombre
-SET @result = 1
-SELECT @result AS resultado
-COMMIT TRAN delfuncs
-END TRY
-
-BEGIN CATCH
-ROLLBACK TRAN delfuncs
-SET @result =0
-SELECT @result AS resultado
-END CATCH
-
-END
-GO
-
-
-
 --------------------MODIFICACION------------------------------------
 CREATE PROCEDURE LOS_DE_GESTION.ModificarRol @RolNombreAntiguo NVARCHAR(255),@RolNombreNuevo NVARCHAR(255),@habilitado BIT
 AS
@@ -113,10 +88,11 @@ BEGIN
 DECLARE @result NUMERIC(12)
 BEGIN TRAN modrol
 BEGIN TRY
-IF(NOT EXISTS(SELECT nombre FROM LOS_DE_GESTION.Rol WHERE nombre=@RolNombreNuevo) OR @RolNombreAntiguo=@RolNombreNuevo)
+IF(NOT EXISTS(SELECT nombre FROM LOS_DE_GESTION.Rol WHERE nombre=@RolNombreNuevo) OR @RolNombreAntiguo!=@RolNombreNuevo)
 BEGIN
 UPDATE LOS_DE_GESTION.Rol
-SET nombre = @RolNombreNuevo
+SET nombre = @RolNombreNuevo,
+	habilitado = @habilitado
 WHERE nombre =@RolNombreAntiguo
 SET @result = 1
 END
@@ -135,8 +111,27 @@ END CATCH
 END
 GO
 
---CREATE PROCEDURE ModificarFuncionalidad @id_funcionalidad NUMERIC(18,0)
---AS
+CREATE PROCEDURE LOS_DE_GESTION.BorrarFuncionalidades @nombreRol NVARCHAR(255)
+AS
+BEGIN 
+DECLARE @result NUMERIC(12)
+BEGIN TRAN delfuncs
+BEGIN TRY
+DELETE FROM LOS_DE_GESTION.Rol_X_Funcionalidad
+WHERE id_Rol = (SELECT id_rol FROM LOS_DE_GESTION.Rol WHERE nombre=@nombreRol)
+SET @result = 1
+SELECT @result AS resultado
+COMMIT TRAN delfuncs
+END TRY
+
+BEGIN CATCH
+ROLLBACK TRAN delfuncs
+SET @result =0
+SELECT @result AS resultado
+END CATCH
+
+END
+GO
 
 
 -------------------------------ABM USUARIOS----------------------------------------
