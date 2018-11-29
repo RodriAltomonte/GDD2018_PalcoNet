@@ -176,8 +176,8 @@ BEGIN TRY
 			BEGIN 
 				INSERT INTO LOS_DE_GESTION.Cliente(username,nombre,apellido,tipo_documento,numero_documento,
 				cuil,mail,telefono,calle,nro_piso,depto,localidad,codigo_postal,fecha_nacimiento,fecha_creacion,tarjeta)
-				VALUES (@username,@nombre,@apellido,@tipo_documento,@nro_documento,@cuil,@mail,@telefono,
-				@direccion_calle,@numero_piso,@departamento,@localidad,@codigo_postal,@fecha_nacimiento,@fecha_creac,@tarjeta)
+				VALUgES (@username,@nombre,@apellido,@tipo_documento,@nro_documento,@cuil,@mail,@telefono,
+				@direccion_calle,@numero_piso,@departamento,@localidad,@codigo_postal,@fecha_nacimiento,@fecha_de_creac,@tarjeta)
 
 
 				INSERT INTO LOS_DE_GESTION.Usuario(username,password,id_Rol)
