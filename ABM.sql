@@ -35,7 +35,7 @@ AS
 	DECLARE @result NUMERIC(12)
 	BEGIN TRAN funcs
 		BEGIN TRY 
-		IF(@FuncionalidadRol NOT EXISTS(SELECT id_Funcionalidad FROM LOS_DE_GESTION.Funcionalidad_X_Rol WHERE id_Funcionalidad =@FuncionalidadRol))
+		IF(NOT EXISTS(SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Funcionalidad =@FuncionalidadRol))
 		BEGIN
 		INSERT INTO LOS_DE_GESTION.Rol_X_Funcionalidad(id_Rol,id_Funcionalidad)
 		VALUES ((
@@ -393,9 +393,30 @@ GO
 
 
 -------------------MODIFICACION EMPRESA------------------------
---TODO
---CREATE PROCEDURE LOS_DE_GESTION.ModificarPasswordEmpresa @username NVARCHAR(255),@passwordNuevo NVARCHAR(255)
 
+CREATE PROCEDURE LOS_DE_GESTION.ModificarPasswordEmpresa @username NVARCHAR(255),@passwordNuevo NVARCHAR(255)
+AS
+BEGIN
+
+DECLARE @result NUMERIC(12)
+BEGIN TRAN modpass
+BEGIN TRY
+
+UPDATE LOS_DE_GESTION.Usuario
+SET password = @passwordNuevo
+WHERE username = @username
+
+SET @result = 1
+SELECT @result AS resultado
+COMMIT TRAN modpass
+END TRY
+BEGIN CATCH
+ROLLBACK TRAN modpass
+SET @result= 0
+SELECT @result AS resultado
+END CATCH
+END
+GO
 
 CREATE PROCEDURE LOS_DE_GESTION.ModificarEstadoEmpresa
 @razon_social NVARCHAR(255)=NULL,
@@ -409,8 +430,10 @@ DECLARE @result NUMERIC(12)
 BEGIN TRAN modemp
 BEGIN TRY
 
-
-
+UPDATE LOS_DE_GESTION.Usuario
+SET habilitado = @habilitado
+WHERE username = (SELECT username FROM Empresa WHERE razon_social=@razon_social OR @razon_social IS NULL
+													AND cuit = @cuit OR @cuit IS NULL AND mail = @email OR @email IS NULL)
 
 
 COMMIT TRAN modemp
@@ -426,14 +449,26 @@ GO
 
 -----------------------ABM PUBLICACION--------------------
 -----------------------ALTA------------------------------
-CREATE PROCEDURE LOS_DE_GESTION.NuevaPublicacion
+/*
+CREATE PROCEDURE LOS_DE_GESTION.NuevaPublicacion 
+@descripcion NVARCHAR(255),
+@fecha_publicacion DATETIME,
+@fecha_hora_espectaculo DATETIME,
+@rubro NUMERIC(18,0),
+@direccion_espectaculo NVARCHAR(255),
+@grado_publicacion NUMERIC(18,0),
+@usuario_responsable NVARCHAR(255),
+@estado_publicacion NUMERIC(18,0)
+
+AS
+BEGIN
+
+BEGIN TRAN pub
+BEGIN TRY
 
 
-
-
-
-
-
+END 
+GO
 ---------------------BAJA----------------------------------
 CREATE PROCEDURE LOS_DE_GESTION.BorrarPublicacion
 
@@ -441,3 +476,4 @@ CREATE PROCEDURE LOS_DE_GESTION.BorrarPublicacion
 
 --------------------MODIFICACION----------------------------
 CREATE PROCEDURE LOS_DE_GESTION.ModificarPublicacion
+*/
