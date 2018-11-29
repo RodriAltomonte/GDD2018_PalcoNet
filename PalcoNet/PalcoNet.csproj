@@ -62,11 +62,11 @@
     <Compile Include="ABMGrado\ABMGradoPublicacionForm.Designer.cs">
       <DependentUpon>ABMGradoPublicacionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABMRol\Form1.cs">
+    <Compile Include="ABMRol\AltaRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABMRol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABMRol\AltaRol.Designer.cs">
+      <DependentUpon>AltaRol.cs</DependentUpon>
     </Compile>
     <Compile Include="ABMRubro\ABMRubroForm.cs">
       <SubType>Form</SubType>
@@ -231,6 +231,9 @@
     </Compile>
     <EmbeddedResource Include="ABMGrado\ABMGradoPublicacionForm.resx">
       <DependentUpon>ABMGradoPublicacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMRol\AltaRol.resx">
+      <DependentUpon>AltaRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CanjePuntos\CanjePuntosForm.resx">
       <DependentUpon>CanjePuntosForm.cs</DependentUpon>

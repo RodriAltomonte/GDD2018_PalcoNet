@@ -16,7 +16,7 @@ namespace PalcoNet.Classes.Factory.Form
         {
             formMap = new Dictionary<decimal, Type>();
 
-            formMap.Add(FuncionalidadConstants.ABMRol, typeof(ABMRol.Form1));
+            formMap.Add(FuncionalidadConstants.ABMRol, typeof(ABMRol.AltaRol));
             formMap.Add(FuncionalidadConstants.RegistroUsuario, typeof(RegistroUsuario.RegistroDeUsuarioForm));
             formMap.Add(FuncionalidadConstants.ABMCliente, typeof(ABMCliente.ABMClienteForm));
             formMap.Add(FuncionalidadConstants.ABMEmpresaEspectaculos, typeof(ABMEmpresaEspectaculo.ABMEmpresaEspectaculoForm));
