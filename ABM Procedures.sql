@@ -17,7 +17,7 @@ AS
 		BEGIN
 			--THROW 50001, 'El rol ya existe!',1
 			-- USO RAISERROR PORQUE THROW ME TIRA ERROR EN SQL SERVER 2008
-			RAISERROR('El rol ya existe!',1,1)
+			RAISERROR('El rol ya existe!',16,1)
 		END
 	END
 GO
@@ -38,7 +38,7 @@ AS
 
 		ELSE 
 			BEGIN
-				RAISERROR('Funcionalidad existente para este rol',1,1)
+				RAISERROR('Funcionalidad existente para este rol',16,1)
 			END
 		
 	END
@@ -113,7 +113,7 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaCliente
 AS
 	BEGIN
 		IF(NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento = @nro_documento)
-				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,0,3) = @nro_documento)
+				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,8) = @nro_documento)
 			BEGIN
 				IF(NOT EXISTS(SELECT username FROM LOS_DE_GESTION.Usuario WHERE username = @username))
 				BEGIN
@@ -126,12 +126,12 @@ AS
 				END
 				ELSE
 					BEGIN
-						RAISERROR('username ya existe!',1,1)
+						RAISERROR('username ya existe!',16,1)
 					END
 			END
 			ELSE
 				BEGIN
-					RAISERROR('Numero de documento,cuil repetido o cuil incorrecto!',1,1)
+					RAISERROR('Numero de documento,cuil repetido o cuil incorrecto!',16,1)
 				END
 	END
 GO
@@ -149,6 +149,17 @@ AS
 GO
 
 ---------------MODIFICACION CLIENTE---------------
+
+CREATE PROCEDURE LOS_DE_GESTION.HabilitarCliente
+@username NVARCHAR(255)
+AS
+	BEGIN
+		UPDATE LOS_DE_GESTION.Usuario
+		SET habilitado = 1
+		WHERE username=@username
+	END
+GO
+
 CREATE PROCEDURE LOS_DE_GESTION.ModificacionPasswordCliente
 @username NVARCHAR(255),
 @password NVARCHAR(255)
@@ -163,7 +174,6 @@ GO
 CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
 @nombre NVARCHAR(255),
 @apellido NVARCHAR(255),
-@dni NVARCHAR(255),
 @email NVARCHAR(255),
 @tipo_documento NVARCHAR(255),
 @nro_documento NUMERIC(18,0),
@@ -182,7 +192,7 @@ AS
 		UPDATE LOS_DE_GESTION.Cliente
 		SET nombre = @nombre,
 			apellido = @apellido,
-			numero_documento = @dni,
+			numero_documento = @nro_documento,
 			mail = @email,
 			tipo_documento = @tipo_documento,
 			cuil = @cuil,
@@ -196,5 +206,59 @@ AS
 			fecha_nacimiento = @fecha_nacimiento,
 			fecha_creacion = @fecha_de_creacion
 	 WHERE numero_documento = @nro_documento
+	END
+GO
+
+---------------ALTA EMPRESA---------------
+CREATE PROCEDURE LOS_DE_GESTION.AltaEmpresa
+@username NVARCHAR(255),
+@pasword NVARCHAR(255),
+@rol NVARCHAR(255),
+@razon_social NVARCHAR(255),
+@mail NVARCHAR(50),
+@telefono NUMERIC(18,0),
+@direccion_calle NUMERIC(18,0),
+@codigo_postal NVARCHAR(50),
+@ciudad NVARCHAR(255),
+@cuit NVARCHAR(255)
+AS
+	BEGIN
+	--falta validar el cuit 
+		IF(NOT EXISTS(SELECT razon_social FROM LOS_DE_GESTION.Empresa WHERE razon_social=@razon_social)
+			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit) )
+			BEGIN
+				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,codigo_postal,ciudad,cuit)
+				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@codigo_postal,@ciudad,@cuit)
+
+				INSERT INTO LOS_DE_GESTION.Usuario(username,id_Rol)
+				VALUES(@username,@rol)
+			END
+		ELSE
+			BEGIN
+				RAISERROR('Error al crear usuario',16,1)
+			END
+	END
+
+GO
+
+---------------BAJA EMPRESA---------------
+CREATE PROCEDURE LOS_DE_GESTION.BajaEmpresa
+@razon_social NVARCHAR(255)
+AS
+	BEGIN
+		UPDATE LOS_DE_GESTION.Usuario
+		SET habilitado=0
+		WHERE username=(SELECT username FROM LOS_DE_GESTION.Empresa WHERE razon_social = @razon_social)
+	END
+GO
+
+---------------MODIFICACION EMPRESA---------------
+CREATE PROCEDURE LOS_DE_GESTION.HabiltarEmpresa
+@username NVARCHAR(255)
+AS 
+	BEGIN
+		UPDATE LOS_DE_GESTION.Usuario
+		SET habilitado = 1
+		WHERE username=@username
 	END
 GO
