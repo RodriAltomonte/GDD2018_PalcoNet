@@ -18,7 +18,7 @@ namespace PalcoNet.Classes.Factory.Form
 
             formMap.Add(FuncionalidadConstants.ABMRol, typeof(ABMRol.AltaRol));
             formMap.Add(FuncionalidadConstants.RegistroUsuario, typeof(RegistroUsuario.RegistroDeUsuarioForm));
-            formMap.Add(FuncionalidadConstants.ABMCliente, typeof(ABMCliente.ABMClienteForm));
+            formMap.Add(FuncionalidadConstants.ABMCliente, typeof(ABMCliente.AltaCliente));
             formMap.Add(FuncionalidadConstants.ABMEmpresaEspectaculos, typeof(ABMEmpresaEspectaculo.ABMEmpresaEspectaculoForm));
             formMap.Add(FuncionalidadConstants.ABMRubro, typeof(ABMRubro.ABMRubroForm));
             formMap.Add(FuncionalidadConstants.ABMGradoPublicacion, typeof(ABMGrado.ABMGradoPublicacionForm));

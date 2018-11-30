@@ -104,6 +104,7 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaCliente
 @mail NVARCHAR(255),
 @telefono NVARCHAR(50),
 @direccion_calle NVARCHAR(255),
+@numero_calle NUMERIC(18,0),
 @numero_piso NUMERIC(18,0),
 @departamento NVARCHAR(255),
 @localidad NVARCHAR(255),
@@ -119,9 +120,9 @@ AS
 				IF(NOT EXISTS(SELECT username FROM LOS_DE_GESTION.Usuario WHERE username = @username))
 				BEGIN
 					INSERT INTO LOS_DE_GESTION.Cliente(username,nombre,apellido,tipo_documento,numero_documento,
-						cuil,mail,telefono,calle,nro_piso,depto,localidad,codigo_postal,fecha_nacimiento,fecha_creacion,tarjeta)
+						cuil,mail,telefono,calle,nro_calle,nro_piso,depto,localidad,codigo_postal,fecha_nacimiento,fecha_creacion,tarjeta)
 					VALUES(@username,@nombre,@apellido,@tipo_documento,@nro_documento,@cuil,@mail,@telefono,
-						@direccion_calle,@numero_piso,@departamento,@localidad,@codigo_postal,@fecha_de_nacimiento,@fecha_de_creacion,@tarjeta)
+						@direccion_calle,@numero_calle,@numero_piso,@departamento,@localidad,@codigo_postal,@fecha_de_nacimiento,@fecha_de_creacion,@tarjeta)
 					INSERT INTO LOS_DE_GESTION.Usuario(username,password,id_Rol)
 					VALUES(@username,@password,@rol)
 				END

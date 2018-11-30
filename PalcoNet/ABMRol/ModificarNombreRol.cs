@@ -27,8 +27,8 @@ namespace PalcoNet.ABMRol
             //CHEQUEAR QUE LOS CAMPOS NO ESTEN VACIOS
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
             
-            inputParameters.AddParameter("@nombreRolAntiguo",txtNombreAntiguo);
-            inputParameters.AddParameter("@nombreRolNuevo",txtNombreNuevo);
+            inputParameters.AddParameter("@nombreRolAntiguo",txtNombreAntiguo.Text);
+            inputParameters.AddParameter("@nombreRolNuevo",txtNombreNuevo.Text);
             try
             {
                 ConnectionFactory.Instance().CreateConnection()
@@ -39,6 +39,11 @@ namespace PalcoNet.ABMRol
             {
                 MessageBox.Show(sqlE.Message);
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

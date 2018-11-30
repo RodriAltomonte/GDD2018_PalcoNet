@@ -14,7 +14,7 @@ namespace PalcoNet.Classes.Factory.Form
         static ABMClienteEmpresaFormFactory()
         { 
             tiposDeFormPorRol = new Dictionary<decimal,Type>();
-            tiposDeFormPorRol.Add(RolConstants.Cliente, typeof(ABMCliente.ABMClienteForm));
+            tiposDeFormPorRol.Add(RolConstants.Cliente, typeof(ABMCliente.AltaCliente));
             tiposDeFormPorRol.Add(RolConstants.Empresa, typeof(ABMEmpresaEspectaculo.ABMEmpresaEspectaculoForm));
         }
         public static System.Windows.Forms.Form CrearForm(decimal idRol)

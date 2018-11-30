@@ -44,11 +44,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ABMCliente\ABMClienteForm.cs">
+    <Compile Include="ABMCliente\AltaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABMCliente\ABMClienteForm.Designer.cs">
-      <DependentUpon>ABMClienteForm.cs</DependentUpon>
+    <Compile Include="ABMCliente\AltaCliente.Designer.cs">
+      <DependentUpon>AltaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMCliente\BajaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMCliente\BajaCliente.Designer.cs">
+      <DependentUpon>BajaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMCliente\ModificacionCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMCliente\ModificacionCliente.Designer.cs">
+      <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="ABMEmpresaEspectaculo\ABMEmpresaEspectaculoForm.cs">
       <SubType>Form</SubType>
@@ -67,6 +79,18 @@
     </Compile>
     <Compile Include="ABMRol\AltaRol.Designer.cs">
       <DependentUpon>AltaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMRol\frmAgregarFuncionalidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMRol\frmAgregarFuncionalidad.Designer.cs">
+      <DependentUpon>frmAgregarFuncionalidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMRol\frmBorrarFuncionalidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMRol\frmBorrarFuncionalidad.Designer.cs">
+      <DependentUpon>frmBorrarFuncionalidad.cs</DependentUpon>
     </Compile>
     <Compile Include="ABMRol\ModificarFuncionalidadesRol.cs">
       <SubType>Form</SubType>
@@ -247,11 +271,23 @@
     <Compile Include="RegistroUsuario\RegistroDeUsuarioForm.Designer.cs">
       <DependentUpon>RegistroDeUsuarioForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ABMCliente\AltaCliente.resx">
+      <DependentUpon>AltaCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABMGrado\ABMGradoPublicacionForm.resx">
       <DependentUpon>ABMGradoPublicacionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABMRol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMRol\frmAgregarFuncionalidad.resx">
+      <DependentUpon>frmAgregarFuncionalidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMRol\frmBorrarFuncionalidad.resx">
+      <DependentUpon>frmBorrarFuncionalidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMRol\ModificarFuncionalidadesRol.resx">
+      <DependentUpon>ModificarFuncionalidadesRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABMRol\ModificarNombreRol.resx">
       <DependentUpon>ModificarNombreRol.cs</DependentUpon>
