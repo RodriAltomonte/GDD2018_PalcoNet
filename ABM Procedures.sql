@@ -113,7 +113,7 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaCliente
 AS
 	BEGIN
 		IF(NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento = @nro_documento)
-				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,8) = @nro_documento)
+				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,10) = @nro_documento)
 			BEGIN
 				IF(NOT EXISTS(SELECT username FROM LOS_DE_GESTION.Usuario WHERE username = @username))
 				BEGIN
@@ -172,6 +172,7 @@ AS
 GO
 
 CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
+@nro_docOriginal NUMERIC(18,0),
 @nombre NVARCHAR(255),
 @apellido NVARCHAR(255),
 @email NVARCHAR(255),
@@ -189,6 +190,10 @@ CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
 @fecha_de_creacion DATETIME
 AS
 	BEGIN
+		IF(NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil=@cuil ) 
+			AND NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento=@nro_documento)
+			AND SUBSTRING(@cuil,3,10) = @nro_documento)
+			BEGIN
 		UPDATE LOS_DE_GESTION.Cliente
 		SET nombre = @nombre,
 			apellido = @apellido,
@@ -205,7 +210,12 @@ AS
 			codigo_postal = @codigo_postal,
 			fecha_nacimiento = @fecha_nacimiento,
 			fecha_creacion = @fecha_de_creacion
-	 WHERE numero_documento = @nro_documento
+	 WHERE numero_documento = @nro_docOriginal
+	 END
+	 ELSE
+		BEGIN
+			RAISERROR('Error al modificar cliente',16,1)
+		END
 	END
 GO
 
@@ -227,7 +237,7 @@ AS
 		IF(NOT EXISTS(SELECT razon_social FROM LOS_DE_GESTION.Empresa WHERE razon_social=@razon_social)
 			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit) )
 			BEGIN
-				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,codigo_postal,ciudad,cuit)
+				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,nro_calle,codigo_postal,ciudad,cuit)
 				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@codigo_postal,@ciudad,@cuit)
 
 				INSERT INTO LOS_DE_GESTION.Usuario(username,id_Rol)
@@ -260,5 +270,55 @@ AS
 		UPDATE LOS_DE_GESTION.Usuario
 		SET habilitado = 1
 		WHERE username=@username
+	END
+GO
+
+CREATE PROCEDURE LOS_DE_GESTION.ModificarPasswordEmpresa
+@username NVARCHAR(255),
+@passwordNuevo NVARCHAR(255)
+AS
+	BEGIN
+		UPDATE LOS_DE_GESTION.Usuario
+		SET password = @passwordNuevo
+		WHERE username = @username
+	END
+GO
+
+CREATE PROCEDURE LOS_DE_GESTION.ModificarEmpresa
+@cuitOriginal NVARCHAR(255),
+@razon_social NVARCHAR(255),
+@mail NVARCHAR(255),
+@telefono NUMERIC(18,0),
+@direccion_calle NVARCHAR(50),
+@numero_calle NUMERIC(18,0),
+@nro_piso NUMERIC(18,0),
+@depto NVARCHAR(50),
+@localidad NVARCHAR(255),
+@cod_postal NVARCHAR(50),
+@ciudad NVARCHAR(255),
+@cuit NVARCHAR(255)
+AS
+	BEGIN
+	--falta comprobar que sea un cuit valido
+		IF(NOT EXISTS(SELECT cuit FROM LOS_DE_GESTION.Empresa WHERE cuit=@cuit))
+			BEGIN
+				UPDATE LOS_DE_GESTION.Empresa
+				SET razon_social = @razon_social,
+					mail = @mail,
+					telefono = @telefono,
+					calle = @direccion_calle,
+					nro_calle = @numero_calle,
+					nro_piso = @nro_piso,
+					depto = @depto,
+					localidad = @localidad,
+					codigo_postal = @cod_postal,
+					ciudad = @ciudad,
+					cuit = @cuit
+				WHERE cuit = @cuitOriginal
+			END
+			ELSE
+				BEGIN
+					RAISERROR('Error al modificar empresa',16,1)
+				END
 	END
 GO
