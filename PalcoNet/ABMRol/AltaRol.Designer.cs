@@ -35,6 +35,8 @@
             this.chbxHabilitado = new System.Windows.Forms.CheckBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.txtIdRol = new System.Windows.Forms.TextBox();
+            this.lblIdRol = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,12 +102,31 @@
             this.btnCancelar.TabIndex = 6;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // txtIdRol
+            // 
+            this.txtIdRol.Location = new System.Drawing.Point(392, 25);
+            this.txtIdRol.Name = "txtIdRol";
+            this.txtIdRol.Size = new System.Drawing.Size(100, 20);
+            this.txtIdRol.TabIndex = 7;
+            // 
+            // lblIdRol
+            // 
+            this.lblIdRol.AutoSize = true;
+            this.lblIdRol.Location = new System.Drawing.Point(370, 28);
+            this.lblIdRol.Name = "lblIdRol";
+            this.lblIdRol.Size = new System.Drawing.Size(16, 13);
+            this.lblIdRol.TabIndex = 8;
+            this.lblIdRol.Text = "Id";
             // 
             // AltaRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 311);
+            this.Controls.Add(this.lblIdRol);
+            this.Controls.Add(this.txtIdRol);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.chbxHabilitado);
@@ -131,5 +152,7 @@
         private System.Windows.Forms.CheckBox chbxHabilitado;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.TextBox txtIdRol;
+        private System.Windows.Forms.Label lblIdRol;
     }
 }

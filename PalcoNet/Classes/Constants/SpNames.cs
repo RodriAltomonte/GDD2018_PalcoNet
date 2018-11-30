@@ -36,6 +36,8 @@ namespace PalcoNet.Classes.Constants
         public const string PublicacionesAEditar = Schema + "PR_PUBLICACIONES_A_EDITAR";
         public const string ExisteUnaPublicacionIgual = Schema + "PR_EXISTE_UNA_PUBLICACION_IGUAL";
         public const string ActualizarPublicacion = Schema + "PR_ACTUALIZAR_PUBLICACION";
+        public const string AltaRol = Schema + "AltaRol";
+        public const string AgregarFuncionalidadRol = Schema + "FuncionalidadRol";
 
     }
 }

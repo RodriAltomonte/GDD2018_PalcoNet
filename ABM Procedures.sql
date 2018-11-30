@@ -3,14 +3,15 @@
 
 CREATE PROCEDURE LOS_DE_GESTION.AltaRol
 @nombreRol NVARCHAR(255),
+@id_rol NUMERIC(18, 0),
 @habilitado BIT
 AS
 	BEGIN
 	IF(NOT EXISTS(SELECT nombre FROM LOS_DE_GESTION.Rol WHERE nombre = @nombreRol))
 		BEGIN
 			BEGIN TRANSACTION
-				INSERT INTO LOS_DE_GESTION.Rol(nombre,habilitado)
-				VALUES(@nombreRol,@habilitado)
+				INSERT INTO LOS_DE_GESTION.Rol(nombre,habilitado,id_Rol)
+				VALUES(@nombreRol,@habilitado,@id_rol)
 			COMMIT TRANSACTION
 		END
 	ELSE
@@ -119,7 +120,7 @@ AS
 				BEGIN
 					INSERT INTO LOS_DE_GESTION.Cliente(username,nombre,apellido,tipo_documento,numero_documento,
 						cuil,mail,telefono,calle,nro_piso,depto,localidad,codigo_postal,fecha_nacimiento,fecha_creacion,tarjeta)
-					VALUES(@username,@password,@nombre,@apellido,@tipo_documento,@nro_documento,@cuil,@mail,@telefono,
+					VALUES(@username,@nombre,@apellido,@tipo_documento,@nro_documento,@cuil,@mail,@telefono,
 						@direccion_calle,@numero_piso,@departamento,@localidad,@codigo_postal,@fecha_de_nacimiento,@fecha_de_creacion,@tarjeta)
 					INSERT INTO LOS_DE_GESTION.Usuario(username,password,id_Rol)
 					VALUES(@username,@password,@rol)
@@ -198,7 +199,6 @@ AS
 		SET nombre = @nombre,
 			apellido = @apellido,
 			numero_documento = @nro_documento,
-			mail = @email,
 			tipo_documento = @tipo_documento,
 			cuil = @cuil,
 			mail = @email,

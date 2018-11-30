@@ -33,6 +33,12 @@ namespace PalcoNet.Classes.DatabaseConnection
             return this;
         }
 
+        public void RemoveParameters()
+        {
+            parametersMap.Clear();
+            return;
+        }
+
         public void AddParametersToCommand(SqlCommand command)
         {
             foreach (KeyValuePair<string, object> item in parametersMap)
