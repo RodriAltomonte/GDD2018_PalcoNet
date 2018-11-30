@@ -9,6 +9,7 @@ namespace PalcoNet.Classes.Constants
     static class SpNames
     {
         private const string Schema = "LOS_DE_GESTION.";
+
         public const string ValidarLogin = Schema + "PR_Validar_login";
         public const string FuncionaliadesDeUnRol = Schema + "PR_FUNCIONALIDADES_DE_UN_ROL";
         public const string RolDeUsuario = Schema + "PR_ROL_DE_USUARIO";
@@ -32,6 +33,9 @@ namespace PalcoNet.Classes.Constants
         public const string TodosLosTiposDeUbicacion = Schema + "PR_TODOS_LOS_TIPOS_DE_UBICACION";
         public const string CrearPublicacion = Schema + "PR_CREAR_PUBLICACION";
         public const string CrearUbicaciones = Schema + "PR_CREAR_UBICACIONES";
+        public const string PublicacionesAEditar = Schema + "PR_PUBLICACIONES_A_EDITAR";
+        public const string ExisteUnaPublicacionIgual = Schema + "PR_EXISTE_UNA_PUBLICACION_IGUAL";
+        public const string ActualizarPublicacion = Schema + "PR_ACTUALIZAR_PUBLICACION";
 
     }
 }

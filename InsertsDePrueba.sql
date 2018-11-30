@@ -44,3 +44,7 @@ EXEC LOS_DE_GESTION.PR_CREAR_UBICACIONES @codPub, null, 1, 10, 1000,1
 
 delete from LOS_DE_GESTION.Ubicacion
 delete from LOS_DE_GESTION.Publicacion
+
+select * from LOS_DE_GESTION.Ubicacion
+order by id_Ubicacion ASC
+offset 10 rows fetch next 15 rows only

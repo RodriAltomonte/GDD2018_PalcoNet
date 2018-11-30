@@ -7,14 +7,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PalcoNet.Classes.Repository;
+using PalcoNet.Classes.Session;
+using PalcoNet.Classes.Util.Form;
 
 namespace PalcoNet.EditarPublicacion
 {
     public partial class EditarPublicacionForm : Form
     {
+        private PublicacionRepository publicacionRepository;
+
         public EditarPublicacionForm()
         {
             InitializeComponent();
+            this.publicacionRepository = new PublicacionRepository();
+            Session.Instance().OpenSession("empresa");
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            dgvPublicaciones.DataSource = publicacionRepository.BuscarPublicacionesEditables(Session.Instance().LoggedUsername, txtDescripcion.Text);
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(dgvPublicaciones.SelectedRows[0].Cells[0].Value.ToString());
         }
     }
 }

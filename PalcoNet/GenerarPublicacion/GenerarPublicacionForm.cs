@@ -32,7 +32,6 @@ namespace PalcoNet.GenerarPublicacion
             this.previousForm = previousForm;
             this.InitializeRepositories();
             this.InitializeControls();
-            Session.Instance().OpenSession("empresa");
         }
 
         private void btnCrear_Click(object sender, EventArgs e)

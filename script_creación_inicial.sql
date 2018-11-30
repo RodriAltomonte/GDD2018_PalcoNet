@@ -98,6 +98,18 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_CREAR_UBICACIONES') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_CREAR_UBICACIONES
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR 
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_EXISTE_UNA_PUBLICACION_IGUAL') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_EXISTE_UNA_PUBLICACION_IGUAL
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION
+go
+
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -690,6 +702,35 @@ BEGIN
 END
 go
 
+/*9. EDITAR PUBLICACION*/
+CREATE PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR @usernameEmpresa nvarchar(255), @descripcion nvarchar(255)--, @pagina int, @tamanio int
+AS
+BEGIN
+	select p.cod_publicacion, p.descripcion, p.fecha_hora_espectaculo, p.direccion_espectaculo, r.descripcion, g.id_Grado_Publicacion from LOS_DE_GESTION.Publicacion p
+	inner join LOS_DE_GESTION.Rubro r on r.id_Rubro = p.id_Rubro
+	inner join LOS_DE_GESTION.Grado_Publicacion g on g.id_Grado_Publicacion = p.id_Grado_Publicacion
+	where (p.usuario_empresa_vendedora = @usernameEmpresa 
+		or @usernameEmpresa in (select u.username from LOS_DE_GESTION.Usuario u where u.id_Rol = 1))--Es un admin
+	and p.id_Estado_Publicacion = 1 --Es borrador
+	and p.descripcion like '%'+@descripcion+'%'
+	order by p.cod_publicacion asc
+	--offset @pagina rows fetch next @tamanio rows only 
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_EXISTE_UNA_PUBLICACION_IGUAL
+AS
+BEGIN
+	select 1 as TODO
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION @codPublicacion numeric(18,0)
+AS
+BEGIN
+	select 1 as TODO
+END
+go
 /*12.CANJE Y ADMINISTRACION DE PUNTOS*/
 CREATE PROCEDURE LOS_DE_GESTION.PR_TODOS_LOS_PREMIOS_DISPONIBLES
 AS

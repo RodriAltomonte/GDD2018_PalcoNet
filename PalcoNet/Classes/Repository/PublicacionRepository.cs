@@ -7,6 +7,7 @@ using PalcoNet.Classes.Model;
 using PalcoNet.Classes.DatabaseConnection;
 using Classes.DatabaseConnection;
 using PalcoNet.Classes.Constants;
+using System.Data;
 
 namespace PalcoNet.Classes.Repository
 {
@@ -27,6 +28,32 @@ namespace PalcoNet.Classes.Repository
 
             return ConnectionFactory.Instance().CreateConnection()
                 .ExecuteSingleOutputStoredProcedure<decimal>(SpNames.CrearPublicacion, inputParameters, "@codPublicacionNueva");
+        }
+
+        public DataTable BuscarPublicacionesEditables(string usernameEmpresa, string descripcionPublicacion)
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
+                .AddParameter("@usernameEmpresa", usernameEmpresa)
+                .AddParameter("@descripcion", descripcionPublicacion);
+
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.PublicacionesAEditar, inputParameters);
+        }
+
+        public Boolean ExisteUnaPublicacionIgual()
+        { 
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteSingleOutputStoredProcedure<Boolean>(SpNames.ExisteUnaPublicacionIgual, inputParameters, "@existe");
+        }
+
+        public void ActualizarPublicacion()
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+
+            ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.ActualizarPublicacion, inputParameters);
         }
     }
 }
