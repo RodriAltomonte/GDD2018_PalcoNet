@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.ABMRol
 {
-    partial class ModificarRol
+    partial class ModificarFuncionalidadesRol
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // ModificarRol
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(545, 186);
-            this.Name = "ModificarRol";
-            this.Text = "ModificarRol";
-            this.ResumeLayout(false);
-
+            this.Text = "ModificarFuncionalidadesRol";
         }
 
         #endregion

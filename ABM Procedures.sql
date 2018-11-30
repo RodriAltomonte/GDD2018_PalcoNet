@@ -67,7 +67,7 @@ AS
 		WHERE id_Rol = (SELECT id_Rol FROM LOS_DE_GESTION.Rol WHERE nombre = @nombreRolAntiguo)
 	END
 GO
-
+--ESTE ESTA DUPLICADO 
 CREATE PROCEDURE LOS_DE_GESTION.AgregarFuncionalidad
 @rolNombre NVARCHAR(255),
 @funcionalidad NUMERIC(18,0)

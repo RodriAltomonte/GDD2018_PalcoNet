@@ -38,6 +38,7 @@ namespace PalcoNet.Classes.Constants
         public const string ActualizarPublicacion = Schema + "PR_ACTUALIZAR_PUBLICACION";
         public const string AltaRol = Schema + "AltaRol";
         public const string AgregarFuncionalidadRol = Schema + "FuncionalidadRol";
+        public const string ModificarRol = Schema + "ModificarRol";
 
     }
 }

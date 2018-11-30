@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PalcoNet.ABMRol
 {
-    public partial class ModificarRol : Form
+    public partial class ModificarFuncionalidadesRol : Form
     {
-        public ModificarRol()
+        public ModificarFuncionalidadesRol()
         {
             InitializeComponent();
         }
