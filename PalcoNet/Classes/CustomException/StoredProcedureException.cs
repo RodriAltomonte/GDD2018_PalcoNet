@@ -11,5 +11,10 @@ namespace PalcoNet.Classes.CustomException
         public StoredProcedureException(string message) : base(message) { }
 
         public StoredProcedureException(string message, Exception innerException) : base(message, innerException) { }
+
+    }
+    class SqlQueryException : Exception
+    {
+        public SqlQueryException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

@@ -85,12 +85,37 @@ namespace Classes.DatabaseConnection
             return dataTable;
         }
 
+      
+
         public IList<TMapped> ExecuteMappedStoredProcedure<TMapped>(string procedureName, StoredProcedureParameterMap inputParameters, IStoredProcedureResultMapper<TMapped> mapper)
         {
             DataTable result = this.ExecuteDataTableStoredProcedure(procedureName, inputParameters);
             return mapper.Map(result);
         }
+       
         #endregion
+
+
+        public DataTable ExecuteDataTableSqlQuery(string sqlQuery)
+        {
+            DataTable dt = new DataTable();
+            using (sqlConnection)
+            using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection))
+            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+            {
+                cmd.CommandType = CommandType.Text;
+                try
+                {
+                    da.Fill(dt);
+
+                }
+                catch (SqlException e)
+                {
+                    throw new SqlQueryException(e.Message, e);
+                }
+                return dt;
+            }
+        }
 
         #region Private methods
         private void AddInputParametersToCommandIfTheyAreNotNull(StoredProcedureParameterMap inputParameters, SqlCommand command)
