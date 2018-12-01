@@ -39,9 +39,11 @@ namespace PalcoNet.Classes.Constants
         
         public const string AltaRol = Schema + "AltaRol";
         public const string AgregarFuncionalidadRol = Schema + "FuncionalidadRol";
+        public const string HabilitarRol = Schema + "HabilitarRol";
         public const string ModificarRol = Schema + "ModificarRol";
         public const string BorrarFuncionalidad = Schema + "EliminarFuncionalidad";
         public const string BajaRol = Schema + "BajaRol";
+        public const string RolHabilitado = Schema + "RolHabilitado";
 
         public const string AltaCliente = Schema + "AltaCliente";
         public const string BajaCliente = Schema + "BajaCliente";

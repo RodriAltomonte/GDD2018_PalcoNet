@@ -1,5 +1,16 @@
+
+CREATE PROCEDURE LOS_DE_GESTION.RolHabilitado
+@idRol NUMERIC(18,0),
+@estaHabilitado BIT OUTPUT
+AS
+BEGIN
+	SELECT @estaHabilitado=habilitado FROM LOS_DE_GESTION.Rol WHERE id_Rol=@idRol
+END
+GO
+
 ------------- ABM Rol---------------
 ---------------ALTA---------------
+
 
 CREATE PROCEDURE LOS_DE_GESTION.AltaRol
 @nombreRol NVARCHAR(255),
@@ -88,7 +99,15 @@ AS
 	END
 GO
 
-
+CREATE PROCEDURE LOS_DE_GESTION.HabilitarRol 
+@id_Rol NUMERIC(18,0)
+AS
+BEGIN
+	UPDATE LOS_DE_GESTION.Rol
+	SET habilitado = 1
+	WHERE id_Rol = @id_Rol
+END
+GO
 ---------------ABM USUARIOS---------------
 ---------------ALTA CLIENTE---------------
 

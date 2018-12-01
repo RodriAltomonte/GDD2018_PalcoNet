@@ -62,6 +62,7 @@
             this.btnHabilitar.TabIndex = 1;
             this.btnHabilitar.Text = "Habilitar";
             this.btnHabilitar.UseVisualStyleBackColor = true;
+            this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
             // 
             // btnDeshabilitar
             // 
@@ -71,6 +72,7 @@
             this.btnDeshabilitar.TabIndex = 1;
             this.btnDeshabilitar.Text = "Deshabilitar";
             this.btnDeshabilitar.UseVisualStyleBackColor = true;
+            this.btnDeshabilitar.Click += new System.EventHandler(this.btnDeshabilitar_Click);
             // 
             // ModificacionRol
             // 
