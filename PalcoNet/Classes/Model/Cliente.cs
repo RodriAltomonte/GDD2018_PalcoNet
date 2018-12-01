@@ -16,6 +16,7 @@ namespace PalcoNet.Classes.Model
         public string Mail { get; set; }
         public string Telefono { get; set; }
         public string DireccionCalle { get; set; }
+        public decimal NumeroCalle { get; set; }
         public decimal DireccionNumero { get; set; }
         public decimal NroPiso { get; set; }
         public string Depto { get; set; }

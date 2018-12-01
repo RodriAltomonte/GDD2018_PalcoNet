@@ -63,19 +63,21 @@ namespace PalcoNet.ABMCliente
             this.tbTelefono = new System.Windows.Forms.TextBox();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.tbCuil = new System.Windows.Forms.TextBox();
-            this.tbTipoDocumento = new System.Windows.Forms.TextBox();
+            this.tbNroDocumento = new System.Windows.Forms.TextBox();
             this.cbDocumento = new System.Windows.Forms.ComboBox();
             this.cbRol = new System.Windows.Forms.ComboBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.tbApellido = new System.Windows.Forms.TextBox();
             this.tbNombre = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tbTarjeta = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(53, 19);
+            this.label1.Location = new System.Drawing.Point(48, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
@@ -84,7 +86,7 @@ namespace PalcoNet.ABMCliente
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(53, 44);
+            this.label2.Location = new System.Drawing.Point(48, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 1;
@@ -111,7 +113,7 @@ namespace PalcoNet.ABMCliente
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(57, 71);
+            this.label5.Location = new System.Drawing.Point(48, 71);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(23, 13);
             this.label5.TabIndex = 4;
@@ -120,7 +122,7 @@ namespace PalcoNet.ABMCliente
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(53, 108);
+            this.label6.Location = new System.Drawing.Point(48, 108);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(101, 13);
             this.label6.TabIndex = 5;
@@ -138,7 +140,7 @@ namespace PalcoNet.ABMCliente
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(56, 139);
+            this.label8.Location = new System.Drawing.Point(48, 139);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 13);
             this.label8.TabIndex = 7;
@@ -147,7 +149,7 @@ namespace PalcoNet.ABMCliente
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(57, 172);
+            this.label9.Location = new System.Drawing.Point(48, 172);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(32, 13);
             this.label9.TabIndex = 8;
@@ -156,7 +158,7 @@ namespace PalcoNet.ABMCliente
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(56, 202);
+            this.label10.Location = new System.Drawing.Point(48, 202);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(49, 13);
             this.label10.TabIndex = 9;
@@ -165,7 +167,7 @@ namespace PalcoNet.ABMCliente
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(57, 238);
+            this.label11.Location = new System.Drawing.Point(48, 235);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(92, 13);
             this.label11.TabIndex = 10;
@@ -192,7 +194,7 @@ namespace PalcoNet.ABMCliente
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(68, 322);
+            this.label15.Location = new System.Drawing.Point(48, 322);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 13);
             this.label15.TabIndex = 14;
@@ -219,7 +221,7 @@ namespace PalcoNet.ABMCliente
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(68, 371);
+            this.label18.Location = new System.Drawing.Point(48, 365);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(91, 13);
             this.label18.TabIndex = 16;
@@ -302,7 +304,7 @@ namespace PalcoNet.ABMCliente
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(60, 279);
+            this.label14.Location = new System.Drawing.Point(48, 279);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(74, 13);
             this.label14.TabIndex = 13;
@@ -357,12 +359,12 @@ namespace PalcoNet.ABMCliente
             this.tbCuil.Size = new System.Drawing.Size(200, 20);
             this.tbCuil.TabIndex = 23;
             // 
-            // tbTipoDocumento
+            // tbNroDocumento
             // 
-            this.tbTipoDocumento.Location = new System.Drawing.Point(516, 101);
-            this.tbTipoDocumento.Name = "tbTipoDocumento";
-            this.tbTipoDocumento.Size = new System.Drawing.Size(200, 20);
-            this.tbTipoDocumento.TabIndex = 23;
+            this.tbNroDocumento.Location = new System.Drawing.Point(516, 101);
+            this.tbNroDocumento.Name = "tbNroDocumento";
+            this.tbNroDocumento.Size = new System.Drawing.Size(200, 20);
+            this.tbNroDocumento.TabIndex = 23;
             // 
             // cbDocumento
             // 
@@ -403,23 +405,39 @@ namespace PalcoNet.ABMCliente
             // 
             // tbNombre
             // 
-            this.tbNombre.Location = new System.Drawing.Point(162, 12);
+            this.tbNombre.Location = new System.Drawing.Point(163, 12);
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(200, 20);
             this.tbNombre.TabIndex = 25;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(420, 421);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(40, 13);
+            this.label20.TabIndex = 17;
+            this.label20.Text = "Tarjeta";
+            // 
+            // tbTarjeta
+            // 
+            this.tbTarjeta.Location = new System.Drawing.Point(516, 414);
+            this.tbTarjeta.Name = "tbTarjeta";
+            this.tbTarjeta.Size = new System.Drawing.Size(200, 20);
+            this.tbTarjeta.TabIndex = 23;
             // 
             // AltaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(764, 522);
+            this.ClientSize = new System.Drawing.Size(740, 532);
             this.Controls.Add(this.tbNombre);
             this.Controls.Add(this.tbApellido);
             this.Controls.Add(this.tbUsername);
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.cbRol);
             this.Controls.Add(this.cbDocumento);
-            this.Controls.Add(this.tbTipoDocumento);
+            this.Controls.Add(this.tbNroDocumento);
             this.Controls.Add(this.tbCuil);
             this.Controls.Add(this.tbEmail);
             this.Controls.Add(this.tbTelefono);
@@ -429,12 +447,14 @@ namespace PalcoNet.ABMCliente
             this.Controls.Add(this.tbDepartamento);
             this.Controls.Add(this.tbLocalidad);
             this.Controls.Add(this.tbCodigoPostal);
+            this.Controls.Add(this.tbTarjeta);
             this.Controls.Add(this.dtpTelefono);
             this.Controls.Add(this.dtpFechaCreacion);
             this.Controls.Add(this.dtpFechaNacimiento);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
@@ -497,12 +517,14 @@ namespace PalcoNet.ABMCliente
         private System.Windows.Forms.TextBox tbTelefono;
         private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.TextBox tbCuil;
-        private System.Windows.Forms.TextBox tbTipoDocumento;
+        private System.Windows.Forms.TextBox tbNroDocumento;
         private System.Windows.Forms.ComboBox cbDocumento;
         private System.Windows.Forms.ComboBox cbRol;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.TextBox tbUsername;
         private System.Windows.Forms.TextBox tbApellido;
         private System.Windows.Forms.TextBox tbNombre;
+        private Label label20;
+        private TextBox tbTarjeta;
     }
 }

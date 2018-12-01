@@ -56,6 +56,30 @@
     <Compile Include="ABMCliente\BajaCliente.Designer.cs">
       <DependentUpon>BajaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABMCliente\frmHabilitarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMCliente\frmHabilitarCliente.Designer.cs">
+      <DependentUpon>frmHabilitarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMCliente\frmModificarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMCliente\frmModificarCliente.Designer.cs">
+      <DependentUpon>frmModificarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMCliente\frmModificarPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMCliente\frmModificarPassword.Designer.cs">
+      <DependentUpon>frmModificarPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMCliente\frmSeleccionMod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMCliente\frmSeleccionMod.Designer.cs">
+      <DependentUpon>frmSeleccionMod.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABMCliente\ModificacionCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,6 +304,15 @@
     </Compile>
     <EmbeddedResource Include="ABMCliente\AltaCliente.resx">
       <DependentUpon>AltaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMCliente\BajaCliente.resx">
+      <DependentUpon>BajaCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMCliente\frmSeleccionMod.resx">
+      <DependentUpon>frmSeleccionMod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMCliente\ModificacionCliente.resx">
+      <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABMGrado\ABMGradoPublicacionForm.resx">
       <DependentUpon>ABMGradoPublicacionForm.cs</DependentUpon>
