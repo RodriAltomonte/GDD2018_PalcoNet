@@ -260,6 +260,9 @@
     <Compile Include="RegistroUsuario\RegistroDeUsuarioForm.Designer.cs">
       <DependentUpon>RegistroDeUsuarioForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ABMCliente\AltaCliente.resx">
+      <DependentUpon>AltaCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABMGrado\ABMGradoPublicacionForm.resx">
       <DependentUpon>ABMGradoPublicacionForm.cs</DependentUpon>
     </EmbeddedResource>

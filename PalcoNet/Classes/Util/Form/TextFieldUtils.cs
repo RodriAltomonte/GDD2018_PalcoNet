@@ -22,5 +22,14 @@ namespace TFUtilites
             }
             return false;
         }
+        public static void CleanAllControls(Form myForm)
+        {
+            var txtControls = myForm.Controls.OfType<TextBox>();
+            
+            foreach (var tb in txtControls)
+            {
+                tb.Text = "";
+            }
+        }
     }
 }

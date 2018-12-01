@@ -2,6 +2,7 @@
 using PalcoNet.Classes.Constants;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.DatabaseConnection;
+using PalcoNet.Classes.Util.Form;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,11 @@ namespace PalcoNet.ABMRol
             }
             catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
         }else{MessageBox.Show("Por favor rellena todos los campos");}
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, new ModificacionRol(IdRol));
         }
     }
 }

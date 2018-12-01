@@ -112,9 +112,10 @@ GO
 ---------------ALTA CLIENTE---------------
 
 CREATE PROCEDURE LOS_DE_GESTION.AltaCliente
+@habilitado BIT,
 @username NVARCHAR(255),
 @password NVARCHAR(255),
-@rol NVARCHAR(255),
+@id_rol NUMERIC(18,0),
 @nombre NVARCHAR(255),
 @apellido NVARCHAR(255),
 @tipo_documento NVARCHAR(255),
@@ -134,25 +135,27 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaCliente
 AS
 	BEGIN
 		IF(NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento = @nro_documento)
-				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,10) = @nro_documento)
+				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,8) = @nro_documento)
 			BEGIN
-				IF(NOT EXISTS(SELECT username FROM LOS_DE_GESTION.Usuario WHERE username = @username))
-				BEGIN
+				
 					INSERT INTO LOS_DE_GESTION.Cliente(username,nombre,apellido,tipo_documento,numero_documento,
 						cuil,mail,telefono,calle,nro_calle,nro_piso,depto,localidad,codigo_postal,fecha_nacimiento,fecha_creacion,tarjeta)
 					VALUES(@username,@nombre,@apellido,@tipo_documento,@nro_documento,@cuil,@mail,@telefono,
 						@direccion_calle,@numero_calle,@numero_piso,@departamento,@localidad,@codigo_postal,@fecha_de_nacimiento,@fecha_de_creacion,@tarjeta)
-					INSERT INTO LOS_DE_GESTION.Usuario(username,password,id_Rol)
-					VALUES(@username,@password,@rol)
+					
 				END
-				ELSE
-					BEGIN
-						RAISERROR('username ya existe!',16,1)
-					END
-			END
 			ELSE
 				BEGIN
 					RAISERROR('Numero de documento,cuil repetido o cuil incorrecto!',16,1)
+				END
+			IF(NOT EXISTS (SELECT username FROM LOS_DE_GESTION.Usuario WHERE username=@username))
+				BEGIN
+					INSERT INTO LOS_DE_GESTION.Usuario(username,password,id_Rol,habilitado,intentos_login)
+					VALUES(@username,@password,@id_rol,@habilitado,0)
+				END
+			ELSE
+				BEGIN
+				RAISERROR('Este username ya existe!',16,1)
 				END
 	END
 GO
