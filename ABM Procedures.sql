@@ -24,7 +24,7 @@ AS
 GO
 
 CREATE PROCEDURE LOS_DE_GESTION.FuncionalidadRol 
-@rolNombre NVARCHAR(255),
+@id_Rol NVARCHAR(255),
 @funcionalidadRol NUMERIC(18,0)
 AS
 	BEGIN
@@ -33,7 +33,7 @@ AS
 		BEGIN
 			BEGIN TRANSACTION
 				INSERT INTO LOS_DE_GESTION.Rol_X_Funcionalidad(id_Rol,id_Funcionalidad)
-				VALUES ((SELECT id_Rol FROM LOS_DE_GESTION.Rol WHERE nombre=@rolNombre),@funcionalidadRol)
+				VALUES (@id_Rol,@funcionalidadRol)
 			COMMIT TRANSACTION
 		END
 
@@ -58,13 +58,13 @@ AS
 GO
 ---------------MODIFICACION---------------
 CREATE PROCEDURE LOS_DE_GESTION.ModificarRol
-@nombreRolAntiguo NVARCHAR(255),
+@id_Rol NUMERIC(18,0),
 @nombreRolNuevo NVARCHAR(255)
 AS
 	BEGIN
 		UPDATE LOS_DE_GESTION.Rol
 		SET nombre = @nombreRolNuevo
-		WHERE id_Rol = (SELECT id_Rol FROM LOS_DE_GESTION.Rol WHERE nombre = @nombreRolAntiguo)
+		WHERE id_Rol = @id_Rol
 	END
 GO
 --ESTE ESTA DUPLICADO 
@@ -174,7 +174,6 @@ AS
 GO
 
 CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
-@nro_docOriginal NUMERIC(18,0),
 @nombre NVARCHAR(255),
 @apellido NVARCHAR(255),
 @email NVARCHAR(255),
@@ -189,7 +188,8 @@ CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
 @localidad NVARCHAR(255),
 @codigo_postal NVARCHAR(255),
 @fecha_nacimiento DATETIME,
-@fecha_de_creacion DATETIME
+@fecha_de_creacion DATETIME,
+@tarjeta NVARCHAR(255)
 AS
 	BEGIN
 		IF(NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil=@cuil ) 
@@ -210,8 +210,9 @@ AS
 			localidad = @localidad,
 			codigo_postal = @codigo_postal,
 			fecha_nacimiento = @fecha_nacimiento,
-			fecha_creacion = @fecha_de_creacion
-	 WHERE numero_documento = @nro_docOriginal
+			fecha_creacion = @fecha_de_creacion,
+			tarjeta = @tarjeta
+	 WHERE numero_documento = @nro_documento
 	 END
 	 ELSE
 		BEGIN

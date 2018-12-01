@@ -50,42 +50,6 @@
     <Compile Include="ABMCliente\AltaCliente.Designer.cs">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABMCliente\BajaCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ABMCliente\BajaCliente.Designer.cs">
-      <DependentUpon>BajaCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ABMCliente\frmHabilitarCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ABMCliente\frmHabilitarCliente.Designer.cs">
-      <DependentUpon>frmHabilitarCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ABMCliente\frmModificarCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ABMCliente\frmModificarCliente.Designer.cs">
-      <DependentUpon>frmModificarCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ABMCliente\frmModificarPassword.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ABMCliente\frmModificarPassword.Designer.cs">
-      <DependentUpon>frmModificarPassword.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ABMCliente\frmSeleccionMod.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ABMCliente\frmSeleccionMod.Designer.cs">
-      <DependentUpon>frmSeleccionMod.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ABMCliente\ModificacionCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ABMCliente\ModificacionCliente.Designer.cs">
-      <DependentUpon>ModificacionCliente.cs</DependentUpon>
-    </Compile>
     <Compile Include="ABMEmpresaEspectaculo\ABMEmpresaEspectaculoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,35 +68,29 @@
     <Compile Include="ABMRol\AltaRol.Designer.cs">
       <DependentUpon>AltaRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABMRol\BajaRol.cs">
+    <Compile Include="ABMRol\frmModificarFuncionalidades.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABMRol\BajaRol.Designer.cs">
-      <DependentUpon>BajaRol.cs</DependentUpon>
+    <Compile Include="ABMRol\frmModificarFuncionalidades.Designer.cs">
+      <DependentUpon>frmModificarFuncionalidades.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABMRol\frmAgregarFuncionalidad.cs">
+    <Compile Include="ABMRol\frmModificarNombre.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABMRol\frmAgregarFuncionalidad.Designer.cs">
-      <DependentUpon>frmAgregarFuncionalidad.cs</DependentUpon>
+    <Compile Include="ABMRol\frmModificarNombre.Designer.cs">
+      <DependentUpon>frmModificarNombre.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABMRol\frmBorrarFuncionalidad.cs">
+    <Compile Include="ABMRol\ModificacionRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABMRol\frmBorrarFuncionalidad.Designer.cs">
-      <DependentUpon>frmBorrarFuncionalidad.cs</DependentUpon>
+    <Compile Include="ABMRol\ModificacionRol.Designer.cs">
+      <DependentUpon>ModificacionRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABMRol\ModificarFuncionalidadesRol.cs">
+    <Compile Include="ABMRol\SeleccionRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABMRol\ModificarFuncionalidadesRol.Designer.cs">
-      <DependentUpon>ModificarFuncionalidadesRol.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ABMRol\ModificarNombreRol.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ABMRol\ModificarNombreRol.Designer.cs">
-      <DependentUpon>ModificarNombreRol.cs</DependentUpon>
+    <Compile Include="ABMRol\SeleccionRol.Designer.cs">
+      <DependentUpon>SeleccionRol.cs</DependentUpon>
     </Compile>
     <Compile Include="ABMRubro\ABMRubroForm.cs">
       <SubType>Form</SubType>
@@ -302,38 +260,23 @@
     <Compile Include="RegistroUsuario\RegistroDeUsuarioForm.Designer.cs">
       <DependentUpon>RegistroDeUsuarioForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ABMCliente\AltaCliente.resx">
-      <DependentUpon>AltaCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ABMCliente\BajaCliente.resx">
-      <DependentUpon>BajaCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ABMCliente\frmSeleccionMod.resx">
-      <DependentUpon>frmSeleccionMod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ABMCliente\ModificacionCliente.resx">
-      <DependentUpon>ModificacionCliente.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ABMGrado\ABMGradoPublicacionForm.resx">
       <DependentUpon>ABMGradoPublicacionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABMRol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABMRol\BajaRol.resx">
-      <DependentUpon>BajaRol.cs</DependentUpon>
+    <EmbeddedResource Include="ABMRol\frmModificarFuncionalidades.resx">
+      <DependentUpon>frmModificarFuncionalidades.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABMRol\frmAgregarFuncionalidad.resx">
-      <DependentUpon>frmAgregarFuncionalidad.cs</DependentUpon>
+    <EmbeddedResource Include="ABMRol\frmModificarNombre.resx">
+      <DependentUpon>frmModificarNombre.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABMRol\frmBorrarFuncionalidad.resx">
-      <DependentUpon>frmBorrarFuncionalidad.cs</DependentUpon>
+    <EmbeddedResource Include="ABMRol\ModificacionRol.resx">
+      <DependentUpon>ModificacionRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABMRol\ModificarFuncionalidadesRol.resx">
-      <DependentUpon>ModificarFuncionalidadesRol.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ABMRol\ModificarNombreRol.resx">
-      <DependentUpon>ModificarNombreRol.cs</DependentUpon>
+    <EmbeddedResource Include="ABMRol\SeleccionRol.resx">
+      <DependentUpon>SeleccionRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CanjePuntos\CanjePuntosForm.resx">
       <DependentUpon>CanjePuntosForm.cs</DependentUpon>
