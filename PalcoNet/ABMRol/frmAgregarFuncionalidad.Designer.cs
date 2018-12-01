@@ -33,20 +33,21 @@
             this.button1 = new System.Windows.Forms.Button();
             this.txtNombreRol = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dvgFuncionalidades)).BeginInit();
             this.SuspendLayout();
             // 
             // dvgFuncionalidades
             // 
             this.dvgFuncionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgFuncionalidades.Location = new System.Drawing.Point(13, 46);
+            this.dvgFuncionalidades.Location = new System.Drawing.Point(16, 93);
             this.dvgFuncionalidades.Name = "dvgFuncionalidades";
             this.dvgFuncionalidades.Size = new System.Drawing.Size(259, 150);
             this.dvgFuncionalidades.TabIndex = 0;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(197, 202);
+            this.btnAgregar.Location = new System.Drawing.Point(197, 249);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 1;
@@ -56,7 +57,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(116, 202);
+            this.button1.Location = new System.Drawing.Point(116, 249);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -79,11 +80,21 @@
             this.lblNombre.TabIndex = 3;
             this.lblNombre.Text = "Nombre ";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(28, 65);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(134, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Funcionalidades existentes";
+            // 
             // frmAgregarFuncionalidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(311, 284);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.txtNombreRol);
             this.Controls.Add(this.button1);
@@ -104,5 +115,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtNombreRol;
         private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.Label label1;
     }
 }

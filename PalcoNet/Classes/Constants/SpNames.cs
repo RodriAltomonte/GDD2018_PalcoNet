@@ -36,9 +36,18 @@ namespace PalcoNet.Classes.Constants
         public const string PublicacionesAEditar = Schema + "PR_PUBLICACIONES_A_EDITAR";
         public const string ExisteUnaPublicacionIgual = Schema + "PR_EXISTE_UNA_PUBLICACION_IGUAL";
         public const string ActualizarPublicacion = Schema + "PR_ACTUALIZAR_PUBLICACION";
+        
         public const string AltaRol = Schema + "AltaRol";
         public const string AgregarFuncionalidadRol = Schema + "FuncionalidadRol";
         public const string ModificarRol = Schema + "ModificarRol";
+        public const string BorrarFuncionalidad = Schema + "EliminarFuncionalidad";
+        public const string BajaRol = Schema + "BajaRol";
+
+        public const string AltaCliente = Schema + "AltaCliente";
+        public const string BajaCliente = Schema + "BajaCliente";
+        public const string HabilitarCliente = Schema + "HabilitarCliente";
+        public const string ModificacionPasswordCliente = Schema + "ModificacionPasswordCliente";
+        public const string ModificarCliente = Schema + "ModificarCliente";
 
     }
 }

@@ -117,6 +117,29 @@ namespace Classes.DatabaseConnection
             }
         }
 
+        public DataSet ExecuteDataSetSqlQuery(string sqlQuery,string row)
+        {
+            DataSet ds = new DataSet();
+            using (sqlConnection)
+            using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection))
+            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+            {
+                cmd.CommandType = CommandType.Text;
+                try
+                {
+                    da.Fill(ds,row);
+
+                }
+                catch (SqlException e)
+                {
+                    throw new SqlQueryException(e.Message, e);
+                }
+                return ds;
+            }
+        }
+
+
+
         #region Private methods
         private void AddInputParametersToCommandIfTheyAreNotNull(StoredProcedureParameterMap inputParameters, SqlCommand command)
         {

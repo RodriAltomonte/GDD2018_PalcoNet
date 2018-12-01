@@ -48,12 +48,12 @@ GO
 
 ---------------BAJA---------------
 CREATE PROCEDURE LOS_DE_GESTION.BajaRol
-@nombreRol NUMERIC(18,0)
+@id_Rol NUMERIC(18,0)
 AS
-	BEGIN
-		UPDATE LOS_DE_GESTION.Usuario
+	BEGIN	
+		UPDATE LOS_DE_GESTION.Rol
 		SET habilitado = 0
-		WHERE id_Rol = (SELECT id_Rol FROM LOS_DE_GESTION.Rol WHERE nombre=@nombreRol)
+		WHERE id_Rol = @id_rol
 	END
 GO
 ---------------MODIFICACION---------------
@@ -79,12 +79,12 @@ AS
 GO
 
 CREATE PROCEDURE LOS_DE_GESTION.EliminarFuncionalidad
-@rolNombre NVARCHAR(255),
+@id_rol NVARCHAR(255),
 @funcionalidad NUMERIC(18,0)
 AS
 	BEGIN
 		DELETE LOS_DE_GESTION.Rol_X_Funcionalidad
-		WHERE id_Rol = (SELECT id_Rol FROM LOS_DE_GESTION.Rol WHERE nombre=@rolNombre) AND id_Funcionalidad = @funcionalidad
+		WHERE id_Rol = @id_rol AND id_Funcionalidad=@funcionalidad
 	END
 GO
 

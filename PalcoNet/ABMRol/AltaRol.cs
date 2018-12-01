@@ -12,13 +12,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Classes.Model;
+using TFUtilites;
 
 namespace PalcoNet.ABMRol
 {
     public partial class AltaRol : Form
     {
-      
-        
         public AltaRol()
         {
             InitializeComponent();
@@ -34,7 +33,9 @@ namespace PalcoNet.ABMRol
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            //TODO: FALTARIA HACER LA COMPROBACION DE QUE NINGUN CAMPO ESTE VACIO
+
+            if (!TextFieldUtils.IsAnyFieldEmpty(this))
+            {
             StoredProcedureParameterMap RolParameters = new StoredProcedureParameterMap();
             StoredProcedureParameterMap FuncionalidadParameters = new StoredProcedureParameterMap();
             DataGridViewSelectedCellCollection cells = dgvFuncionalidades.SelectedCells;
@@ -75,6 +76,10 @@ namespace PalcoNet.ABMRol
            {
                MessageBox.Show(ex.Message);
            }
+            }else
+            {
+                MessageBox.Show("Por favor rellena todos los campos");
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
