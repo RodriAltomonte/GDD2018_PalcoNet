@@ -1,3 +1,5 @@
+USE [GD2C2018]
+GO
 
 CREATE PROCEDURE LOS_DE_GESTION.RolHabilitado
 @idRol NUMERIC(18,0),
@@ -196,15 +198,16 @@ AS
 GO
 
 CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
+@habilitado BIT,
 @nombre NVARCHAR(255),
 @apellido NVARCHAR(255),
-@email NVARCHAR(255),
 @tipo_documento NVARCHAR(255),
 @nro_documento NUMERIC(18,0),
 @cuil NVARCHAR(255),
 @mail NVARCHAR(255),
 @telefono NVARCHAR(50),
 @dir_calle NVARCHAR(255),
+@nro_calle NUMERIC(18,0),
 @nro_piso NUMERIC(18,0),
 @depto NVARCHAR(255),
 @localidad NVARCHAR(255),
@@ -216,7 +219,7 @@ AS
 	BEGIN
 		IF(NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil=@cuil ) 
 			AND NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento=@nro_documento)
-			AND SUBSTRING(@cuil,3,10) = @nro_documento)
+			AND SUBSTRING(@cuil,3,8) = @nro_documento)
 			BEGIN
 		UPDATE LOS_DE_GESTION.Cliente
 		SET nombre = @nombre,
@@ -224,7 +227,7 @@ AS
 			numero_documento = @nro_documento,
 			tipo_documento = @tipo_documento,
 			cuil = @cuil,
-			mail = @email,
+			mail = @mail,
 			telefono = @telefono,
 			calle = @dir_calle,
 			nro_piso = @nro_piso,
@@ -233,12 +236,17 @@ AS
 			codigo_postal = @codigo_postal,
 			fecha_nacimiento = @fecha_nacimiento,
 			fecha_creacion = @fecha_de_creacion,
-			tarjeta = @tarjeta
+			tarjeta = @tarjeta	
 	 WHERE numero_documento = @nro_documento
+
+	 UPDATE LOS_DE_GESTION.Usuario
+	 SET habilitado = @habilitado
+	 WHERE username = (SELECT username FROM LOS_DE_GESTION.Cliente WHERE numero_documento = @nro_documento)
+
 	 END
 	 ELSE
 		BEGIN
-			RAISERROR('Error al modificar cliente',16,1)
+			RAISERROR('Error al modificar cliente CUIL invalido o repetido!',16,1)
 		END
 	END
 GO

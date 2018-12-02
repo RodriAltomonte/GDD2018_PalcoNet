@@ -63,6 +63,30 @@ namespace Classes.DatabaseConnection
             }
         }
 
+        public TOutput ExecuteSingleOutputSqlQuery<TOutput>(string query)
+        {
+            TOutput value ;
+            using (sqlConnection)
+            using (SqlCommand command = new SqlCommand(query, sqlConnection))
+            {
+                command.CommandType = CommandType.Text;
+                OpenConnection();
+
+                try
+                {
+                   value=(TOutput) command.ExecuteScalar();
+                    return value;
+                }
+                catch (SqlException e)
+                {
+                    throw new StoredProcedureException(e.Message, e);
+                }
+            }
+        }
+
+
+
+
         public DataTable ExecuteDataTableStoredProcedure(string procedureName, StoredProcedureParameterMap inputParameters)
         {
             DataTable dataTable = new DataTable();
