@@ -186,10 +186,18 @@ ALTER TABLE LOS_DE_GESTION.Ubicacion DROP CONSTRAINT FK_Ubicacion_Tipo_Ubicacion
 GO
 IF OBJECT_id('LOS_DE_GESTION.Ubicacion') IS NOT NULL AND OBJECT_ID('FK_Ubicacion_Compra','F') IS NOT NULL
 ALTER TABLE LOS_DE_GESTION.Ubicacion DROP CONSTRAINT FK_Ubicacion_Compra
+GO--aca estoy
+IF OBJECT_ID('LOS_DE_GESTION.Usuario_X_Rol') IS NOT NULL AND OBJECT_ID('FK_Usuario_X_Rol_Rol','F') IS NOT NULL
+ALTER TABLE LOS_DE_GESTION.Usuario_X_Rol DROP CONSTRAINT FK_Usuario_X_Rol_Rol
+GO
+IF OBJECT_ID('LOS_DE_GESTION.Usuario_X_Rol') IS NOT NULL AND OBJECT_ID('FK_Usuario_X_Rol_Usuario','F') IS NOT NULL
+ALTER TABLE LOS_DE_GESTION.Usuario_X_Rol DROP CONSTRAINT FK_Usuario_X_Rol_Usuario
 GO
 
 ------------------------------DROP DE TABLAS------------------------------
-
+IF OBJECT_ID('LOS_DE_GESTION.Usuario_X_Rol') IS NOT NULL
+DROP TABLE LOS_DE_GESTION.Usuario_X_Rol;
+go
 IF OBJECT_ID('LOS_DE_GESTION.Ubicacion') IS NOT NULL
 DROP TABLE LOS_DE_GESTION.Ubicacion;
 go
@@ -247,6 +255,7 @@ go
 IF OBJECT_ID('LOS_DE_GESTION.Premio') IS NOT NULL
 DROP TABLE LOS_DE_GESTION.Premio;
 go
+
 
 GO
 
@@ -312,7 +321,7 @@ CREATE TABLE LOS_DE_GESTION.Premio(
 	intentos_login int ,
 	bloqueado_login_fallidos bit,
 	habilitado bit,
-	id_Rol numeric(18, 0)
+	--id_Rol numeric(18, 0) ya no se usa esta tabla intermedia Usuario_X_Rol
  )
  go
 
@@ -334,7 +343,7 @@ CREATE TABLE LOS_DE_GESTION.Premio(
  go
 
  CREATE TABLE LOS_DE_GESTION.Rendicion(
-	id_Rendicion numeric(18, 0) PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	id_Rendicion numeric(18, 0) PRIMARY KEY,
 	importe_total_ventas numeric(18, 2),
 	importe_comision_total numeric(18, 2),
 	importe_rendicion_total numeric(18, 2),
@@ -440,6 +449,13 @@ CREATE TABLE LOS_DE_GESTION.Premio(
  )
  go
 
+  CREATE TABLE LOS_DE_GESTION.Usuario_X_Rol(
+	id_Rol numeric(18, 0),
+	username nvarchar(255),
+	PRIMARY KEY(username,id_Rol)
+ )
+ go
+
 -----------------------------VISTAS---------------------------------------
 -----------------------------FUNCIONES------------------------------------
 CREATE FUNCTION LOS_DE_GESTION.FN_HASHPASS(@password nvarchar(255))
@@ -529,7 +545,7 @@ go
 
 create procedure LOS_DE_GESTION.PR_ROL_DE_USUARIO @username nvarchar(255)
 as begin
-	select r.* from LOS_DE_GESTION.Rol r inner join LOS_DE_GESTION.Usuario u on r.id_Rol = u.id_Rol
+	select r.* from LOS_DE_GESTION.Rol r inner join LOS_DE_GESTION.Usuario_X_Rol j on (r.id_Rol = j.id_Rol)  inner join  LOS_DE_GESTION.Usuario u on (u.username = j.username)
 	where u.username = @username
 end
 go
@@ -552,8 +568,14 @@ AS
 BEGIN
 	BEGIN TRY
 		INSERT INTO GD2C2018.LOS_DE_GESTION.Usuario
-		(username, password, intentos_login, bloqueado_login_fallidos, habilitado, id_Rol)
-		VALUES(@username, LOS_DE_GESTION.FN_HASHPASS(@password), 0, 0, 1, @idRol)
+		(username, password, intentos_login, bloqueado_login_fallidos, habilitado)
+		VALUES(@username, LOS_DE_GESTION.FN_HASHPASS(@password), 0, 0, 1)
+
+		INSERT INTO GD2C2018.LOS_DE_GESTION.Usuario_X_Rol
+		(username, id_Rol)
+		VALUES(@username, @idRol)
+
+
 	END TRY
 	BEGIN CATCH
 		IF (select ERROR_NUMBER()) = 2627 --Violacion de PK
@@ -710,7 +732,7 @@ BEGIN
 	inner join LOS_DE_GESTION.Rubro r on r.id_Rubro = p.id_Rubro
 	inner join LOS_DE_GESTION.Grado_Publicacion g on g.id_Grado_Publicacion = p.id_Grado_Publicacion
 	where (p.usuario_empresa_vendedora = @usernameEmpresa 
-		or @usernameEmpresa in (select u.username from LOS_DE_GESTION.Usuario u where u.id_Rol = 1))--Es un admin
+		or @usernameEmpresa in (select u.username from LOS_DE_GESTION.Usuario u inner join Usuario_X_Rol j on (u.username = j.username) where j.id_Rol = 1))--Es un admin
 	and p.id_Estado_Publicacion = 1 --Es borrador
 	and p.descripcion like '%'+@descripcion+'%'
 	order by p.cod_publicacion asc
@@ -805,9 +827,14 @@ AS
 BEGIN
 /*si intentos_login -1 -> el usuario viene de migracion*/
 /* inserto Usuarios de Empresas*/
-		 insert into LOS_DE_GESTION.Usuario(username, password, intentos_login, bloqueado_login_fallidos, habilitado, id_Rol)
-		 SELECT distinct Espec_Empresa_Mail,HashBytes('SHA2_256', Espec_Empresa_Cuit),-1, 0,1,3
+		 insert into LOS_DE_GESTION.Usuario(username, password, intentos_login, bloqueado_login_fallidos, habilitado)--saco id_Rol
+		 SELECT distinct Espec_Empresa_Mail,HashBytes('SHA2_256', Espec_Empresa_Cuit),-1, 0,1
 		 FROM gd_esquema.Maestra
+
+/* inserto Usuario_X_Rol de Empresas*/
+	insert into LOS_DE_GESTION.Usuario_X_Rol(username,id_Rol) 
+	SELECT distinct username,3 --3 de empresa
+	from LOS_DE_GESTION.Usuario
 	
 /* inserto Empresas*/
 		 insert into LOS_DE_GESTION.Empresa(username,cuit, razon_social, fecha_creacion, mail, calle, nro_calle, nro_piso,depto, codigo_postal)
@@ -817,21 +844,26 @@ BEGIN
 	
 
 /* inserto Usuarios de clientes*/
-		 insert into LOS_DE_GESTION.Usuario(username, password, intentos_login, bloqueado_login_fallidos, habilitado, id_Rol)
-		 SELECT distinct Cli_Dni,HashBytes('SHA2_256', convert(nvarchar(255), Cli_Dni)),-1, 0,1,2
+		 insert into LOS_DE_GESTION.Usuario(username, password, intentos_login, bloqueado_login_fallidos, habilitado)--saco id_Rol
+		 SELECT distinct convert(nvarchar(255), Cli_Dni),HashBytes('SHA2_256', convert(nvarchar(255), Cli_Dni)),-1, 0,1
+		 FROM gd_esquema.Maestra where Cli_Dni is not NULL
+
+/* inserto Usuario_X_Rol de clientes*/
+	insert into LOS_DE_GESTION.Usuario_X_Rol(username,id_Rol) 
+		 SELECT distinct convert(nvarchar(255), Cli_Dni),2 --2 de cliente
 		 FROM gd_esquema.Maestra where Cli_Dni is not NULL
 	
 /* inserto clientes*/
 		 insert into LOS_DE_GESTION.Cliente(username,tipo_documento,numero_documento, apellido,nombre,fecha_nacimiento, mail,calle,nro_calle,nro_piso,depto,codigo_postal)
-		 SELECT distinct Cli_Dni,'DNI',Cli_Dni, Cli_Apeliido,Cli_Nombre,Cli_Fecha_Nac,Cli_Mail, Cli_Dom_Calle,Cli_Nro_Calle,Cli_Piso, Cli_Depto,Cli_Cod_Postal
+		 SELECT distinct convert(nvarchar(255), Cli_Dni),'DNI',Cli_Dni, Cli_Apeliido,Cli_Nombre,Cli_Fecha_Nac,Cli_Mail, Cli_Dom_Calle,Cli_Nro_Calle,Cli_Piso, Cli_Depto,Cli_Cod_Postal
 		 FROM gd_esquema.Maestra where Cli_Mail is not NULL
+
 /*decision de implementacion*/
 /* deshabilito Clientes con mismo mail*/
 		 update LOS_DE_GESTION.Usuario
 		 set habilitado = 0
-		 where id_Rol = 2 and 
-			   username in (SELECT a.numero_documento FROM LOS_DE_GESTION.Cliente a ,LOS_DE_GESTION.Cliente b 
-							where  b.mail = a.mail and b.numero_documento != a.numero_documento )
+		 where username in (SELECT convert(nvarchar(255), a.numero_documento)  FROM LOS_DE_GESTION.Cliente a ,LOS_DE_GESTION.Cliente b 
+							where  b.mail = a.mail and b.numero_documento != a.numero_documento ) 
   
 /* inserto Estado Publicacion*/
 		 insert into LOS_DE_GESTION.Estado_Publicacion(id_Estado_Publicacion,descripcion)
@@ -905,8 +937,8 @@ INSERT INTO LOS_DE_GESTION.Funcionalidad (id_Funcionalidad, nombre) VALUES
 (7, 'Generar Publicacion'),--Empresa
 (8, 'Editar Publicacion'),--Empresa
 (9, 'Comprar'),--Cliente
-(10, 'Historial de Cliente'),--Cliente
-(11, 'Generar rendicion de comisiones'),--Admin
+(10,'Historial de Cliente'),--Cliente
+(11,'Generar rendicion de comisiones'),--Admin
 (12, 'Listado Estadistico'),--Admin
 (13, 'Modificar password'),--Cliente,Admin
 (14, 'Dar de baja un usuario'),
@@ -954,7 +986,7 @@ ALTER TABLE LOS_DE_GESTION.Premio_Canjeado ADD CONSTRAINT FK_Premio_Canjeado_Cli
 
 ALTER TABLE LOS_DE_GESTION.Historial_puntos_vencidos ADD CONSTRAINT FK_Historial_puntos_vencidos_Cliente FOREIGN KEY ([usuario_cliente]) REFERENCES [LOS_DE_GESTION].Cliente
 
-ALTER TABLE LOS_DE_GESTION.Usuario ADD CONSTRAINT FK_Usuario_Rol FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol
+--ALTER TABLE LOS_DE_GESTION.Usuario ADD CONSTRAINT FK_Usuario_Rol FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol ya no se usa
 
 ALTER TABLE LOS_DE_GESTION.Rol_X_Funcionalidad ADD CONSTRAINT FK_Rol_X_Funcionalidad_Rol FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol
 ALTER TABLE LOS_DE_GESTION.Rol_X_Funcionalidad ADD CONSTRAINT FK_Rol_X_Funcionalidad_Funcionalidad FOREIGN KEY (id_Funcionalidad) REFERENCES [LOS_DE_GESTION].Funcionalidad
@@ -978,6 +1010,10 @@ ALTER TABLE LOS_DE_GESTION.Cliente ADD CONSTRAINT FK_Cliente_Usuario FOREIGN KEY
 ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Publicacion FOREIGN KEY (cod_publicacion) REFERENCES [LOS_DE_GESTION].Publicacion
 ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Tipo_Ubicacion FOREIGN KEY (id_Tipo_Ubicacion) REFERENCES [LOS_DE_GESTION].Tipo_Ubicacion
 ALTER TABLE LOS_DE_GESTION.Ubicacion ADD CONSTRAINT FK_Ubicacion_Compra FOREIGN KEY (id_Compra) REFERENCES [LOS_DE_GESTION].Compra
+
+ALTER TABLE LOS_DE_GESTION.Usuario_X_Rol ADD CONSTRAINT FK_Usuario_X_Rol_Rol FOREIGN KEY (id_Rol) REFERENCES [LOS_DE_GESTION].Rol
+ALTER TABLE LOS_DE_GESTION.Usuario_X_Rol ADD CONSTRAINT FK_Usuario_X_Rol_Usuario FOREIGN KEY (username) REFERENCES [LOS_DE_GESTION].Usuario
+
 
 GO
 
