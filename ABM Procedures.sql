@@ -137,7 +137,7 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaCliente
 AS
 	BEGIN
 		IF(NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento = @nro_documento)
-				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,8) = @nro_documento)
+				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,9) = @nro_documento)
 			BEGIN
 				
 					INSERT INTO LOS_DE_GESTION.Cliente(username,nombre,apellido,tipo_documento,numero_documento,
@@ -198,6 +198,7 @@ AS
 GO
 
 CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
+@nro_documentoOriginal NUMERIC(18,0),
 @habilitado BIT,
 @nombre NVARCHAR(255),
 @apellido NVARCHAR(255),
@@ -217,9 +218,9 @@ CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
 @tarjeta NVARCHAR(255)
 AS
 	BEGIN
-		IF(NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil=@cuil ) 
+		IF(NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil=@cuil) 
 			AND NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento=@nro_documento)
-			AND SUBSTRING(@cuil,3,8) = @nro_documento)
+			AND SUBSTRING(@cuil,3,9) = @nro_documento)
 			BEGIN
 		UPDATE LOS_DE_GESTION.Cliente
 		SET nombre = @nombre,
@@ -237,7 +238,7 @@ AS
 			fecha_nacimiento = @fecha_nacimiento,
 			fecha_creacion = @fecha_de_creacion,
 			tarjeta = @tarjeta	
-	 WHERE numero_documento = @nro_documento
+	 WHERE numero_documento = @nro_documentoOriginal
 
 	 UPDATE LOS_DE_GESTION.Usuario
 	 SET habilitado = @habilitado
@@ -253,13 +254,15 @@ GO
 
 ---------------ALTA EMPRESA---------------
 CREATE PROCEDURE LOS_DE_GESTION.AltaEmpresa
+@habilitado BIT,
 @username NVARCHAR(255),
-@pasword NVARCHAR(255),
+@password NVARCHAR(255),
 @rol NVARCHAR(255),
 @razon_social NVARCHAR(255),
 @mail NVARCHAR(50),
 @telefono NUMERIC(18,0),
-@direccion_calle NUMERIC(18,0),
+@direccion_calle NVARCHAR(255),
+@nro_calle NUMERIC(18,0),
 @codigo_postal NVARCHAR(50),
 @ciudad NVARCHAR(255),
 @cuit NVARCHAR(255)
@@ -269,15 +272,15 @@ AS
 		IF(NOT EXISTS(SELECT razon_social FROM LOS_DE_GESTION.Empresa WHERE razon_social=@razon_social)
 			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit) )
 			BEGIN
-				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,nro_calle,codigo_postal,ciudad,cuit)
-				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@codigo_postal,@ciudad,@cuit)
-
-				INSERT INTO LOS_DE_GESTION.Usuario(username,id_Rol)
-				VALUES(@username,@rol)
+				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,nro_calle,codigo_postal,ciudad,cuit)
+				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@nro_calle,@codigo_postal,@ciudad,@cuit)
+				
+				INSERT INTO LOS_DE_GESTION.Usuario(username,id_Rol,habilitado)
+				VALUES(@username,@rol,@habilitado)
 			END
 		ELSE
 			BEGIN
-				RAISERROR('Error al crear usuario',16,1)
+				RAISERROR('Error al crear empresa',16,1)
 			END
 	END
 
@@ -285,17 +288,17 @@ GO
 
 ---------------BAJA EMPRESA---------------
 CREATE PROCEDURE LOS_DE_GESTION.BajaEmpresa
-@razon_social NVARCHAR(255)
+@username NVARCHAR(255)
 AS
 	BEGIN
 		UPDATE LOS_DE_GESTION.Usuario
 		SET habilitado=0
-		WHERE username=(SELECT username FROM LOS_DE_GESTION.Empresa WHERE razon_social = @razon_social)
+		WHERE username=@username
 	END
 GO
 
 ---------------MODIFICACION EMPRESA---------------
-CREATE PROCEDURE LOS_DE_GESTION.HabiltarEmpresa
+CREATE PROCEDURE LOS_DE_GESTION.HabilitarEmpresa
 @username NVARCHAR(255)
 AS 
 	BEGIN

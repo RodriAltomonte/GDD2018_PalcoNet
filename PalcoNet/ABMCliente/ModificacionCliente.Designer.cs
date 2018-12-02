@@ -75,6 +75,7 @@
             this.cbxHabilitado.TabIndex = 99;
             this.cbxHabilitado.Text = "Habilitado";
             this.cbxHabilitado.UseVisualStyleBackColor = true;
+            this.cbxHabilitado.Click += new System.EventHandler(this.cbxHabilitado_Click);
             // 
             // btnVolver
             // 

@@ -17,8 +17,9 @@ namespace PalcoNet.ABMCliente
 {
     public partial class ModificacionCliente : Form
     {
-       
+        private string Username;
         public ModificacionCliente( bool habilitado,
+                                    string username,
                                     string nombre,
                                     string apellido,
                                     string tipo_documento,
@@ -54,6 +55,7 @@ namespace PalcoNet.ABMCliente
             dtpFechaCreacion.Text = fecha_creacion;
             dtpFechaNacimiento.Text = fecha_nacimiento;
             txtTarjeta.Text = tarjeta;
+            Username = username;
             
         }
 
@@ -86,6 +88,29 @@ namespace PalcoNet.ABMCliente
                 MessageBox.Show("Cliente modificado correctamente!");
             }
             catch (StoredProcedureException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+        }
+
+        private void cbxHabilitado_Click(object sender, EventArgs e)
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+
+            if (cbxHabilitado.Checked == true)
+            {
+                inputParameters.AddParameter("@username", Username);
+                ConnectionFactory.Instance()
+                            .CreateConnection()
+                            .ExecuteDataTableStoredProcedure(SpNames.HabilitarCliente, inputParameters);
+                MessageBox.Show("Cliente modificado correctamente!");
+            }
+            else
+            {
+                inputParameters.AddParameter("@username", Username);
+                ConnectionFactory.Instance()
+                            .CreateConnection()
+                            .ExecuteDataTableStoredProcedure(SpNames.BajaCliente, inputParameters);
+                MessageBox.Show("Cliente modificado correctamente!");
+            }
+           
         }
 
     }

@@ -16,7 +16,7 @@ namespace PalcoNet
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ABMCliente.BajaCliente());
+            Application.Run(new ABMEmpresaEspectaculo.ListadoEmpresa());
         }
     }
 }

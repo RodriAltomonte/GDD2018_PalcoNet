@@ -30,9 +30,9 @@ namespace PalcoNet.ABMCliente
                                                 .ExecuteDataTableSqlQuery(@"SELECT nombre,apellido,tipo_documento,
                                                                             numero_documento,cuil,mail,telefono,calle,nro_calle,
                                                                             nro_piso,depto,localidad,codigo_postal,
-                                                                            fecha_nacimiento,fecha_creacion,tarjeta
+                                                                            fecha_nacimiento,fecha_creacion,tarjeta,username
                                                                             FROM LOS_DE_GESTION.Cliente
-                                                                           "); // ARREGLAR ESTO
+                                                                           WHERE nombre="+"'"+txtNombre.Text+"'"); // ARREGLAR ESTO
                 dgvClientes.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
@@ -57,14 +57,14 @@ namespace PalcoNet.ABMCliente
             string fecha_nacimiento = dgvClientes.CurrentRow.Cells[13].Value.ToString();
             string fecha_creacion = dgvClientes.CurrentRow.Cells[14].Value.ToString();
             string tarjeta = dgvClientes.CurrentRow.Cells[15].Value.ToString();
+            string username = dgvClientes.CurrentRow.Cells[16].Value.ToString();
             bool habilitado = ConnectionFactory.Instance()
                                                .CreateConnection()
                                                .ExecuteSingleOutputSqlQuery<bool>(@"SELECT habilitado 
                                                                                    FROM LOS_DE_GESTION.Usuario
-                                                                                   WHERE username = (SELECT username FROM
-                                                                                                    LOS_DE_GESTION.Cliente 
-                                                                                                    WHERE numero_documento="+"'"+nro_documento +"'"+")");
+                                                                                   WHERE username ="+"'"+username+"'");
             NavigableFormUtil.ForwardTo(this, new ModificacionCliente(habilitado,
+                                                                      username,
                                                                       nombre,
                                                                       apellido,
                                                                       tipo_documento,
