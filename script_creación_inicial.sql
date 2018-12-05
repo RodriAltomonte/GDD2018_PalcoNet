@@ -891,8 +891,9 @@ BEGIN
 
 /* inserto Compra*/
 		 insert into LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,id_Rendicion,cantidad_ubicaciones)
-		 SELECT distinct null,Compra_Fecha,Cli_Dni,null,Factura_Nro,Compra_Cantidad
+		 SELECT null,Compra_Fecha,Cli_Dni,null,Factura_Nro,sum(Compra_Cantidad)
 		 FROM gd_esquema.Maestra where Compra_Cantidad is not null
+		 group by Compra_Fecha,Cli_Dni,Factura_Nro									       
 
 		 
 /* inserto Ubicacion*/--revisar id_compra
