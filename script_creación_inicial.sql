@@ -160,6 +160,9 @@ GO
 IF OBJECT_ID('LOS_DE_GESTION.Publicacion') IS NOT NULL AND OBJECT_ID('FK_Publicacion_Estado_Publicacion','F') IS NOT NULL
 ALTER TABLE LOS_DE_GESTION.Publicacion DROP CONSTRAINT FK_Publicacion_Estado_Publicacion
 GO
+IF OBJECT_id('LOS_DE_GESTION.Item_Rendicion') IS NOT NULL AND OBJECT_ID('FK_Item_Rendicion_Compra','F') IS NOT NULL
+ALTER TABLE LOS_DE_GESTION.Item_Rendicion DROP CONSTRAINT FK_Item_Rendicion_Compra
+GO
 IF OBJECT_id('LOS_DE_GESTION.Item_Rendicion') IS NOT NULL AND OBJECT_ID('FK_Item_Rendicion_Rendicion','F') IS NOT NULL
 ALTER TABLE LOS_DE_GESTION.Item_Rendicion DROP CONSTRAINT FK_Item_Rendicion_Rendicion
 GO
@@ -359,7 +362,8 @@ CREATE TABLE LOS_DE_GESTION.Premio(
 	fecha_compra datetime,
 	usuario_cliente_comprador nvarchar(255),
 	tarjeta_comprador nvarchar(255),
-	id_Rendicion numeric(18, 0),
+	--id_Rendicion numeric(18, 0),
+	id_item_Rendicion numeric(18, 0),
 	cantidad_ubicaciones numeric(18, 0)
  )
  go
@@ -371,7 +375,8 @@ CREATE TABLE LOS_DE_GESTION.Premio(
 	importe_comision numeric(18, 2),
 	importe_rendicion numeric(18, 2),
 	descripcion nvarchar(60),
-	cantidad_ubicaciones numeric(18, 0)
+	cantidad_ubicaciones numeric(18, 0),
+	id_Compra numeric(18, 0)
  )
  go
 
@@ -890,7 +895,7 @@ BEGIN
 		 FROM gd_esquema.Maestra
 
 /* inserto Compra*/
-		 insert into LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,id_Rendicion,cantidad_ubicaciones)
+		 insert into LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,id_item_Rendicion,cantidad_ubicaciones)
 		 SELECT null,Compra_Fecha,Cli_Dni,null,Factura_Nro,sum(Compra_Cantidad)
 		 FROM gd_esquema.Maestra where Compra_Cantidad is not null
 		 group by Compra_Fecha,Cli_Dni,Factura_Nro									       
@@ -906,12 +911,12 @@ BEGIN
 		 SELECT distinct Factura_Nro, null,null,Factura_Total,Factura_Fecha,Espec_Empresa_Mail,Forma_Pago_Desc
 		 FROM gd_esquema.Maestra where Factura_Nro is not null
 
-/* inserto Item_Rendicion*/
-		 insert into LOS_DE_GESTION.Item_Rendicion(id_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones)
-		 SELECT distinct Factura_Nro, null,null,Item_Factura_Monto,Item_Factura_Descripcion,Item_Factura_Cantidad
-		 FROM gd_esquema.Maestra where Factura_Nro is not null
-
-		 
+/* inserto Item_Rendicion*/--revisar sum(Item_Factura_Monto)
+		 insert into LOS_DE_GESTION.Item_Rendicion(id_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones,id_Compra)
+		 SELECT Factura_Nro, null,null,sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where c.id_item_Rendicion = Factura_Nro)
+		 FROM gd_esquema.Maestra where Factura_Nro is not null 
+		 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad
+		
 END
 GO
 
@@ -998,11 +1003,12 @@ ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Empresa FOR
 ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Estado_Publicacion FOREIGN KEY (id_Estado_Publicacion) REFERENCES [LOS_DE_GESTION].Estado_Publicacion
 
 ALTER TABLE LOS_DE_GESTION.Item_Rendicion ADD CONSTRAINT FK_Item_Rendicion_Rendicion FOREIGN KEY (id_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
+ALTER TABLE LOS_DE_GESTION.Item_Rendicion ADD CONSTRAINT FK_Item_Rendicion_Compra FOREIGN KEY (id_Compra) REFERENCES [LOS_DE_GESTION].Compra
 
 ALTER TABLE LOS_DE_GESTION.Rendicion ADD CONSTRAINT FK_Rendicion_Empresa FOREIGN KEY (usuario_empresa_a_rendir) REFERENCES [LOS_DE_GESTION].Empresa
 
 ALTER TABLE LOS_DE_GESTION.Compra ADD CONSTRAINT FK_Compra_Cliente FOREIGN KEY (usuario_cliente_comprador) REFERENCES [LOS_DE_GESTION].Cliente
-ALTER TABLE LOS_DE_GESTION.Compra ADD CONSTRAINT FK_Compra_Rendicion FOREIGN KEY (id_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
+--ALTER TABLE LOS_DE_GESTION.Compra ADD CONSTRAINT FK_Compra_Rendicion FOREIGN KEY (id_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
 
 ALTER TABLE LOS_DE_GESTION.Empresa ADD CONSTRAINT FK_Empresa_Usuario FOREIGN KEY (username) REFERENCES [LOS_DE_GESTION].Usuario
 
@@ -1025,5 +1031,8 @@ GO
 --select* from LOS_DE_GESTION.Rubro
 --select* from LOS_DE_GESTION.Publicacion
 --select* from LOS_DE_GESTION.Ubicacion
+--select * from LOS_DE_GESTION.Item_Rendicion
+--select * from LOS_DE_GESTION.Rendicion
+--select * from LOS_DE_GESTION.Compra
 --select* from gd_esquema.Maestra
 
