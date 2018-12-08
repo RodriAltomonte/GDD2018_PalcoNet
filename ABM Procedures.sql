@@ -199,6 +199,7 @@ GO
 
 CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
 @nro_documentoOriginal NUMERIC(18,0),
+@cuil_original NVARCHAR(255),
 @habilitado BIT,
 @nombre NVARCHAR(255),
 @apellido NVARCHAR(255),
@@ -218,8 +219,8 @@ CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
 @tarjeta NVARCHAR(255)
 AS
 	BEGIN
-		IF(NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil=@cuil) 
-			AND NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento=@nro_documento)
+		IF(NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil=@cuil AND cuil != @cuil_original) --Arreglar esto!
+			AND NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento=@nro_documento AND numero_documento!=@nro_documentoOriginal)
 			AND SUBSTRING(@cuil,3,9) = @nro_documento)
 			BEGIN
 		UPDATE LOS_DE_GESTION.Cliente
@@ -335,7 +336,7 @@ CREATE PROCEDURE LOS_DE_GESTION.ModificarEmpresa
 AS
 	BEGIN
 	--falta comprobar que sea un cuit valido
-		IF(NOT EXISTS(SELECT cuit FROM LOS_DE_GESTION.Empresa WHERE cuit=@cuit))
+		IF(NOT EXISTS(SELECT cuit FROM LOS_DE_GESTION.Empresa WHERE cuit = @cuit AND cuit != @cuitOriginal))
 			BEGIN
 				UPDATE LOS_DE_GESTION.Empresa
 				SET razon_social = @razon_social,
@@ -353,7 +354,44 @@ AS
 			END
 			ELSE
 				BEGIN
-					RAISERROR('Error al modificar empresa',16,1)
+					RAISERROR('Error al modificar empresa el cuit ya existe',16,1)
 				END
 	END
 GO
+
+
+-----PROCEDURES DE BUSQUEDA------
+CREATE PROCEDURE LOS_DE_GESTION.ListadoClientes
+@nombre NVARCHAR(255),
+@apellido NVARCHAR(255),
+@dni NUMERIC(18,0),
+@mail NVARCHAR(255)
+AS
+BEGIN
+
+	SELECT nombre,apellido,tipo_documento,
+     numero_documento,cuil,mail,telefono,calle,nro_calle,
+     nro_piso,depto,localidad,codigo_postal,
+     fecha_nacimiento,fecha_creacion,tarjeta,username
+     FROM LOS_DE_GESTION.Cliente
+     WHERE nombre = @nombre OR @nombre IS NULL AND apellido = @apellido OR @apellido IS NULL
+	 AND numero_documento = @dni OR @dni IS NULL AND mail=@mail OR @mail IS NULL
+
+END
+GO
+
+CREATE PROCEDURE LOS_DE_GESTION.ListadoEmpresas
+@razon_social NVARCHAR(255),
+@CUIT NVARCHAR(255),
+@mail NVARCHAR(50)
+AS
+BEGIN
+
+	SELECT razon_social,mail,telefono,
+    calle,nro_calle,depto,localidad,
+    codigo_postal,ciudad,cuit,username
+    FROM LOS_DE_GESTION.Empresa
+    WHERE razon_social=@razon_social OR @razon_social IS NULL 
+	AND cuit=@CUIT OR @CUIT IS NULL AND mail=@mail OR @mail IS NULL
+
+END

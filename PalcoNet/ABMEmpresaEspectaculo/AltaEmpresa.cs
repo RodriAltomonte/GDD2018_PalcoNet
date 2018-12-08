@@ -29,8 +29,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
             inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
             inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(10));
-            inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(8));
-            inputParameters.AddParameter("@rol", 1);//CAMBIAR ESTO ES SOLO DE PRUEBA
+            inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10));
+            inputParameters.AddParameter("@rol", 3);//3 rol Empresa
             inputParameters.AddParameter("@razon_social", txtRazonSocial.Text);
             inputParameters.AddParameter("@mail",txtMail.Text);
             inputParameters.AddParameter("@telefono", txtTelefono.Text);
