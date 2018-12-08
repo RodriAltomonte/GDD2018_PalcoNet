@@ -1,5 +1,7 @@
 ﻿using Classes.DatabaseConnection;
+using PalcoNet.Classes.Constants;
 using PalcoNet.Classes.CustomException;
+using PalcoNet.Classes.DatabaseConnection;
 using PalcoNet.Classes.Util.Form;
 using System;
 using System.Collections.Generic;
@@ -22,15 +24,17 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            decimal cuit;
+            decimal.TryParse(txtCUIT.Text, out cuit);
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+            inputParameters.AddParameter("@razon_social", txtRazonSocial.Text);
+            inputParameters.AddParameter("@CUIT", cuit);
+            inputParameters.AddParameter("@mail", txtMail.Text);
             try
             {
                 DataTable dt = ConnectionFactory.Instance()
                                                 .CreateConnection()
-                                                .ExecuteDataTableSqlQuery(@"SELECT razon_social,mail,telefono,
-                                                                            calle,nro_calle,depto,localidad,
-                                                                            codigo_postal,ciudad,cuit,username
-                                                                            FROM LOS_DE_GESTION.Empresa
-                                                                            WHERE razon_social=" + "'" + txtRazonSocial.Text + "'"); // ARREGLAR ESTO
+                                                .ExecuteDataTableStoredProcedure(SpNames.ListadoEmpresas,inputParameters); // ARREGLAR ESTO CREAR PROCEDURE
                 dgvEmpresas.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }

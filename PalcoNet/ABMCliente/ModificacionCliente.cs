@@ -18,6 +18,9 @@ namespace PalcoNet.ABMCliente
     public partial class ModificacionCliente : Form
     {
         private string Username;
+        private string doc_original = "";
+        private string cuil_original = "";
+
         public ModificacionCliente( bool habilitado,
                                     string username,
                                     string nombre,
@@ -56,12 +59,15 @@ namespace PalcoNet.ABMCliente
             dtpFechaNacimiento.Text = fecha_nacimiento;
             txtTarjeta.Text = tarjeta;
             Username = username;
-            
+            doc_original = nro_documento;
+            cuil_original = CUIL;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+            inputParameters.AddParameter("@nro_documentoOriginal", decimal.Parse(doc_original));
+            inputParameters.AddParameter("@cuil_original", cuil_original);
             inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
             inputParameters.AddParameter("@nombre", txtNombre.Text);
             inputParameters.AddParameter("@apellido", txtApellido.Text);

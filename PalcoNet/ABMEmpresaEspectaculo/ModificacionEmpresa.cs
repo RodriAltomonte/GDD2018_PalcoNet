@@ -75,7 +75,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                 {
                     ConnectionFactory.Instance()
                                      .CreateConnection()
-                                     .ExecuteDataTableStoredProcedure(SpNames.ModificarCliente, inputParameters);
+                                     .ExecuteDataTableStoredProcedure(SpNames.ModificarEmpresa, inputParameters);
+                    MessageBox.Show("La empresa fue modificada correctamente!");
                 }
                 catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             }

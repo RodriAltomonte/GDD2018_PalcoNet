@@ -350,6 +350,9 @@
     <EmbeddedResource Include="ABMRol\SeleccionRol.resx">
       <DependentUpon>SeleccionRol.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABMRubro\ABMRubroForm.resx">
+      <DependentUpon>ABMRubroForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CanjePuntos\CanjePuntosForm.resx">
       <DependentUpon>CanjePuntosForm.cs</DependentUpon>
     </EmbeddedResource>

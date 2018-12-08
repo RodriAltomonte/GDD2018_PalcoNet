@@ -57,7 +57,8 @@ namespace PalcoNet.Classes.Constants
         public const string ModificarPasswordEmpresa = Schema + "ModificarPasswordEmpresa";
         public const string ModificarEmpresa = Schema + "ModificarEmpresa";
 
-
+        public const string ListadoClientes = Schema + "ListadoClientes";
+        public const string ListadoEmpresas = Schema + "ListadoEmpresas";
 
     }
 }
