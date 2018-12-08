@@ -81,7 +81,7 @@ namespace PalcoNet.Comprar
 
                     if (descripcion != "")
                     {
-                        select += "p.descripcion = " + descripcion + " ";
+                        select += "p.descripcion = '" + descripcion + "' ";
                         select += " and ";
                     }
 
@@ -99,8 +99,8 @@ namespace PalcoNet.Comprar
 
                     foreach (var rubros in categorias)
                     {
-                        select += rDescripcion;
-                        select += rubros;
+                        select +=  rDescripcion ;
+                        select += "'" + rubros + "'";
                         select += " and ";
                     }
 
