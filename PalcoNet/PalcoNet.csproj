@@ -203,11 +203,17 @@
     <Compile Include="Classes\Util\Form\NavigableFormUtil.cs" />
     <Compile Include="Classes\Util\Form\TextFieldUtils.cs" />
     <Compile Include="Classes\Util\StringUtil.cs" />
-    <Compile Include="Comprar\ComprarForm.cs">
+    <Compile Include="Comprar\Comprar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Comprar\ComprarForm.Designer.cs">
-      <DependentUpon>ComprarForm.cs</DependentUpon>
+    <Compile Include="Comprar\Comprar.Designer.cs">
+      <DependentUpon>Comprar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar\ResPublicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\ResPublicacion.Designer.cs">
+      <DependentUpon>ResPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="EditarPublicacion\EditarPublicacionForm.cs">
       <SubType>Form</SubType>
@@ -347,8 +353,11 @@
     <EmbeddedResource Include="CanjePuntos\CanjePuntosForm.resx">
       <DependentUpon>CanjePuntosForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Comprar\ComprarForm.resx">
-      <DependentUpon>ComprarForm.cs</DependentUpon>
+    <EmbeddedResource Include="Comprar\Comprar.resx">
+      <DependentUpon>Comprar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\ResPublicacion.resx">
+      <DependentUpon>ResPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditarPublicacion\EditarPublicacionForm.resx">
       <DependentUpon>EditarPublicacionForm.cs</DependentUpon>
@@ -361,6 +370,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GenerarPublicacion\GenerarPublicacionForm.resx">
       <DependentUpon>GenerarPublicacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistorialCliente\HistorialClienteForm.resx">
+      <DependentUpon>HistorialClienteForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico\ListadoEstadisticoForm.resx">
       <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>

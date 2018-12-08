@@ -24,7 +24,7 @@ namespace PalcoNet.Classes.Factory.Form
             formMap.Add(FuncionalidadConstants.ABMGradoPublicacion, typeof(ABMGrado.ABMGradoPublicacionForm));
             formMap.Add(FuncionalidadConstants.GenerarPublicacion, typeof(GenerarPublicacion.GenerarPublicacionForm));
             formMap.Add(FuncionalidadConstants.EditarPublicacion, typeof(EditarPublicacion.EditarPublicacionForm));
-            formMap.Add(FuncionalidadConstants.Comprar, typeof(Comprar.ComprarForm));
+            formMap.Add(FuncionalidadConstants.Comprar, typeof(Comprar.Comprar));
             formMap.Add(FuncionalidadConstants.HistorialCliente, typeof(HistorialCliente.HistorialClienteForm));
             formMap.Add(FuncionalidadConstants.GenerarRendicion, typeof(GenerarRendicionComisiones.GenerarRendicionForm));
             formMap.Add(FuncionalidadConstants.ListadoEstadistico, typeof(ListadoEstadistico.ListadoEstadisticoForm));

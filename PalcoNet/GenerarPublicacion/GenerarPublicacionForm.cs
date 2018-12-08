@@ -26,6 +26,14 @@ namespace PalcoNet.GenerarPublicacion
         private PublicacionRepository publicacionRepository;
         private UbicacionRepository ubicacionRepository;
 
+        public GenerarPublicacionForm()
+        {
+            InitializeComponent();
+            //this.previousForm = previousForm;
+            this.InitializeRepositories();
+            this.InitializeControls();
+        }
+
         public GenerarPublicacionForm(Form previousForm)
         {
             InitializeComponent();
