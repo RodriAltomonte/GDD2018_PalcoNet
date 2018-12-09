@@ -16,5 +16,10 @@ namespace PalcoNet.GenerarRendicionComisiones
         {
             InitializeComponent();
         }
+
+        private void GenerarRendicionForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

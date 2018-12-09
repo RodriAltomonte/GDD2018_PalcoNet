@@ -136,6 +136,20 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaCliente
 @tarjeta NVARCHAR(255)
 AS
 	BEGIN
+	
+	IF(NOT EXISTS (SELECT username FROM LOS_DE_GESTION.Usuario WHERE username=@username))
+		BEGIN
+			INSERT INTO LOS_DE_GESTION.Usuario(username,password,habilitado,intentos_login,bloqueado_login_fallidos)
+			VALUES(@username,@password,@habilitado,0,0)
+
+			INSERT INTO LOS_DE_GESTION.Usuario_X_Rol(id_Rol,username)
+			VALUES(@id_rol,@username)
+		END
+		ELSE
+			BEGIN
+				RAISERROR('Este username ya existe!',16,1)
+		END
+
 		IF(NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento = @nro_documento)
 				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,9) = @nro_documento)
 			BEGIN
@@ -150,15 +164,7 @@ AS
 				BEGIN
 					RAISERROR('Numero de documento,cuil repetido o cuil incorrecto!',16,1)
 				END
-			IF(NOT EXISTS (SELECT username FROM LOS_DE_GESTION.Usuario WHERE username=@username))
-				BEGIN
-					INSERT INTO LOS_DE_GESTION.Usuario(username,password,id_Rol,habilitado,intentos_login)
-					VALUES(@username,@password,@id_rol,@habilitado,0)
-				END
-			ELSE
-				BEGIN
-				RAISERROR('Este username ya existe!',16,1)
-				END
+			
 	END
 GO
 
@@ -268,23 +274,33 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaEmpresa
 @ciudad NVARCHAR(255),
 @cuit NVARCHAR(255)
 AS
-	BEGIN
+BEGIN
 	--falta validar el cuit 
+	IF(NOT EXISTS(SELECT username FROM LOS_DE_GESTION.Usuario WHERE username=@username))
+		BEGIN
+				INSERT INTO LOS_DE_GESTION.Usuario(username,password,habilitado,intentos_login,bloqueado_login_fallidos) --EXECUTE LOS_DE_GESTION.PR_ALTA_DE_USUARIO(args) 
+				VALUES(@username,@password,@habilitado,0,0)
+
+				INSERT INTO LOS_DE_GESTION.Usuario_X_Rol(username,id_Rol)
+				VALUES(@username,@rol)
+		END
+		
+		ELSE
+		BEGIN
+			RAISERROR('Este username ya existe',16,1)
+		END
+		
 		IF(NOT EXISTS(SELECT razon_social FROM LOS_DE_GESTION.Empresa WHERE razon_social=@razon_social)
 			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit) )
 			BEGIN
 				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,nro_calle,codigo_postal,ciudad,cuit)
 				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@nro_calle,@codigo_postal,@ciudad,@cuit)
-				
-				INSERT INTO LOS_DE_GESTION.Usuario(username,id_Rol,habilitado)
-				VALUES(@username,@rol,@habilitado)
 			END
 		ELSE
 			BEGIN
 				RAISERROR('Error al crear empresa',16,1)
 			END
-	END
-
+END	
 GO
 
 ---------------BAJA EMPRESA---------------
@@ -393,5 +409,43 @@ BEGIN
     FROM LOS_DE_GESTION.Empresa
     WHERE razon_social=@razon_social OR @razon_social IS NULL 
 	AND cuit=@CUIT OR @CUIT IS NULL AND mail=@mail OR @mail IS NULL
+
+END
+GO
+---PROCEDURES RENDICION-----
+
+CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
+@importe_total_ventas NUMERIC(18, 2),
+@importe_comision_total NUMERIC(18, 2),
+@importe_rendicion_total NUMERIC(18, 2),
+@fecha_rendicion DATETIME,
+@usuario_empresa_a_rendir NVARCHAR(255),
+@forma_pago_a_empresa NVARCHAR(255)
+AS
+BEGIN
+
+
+	INSERT INTO LOS_DE_GESTION.Rendicion(importe_total_ventas,importe_comision_total,importe_rendicion_total,
+										fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
+	VALUES(@importe_total_ventas,@importe_comision_total,@importe_rendicion_total,@fecha_rendicion,@usuario_empresa_a_rendir,@forma_pago_a_empresa)
+
+
+END
+GO
+
+CREATE PROCEDURE LOS_DE_GESTION.CrearItemRendicion
+@id_Rendicion numeric(18, 0), -- FK
+@importe_venta numeric(18, 2),
+@importe_comision numeric(18, 2),
+@importe_rendicion numeric(18, 2),
+@descripcion nvarchar(60),
+@cantidad_ubicaciones numeric(18, 0),
+@id_Compra numeric(18, 0)
+AS
+BEGIN
+
+	INSERT INTO LOS_DE_GESTION.Item_Rendicion(id_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones,
+											id_Compra)
+	VALUES(@id_Rendicion,@importe_venta,@importe_comision,@importe_rendicion,@descripcion,@cantidad_ubicaciones,@id_Compra)
 
 END
