@@ -7,8 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 using PalcoNet.Classes.Repository;
+using PalcoNet.Classes.Util;
+using PalcoNet.Classes.Util.Form;
+using PalcoNet.Classes.Model;
+using PalcoNet.Classes.Factory;
 
 namespace PalcoNet.ListadoEstadistico
 {
@@ -19,17 +22,20 @@ namespace PalcoNet.ListadoEstadistico
         private const string CLIENTES_MAS_PUNTOS_VENCIDOS = "Clientes con mayores puntos vencidos";
         private const string CLIENTES_MAS_COMPRAS = "Clientes con mayor cantidad de compras";
 
-        private const string PRIMER_TRIMESTRE = "Enero - Abril";
-        private const string SEGUNDO_TRIMESTRE = "Mayo - Agosto";
-        private const string TERCER_TRIMESTRE = "Septiembre - Diciembre";
+        private const string PRIMER_TRIMESTRE = "Enero - Marzo";
+        private const string SEGUNDO_TRIMESTRE = "Abril - Junio";
+        private const string TERCER_TRIMESTRE = "Julio - Septiembre";
+        private const string CUARTO_TRIMESTRE = "Octubre - Diciembre";
         #endregion
 
         private ListadoEstadisticoRepository listadoEstadisticoRepository;
+        private Form callerForm;
 
-        public ListadoEstadisticoForm()
+        public ListadoEstadisticoForm(Form callerForm)
         {
             InitializeComponent();
             this.listadoEstadisticoRepository = new ListadoEstadisticoRepository();
+            this.callerForm = callerForm;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -40,19 +46,19 @@ namespace PalcoNet.ListadoEstadistico
                 switch (cmbTipoListado.SelectedItem.ToString())
                 {
                     case EMPRESAS_LOCALIDADES_NO_VENDIDAS:
-                        dgvResultados.DataSource = listadoEstadisticoRepository.EmpresasConMasLocalidadesNoVendidas(DateTime.Now, DateTime.Now);
+                        dgvResultados.DataSource = listadoEstadisticoRepository.EmpresasConMasLocalidadesNoVendidas(Quarter().Desde, Quarter().Hasta);
                         break;
                     case CLIENTES_MAS_COMPRAS:
-                        dgvResultados.DataSource = listadoEstadisticoRepository.ClientesConMasCompras(DateTime.Now, DateTime.Now);
+                        dgvResultados.DataSource = listadoEstadisticoRepository.ClientesConMasCompras(Quarter().Desde, Quarter().Hasta);
                         break;
                     case CLIENTES_MAS_PUNTOS_VENCIDOS:
-                        dgvResultados.DataSource = listadoEstadisticoRepository.ClientesConMasPuntosVencidos(DateTime.Now, DateTime.Now);
+                        dgvResultados.DataSource = listadoEstadisticoRepository.ClientesConMasPuntosVencidos(Quarter().Desde, Quarter().Hasta);
                         break;
                 }
             }
             else
             {
-                MessageBox.Show("Los filtros ingresados son inválidos.");
+                MessageBoxUtil.ShowError("Los filtros ingresados son inválidos.");
             }
         }
 
@@ -66,13 +72,35 @@ namespace PalcoNet.ListadoEstadistico
             cmbTrimestre.Items.Add(PRIMER_TRIMESTRE);
             cmbTrimestre.Items.Add(SEGUNDO_TRIMESTRE);
             cmbTrimestre.Items.Add(TERCER_TRIMESTRE);
+            cmbTrimestre.Items.Add(CUARTO_TRIMESTRE);
+        }
+
+        private Trimestre Quarter() 
+        {
+            switch (cmbTrimestre.SelectedItem.ToString())
+            {
+                case PRIMER_TRIMESTRE:
+                    return QuarterFactory.FirstQuarterOf(int.Parse(txtAnio.Text));
+                case SEGUNDO_TRIMESTRE:
+                    return QuarterFactory.SecondQuarterOf(int.Parse(txtAnio.Text));
+                case TERCER_TRIMESTRE:
+                    return QuarterFactory.ThirdQuarterOf(int.Parse(txtAnio.Text));
+                case CUARTO_TRIMESTRE:
+                    return QuarterFactory.FourthQuarterOf(int.Parse(txtAnio.Text));
+                default:
+                    return null;
+            }
         }
 
         private Boolean ValidarFiltros()
         {
-            Regex regexNumeros = new Regex("^[0-9]*$");
-            return regexNumeros.IsMatch(txtAnio.Text) && cmbTipoListado.SelectedItem != null && cmbTrimestre.SelectedItem != null;
+           return RegexUtil.NumbersOnly(txtAnio.Text) && cmbTipoListado.SelectedItem != null && cmbTrimestre.SelectedItem != null;
         }
         #endregion
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, callerForm);
+        }
     }
 }

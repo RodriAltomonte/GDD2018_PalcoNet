@@ -110,6 +110,14 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_BUSCAR_PUBLICACION_POR_ID') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_BUSCAR_PUBLICACION_POR_ID
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_UBICACIONES_EDITABLES') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_UBICACIONES_EDITABLES
+go
+
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -746,16 +754,75 @@ END
 go
 
 CREATE PROCEDURE LOS_DE_GESTION.PR_EXISTE_UNA_PUBLICACION_IGUAL
+@codPublicacion numeric(18,0),
+@direccion nvarchar(255), 
+@descripcion nvarchar(255), 
+@idRubro numeric(18,0), 
+@fechaHoraEspectaculo datetime,
+@existePublicacionIgual bit output
 AS
 BEGIN
-	select 1 as TODO
+	if exists (select * from LOS_DE_GESTION.Publicacion p 
+		where p.cod_publicacion <> @codPublicacion and p.direccion_espectaculo = @direccion and p.descripcion = @descripcion
+		and p.id_Rubro = @idRubro and p.fecha_hora_espectaculo = @fechaHoraEspectaculo)
+	begin
+		set @existePublicacionIgual = 1
+	end
+	else
+	begin
+		set @existePublicacionIgual = 0
+	end
+	
+	return;
 END
 go
 
-CREATE PROCEDURE LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION @codPublicacion numeric(18,0)
+CREATE PROCEDURE LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION 
+@codPublicacion numeric(18,0),
+@descripcion nvarchar(255),
+@fechaPublicacion datetime,
+@fechaVencimientoPublicacion datetime,
+@fechaHoraEspectaculo datetime,
+@idRubro numeric(18,0),
+@direccion nvarchar(255),
+@idGradoPublicacion numeric(18,0),
+@idEstadoPublicacion numeric(18,0)
 AS
 BEGIN
-	select 1 as TODO
+	UPDATE LOS_DE_GESTION.Publicacion
+	SET descripcion=@descripcion, 
+		fecha_publicacion=@fechaPublicacion, 
+		fecha_vencimiento_publicacion=@fechaVencimientoPublicacion, 
+		fecha_hora_espectaculo=@fechaHoraEspectaculo, 
+		id_Rubro=@idRubro, 
+		direccion_espectaculo=@direccion, 
+		id_Grado_Publicacion=@idGradoPublicacion,  
+		id_Estado_Publicacion=@idEstadoPublicacion
+	WHERE cod_publicacion=@codPublicacion
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_BUSCAR_PUBLICACION_POR_ID @idPublicacion numeric(18,0)
+AS
+BEGIN
+	SELECT cod_publicacion, descripcion, fecha_publicacion, fecha_vencimiento_publicacion, fecha_hora_espectaculo, id_Rubro, direccion_espectaculo, id_Grado_Publicacion, usuario_empresa_vendedora, id_Estado_Publicacion
+	FROM LOS_DE_GESTION.Publicacion
+	WHERE cod_publicacion = @idPublicacion
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_UBICACIONES_EDITABLES @codPublicacion numeric(18,0)
+AS
+BEGIN
+	select 'Fila ' + u.fila AS Ubicacion, count(u.asiento) as Cantidad, u.precio as Precio, t.descripcion as 'Tipo de ubicacion', t.id_Tipo_Ubicacion
+	from LOS_DE_GESTION.Ubicacion u inner join LOS_DE_GESTION.Tipo_Ubicacion t on t.id_Tipo_Ubicacion = u.id_Tipo_Ubicacion
+	where u.fila is not null and u.ubicacion_sin_numerar = 0
+	group by u.fila, u.precio, t.descripcion, t.id_Tipo_Ubicacion
+	union
+	select 'Sin numerar' as Ubicacion, count(u2.precio) as Cantidad, u2.precio as Precio, t2.descripcion as 'Tipo de ubicacion', t2.id_Tipo_Ubicacion
+	from LOS_DE_GESTION.Ubicacion u2 inner join LOS_DE_GESTION.Tipo_Ubicacion t2 on t2.id_Tipo_Ubicacion = u2.id_Tipo_Ubicacion
+	where u2.ubicacion_sin_numerar = 1
+	group by u2.ubicacion_sin_numerar, u2.precio, t2.descripcion, t2.id_Tipo_Ubicacion	
 END
 go
 /*12.CANJE Y ADMINISTRACION DE PUNTOS*/
@@ -821,7 +888,10 @@ go
 CREATE PROCEDURE LOS_DE_GESTION.PR_CLIENTES_CON_MAS_PUNTOS_VENCIDOS @fechaDesde datetime, @fechaHasta datetime
 AS
 BEGIN
-	select 1 as TODO
+	select top 5 h.usuario_cliente as Usuario, sum(h.puntos_vencidos) as 'Puntos vencidos' from LOS_DE_GESTION.Historial_puntos_vencidos h
+	where h.fecha_de_vencimiento between @fechaDesde and @fechaHasta
+	group by h.usuario_cliente
+	order by sum(h.puntos_vencidos) desc
 END
 go
 
@@ -1035,4 +1105,3 @@ GO
 --select * from LOS_DE_GESTION.Rendicion
 --select * from LOS_DE_GESTION.Compra
 --select* from gd_esquema.Maestra
-

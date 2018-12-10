@@ -20,8 +20,7 @@ namespace PalcoNet.EditarPublicacion
         public EditarPublicacionForm()
         {
             InitializeComponent();
-            this.publicacionRepository = new PublicacionRepository();
-            Session.Instance().OpenSession("empresa");
+            this.publicacionRepository = new PublicacionRepository();        
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -31,7 +30,14 @@ namespace PalcoNet.EditarPublicacion
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(dgvPublicaciones.SelectedRows[0].Cells[0].Value.ToString());
+            NavigableFormUtil.ForwardTo(this, new EditarPublicacionSeleccionada(
+                decimal.Parse(dgvPublicaciones.SelectedRows[0].Cells[0].Value.ToString()), this)
+                );
+        }
+
+        public void ActualizarDataGrid()
+        {
+            dgvPublicaciones.DataSource = publicacionRepository.BuscarPublicacionesEditables(Session.Instance().LoggedUsername, txtDescripcion.Text);
         }
     }
 }

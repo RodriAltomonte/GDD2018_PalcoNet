@@ -178,6 +178,7 @@
     <Compile Include="Classes\Model\Rol.cs" />
     <Compile Include="Classes\Model\Rubro.cs" />
     <Compile Include="Classes\Model\TipoDeUbicacion.cs" />
+    <Compile Include="Classes\Model\Trimestre.cs" />
     <Compile Include="Classes\Model\Ubicacion.cs" />
     <Compile Include="Classes\Model\UbicacionPersistente.cs" />
     <Compile Include="Classes\Model\Usuario.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Classes\Repository\ListadoEstadisticoRepository.cs" />
     <Compile Include="Classes\Repository\Mapper\AutoMapper.cs" />
     <Compile Include="Classes\Repository\Mapper\FuncionalidadMapper.cs" />
+    <Compile Include="Classes\Repository\Mapper\UbicacionPersistenteDGVMapper.cs" />
     <Compile Include="Classes\Repository\PremioRepository.cs" />
     <Compile Include="Classes\Repository\PublicacionRepository.cs" />
     <Compile Include="Classes\Repository\RolRepository.cs" />
@@ -201,6 +203,8 @@
     <Compile Include="Classes\Util\Form\ComboBoxItem.cs" />
     <Compile Include="Classes\Util\Form\MessageBoxUtil.cs" />
     <Compile Include="Classes\Util\Form\NavigableFormUtil.cs" />
+    <Compile Include="Classes\Factory\QuarterFactory.cs" />
+    <Compile Include="Classes\Util\RegexUtil.cs" />
     <Compile Include="Classes\Util\Form\TextFieldUtils.cs" />
     <Compile Include="Classes\Util\StringUtil.cs" />
     <Compile Include="Comprar\Comprar.cs">
@@ -214,6 +218,12 @@
     </Compile>
     <Compile Include="Comprar\ResPublicacion.Designer.cs">
       <DependentUpon>ResPublicacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditarPublicacion\AgregarUbicacionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditarPublicacion\AgregarUbicacionForm.Designer.cs">
+      <DependentUpon>AgregarUbicacionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="EditarPublicacion\EditarPublicacionForm.cs">
       <SubType>Form</SubType>
@@ -368,8 +378,14 @@
     <EmbeddedResource Include="Comprar\ResPublicacion.resx">
       <DependentUpon>ResPublicacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditarPublicacion\AgregarUbicacionForm.resx">
+      <DependentUpon>AgregarUbicacionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditarPublicacion\EditarPublicacionForm.resx">
       <DependentUpon>EditarPublicacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditarPublicacion\EditarPublicacionSeleccionada.resx">
+      <DependentUpon>EditarPublicacionSeleccionada.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenerarPublicacion\AgregarFechaHora.resx">
       <DependentUpon>AgregarFechaHora.cs</DependentUpon>

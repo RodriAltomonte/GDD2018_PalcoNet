@@ -30,5 +30,14 @@ namespace PalcoNet.Classes.Repository
         {
             ubicaciones.ToList().ForEach(ubicacion => this.CrearUbicaciones(ubicacion));
         }
+
+        public IList<UbicacionPersistente> UbicacionesEditables(decimal codPublicacion)
+        {
+            StoredProcedureParameterMap inputParameters = StoredProcedureParameterMap.Of("@codPublicacion", codPublicacion);
+
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteMappedStoredProcedure<UbicacionPersistente>(
+                "LOS_DE_GESTION.PR_UBICACIONES_EDITABLES", inputParameters, new Mapper.UbicacionPersistenteDGVMapper());
+        }
     }
 }

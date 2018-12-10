@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.grpBusqueda = new System.Windows.Forms.GroupBox();
-            this.lblTipoListado = new System.Windows.Forms.Label();
-            this.lblAnio = new System.Windows.Forms.Label();
-            this.lblTrimestre = new System.Windows.Forms.Label();
-            this.cmbTipoListado = new System.Windows.Forms.ComboBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.cmbTrimestre = new System.Windows.Forms.ComboBox();
             this.txtAnio = new System.Windows.Forms.TextBox();
+            this.cmbTrimestre = new System.Windows.Forms.ComboBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.cmbTipoListado = new System.Windows.Forms.ComboBox();
+            this.lblTrimestre = new System.Windows.Forms.Label();
+            this.lblAnio = new System.Windows.Forms.Label();
+            this.lblTipoListado = new System.Windows.Forms.Label();
             this.grpResultados = new System.Windows.Forms.GroupBox();
             this.dgvResultados = new System.Windows.Forms.DataGridView();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.grpBusqueda.SuspendLayout();
             this.grpResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultados)).BeginInit();
@@ -59,41 +60,21 @@
             this.grpBusqueda.TabStop = false;
             this.grpBusqueda.Text = "Filtros de Búsqueda";
             // 
-            // lblTipoListado
+            // txtAnio
             // 
-            this.lblTipoListado.AutoSize = true;
-            this.lblTipoListado.Location = new System.Drawing.Point(36, 36);
-            this.lblTipoListado.Name = "lblTipoListado";
-            this.lblTipoListado.Size = new System.Drawing.Size(76, 13);
-            this.lblTipoListado.TabIndex = 0;
-            this.lblTipoListado.Text = "Tipo de listado";
+            this.txtAnio.Location = new System.Drawing.Point(128, 62);
+            this.txtAnio.Name = "txtAnio";
+            this.txtAnio.Size = new System.Drawing.Size(100, 20);
+            this.txtAnio.TabIndex = 6;
             // 
-            // lblAnio
+            // cmbTrimestre
             // 
-            this.lblAnio.AutoSize = true;
-            this.lblAnio.Location = new System.Drawing.Point(36, 65);
-            this.lblAnio.Name = "lblAnio";
-            this.lblAnio.Size = new System.Drawing.Size(26, 13);
-            this.lblAnio.TabIndex = 1;
-            this.lblAnio.Text = "Año";
-            // 
-            // lblTrimestre
-            // 
-            this.lblTrimestre.AutoSize = true;
-            this.lblTrimestre.Location = new System.Drawing.Point(250, 65);
-            this.lblTrimestre.Name = "lblTrimestre";
-            this.lblTrimestre.Size = new System.Drawing.Size(50, 13);
-            this.lblTrimestre.TabIndex = 2;
-            this.lblTrimestre.Text = "Trimestre";
-            // 
-            // cmbTipoListado
-            // 
-            this.cmbTipoListado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipoListado.FormattingEnabled = true;
-            this.cmbTipoListado.Location = new System.Drawing.Point(128, 33);
-            this.cmbTipoListado.Name = "cmbTipoListado";
-            this.cmbTipoListado.Size = new System.Drawing.Size(339, 21);
-            this.cmbTipoListado.TabIndex = 3;
+            this.cmbTrimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTrimestre.FormattingEnabled = true;
+            this.cmbTrimestre.Location = new System.Drawing.Point(306, 62);
+            this.cmbTrimestre.Name = "cmbTrimestre";
+            this.cmbTrimestre.Size = new System.Drawing.Size(161, 21);
+            this.cmbTrimestre.TabIndex = 5;
             // 
             // btnBuscar
             // 
@@ -105,21 +86,41 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // cmbTrimestre
+            // cmbTipoListado
             // 
-            this.cmbTrimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTrimestre.FormattingEnabled = true;
-            this.cmbTrimestre.Location = new System.Drawing.Point(306, 62);
-            this.cmbTrimestre.Name = "cmbTrimestre";
-            this.cmbTrimestre.Size = new System.Drawing.Size(161, 21);
-            this.cmbTrimestre.TabIndex = 5;
+            this.cmbTipoListado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoListado.FormattingEnabled = true;
+            this.cmbTipoListado.Location = new System.Drawing.Point(128, 33);
+            this.cmbTipoListado.Name = "cmbTipoListado";
+            this.cmbTipoListado.Size = new System.Drawing.Size(339, 21);
+            this.cmbTipoListado.TabIndex = 3;
             // 
-            // txtAnio
+            // lblTrimestre
             // 
-            this.txtAnio.Location = new System.Drawing.Point(128, 62);
-            this.txtAnio.Name = "txtAnio";
-            this.txtAnio.Size = new System.Drawing.Size(100, 20);
-            this.txtAnio.TabIndex = 6;
+            this.lblTrimestre.AutoSize = true;
+            this.lblTrimestre.Location = new System.Drawing.Point(250, 65);
+            this.lblTrimestre.Name = "lblTrimestre";
+            this.lblTrimestre.Size = new System.Drawing.Size(50, 13);
+            this.lblTrimestre.TabIndex = 2;
+            this.lblTrimestre.Text = "Trimestre";
+            // 
+            // lblAnio
+            // 
+            this.lblAnio.AutoSize = true;
+            this.lblAnio.Location = new System.Drawing.Point(36, 65);
+            this.lblAnio.Name = "lblAnio";
+            this.lblAnio.Size = new System.Drawing.Size(26, 13);
+            this.lblAnio.TabIndex = 1;
+            this.lblAnio.Text = "Año";
+            // 
+            // lblTipoListado
+            // 
+            this.lblTipoListado.AutoSize = true;
+            this.lblTipoListado.Location = new System.Drawing.Point(36, 36);
+            this.lblTipoListado.Name = "lblTipoListado";
+            this.lblTipoListado.Size = new System.Drawing.Size(76, 13);
+            this.lblTipoListado.TabIndex = 0;
+            this.lblTipoListado.Text = "Tipo de listado";
             // 
             // grpResultados
             // 
@@ -142,11 +143,22 @@
             this.dgvResultados.Size = new System.Drawing.Size(491, 168);
             this.dgvResultados.TabIndex = 0;
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(12, 418);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 2;
+            this.btnVolver.Text = "<< Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // ListadoEstadisticoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 429);
+            this.ClientSize = new System.Drawing.Size(528, 453);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.grpResultados);
             this.Controls.Add(this.grpBusqueda);
             this.Name = "ListadoEstadisticoForm";
@@ -172,5 +184,6 @@
         private System.Windows.Forms.Label lblTipoListado;
         private System.Windows.Forms.GroupBox grpResultados;
         private System.Windows.Forms.DataGridView dgvResultados;
+        private System.Windows.Forms.Button btnVolver;
     }
 }
