@@ -2,7 +2,7 @@ USE GD2C2018
 GO
 
 ------------------------------DROP PROCEDURES-----------------------------
-IF OBJECT_ID('LOS_DE_GESTION.PR_MIGRACION') IS NOT NULL
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_MIGRACION') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_MIGRACION;
 GO
 
@@ -903,7 +903,7 @@ BEGIN
 /*si intentos_login -1 -> el usuario viene de migracion*/
 /* inserto Usuarios de Empresas*/
 		 insert into LOS_DE_GESTION.Usuario(username, password, intentos_login, bloqueado_login_fallidos, habilitado)--saco id_Rol
-		 SELECT distinct Espec_Empresa_Mail,HashBytes('SHA2_256', Espec_Empresa_Cuit),-1, 0,1
+		 SELECT distinct Espec_Empresa_Mail,LOS_DE_GESTION.FN_HASHPASS(Espec_Empresa_Cuit),-1, 0,1
 		 FROM gd_esquema.Maestra
 
 /* inserto Usuario_X_Rol de Empresas*/
@@ -920,7 +920,7 @@ BEGIN
 
 /* inserto Usuarios de clientes*/
 		 insert into LOS_DE_GESTION.Usuario(username, password, intentos_login, bloqueado_login_fallidos, habilitado)--saco id_Rol
-		 SELECT distinct convert(nvarchar(255), Cli_Dni),HashBytes('SHA2_256', convert(nvarchar(255), Cli_Dni)),-1, 0,1
+		 SELECT distinct convert(nvarchar(255), Cli_Dni),LOS_DE_GESTION.FN_HASHPASS(Cli_Dni),-1, 0,1
 		 FROM gd_esquema.Maestra where Cli_Dni is not NULL
 
 /* inserto Usuario_X_Rol de clientes*/
