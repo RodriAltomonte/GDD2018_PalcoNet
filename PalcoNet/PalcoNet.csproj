@@ -249,7 +249,6 @@
     <Compile Include="GenerarPublicacion\AgregarUbicacionForm.Designer.cs">
       <DependentUpon>AgregarUbicacionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GenerarPublicacion\UbicacionFiller.cs" />
     <Compile Include="GenerarRendicionComisiones\GenerarRendicionV2.cs">
       <SubType>Form</SubType>
     </Compile>
