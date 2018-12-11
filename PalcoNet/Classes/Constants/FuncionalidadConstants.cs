@@ -23,5 +23,6 @@ namespace PalcoNet.Classes.Constants
         public const decimal ModificarPassword = 13;
         public const decimal BajaDeUsuario = 14;
         public const decimal CanjePuntos = 15;
+        public const decimal ModificarPasswordDeOtroUsuario = 16;
     }
 }

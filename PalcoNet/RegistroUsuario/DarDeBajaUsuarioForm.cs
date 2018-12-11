@@ -8,17 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Classes.Repository;
+using PalcoNet.Classes.Util.Form;
 
 namespace PalcoNet.RegistroUsuario
 {
     public partial class DarDeBajaUsuarioForm : Form
     {
         private UsuarioRepository usuarioRepository;
+        private Form callerForm;
 
-        public DarDeBajaUsuarioForm()
+        public DarDeBajaUsuarioForm(Form callerForm)
         {
             InitializeComponent();
             this.usuarioRepository = new UsuarioRepository();
+            this.callerForm = callerForm;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -30,18 +33,26 @@ namespace PalcoNet.RegistroUsuario
         {
             if (txtUsuarioSeleccionado.Text == "")
             {
-                MessageBox.Show("Seleccione un usuario.", "Error", MessageBoxButtons.OK);
+                MessageBoxUtil.ShowError("Seleccione un usuario.");
             }
             else
             {
                 usuarioRepository.DarDeBajaUnUsuarioPorAdmin(txtUsuarioSeleccionado.Text);
-                MessageBox.Show("Usuario dado de baja correctamente.", "Info", MessageBoxButtons.OK);
+                MessageBoxUtil.ShowInfo("Usuario dado de baja correctamente.");
             }
         }
 
         private void dgvUsuarios_SelectionChanged(object sender, EventArgs e)
         {
-            txtUsuarioSeleccionado.Text = dgvUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+            if (dgvUsuarios.SelectedRows.Count > 0)
+            {
+                txtUsuarioSeleccionado.Text = dgvUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+            }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, callerForm);
         }
     }
 }

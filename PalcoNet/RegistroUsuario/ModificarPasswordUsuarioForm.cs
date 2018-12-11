@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Util.Form;
+using PalcoNet.Classes.Session;
 
 namespace PalcoNet.RegistroUsuario
 {
@@ -16,6 +17,7 @@ namespace PalcoNet.RegistroUsuario
     {
         private UsuarioRepository usuarioRepository;
         private string usuarioAModificar;
+        private Form callerForm;
 
         public ModificarPasswordUsuarioForm(string usuarioAModificar)
         {
@@ -24,17 +26,26 @@ namespace PalcoNet.RegistroUsuario
             this.usuarioAModificar = usuarioAModificar;
         }
 
+        public ModificarPasswordUsuarioForm(Form callerForm)
+        {
+            InitializeComponent();
+            this.usuarioRepository = new UsuarioRepository();
+            this.callerForm = callerForm;
+        }
+
+
         private void btnModificarPassword_Click(object sender, EventArgs e)
         {
             if (this.ValidarPasswordNoVacio())
             {
                 if (this.ValidarPasswordNuevo())
                 {
-                    usuarioRepository.CambiarPassword(usuarioAModificar, txtNuevoPassword.Text);
-                    if (usuarioRepository.EsUsuarioMigrado(usuarioAModificar))
+                    usuarioRepository.CambiarPassword(Session.Instance().LoggedUsername, txtNuevoPassword.Text);
+                    if (usuarioRepository.EsUsuarioMigrado(Session.Instance().LoggedUsername))
                     {
-                        usuarioRepository.ActualizarUsuarioMigrado(usuarioAModificar);
-                    }                    
+                        usuarioRepository.ActualizarUsuarioMigrado(Session.Instance().LoggedUsername);
+                    }
+                    Session.Instance().CloseSession();
                     MessageBoxUtil.ShowInfo("Contraseña modificada correctamente. Acceda nuevamente.");
                     NavigableFormUtil.BackwardTo(this, new Login.LoginForm());
                 }
@@ -64,5 +75,10 @@ namespace PalcoNet.RegistroUsuario
 
         }
         #endregion
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, callerForm);
+        }
     }
 }

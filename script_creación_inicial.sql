@@ -1043,7 +1043,8 @@ INSERT INTO LOS_DE_GESTION.Funcionalidad (id_Funcionalidad, nombre) VALUES
 (12, 'Listado Estadistico'),--Admin
 (13, 'Modificar password'),--Cliente,Admin
 (14, 'Dar de baja un usuario'),
-(15, 'Canje y administracion de puntos')--Admin
+(15, 'Canje y administracion de puntos'),--Admin
+(16, 'Modificar password de otro usuario')
 go
 
 /*FUNCIONALIDADES DEL CLIENTE*/
@@ -1075,7 +1076,8 @@ INSERT INTO LOS_DE_GESTION.Rol_X_Funcionalidad (id_Rol, id_Funcionalidad) VALUES
 (1, 12),
 (1, 13),
 (1, 14),
-(1, 15)
+(1, 15),
+(1, 16)
 go
 
 /*CREACION DE ADMIN*/
