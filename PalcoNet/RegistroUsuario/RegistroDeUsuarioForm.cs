@@ -51,6 +51,11 @@ namespace PalcoNet.RegistroUsuario
                 MessageBoxUtil.ShowError(ex.Message);
             }
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, previousForm);
+        }
                 
     }
 }

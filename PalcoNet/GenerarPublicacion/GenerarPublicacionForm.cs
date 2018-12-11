@@ -114,7 +114,7 @@ namespace PalcoNet.GenerarPublicacion
                 }
 
                 nuevaUbicacion.CantidadDeLugares = Convert.ToInt32(item.SubItems[1].Text);
-                nuevaUbicacion.IdTipoUbicacion = 1;
+                nuevaUbicacion.IdTipoUbicacion = tipoUbicacionRepository.IdDeRubro(item.SubItems[3].Text);
                 nuevaUbicacion.Precio = item.SubItems[2].Text;
                 nuevaUbicacion.CodPublicacion = codPublicacionNueva;
 

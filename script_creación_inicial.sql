@@ -986,7 +986,32 @@ BEGIN
 		 SELECT Factura_Nro, null,null,sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where c.id_item_Rendicion = Factura_Nro)
 		 FROM gd_esquema.Maestra where Factura_Nro is not null 
 		 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad
+		 
+/*Decisiones de migracion*/
+		 update LOS_DE_GESTION.Cliente
+		 set puntos_acum_validos = 10000, puntos_vencidos = 0, fecha_vencimiento_puntos = convert(datetime,'2018-12-31 23:59:59',120)
+		 
+		 update LOS_DE_GESTION.Tipo_Ubicacion
+		 set puntos_cliente_frecuente = 100
+		 where id_Tipo_Ubicacion in (4446,4447,4449)
+		 
+		 update LOS_DE_GESTION.Tipo_Ubicacion
+		 set puntos_cliente_frecuente = 300
+		 where id_Tipo_Ubicacion in (4448,4450)
+		 
+		 update LOS_DE_GESTION.Tipo_Ubicacion
+		 set puntos_cliente_frecuente = 200
+		 where id_Tipo_Ubicacion in (4451,4452,4453)
+		 
+		 INSERT INTO LOS_DE_GESTION.Grado_Publicacion
+		 (id_Grado_Publicacion, descripcion, porcentaje_costo)
+		VALUES(1, 'Alta', 10), (2, 'Media', 7),(3,'Baja',5)
 		
+		update LOS_DE_GESTION.Publicacion
+		set id_Grado_Publicacion = 1, fecha_publicacion = dateadd(year, -1, fecha_vencimiento_publicacion), direccion_espectaculo = ''
+		
+		update LOS_DE_GESTION.Rubro set descripcion = 'General' where id_Rubro = 1
+
 END
 GO
 
@@ -1035,12 +1060,48 @@ INSERT INTO LOS_DE_GESTION.Rol_X_Funcionalidad (id_Rol, id_Funcionalidad) VALUES
 (3, 13)
 go
 /*FUNCIONALIDADES DEL ADMINISTRADOR*/
+INSERT INTO LOS_DE_GESTION.Rol_X_Funcionalidad (id_Rol, id_Funcionalidad) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15)
+go
+
+/*CREACION DE ADMIN*/
+INSERT INTO LOS_DE_GESTION.Usuario
+(username, password, intentos_login, bloqueado_login_fallidos, habilitado)
+VALUES('admin', LOS_DE_GESTION.FN_HASHPASS('pass'), 0, 0, 1)
+go
+
+INSERT INTO LOS_DE_GESTION.Usuario_X_Rol
+(id_Rol, username)
+VALUES(1, 'admin')
+go
+INSERT INTO GD2C2018.LOS_DE_GESTION.Cliente
+(username, nombre, apellido, tipo_documento, numero_documento, cuil, mail, telefono, calle, nro_calle, nro_piso, depto, localidad, codigo_postal, fecha_nacimiento, fecha_creacion, tarjeta, puntos_acum_validos, fecha_vencimiento_puntos, puntos_vencidos)
+VALUES('admin', 'Administrador', 'Administrador', 'DNI', 99999999, '20-99999999-3', 'admin@mail.com', 'Calle 1', '1234', 1, 1, '1', 'Localidad admin', '1234', convert(datetime, '2018-01-01 00:00:00',120),convert(datetime, '2018-01-01 00:00:00',120), '1234123412341234', 100000, convert(datetime,'2018-12-31 23:59:59',120), 0)
+GO
+INSERT INTO GD2C2018.LOS_DE_GESTION.Empresa
+(username, razon_social, cuit, mail, telefono, calle, nro_calle, nro_piso, depto, localidad, codigo_postal, ciudad, fecha_creacion)
+VALUES('admin', 'Administrador', '20-999999999-0', 'admin@mail.com', 99999999, 'Calle 1', 1234, 1, '1', 'Localidad admin', '1234', 'Ciudad admin', convert(datetime,'2018-01-01 00:00:00',120))
+go
 
 
 /*PREMIOS*/
 INSERT INTO GD2C2018.LOS_DE_GESTION.Premio
 (descripcion, puntos_requeridos)
-VALUES('Prueba', 500)
+VALUES('Entrada de cine', 1000),('Entrada de concierto', 8000),('Entrada de teatro', 5000),('Entrada de partido de futbol', 3000)
 go
 
 -----------------------GENERACION DE ADMINISTRADOR GENERAL----------------

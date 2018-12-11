@@ -17,5 +17,11 @@ namespace PalcoNet.Classes.Repository
             return ConnectionFactory.Instance().CreateConnection()
                 .ExecuteMappedStoredProcedure(SpNames.TodosLosTiposDeUbicacion, null, new Mapper.AutoMapper<TipoDeUbicacion>());
         }
+
+        public decimal IdDeRubro(string descripcion)
+        {
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteSingleOutputSqlQuery<decimal>("select id_Tipo_Ubicacion from LOS_DE_GESTION.Tipo_Ubicacion where descripcion = '" + descripcion + "'");
+        }
     }
 }

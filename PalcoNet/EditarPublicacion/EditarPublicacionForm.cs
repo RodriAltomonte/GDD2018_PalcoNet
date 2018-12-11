@@ -16,11 +16,13 @@ namespace PalcoNet.EditarPublicacion
     public partial class EditarPublicacionForm : Form
     {
         private PublicacionRepository publicacionRepository;
+        private Form callerForm;
 
-        public EditarPublicacionForm()
+        public EditarPublicacionForm(Form callerForm)
         {
             InitializeComponent();
-            this.publicacionRepository = new PublicacionRepository();        
+            this.publicacionRepository = new PublicacionRepository();
+            this.callerForm = callerForm;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -38,6 +40,11 @@ namespace PalcoNet.EditarPublicacion
         public void ActualizarDataGrid()
         {
             dgvPublicaciones.DataSource = publicacionRepository.BuscarPublicacionesEditables(Session.Instance().LoggedUsername, txtDescripcion.Text);
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, callerForm);
         }
     }
 }
