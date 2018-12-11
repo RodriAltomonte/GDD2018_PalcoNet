@@ -41,10 +41,8 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnLimpiarFechaHora = new System.Windows.Forms.Button();
             this.btnRemoverFechaHora = new System.Windows.Forms.Button();
             this.btnAgregarFechaHora = new System.Windows.Forms.Button();
-            this.btnLimpiarUbicaciones = new System.Windows.Forms.Button();
             this.btnRemoveUbicacion = new System.Windows.Forms.Button();
             this.btnAgregarUbicacion = new System.Windows.Forms.Button();
             this.btnCrear = new System.Windows.Forms.Button();
@@ -71,7 +69,7 @@
             // btnVolver
             // 
             this.btnVolver.Location = new System.Drawing.Point(17, 730);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
             this.btnVolver.TabIndex = 1;
@@ -85,10 +83,8 @@
             this.grpGenerarPublicacion.Controls.Add(this.dtpVencimiento);
             this.grpGenerarPublicacion.Controls.Add(this.lvFechaHora);
             this.grpGenerarPublicacion.Controls.Add(this.lvUbicaciones);
-            this.grpGenerarPublicacion.Controls.Add(this.btnLimpiarFechaHora);
             this.grpGenerarPublicacion.Controls.Add(this.btnRemoverFechaHora);
             this.grpGenerarPublicacion.Controls.Add(this.btnAgregarFechaHora);
-            this.grpGenerarPublicacion.Controls.Add(this.btnLimpiarUbicaciones);
             this.grpGenerarPublicacion.Controls.Add(this.btnRemoveUbicacion);
             this.grpGenerarPublicacion.Controls.Add(this.btnAgregarUbicacion);
             this.grpGenerarPublicacion.Controls.Add(this.btnCrear);
@@ -107,9 +103,9 @@
             this.grpGenerarPublicacion.Controls.Add(this.lblDescripcion);
             this.grpGenerarPublicacion.Controls.Add(this.rTxtDescripcion);
             this.grpGenerarPublicacion.Location = new System.Drawing.Point(17, 16);
-            this.grpGenerarPublicacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpGenerarPublicacion.Margin = new System.Windows.Forms.Padding(4);
             this.grpGenerarPublicacion.Name = "grpGenerarPublicacion";
-            this.grpGenerarPublicacion.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpGenerarPublicacion.Padding = new System.Windows.Forms.Padding(4);
             this.grpGenerarPublicacion.Size = new System.Drawing.Size(711, 706);
             this.grpGenerarPublicacion.TabIndex = 2;
             this.grpGenerarPublicacion.TabStop = false;
@@ -130,7 +126,7 @@
             this.dtpVencimiento.CustomFormat = "dd/MM/yyyy";
             this.dtpVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpVencimiento.Location = new System.Drawing.Point(229, 455);
-            this.dtpVencimiento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpVencimiento.Margin = new System.Windows.Forms.Padding(4);
             this.dtpVencimiento.Name = "dtpVencimiento";
             this.dtpVencimiento.Size = new System.Drawing.Size(148, 22);
             this.dtpVencimiento.TabIndex = 27;
@@ -141,7 +137,7 @@
             this.columnHeader1,
             this.columnHeader7});
             this.lvFechaHora.Location = new System.Drawing.Point(229, 321);
-            this.lvFechaHora.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lvFechaHora.Margin = new System.Windows.Forms.Padding(4);
             this.lvFechaHora.Name = "lvFechaHora";
             this.lvFechaHora.Size = new System.Drawing.Size(444, 118);
             this.lvFechaHora.TabIndex = 26;
@@ -166,7 +162,7 @@
             this.columnHeader4,
             this.columnHeader5});
             this.lvUbicaciones.Location = new System.Drawing.Point(229, 137);
-            this.lvUbicaciones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lvUbicaciones.Margin = new System.Windows.Forms.Padding(4);
             this.lvUbicaciones.Name = "lvUbicaciones";
             this.lvUbicaciones.Size = new System.Drawing.Size(444, 118);
             this.lvUbicaciones.TabIndex = 25;
@@ -193,22 +189,10 @@
             this.columnHeader5.Text = "Tipo de ubicación";
             this.columnHeader5.Width = 98;
             // 
-            // btnLimpiarFechaHora
-            // 
-            this.btnLimpiarFechaHora.Location = new System.Drawing.Point(163, 414);
-            this.btnLimpiarFechaHora.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnLimpiarFechaHora.Name = "btnLimpiarFechaHora";
-            this.btnLimpiarFechaHora.Size = new System.Drawing.Size(44, 25);
-            this.btnLimpiarFechaHora.TabIndex = 24;
-            this.btnLimpiarFechaHora.Text = "x";
-            this.tTipLimpiar.SetToolTip(this.btnLimpiarFechaHora, "Limpiar");
-            this.btnLimpiarFechaHora.UseVisualStyleBackColor = true;
-            this.btnLimpiarFechaHora.Click += new System.EventHandler(this.btnLimpiarFechaHora_Click);
-            // 
             // btnRemoverFechaHora
             // 
             this.btnRemoverFechaHora.Location = new System.Drawing.Point(163, 384);
-            this.btnRemoverFechaHora.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRemoverFechaHora.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoverFechaHora.Name = "btnRemoverFechaHora";
             this.btnRemoverFechaHora.Size = new System.Drawing.Size(44, 23);
             this.btnRemoverFechaHora.TabIndex = 23;
@@ -220,7 +204,7 @@
             // btnAgregarFechaHora
             // 
             this.btnAgregarFechaHora.Location = new System.Drawing.Point(163, 353);
-            this.btnAgregarFechaHora.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAgregarFechaHora.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregarFechaHora.Name = "btnAgregarFechaHora";
             this.btnAgregarFechaHora.Size = new System.Drawing.Size(44, 23);
             this.btnAgregarFechaHora.TabIndex = 22;
@@ -229,22 +213,10 @@
             this.btnAgregarFechaHora.UseVisualStyleBackColor = true;
             this.btnAgregarFechaHora.Click += new System.EventHandler(this.btnAgregarFechaHora_Click);
             // 
-            // btnLimpiarUbicaciones
-            // 
-            this.btnLimpiarUbicaciones.Location = new System.Drawing.Point(163, 229);
-            this.btnLimpiarUbicaciones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnLimpiarUbicaciones.Name = "btnLimpiarUbicaciones";
-            this.btnLimpiarUbicaciones.Size = new System.Drawing.Size(44, 25);
-            this.btnLimpiarUbicaciones.TabIndex = 21;
-            this.btnLimpiarUbicaciones.Text = "x";
-            this.tTipLimpiar.SetToolTip(this.btnLimpiarUbicaciones, "Limpiar");
-            this.btnLimpiarUbicaciones.UseVisualStyleBackColor = true;
-            this.btnLimpiarUbicaciones.Click += new System.EventHandler(this.btnLimpiarUbicaciones_Click);
-            // 
             // btnRemoveUbicacion
             // 
             this.btnRemoveUbicacion.Location = new System.Drawing.Point(163, 198);
-            this.btnRemoveUbicacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRemoveUbicacion.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoveUbicacion.Name = "btnRemoveUbicacion";
             this.btnRemoveUbicacion.Size = new System.Drawing.Size(44, 23);
             this.btnRemoveUbicacion.TabIndex = 20;
@@ -256,7 +228,7 @@
             // btnAgregarUbicacion
             // 
             this.btnAgregarUbicacion.Location = new System.Drawing.Point(163, 167);
-            this.btnAgregarUbicacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAgregarUbicacion.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregarUbicacion.Name = "btnAgregarUbicacion";
             this.btnAgregarUbicacion.Size = new System.Drawing.Size(44, 23);
             this.btnAgregarUbicacion.TabIndex = 19;
@@ -268,7 +240,7 @@
             // btnCrear
             // 
             this.btnCrear.Location = new System.Drawing.Point(575, 657);
-            this.btnCrear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCrear.Margin = new System.Windows.Forms.Padding(4);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(100, 28);
             this.btnCrear.TabIndex = 16;
@@ -291,7 +263,7 @@
             this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEstado.FormattingEnabled = true;
             this.cmbEstado.Location = new System.Drawing.Point(229, 597);
-            this.cmbEstado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbEstado.Margin = new System.Windows.Forms.Padding(4);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(444, 24);
             this.cmbEstado.TabIndex = 14;
@@ -311,7 +283,7 @@
             this.cmbGrado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGrado.FormattingEnabled = true;
             this.cmbGrado.Location = new System.Drawing.Point(229, 564);
-            this.cmbGrado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbGrado.Margin = new System.Windows.Forms.Padding(4);
             this.cmbGrado.Name = "cmbGrado";
             this.cmbGrado.Size = new System.Drawing.Size(444, 24);
             this.cmbGrado.TabIndex = 12;
@@ -319,7 +291,7 @@
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(229, 532);
-            this.txtDireccion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDireccion.Margin = new System.Windows.Forms.Padding(4);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(444, 22);
             this.txtDireccion.TabIndex = 11;
@@ -339,7 +311,7 @@
             this.cmbRubro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRubro.FormattingEnabled = true;
             this.cmbRubro.Location = new System.Drawing.Point(229, 498);
-            this.cmbRubro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbRubro.Margin = new System.Windows.Forms.Padding(4);
             this.cmbRubro.Name = "cmbRubro";
             this.cmbRubro.Size = new System.Drawing.Size(444, 24);
             this.cmbRubro.TabIndex = 9;
@@ -349,7 +321,7 @@
             this.dtpFechaPublicacion.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaPublicacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaPublicacion.Location = new System.Drawing.Point(229, 287);
-            this.dtpFechaPublicacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaPublicacion.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaPublicacion.Name = "dtpFechaPublicacion";
             this.dtpFechaPublicacion.Size = new System.Drawing.Size(148, 22);
             this.dtpFechaPublicacion.TabIndex = 7;
@@ -407,7 +379,7 @@
             // rTxtDescripcion
             // 
             this.rTxtDescripcion.Location = new System.Drawing.Point(229, 44);
-            this.rTxtDescripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rTxtDescripcion.Margin = new System.Windows.Forms.Padding(4);
             this.rTxtDescripcion.Name = "rTxtDescripcion";
             this.rTxtDescripcion.Size = new System.Drawing.Size(444, 73);
             this.rTxtDescripcion.TabIndex = 0;
@@ -420,7 +392,7 @@
             this.ClientSize = new System.Drawing.Size(747, 773);
             this.Controls.Add(this.grpGenerarPublicacion);
             this.Controls.Add(this.btnVolver);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "GenerarPublicacionForm";
             this.Text = "GenerarPublicacionForm";
             this.grpGenerarPublicacion.ResumeLayout(false);
@@ -448,13 +420,11 @@
         private System.Windows.Forms.Label lblFechaHoraEspectaculo;
         private System.Windows.Forms.Label lblFechaPublicacion;
         private System.Windows.Forms.Label lblUbicaciones;
-        private System.Windows.Forms.Button btnLimpiarUbicaciones;
         private System.Windows.Forms.Button btnRemoveUbicacion;
         private System.Windows.Forms.Button btnAgregarUbicacion;
         private System.Windows.Forms.ToolTip tTipAgregar;
         private System.Windows.Forms.ToolTip tTipLimpiar;
         private System.Windows.Forms.ToolTip tTipRemover;
-        private System.Windows.Forms.Button btnLimpiarFechaHora;
         private System.Windows.Forms.Button btnRemoverFechaHora;
         private System.Windows.Forms.Button btnAgregarFechaHora;
         private System.Windows.Forms.ListView lvUbicaciones;
