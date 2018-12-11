@@ -13,14 +13,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TFUtilites;
+using PalcoNet.Classes.Util.Form;
+using PalcoNet.Classes.Model;
 
 namespace PalcoNet.ABMEmpresaEspectaculo
 {
     public partial class AltaEmpresa : Form
     {
+        private Form callerForm;
+        private Usuario newUser;
+
         public AltaEmpresa()
         {
             InitializeComponent();
+        }
+
+        public AltaEmpresa(Form callerForm, Usuario newUser)
+        {
+            InitializeComponent();
+            this.callerForm = callerForm;
+            this.newUser = newUser;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -28,8 +40,6 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             if(!TextFieldUtils.IsAnyFieldEmpty(this)){
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
             inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
-            inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(10));
-            inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10));
             inputParameters.AddParameter("@rol", 3);//3 rol Empresa
             inputParameters.AddParameter("@razon_social", txtRazonSocial.Text);
             inputParameters.AddParameter("@mail",txtMail.Text);
@@ -39,6 +49,18 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
             inputParameters.AddParameter("@ciudad", txtCiudad.Text);
             inputParameters.AddParameter("@cuit", txtCUIT.Text);
+
+            if (newUser == null)
+            {
+                inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(10));
+                inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10));
+            }
+            else
+            {
+                inputParameters.AddParameter("@username", newUser.Username);
+                inputParameters.AddParameter("@password", newUser.Password);
+            }
+
             try
             {
                 ConnectionFactory.Instance()
@@ -48,6 +70,11 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             }
             catch (StoredProcedureException ex) { MessageBox.Show(this,ex.Message,"Error",MessageBoxButtons.OK); }
             }else{MessageBox.Show("Por favor rellena todos los campos");}
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, callerForm);
         }
 
         

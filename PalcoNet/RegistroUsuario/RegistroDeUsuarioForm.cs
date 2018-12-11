@@ -43,8 +43,8 @@ namespace PalcoNet.RegistroUsuario
 
             try
             {
-                usuarioRepository.AltaDeUsuario(newUser);
-                NavigableFormUtil.ForwardTo(this, ABMClienteEmpresaFormFactory.CrearForm(selectedRolId));
+               // usuarioRepository.AltaDeUsuario(newUser);
+                NavigableFormUtil.ForwardTo(this, ABMClienteEmpresaFormFactory.CrearForm(selectedRolId, this, newUser));
             }
             catch (StoredProcedureException ex)
             {

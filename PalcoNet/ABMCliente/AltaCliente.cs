@@ -13,15 +13,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TFUtilites;
-
+using PalcoNet.Classes.Util.Form;
+using PalcoNet.Classes.Model;
 
 namespace PalcoNet.ABMCliente
 {
     public partial class AltaCliente : Form
     {
+        private Form callerForm;
+        private Usuario newUser;
+
         public AltaCliente()
         {
             InitializeComponent();
+        }
+
+        public AltaCliente(Form callerForm, Usuario newUser) 
+        {
+            InitializeComponent();
+            this.callerForm = callerForm;
+            this.newUser = newUser;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -51,6 +62,17 @@ namespace PalcoNet.ABMCliente
                 inputParameters.AddParameter("@fecha_de_creacion", Convert.ToDateTime(dtpFechaCreacion.Text)); // Verificar la fecha con el archivo de configuracion
                 inputParameters.AddParameter("@tarjeta", txtTarjeta.Text);
 
+                if (newUser == null)
+                {
+                    inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(10));
+                    inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10));
+                }
+                else
+                {
+                    inputParameters.AddParameter("@username", newUser.Username);
+                    inputParameters.AddParameter("@password", newUser.Password);
+                }
+
                 try
                 {
                     ConnectionFactory.Instance()
@@ -66,6 +88,11 @@ namespace PalcoNet.ABMCliente
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             TextFieldUtils.CleanAllControls(this);
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, callerForm);
         }
     }
 }

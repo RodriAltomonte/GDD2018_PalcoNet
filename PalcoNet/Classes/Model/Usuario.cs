@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.Classes.Model
 {
-    class Usuario
+    public class Usuario
     {
         public string Username { get; set; }
         public string Password { get; set; }
