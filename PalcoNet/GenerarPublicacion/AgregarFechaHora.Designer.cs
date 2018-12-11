@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.grpFechaHora = new System.Windows.Forms.GroupBox();
-            this.lblFecha = new System.Windows.Forms.Label();
-            this.lblHora = new System.Windows.Forms.Label();
-            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
-            this.dtpHora = new System.Windows.Forms.DateTimePicker();
             this.btnAceptar = new System.Windows.Forms.Button();
+            this.dtpHora = new System.Windows.Forms.DateTimePicker();
+            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
+            this.lblHora = new System.Windows.Forms.Label();
+            this.lblFecha = new System.Windows.Forms.Label();
             this.grpFechaHora.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,32 +51,15 @@
             this.grpFechaHora.TabStop = false;
             this.grpFechaHora.Text = "Agregar fecha y hora de espectáculo";
             // 
-            // lblFecha
+            // btnAceptar
             // 
-            this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(15, 36);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(37, 13);
-            this.lblFecha.TabIndex = 0;
-            this.lblFecha.Text = "Fecha";
-            // 
-            // lblHora
-            // 
-            this.lblHora.AutoSize = true;
-            this.lblHora.Location = new System.Drawing.Point(15, 64);
-            this.lblHora.Name = "lblHora";
-            this.lblHora.Size = new System.Drawing.Size(30, 13);
-            this.lblHora.TabIndex = 1;
-            this.lblHora.Text = "Hora";
-            // 
-            // dtpFecha
-            // 
-            this.dtpFecha.CustomFormat = "dd/MM/yyyy";
-            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFecha.Location = new System.Drawing.Point(69, 30);
-            this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(120, 20);
-            this.dtpFecha.TabIndex = 2;
+            this.btnAceptar.Location = new System.Drawing.Point(114, 84);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
+            this.btnAceptar.TabIndex = 4;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // dtpHora
             // 
@@ -88,15 +71,32 @@
             this.dtpHora.Size = new System.Drawing.Size(120, 20);
             this.dtpHora.TabIndex = 3;
             // 
-            // btnAceptar
+            // dtpFecha
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(114, 84);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 4;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.dtpFecha.CustomFormat = "dd/MM/yyyy";
+            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFecha.Location = new System.Drawing.Point(69, 30);
+            this.dtpFecha.Name = "dtpFecha";
+            this.dtpFecha.Size = new System.Drawing.Size(120, 20);
+            this.dtpFecha.TabIndex = 2;
+            // 
+            // lblHora
+            // 
+            this.lblHora.AutoSize = true;
+            this.lblHora.Location = new System.Drawing.Point(15, 64);
+            this.lblHora.Name = "lblHora";
+            this.lblHora.Size = new System.Drawing.Size(30, 13);
+            this.lblHora.TabIndex = 1;
+            this.lblHora.Text = "Hora";
+            // 
+            // lblFecha
+            // 
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.Location = new System.Drawing.Point(15, 36);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(37, 13);
+            this.lblFecha.TabIndex = 0;
+            this.lblFecha.Text = "Fecha";
             // 
             // AgregarFechaHora
             // 

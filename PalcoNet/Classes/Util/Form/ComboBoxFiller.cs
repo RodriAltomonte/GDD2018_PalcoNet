@@ -56,6 +56,11 @@ namespace PalcoNet.Classes.Util.Form
             comboBox.SelectedIndex = index;
         }
 
+        public void CheckByDBId(int index)
+        {
+            comboBox.SelectedIndex = index - 1;
+        }
+
         public void CheckFirst()
         {
             comboBox.SelectedIndex = 0;

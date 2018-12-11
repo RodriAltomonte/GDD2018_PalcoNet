@@ -46,7 +46,7 @@ namespace PalcoNet.GenerarPublicacion
         {            
             try
             {
-                if (ValidarExistenciaDeUbicaciones() && ValidarExistenciaDeFechas() && ValidarFechaDeVencimiento())
+                if (ValidarExistenciaDeUbicaciones() && ValidarExistenciaDeFechas() && ValidarFechaDeVencimiento() && ValidarFechaDePublicacion())
                 {
                     IList<Publicacion> publicaciones = this.CrearListaDePublicaciones();
                     foreach (Publicacion publicacion in publicaciones)
@@ -114,7 +114,7 @@ namespace PalcoNet.GenerarPublicacion
                 }
 
                 nuevaUbicacion.CantidadDeLugares = Convert.ToInt32(item.SubItems[1].Text);
-                nuevaUbicacion.IdTipoUbicacion = 1;
+                nuevaUbicacion.IdTipoUbicacion = tipoUbicacionRepository.IdDeRubro(item.SubItems[3].Text);
                 nuevaUbicacion.Precio = item.SubItems[2].Text;
                 nuevaUbicacion.CodPublicacion = codPublicacionNueva;
 
@@ -187,7 +187,7 @@ namespace PalcoNet.GenerarPublicacion
             if (lvFechaHora.Items.Count == 0)
             {
                 new AgregarFechaHora(this, DateTimeUtil.DateOnly(dtpFechaPublicacion.Value)).ShowDialog();
-                dtpFechaPublicacion.Enabled = false;
+                //dtpFechaPublicacion.Enabled = false;
             }
             else
             {
@@ -203,10 +203,10 @@ namespace PalcoNet.GenerarPublicacion
             if (lvFechaHora.Items.Count > 0)
             {
                 lvFechaHora.SelectedItems[0].Remove();
-                if (lvFechaHora.Items.Count == 0)
-                {
-                    dtpFechaPublicacion.Enabled = true;
-                }                
+                //if (lvFechaHora.Items.Count == 0)
+                //{
+                //    dtpFechaPublicacion.Enabled = true;
+                //}                
             }
         }
 
@@ -249,6 +249,19 @@ namespace PalcoNet.GenerarPublicacion
             {
                 MessageBoxUtil.ShowError("La fecha de vencimiento debe ser posterior al ultimo espectaculo.");
                 return false;
+            }
+            return true;
+        }
+
+        private bool ValidarFechaDePublicacion()
+        {
+            foreach (ListViewItem item in lvFechaHora.Items)
+            {
+                if (!DateTimeUtil.Before(DateTimeUtil.DateOnly(dtpFechaPublicacion.Value), DateTimeUtil.Of(item.Text, item.SubItems[1].Text)))
+                {
+                    MessageBoxUtil.ShowError("Todas las fechas y hora de espectaculo deben ser posteriores a la fecha de publicacion.");
+                    return false;
+                }
             }
             return true;
         }

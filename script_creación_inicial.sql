@@ -2,7 +2,7 @@ USE GD2C2018
 GO
 
 ------------------------------DROP PROCEDURES-----------------------------
-IF OBJECT_ID('LOS_DE_GESTION.PR_MIGRACION') IS NOT NULL
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_MIGRACION') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_MIGRACION;
 GO
 
@@ -108,6 +108,14 @@ go
 
 IF OBJECT_ID(N'LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_BUSCAR_PUBLICACION_POR_ID') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_BUSCAR_PUBLICACION_POR_ID
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_UBICACIONES_EDITABLES') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_UBICACIONES_EDITABLES
 go
 
 /*IF OBJECT_ID(N'') IS NOT NULL
@@ -729,16 +737,16 @@ BEGIN
 END
 go
 
-/*9. EDITAR PUBLICACION*/
+/*9. EDITAR PUBLICACION*/drop PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR
 CREATE PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR @usernameEmpresa nvarchar(255), @descripcion nvarchar(255)--, @pagina int, @tamanio int
 AS
 BEGIN
-	select p.cod_publicacion, p.descripcion, p.fecha_hora_espectaculo, p.direccion_espectaculo, r.descripcion, g.id_Grado_Publicacion from LOS_DE_GESTION.Publicacion p
+	select p.cod_publicacion as Codigo, p.descripcion as Descripcion, p.fecha_hora_espectaculo as 'Fecha y hora', p.direccion_espectaculo as Direccion, r.descripcion as Rubro, g.descripcion as Grado from LOS_DE_GESTION.Publicacion p
 	inner join LOS_DE_GESTION.Rubro r on r.id_Rubro = p.id_Rubro
 	inner join LOS_DE_GESTION.Grado_Publicacion g on g.id_Grado_Publicacion = p.id_Grado_Publicacion
 	where (p.usuario_empresa_vendedora = @usernameEmpresa 
 		or @usernameEmpresa in (select u.username from LOS_DE_GESTION.Usuario u inner join Usuario_X_Rol j on (u.username = j.username) where j.id_Rol = 1))--Es un admin
-	and p.id_Estado_Publicacion = 1 --Es borrador
+	and p.id_Estado_Publicacion = 2 --Es borrador
 	and p.descripcion like '%'+@descripcion+'%'
 	order by p.cod_publicacion asc
 	--offset @pagina rows fetch next @tamanio rows only 
@@ -746,16 +754,75 @@ END
 go
 
 CREATE PROCEDURE LOS_DE_GESTION.PR_EXISTE_UNA_PUBLICACION_IGUAL
+@codPublicacion numeric(18,0),
+@direccion nvarchar(255), 
+@descripcion nvarchar(255), 
+@idRubro numeric(18,0), 
+@fechaHoraEspectaculo datetime,
+@existePublicacionIgual bit output
 AS
 BEGIN
-	select 1 as TODO
+	if exists (select * from LOS_DE_GESTION.Publicacion p 
+		where p.cod_publicacion <> @codPublicacion and p.direccion_espectaculo = @direccion and p.descripcion = @descripcion
+		and p.id_Rubro = @idRubro and p.fecha_hora_espectaculo = @fechaHoraEspectaculo)
+	begin
+		set @existePublicacionIgual = 1
+	end
+	else
+	begin
+		set @existePublicacionIgual = 0
+	end
+	
+	return;
 END
 go
 
-CREATE PROCEDURE LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION @codPublicacion numeric(18,0)
+CREATE PROCEDURE LOS_DE_GESTION.PR_ACTUALIZAR_PUBLICACION 
+@codPublicacion numeric(18,0),
+@descripcion nvarchar(255),
+@fechaPublicacion datetime,
+@fechaVencimientoPublicacion datetime,
+@fechaHoraEspectaculo datetime,
+@idRubro numeric(18,0),
+@direccion nvarchar(255),
+@idGradoPublicacion numeric(18,0),
+@idEstadoPublicacion numeric(18,0)
 AS
 BEGIN
-	select 1 as TODO
+	UPDATE LOS_DE_GESTION.Publicacion
+	SET descripcion=@descripcion, 
+		fecha_publicacion=@fechaPublicacion, 
+		fecha_vencimiento_publicacion=@fechaVencimientoPublicacion, 
+		fecha_hora_espectaculo=@fechaHoraEspectaculo, 
+		id_Rubro=@idRubro, 
+		direccion_espectaculo=@direccion, 
+		id_Grado_Publicacion=@idGradoPublicacion,  
+		id_Estado_Publicacion=@idEstadoPublicacion
+	WHERE cod_publicacion=@codPublicacion
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_BUSCAR_PUBLICACION_POR_ID @idPublicacion numeric(18,0)
+AS
+BEGIN
+	SELECT cod_publicacion, descripcion, fecha_publicacion, fecha_vencimiento_publicacion, fecha_hora_espectaculo, id_Rubro, direccion_espectaculo, id_Grado_Publicacion, usuario_empresa_vendedora, id_Estado_Publicacion
+	FROM LOS_DE_GESTION.Publicacion
+	WHERE cod_publicacion = @idPublicacion
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_UBICACIONES_EDITABLES @codPublicacion numeric(18,0)
+AS
+BEGIN
+	select 'Fila ' + u.fila AS Ubicacion, count(u.asiento) as Cantidad, u.precio as Precio, t.descripcion as 'Tipo de ubicacion', t.id_Tipo_Ubicacion
+	from LOS_DE_GESTION.Ubicacion u inner join LOS_DE_GESTION.Tipo_Ubicacion t on t.id_Tipo_Ubicacion = u.id_Tipo_Ubicacion
+	where u.fila is not null and u.ubicacion_sin_numerar = 0
+	group by u.fila, u.precio, t.descripcion, t.id_Tipo_Ubicacion
+	union
+	select 'Sin numerar' as Ubicacion, count(u2.precio) as Cantidad, u2.precio as Precio, t2.descripcion as 'Tipo de ubicacion', t2.id_Tipo_Ubicacion
+	from LOS_DE_GESTION.Ubicacion u2 inner join LOS_DE_GESTION.Tipo_Ubicacion t2 on t2.id_Tipo_Ubicacion = u2.id_Tipo_Ubicacion
+	where u2.ubicacion_sin_numerar = 1
+	group by u2.ubicacion_sin_numerar, u2.precio, t2.descripcion, t2.id_Tipo_Ubicacion	
 END
 go
 /*12.CANJE Y ADMINISTRACION DE PUNTOS*/
@@ -801,10 +868,11 @@ BEGIN
 	inner join LOS_DE_GESTION.Empresa e on e.username = p.usuario_empresa_vendedora
 	where c.fecha_compra between @fechaDesde and @fechaHasta
 	group by c.usuario_cliente_comprador, e.razon_social
+	order by count(*) desc
 END
 go
 
-CREATE PROCEDURE LOS_DE_GESTION.PR_EMPRESAS_CON_MAS_LOCALIDADES_NO_VENDIDAS @fechaDesde datetime, @fechaHasta datetime, @fechaHoy datetime
+CREATE PROCEDURE LOS_DE_GESTION.PR_EMPRESAS_CON_MAS_LOCALIDADES_NO_VENDIDAS @fechaDesde datetime, @fechaHasta datetime
 AS
 BEGIN
 	select top 5 e.razon_social as Empresa, count(*) as 'Localidades no vendidas', (select descripcion from LOS_DE_GESTION.Grado_Publicacion where id_Grado_Publicacion = g.id_Grado_Publicacion) as 'Grado de publicacion' 
@@ -812,7 +880,7 @@ BEGIN
 	inner join LOS_DE_GESTION.Publicacion p on p.usuario_empresa_vendedora = e.username
 	inner join LOS_DE_GESTION.Grado_Publicacion g on g.id_Grado_Publicacion = p.id_Grado_Publicacion
 	inner join LOS_DE_GESTION.Ubicacion u on u.cod_publicacion = p.cod_publicacion
-	where p.fecha_publicacion < @fechaHoy and p.fecha_publicacion between @fechaDesde and @fechaHasta
+	where p.fecha_publicacion between @fechaDesde and @fechaHasta and u.id_Compra is null
 	group by e.razon_social, g.id_Grado_Publicacion, year(p.fecha_publicacion), month(p.fecha_publicacion)
 	order by year(p.fecha_publicacion), month(p.fecha_publicacion), g.id_Grado_Publicacion desc
 END
@@ -821,7 +889,10 @@ go
 CREATE PROCEDURE LOS_DE_GESTION.PR_CLIENTES_CON_MAS_PUNTOS_VENCIDOS @fechaDesde datetime, @fechaHasta datetime
 AS
 BEGIN
-	select 1 as TODO
+	select top 5 h.usuario_cliente as Usuario, sum(h.puntos_vencidos) as 'Puntos vencidos' from LOS_DE_GESTION.Historial_puntos_vencidos h
+	where h.fecha_de_vencimiento between @fechaDesde and @fechaHasta
+	group by h.usuario_cliente
+	order by sum(h.puntos_vencidos) desc
 END
 go
 
@@ -833,7 +904,7 @@ BEGIN
 /*si intentos_login -1 -> el usuario viene de migracion*/
 /* inserto Usuarios de Empresas*/
 		 insert into LOS_DE_GESTION.Usuario(username, password, intentos_login, bloqueado_login_fallidos, habilitado)--saco id_Rol
-		 SELECT distinct Espec_Empresa_Mail,HashBytes('SHA2_256', Espec_Empresa_Cuit),-1, 0,1
+		 SELECT distinct Espec_Empresa_Mail,LOS_DE_GESTION.FN_HASHPASS(Espec_Empresa_Cuit),-1, 0,1
 		 FROM gd_esquema.Maestra
 
 /* inserto Usuario_X_Rol de Empresas*/
@@ -850,7 +921,7 @@ BEGIN
 
 /* inserto Usuarios de clientes*/
 		 insert into LOS_DE_GESTION.Usuario(username, password, intentos_login, bloqueado_login_fallidos, habilitado)--saco id_Rol
-		 SELECT distinct convert(nvarchar(255), Cli_Dni),HashBytes('SHA2_256', convert(nvarchar(255), Cli_Dni)),-1, 0,1
+		 SELECT distinct convert(nvarchar(255), Cli_Dni),LOS_DE_GESTION.FN_HASHPASS(Cli_Dni),-1, 0,1
 		 FROM gd_esquema.Maestra where Cli_Dni is not NULL
 
 /* inserto Usuario_X_Rol de clientes*/
@@ -916,7 +987,32 @@ BEGIN
 		 SELECT Factura_Nro, null,null,sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where c.id_item_Rendicion = Factura_Nro)
 		 FROM gd_esquema.Maestra where Factura_Nro is not null 
 		 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad
+		 
+/*Decisiones de migracion*/
+		 update LOS_DE_GESTION.Cliente
+		 set puntos_acum_validos = 10000, puntos_vencidos = 0, fecha_vencimiento_puntos = convert(datetime,'2018-12-31 23:59:59',120)
+		 
+		 update LOS_DE_GESTION.Tipo_Ubicacion
+		 set puntos_cliente_frecuente = 100
+		 where id_Tipo_Ubicacion in (4446,4447,4449)
+		 
+		 update LOS_DE_GESTION.Tipo_Ubicacion
+		 set puntos_cliente_frecuente = 300
+		 where id_Tipo_Ubicacion in (4448,4450)
+		 
+		 update LOS_DE_GESTION.Tipo_Ubicacion
+		 set puntos_cliente_frecuente = 200
+		 where id_Tipo_Ubicacion in (4451,4452,4453)
+		 
+		 INSERT INTO LOS_DE_GESTION.Grado_Publicacion
+		 (id_Grado_Publicacion, descripcion, porcentaje_costo)
+		VALUES(1, 'Alta', 10), (2, 'Media', 7),(3,'Baja',5)
 		
+		update LOS_DE_GESTION.Publicacion
+		set id_Grado_Publicacion = 1, fecha_publicacion = dateadd(year, -1, fecha_vencimiento_publicacion), direccion_espectaculo = ''
+		
+		update LOS_DE_GESTION.Rubro set descripcion = 'General' where id_Rubro = 1
+
 END
 GO
 
@@ -948,7 +1044,8 @@ INSERT INTO LOS_DE_GESTION.Funcionalidad (id_Funcionalidad, nombre) VALUES
 (12, 'Listado Estadistico'),--Admin
 (13, 'Modificar password'),--Cliente,Admin
 (14, 'Dar de baja un usuario'),
-(15, 'Canje y administracion de puntos')--Admin
+(15, 'Canje y administracion de puntos'),--Admin
+(16, 'Modificar password de otro usuario')
 go
 
 /*FUNCIONALIDADES DEL CLIENTE*/
@@ -965,12 +1062,49 @@ INSERT INTO LOS_DE_GESTION.Rol_X_Funcionalidad (id_Rol, id_Funcionalidad) VALUES
 (3, 13)
 go
 /*FUNCIONALIDADES DEL ADMINISTRADOR*/
+INSERT INTO LOS_DE_GESTION.Rol_X_Funcionalidad (id_Rol, id_Funcionalidad) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 15),
+(1, 16)
+go
+
+/*CREACION DE ADMIN*/
+INSERT INTO LOS_DE_GESTION.Usuario
+(username, password, intentos_login, bloqueado_login_fallidos, habilitado)
+VALUES('admin', LOS_DE_GESTION.FN_HASHPASS('pass'), 0, 0, 1)
+go
+
+INSERT INTO LOS_DE_GESTION.Usuario_X_Rol
+(id_Rol, username)
+VALUES(1, 'admin')
+go
+INSERT INTO GD2C2018.LOS_DE_GESTION.Cliente
+(username, nombre, apellido, tipo_documento, numero_documento, cuil, mail, telefono, calle, nro_calle, nro_piso, depto, localidad, codigo_postal, fecha_nacimiento, fecha_creacion, tarjeta, puntos_acum_validos, fecha_vencimiento_puntos, puntos_vencidos)
+VALUES('admin', 'Administrador', 'Administrador', 'DNI', 99999999, '20-99999999-3', 'admin@mail.com', 'Calle 1', '1234', 1, 1, '1', 'Localidad admin', '1234', convert(datetime, '2018-01-01 00:00:00',120),convert(datetime, '2018-01-01 00:00:00',120), '1234123412341234', 100000, convert(datetime,'2018-12-31 23:59:59',120), 0)
+GO
+INSERT INTO GD2C2018.LOS_DE_GESTION.Empresa
+(username, razon_social, cuit, mail, telefono, calle, nro_calle, nro_piso, depto, localidad, codigo_postal, ciudad, fecha_creacion)
+VALUES('admin', 'Administrador', '20-999999999-0', 'admin@mail.com', 99999999, 'Calle 1', 1234, 1, '1', 'Localidad admin', '1234', 'Ciudad admin', convert(datetime,'2018-01-01 00:00:00',120))
+go
 
 
 /*PREMIOS*/
 INSERT INTO GD2C2018.LOS_DE_GESTION.Premio
 (descripcion, puntos_requeridos)
-VALUES('Prueba', 500)
+VALUES('Entrada de cine', 1000),('Entrada de concierto', 8000),('Entrada de teatro', 5000),('Entrada de partido de futbol', 3000)
 go
 
 -----------------------GENERACION DE ADMINISTRADOR GENERAL----------------
@@ -1035,4 +1169,3 @@ GO
 --select * from LOS_DE_GESTION.Rendicion
 --select * from LOS_DE_GESTION.Compra
 --select* from gd_esquema.Maestra
-

@@ -14,5 +14,6 @@ namespace PalcoNet.Classes.Model
         public bool SinNumerar { get; set; }
         public string Precio { get; set; }
         public decimal IdTipoUbicacion { get; set; }
+        public string DescripcionTipoUbicacion { get; set; }
     }
 }

@@ -40,20 +40,44 @@ namespace PalcoNet.Classes.Repository
                 .ExecuteDataTableStoredProcedure(SpNames.PublicacionesAEditar, inputParameters);
         }
 
-        public Boolean ExisteUnaPublicacionIgual()
-        { 
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+        public Boolean ExisteUnaPublicacionIgual(Publicacion publicacion)
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
+                .AddParameter("@codPublicacion", publicacion.CodPublicacion)
+                .AddParameter("@descripcion", publicacion.Descripcion)
+                .AddParameter("@fechaHoraEspectaculo", publicacion.FechaHoraDeEspectaculo)
+                .AddParameter("@idRubro", publicacion.IdRubro)
+                .AddParameter("@direccion", publicacion.DireccionEspectaculo);
 
             return ConnectionFactory.Instance().CreateConnection()
-                .ExecuteSingleOutputStoredProcedure<Boolean>(SpNames.ExisteUnaPublicacionIgual, inputParameters, "@existe");
+                .ExecuteSingleOutputStoredProcedure<Boolean>(SpNames.ExisteUnaPublicacionIgual, inputParameters, "@existePublicacionIgual");
         }
 
-        public void ActualizarPublicacion()
+        public void ActualizarPublicacion(Publicacion publicacion)
         {
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
+                .AddParameter("@codPublicacion", publicacion.CodPublicacion)
+                .AddParameter("@descripcion", publicacion.Descripcion)
+                .AddParameter("@fechaPublicacion", publicacion.FechaDePublicacion)
+                .AddParameter("@fechaVencimientoPublicacion", publicacion.FechaDeVencimiento)
+                .AddParameter("@fechaHoraEspectaculo", publicacion.FechaHoraDeEspectaculo)
+                .AddParameter("@idRubro", publicacion.IdRubro)
+                .AddParameter("@direccion", publicacion.DireccionEspectaculo)
+                .AddParameter("@idGradoPublicacion", publicacion.IdGradoDePublicacion)
+                .AddParameter("@idEstadoPublicacion", publicacion.IdEstado);
+
 
             ConnectionFactory.Instance().CreateConnection()
                 .ExecuteDataTableStoredProcedure(SpNames.ActualizarPublicacion, inputParameters);
+        }
+
+        public Publicacion BuscarPorId(decimal idPublicacion)
+        {
+            StoredProcedureParameterMap inputParameters = StoredProcedureParameterMap.Of("@idPublicacion", idPublicacion);
+
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteMappedStoredProcedure<Publicacion>(SpNames.BuscarPublicacionPorId, inputParameters, new Mapper.AutoMapper<Publicacion>())
+                .First();
         }
     }
 }

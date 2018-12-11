@@ -78,5 +78,10 @@ namespace PalcoNet.CanjePuntos
             txtFechaVencimiento.Text = puntosDeUsuario.FechaDeVencimiento.ToString();
         }
         #endregion
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, previousForm);
+        }
     }
 }
