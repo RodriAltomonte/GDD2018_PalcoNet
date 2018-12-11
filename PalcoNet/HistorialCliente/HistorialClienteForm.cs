@@ -16,10 +16,10 @@ namespace PalcoNet.HistorialCliente
     {
         private Form previousForm;
 
-        public HistorialClienteForm()
+        public HistorialClienteForm(Form previousForm)
         {
             InitializeComponent();
-           // this.previousForm = previousForm;
+            this.previousForm = previousForm;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

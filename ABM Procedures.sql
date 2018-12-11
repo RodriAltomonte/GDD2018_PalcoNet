@@ -275,7 +275,7 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaEmpresa
 @cuit NVARCHAR(255)
 AS
 BEGIN
-	--falta validar el cuit 
+	
 	IF(NOT EXISTS(SELECT username FROM LOS_DE_GESTION.Usuario WHERE username=@username))
 		BEGIN
 				INSERT INTO LOS_DE_GESTION.Usuario(username,password,habilitado,intentos_login,bloqueado_login_fallidos) --EXECUTE LOS_DE_GESTION.PR_ALTA_DE_USUARIO(args) 
@@ -291,14 +291,14 @@ BEGIN
 		END
 		
 		IF(NOT EXISTS(SELECT razon_social FROM LOS_DE_GESTION.Empresa WHERE razon_social=@razon_social)
-			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit) )
+			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit) AND LEN(@cuit) = 11 )
 			BEGIN
 				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,nro_calle,codigo_postal,ciudad,cuit)
 				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@nro_calle,@codigo_postal,@ciudad,@cuit)
 			END
 		ELSE
 			BEGIN
-				RAISERROR('Error al crear empresa',16,1)
+				RAISERROR('Error al crear empresa revise los datos por favor!',16,1)
 			END
 END	
 GO
@@ -449,3 +449,32 @@ BEGIN
 	VALUES(@id_Rendicion,@importe_venta,@importe_comision,@importe_rendicion,@descripcion,@cantidad_ubicaciones,@id_Compra)
 
 END
+GO
+
+CREATE PROCEDURE LOS_DE_GESTION.ComprasDeEmpresa
+@razon_social NVARCHAR(255),
+@cantidad INT
+AS
+BEGIN
+	SELECT TOP (@cantidad) * 
+	FROM LOS_DE_GESTION.Compra c 
+	JOIN LOS_DE_GESTION.Ubicacion u ON c.id_Compra = u.id_Compra
+	JOIN LOS_DE_GESTION.Publicacion p ON u.cod_publicacion=p.cod_publicacion
+	JOIN LOS_DE_GESTION.Empresa e ON p.usuario_empresa_vendedora=e.username 
+	WHERE e.razon_social = @razon_social		 
+END
+GO
+
+CREATE PROCEDURE LOS_DE_GESTION.NuevaCompra
+@monto_total NUMERIC(18, 2),
+@fecha_compra DATETIME,
+@usuario_cliente_comprador nvarchar(255),
+@tarjeta_comprador nvarchar(255),
+@id_item_Rendicion numeric(18, 0),
+@cantidad_ubicaciones numeric(18, 0)
+AS
+BEGIN
+	INSERT INTO LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,id_item_Rendicion,cantidad_ubicaciones)
+	VALUES(@monto_total,@fecha_compra,@usuario_cliente_comprador,@tarjeta_comprador,@id_item_Rendicion,@cantidad_ubicaciones)
+END
+GO

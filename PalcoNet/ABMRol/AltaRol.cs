@@ -47,7 +47,8 @@ namespace PalcoNet.ABMRol
                 {
                     ConnectionFactory.Instance()
                                      .CreateConnection()
-                                     .ExecuteDataTableStoredProcedure(SpNames.AltaRol, inputParameters);
+                                     .ExecuteDataTableStoredProcedure(SpNames.AltaRol,inputParameters);
+                                    
                     MessageBox.Show("Rol dado de alta correctamente!");
                 }
                 catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }

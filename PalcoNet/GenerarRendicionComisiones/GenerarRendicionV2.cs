@@ -1,4 +1,6 @@
 ﻿using Classes.DatabaseConnection;
+using PalcoNet.Classes.Constants;
+using PalcoNet.Classes.DatabaseConnection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,15 +13,16 @@ using System.Windows.Forms;
 
 namespace PalcoNet.GenerarRendicionComisiones
 {
+    /// <summary>
+    /// Cuando el cliente hace una compra para una publicacion se debe crear una rendicion de esa compra
+    /// rellenando los campos necesarios
+    /// </summary>
+
     public partial class GenerarRendicionV2 : Form
     {
         public GenerarRendicionV2()
         {
             InitializeComponent();
-            var query = "SELECT TOP " + nudCantidadRendicion.Value.ToString() + " * FROM LOS_DE_GESTION.Compra";
-            dgvClientes.DataSource = ConnectionFactory.Instance()
-                                                      .CreateConnection()
-                                                      .ExecuteDataTableSqlQuery(query);
            
            DataSet ds = ConnectionFactory.Instance()
                                                      .CreateConnection()
@@ -31,10 +34,21 @@ namespace PalcoNet.GenerarRendicionComisiones
 
         private void nudCantidadRendicion_ValueChanged(object sender, EventArgs e)
         {
-            var query = "SELECT TOP " + nudCantidadRendicion.Value.ToString() + " * FROM LOS_DE_GESTION.Compra";
+            //Obtengo las compras que se le realizaron a la empresa
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+            inputParameters.AddParameter("@razon_social",cbEmpresas.Text);
+            inputParameters.AddParameter("@cantidad",nudCantidadRendicion.Value);
             dgvClientes.DataSource = ConnectionFactory.Instance()
                                                       .CreateConnection()
-                                                      .ExecuteDataTableSqlQuery(query);
+                                                      .ExecuteDataTableStoredProcedure(SpNames.ListadoComprasEmpresa,inputParameters);
         }
+
+        private void btnGenerar_Click(object sender, EventArgs e)
+        {
+            //Obtener compras seleccionadas
+            // Primero debo crear una rencion y luego los item rendicion
+        }
+        
+
     }
 }

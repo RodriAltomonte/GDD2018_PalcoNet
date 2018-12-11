@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Util.Form;
+using PalcoNet.Classes.Session;
 
 namespace PalcoNet.RegistroUsuario
 {
@@ -22,6 +23,13 @@ namespace PalcoNet.RegistroUsuario
             InitializeComponent();
             this.usuarioRepository = new UsuarioRepository();
             this.usuarioAModificar = usuarioAModificar;
+        }
+
+        public ModificarPasswordUsuarioForm(Form previousForm)
+        {
+            InitializeComponent();
+            this.usuarioRepository = new UsuarioRepository();
+            this.usuarioAModificar = Session.Instance().LoggedUsername;
         }
 
         private void btnModificarPassword_Click(object sender, EventArgs e)

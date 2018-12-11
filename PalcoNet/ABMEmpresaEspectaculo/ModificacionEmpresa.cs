@@ -2,6 +2,8 @@
 using PalcoNet.Classes.Constants;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.DatabaseConnection;
+using PalcoNet.Classes.Session;
+using PalcoNet.Classes.Util.Form;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +21,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
     {
         private static string Username = "";
         private static string CUIT = "";
-
+        
         public ModificacionEmpresa(string razon_social,
                                    string mail,
                                    string telefono,
@@ -53,7 +55,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             
             
         }
-
+      
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (!TextFieldUtils.IsAnyFieldEmpty(this))
@@ -103,6 +105,11 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                             .ExecuteDataTableStoredProcedure(SpNames.BajaEmpresa, inputParameters);
                 MessageBox.Show("Empresa modifcada correctamente!");
             }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            //NavigableFormUtil.BackwardTo(this, previousForm);
         }
     }
 }

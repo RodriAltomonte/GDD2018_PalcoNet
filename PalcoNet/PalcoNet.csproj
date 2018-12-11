@@ -326,6 +326,9 @@
     <EmbeddedResource Include="ABMCliente\ModificacionCliente.resx">
       <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABMEmpresaEspectaculo\ABMClienteEmpresaFormFactory.resx">
+      <DependentUpon>ABMClienteEmpresaFormFactory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABMEmpresaEspectaculo\AltaEmpresa.resx">
       <DependentUpon>AltaEmpresa.cs</DependentUpon>
     </EmbeddedResource>

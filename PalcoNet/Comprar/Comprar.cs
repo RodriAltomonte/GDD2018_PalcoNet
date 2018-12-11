@@ -97,17 +97,19 @@ namespace PalcoNet.Comprar
     #region inicializar
         private void inicializarPantalla()
         {
-            rubroRepository = new RubroRepository();
-            ComboBoxFiller<Rubro, decimal>.Fill(cmbCategoria)
-                .KeyAs(rubro => rubro.IdRubro)
-                .ValueAs(rubro => rubro.Descripcion)
-                .With(rubroRepository.TodosLosRubros());
+           
+            DataSet ds = ConnectionFactory.Instance()
+                                              .CreateConnection()
+                                              .ExecuteDataSetSqlQuery("SELECT id_Rubro FROM LOS_DE_GESTION.Rubro", "id_Rubro");
 
-            cmbCategoria.SelectedIndex = 0;
-           dtpFechaInicial.Value =ConfigurationManager.Instance().GetSystemDateTime();
-           dtpFechaFinal.Value = ConfigurationManager.Instance().GetSystemDateTime();
-           dtpHoraFinal.Value = ConfigurationManager.Instance().GetSystemDateTime();
-           dtpHoraInicial.Value = ConfigurationManager.Instance().GetSystemDateTime();
+          cmbCategoria.DisplayMember = "id_Rubro";
+          cmbCategoria.DataSource = ds.Tables["id_Rubro"];
+          cmbCategoria.SelectedIndex = 0;
+          
+          dtpFechaInicial.Value =ConfigurationManager.Instance().GetSystemDateTime();
+          dtpFechaFinal.Value = ConfigurationManager.Instance().GetSystemDateTime();
+          dtpHoraFinal.Value = ConfigurationManager.Instance().GetSystemDateTime();
+          dtpHoraInicial.Value = ConfigurationManager.Instance().GetSystemDateTime();
 
         }
     #endregion

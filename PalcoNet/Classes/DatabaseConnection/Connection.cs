@@ -84,9 +84,7 @@ namespace Classes.DatabaseConnection
             }
         }
 
-
-
-
+     
         public DataTable ExecuteDataTableStoredProcedure(string procedureName, StoredProcedureParameterMap inputParameters)
         {
             DataTable dataTable = new DataTable();
@@ -108,8 +106,6 @@ namespace Classes.DatabaseConnection
             }
             return dataTable;
         }
-
-      
 
         public IList<TMapped> ExecuteMappedStoredProcedure<TMapped>(string procedureName, StoredProcedureParameterMap inputParameters, IStoredProcedureResultMapper<TMapped> mapper)
         {

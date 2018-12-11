@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Util;
 using Classes.DatabaseConnection;
+using PalcoNet.Classes.CustomException;
+using PalcoNet.Classes.DatabaseConnection;
+using PalcoNet.Classes.Constants;
 
 namespace PalcoNet.Comprar
 {
@@ -31,6 +34,7 @@ namespace PalcoNet.Comprar
             this.fechaFinal = fechaFinal;
             this.categorias = new List<String>();
             this.categorias = categorias;
+         
             cargarResultados(1);
         }
 
@@ -52,7 +56,19 @@ namespace PalcoNet.Comprar
 
         private void dgvResultados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //OBTENER DATOS DE LAS CELDAS SELECIONADAS Y CREAR ITEMS RENDICION LUEGO CREAR LA RENDICION
 
+            /*
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+            inputParameters.AddParameter("@monto_total",);
+            try
+            {
+                ConnectionFactory.Instance()
+                                 .CreateConnection()
+                                 .ExecuteStoredProcedure(SpNames.NuevaCompra, inputParameters);
+            }
+            catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
+            */
         }
 
         private void BtnSiguiente_Click(object sender, EventArgs e)
@@ -69,7 +85,7 @@ namespace PalcoNet.Comprar
                 int x = pagina * 5;
                 string select = @"SELECT p.descripcion,p.fecha_publicacion,
                                     p.fecha_vencimiento_publicacion,p.fecha_hora_espectaculo,
-                                    p.direccion_espectaculo 
+                                    p.direccion_espectaculo,p.usuario_empresa_vendedora 
                                     from LOS_DE_GESTION.Publicacion p join LOS_DE_GESTION.Rubro r on (p.id_Rubro = r.id_Rubro ) ";
 
                 string final = @"ORDER BY cod_publicacion

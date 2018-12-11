@@ -20,8 +20,9 @@ namespace PalcoNet.Classes.Constants
         public const decimal HistorialCliente = 10;
         public const decimal GenerarRendicion = 11;
         public const decimal ListadoEstadistico = 12;
-        public const decimal ModificarPassword = 13;
+        public const decimal ModificarPasswordEmpresa = 13;
         public const decimal BajaDeUsuario = 14;
         public const decimal CanjePuntos = 15;
+       
     }
 }

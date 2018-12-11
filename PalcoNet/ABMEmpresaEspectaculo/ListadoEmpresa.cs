@@ -34,7 +34,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             {
                 DataTable dt = ConnectionFactory.Instance()
                                                 .CreateConnection()
-                                                .ExecuteDataTableStoredProcedure(SpNames.ListadoEmpresas,inputParameters); // ARREGLAR ESTO CREAR PROCEDURE
+                                                .ExecuteDataTableStoredProcedure(SpNames.ListadoEmpresas,inputParameters); 
                 dgvEmpresas.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }

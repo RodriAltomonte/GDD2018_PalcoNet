@@ -64,6 +64,7 @@
             this.btnVolver.TabIndex = 100;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -94,7 +95,6 @@
             this.cbxHabilitado.Text = "Habilitado";
             this.cbxHabilitado.UseVisualStyleBackColor = true;
             this.cbxHabilitado.Click += new System.EventHandler(this.cbxHabilitado_Click);
-            
             // 
             // txtCUIT
             // 

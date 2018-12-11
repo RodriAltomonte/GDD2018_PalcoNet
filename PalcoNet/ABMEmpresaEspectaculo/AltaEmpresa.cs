@@ -25,7 +25,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if(!TextFieldUtils.IsAnyFieldEmpty(this)){
+            if(!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text)){
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
             inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
             inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(10));
@@ -44,10 +44,16 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                 ConnectionFactory.Instance()
                                  .CreateConnection()
                                  .ExecuteDataTableStoredProcedure(SpNames.AltaEmpresa, inputParameters);
+                              
                 MessageBox.Show(this,"Empresa agregada de forma correcta!","Correcto",MessageBoxButtons.OK);
             }
             catch (StoredProcedureException ex) { MessageBox.Show(this,ex.Message,"Error",MessageBoxButtons.OK); }
-            }else{MessageBox.Show("Por favor rellena todos los campos");}
+            }else{MessageBox.Show("Por favor rellena todos los campos y comprueba el mail");}
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            TextFieldUtils.CleanAllControls(this);
         }
 
         

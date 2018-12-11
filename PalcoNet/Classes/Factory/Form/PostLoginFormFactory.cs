@@ -28,7 +28,7 @@ namespace PalcoNet.Classes.Factory.Form
             formMap.Add(FuncionalidadConstants.HistorialCliente, typeof(HistorialCliente.HistorialClienteForm));
             formMap.Add(FuncionalidadConstants.GenerarRendicion, typeof(GenerarRendicionComisiones.GenerarRendicionForm));
             formMap.Add(FuncionalidadConstants.ListadoEstadistico, typeof(ListadoEstadistico.ListadoEstadisticoForm));
-            //formMap.Add(FuncionalidadConstants.ModificarPassword, typeof());
+            formMap.Add(FuncionalidadConstants.ModificarPasswordEmpresa, typeof(RegistroUsuario.ModificarPasswordUsuarioForm));
             //formMap.Add(FuncionalidadConstants.BajaDeUsuario, typeof());
             formMap.Add(FuncionalidadConstants.CanjePuntos, typeof(CanjePuntos.CanjePuntosForm));
 
