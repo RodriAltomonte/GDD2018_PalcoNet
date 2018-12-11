@@ -737,16 +737,16 @@ BEGIN
 END
 go
 
-/*9. EDITAR PUBLICACION*/
+/*9. EDITAR PUBLICACION*/drop PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR
 CREATE PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR @usernameEmpresa nvarchar(255), @descripcion nvarchar(255)--, @pagina int, @tamanio int
 AS
 BEGIN
-	select p.cod_publicacion, p.descripcion, p.fecha_hora_espectaculo, p.direccion_espectaculo, r.descripcion, g.id_Grado_Publicacion from LOS_DE_GESTION.Publicacion p
+	select p.cod_publicacion as Codigo, p.descripcion as Descripcion, p.fecha_hora_espectaculo as 'Fecha y hora', p.direccion_espectaculo as Direccion, r.descripcion as Rubro, g.descripcion as Grado from LOS_DE_GESTION.Publicacion p
 	inner join LOS_DE_GESTION.Rubro r on r.id_Rubro = p.id_Rubro
 	inner join LOS_DE_GESTION.Grado_Publicacion g on g.id_Grado_Publicacion = p.id_Grado_Publicacion
 	where (p.usuario_empresa_vendedora = @usernameEmpresa 
 		or @usernameEmpresa in (select u.username from LOS_DE_GESTION.Usuario u inner join Usuario_X_Rol j on (u.username = j.username) where j.id_Rol = 1))--Es un admin
-	and p.id_Estado_Publicacion = 1 --Es borrador
+	and p.id_Estado_Publicacion = 2 --Es borrador
 	and p.descripcion like '%'+@descripcion+'%'
 	order by p.cod_publicacion asc
 	--offset @pagina rows fetch next @tamanio rows only 
@@ -868,10 +868,11 @@ BEGIN
 	inner join LOS_DE_GESTION.Empresa e on e.username = p.usuario_empresa_vendedora
 	where c.fecha_compra between @fechaDesde and @fechaHasta
 	group by c.usuario_cliente_comprador, e.razon_social
+	order by count(*) desc
 END
 go
 
-CREATE PROCEDURE LOS_DE_GESTION.PR_EMPRESAS_CON_MAS_LOCALIDADES_NO_VENDIDAS @fechaDesde datetime, @fechaHasta datetime, @fechaHoy datetime
+CREATE PROCEDURE LOS_DE_GESTION.PR_EMPRESAS_CON_MAS_LOCALIDADES_NO_VENDIDAS @fechaDesde datetime, @fechaHasta datetime
 AS
 BEGIN
 	select top 5 e.razon_social as Empresa, count(*) as 'Localidades no vendidas', (select descripcion from LOS_DE_GESTION.Grado_Publicacion where id_Grado_Publicacion = g.id_Grado_Publicacion) as 'Grado de publicacion' 
@@ -879,7 +880,7 @@ BEGIN
 	inner join LOS_DE_GESTION.Publicacion p on p.usuario_empresa_vendedora = e.username
 	inner join LOS_DE_GESTION.Grado_Publicacion g on g.id_Grado_Publicacion = p.id_Grado_Publicacion
 	inner join LOS_DE_GESTION.Ubicacion u on u.cod_publicacion = p.cod_publicacion
-	where p.fecha_publicacion < @fechaHoy and p.fecha_publicacion between @fechaDesde and @fechaHasta
+	where p.fecha_publicacion between @fechaDesde and @fechaHasta and u.id_Compra is null
 	group by e.razon_social, g.id_Grado_Publicacion, year(p.fecha_publicacion), month(p.fecha_publicacion)
 	order by year(p.fecha_publicacion), month(p.fecha_publicacion), g.id_Grado_Publicacion desc
 END

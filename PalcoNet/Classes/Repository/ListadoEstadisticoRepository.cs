@@ -39,8 +39,8 @@ namespace PalcoNet.Classes.Repository
         {
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
                 .AddParameter("@fechaDesde", fechaDesde)
-                .AddParameter("@fechaHasta", fechaHasta)
-                .AddParameter("@fechaHoy", ConfigurationManager.Instance().GetSystemDateTime());
+                .AddParameter("@fechaHasta", fechaHasta);
+//                .AddParameter("@fechaHoy", ConfigurationManager.Instance().GetSystemDateTime());
 
             return ConnectionFactory.Instance()
                 .CreateConnection()
