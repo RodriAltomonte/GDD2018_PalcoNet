@@ -67,7 +67,7 @@ namespace PalcoNet.ListadoEstadistico
         {
             cmbTipoListado.Items.Add(EMPRESAS_LOCALIDADES_NO_VENDIDAS);
             cmbTipoListado.Items.Add(CLIENTES_MAS_COMPRAS);
-            cmbTipoListado.Items.Add(CLIENTES_MAS_COMPRAS);
+            cmbTipoListado.Items.Add(CLIENTES_MAS_PUNTOS_VENCIDOS);
 
             cmbTrimestre.Items.Add(PRIMER_TRIMESTRE);
             cmbTrimestre.Items.Add(SEGUNDO_TRIMESTRE);
