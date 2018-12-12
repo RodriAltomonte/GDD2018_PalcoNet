@@ -825,6 +825,40 @@ BEGIN
 	group by u2.ubicacion_sin_numerar, u2.precio, t2.descripcion, t2.id_Tipo_Ubicacion	
 END
 go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_ELIMINAR_UBICACIONES
+@codPublicacion numeric(18,0),
+@fila varchar(3),
+@sinNumerar bit,
+@cantidad int,
+@precio numeric(18,0),
+@idTipoUbicacion numeric(18,0)
+AS
+BEGIN
+	declare @contador int
+	set @contador = 1
+	
+	/*WHILE @contador <= @cantidad
+	BEGIN
+		IF @sinNumerar = 1
+		BEGIN
+			delete from LOS_DE_GESTION.Ubicacion
+			where 
+			
+			INSERT INTO LOS_DE_GESTION.Ubicacion
+			(cod_publicacion, fila, asiento, ubicacion_sin_numerar, precio, id_Tipo_Ubicacion)
+			VALUES(@codPublicacion, null, null, 1, @precio, @idTipoUbicacion)			
+		END
+		ELSE
+		BEGIN
+			INSERT INTO GD2C2018.LOS_DE_GESTION.Ubicacion
+			(cod_publicacion, fila, asiento, ubicacion_sin_numerar, precio, id_Tipo_Ubicacion)
+			VALUES(@codPublicacion, @fila, @contador, 0, @precio, @idTipoUbicacion)
+		END
+		set @contador = @contador+1
+	END	*/
+END
+go
 /*12.CANJE Y ADMINISTRACION DE PUNTOS*/
 CREATE PROCEDURE LOS_DE_GESTION.PR_TODOS_LOS_PREMIOS_DISPONIBLES
 AS
@@ -973,9 +1007,9 @@ BEGIN
 
 		 
 /* inserto Ubicacion*/--revisar id_compra
-		 insert into LOS_DE_GESTION.Ubicacion(fila,asiento,ubicacion_sin_numerar,precio)
-		 SELECT distinct Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio
-		 FROM gd_esquema.Maestra
+		 insert into LOS_DE_GESTION.Ubicacion(fila,asiento,ubicacion_sin_numerar,precio,cod_publicacion)
+		 SELECT distinct Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,(select p.cod_publicacion from LOS_DE_GESTION.Publicacion p where p.maestra_Espectaculo_Cod = espectaculo_cod)
+		 FROM gd_esquema.Maestra 
 
 /* inserto rendicion*/
 		 insert into LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)

@@ -37,7 +37,26 @@ namespace PalcoNet.Classes.Repository
 
             return ConnectionFactory.Instance().CreateConnection()
                 .ExecuteMappedStoredProcedure<UbicacionPersistente>(
-                "LOS_DE_GESTION.PR_UBICACIONES_EDITABLES", inputParameters, new Mapper.UbicacionPersistenteDGVMapper());
+                SpNames.UbicacionesEditables, inputParameters, new Mapper.UbicacionPersistenteDGVMapper());
+        }
+
+        public void EliminarUbicaciones(IList<UbicacionPersistente> ubicaciones)
+        {
+            ubicaciones.ToList().ForEach(ubicacion => this.EliminarUbicacion(ubicacion));
+        }
+
+        public void EliminarUbicacion(UbicacionPersistente ubicacion) 
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
+                .AddParameter("@codPublicacion", ubicacion.CodPublicacion)
+                .AddParameter("@fila", ubicacion.Fila)
+                .AddParameter("@sinNumerar", ubicacion.SinNumerar)
+                .AddParameter("@cantidad", ubicacion.CantidadDeLugares)
+                .AddParameter("@precio", ubicacion.Precio)
+                .AddParameter("@idTipoUbicacion", ubicacion.IdTipoUbicacion);
+
+            ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.EliminarUbicaciones, inputParameters);
         }
     }
 }

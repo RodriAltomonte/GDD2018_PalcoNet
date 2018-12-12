@@ -72,7 +72,7 @@ namespace PalcoNet.EditarPublicacion
 
         private void btnRemoveUbicacion_Click(object sender, EventArgs e)
         {
-            dgvUbicaciones.SelectedRows[0].Visible = false;
+            dgvUbicaciones.Rows.Remove(dgvUbicaciones.SelectedRows[0]);
             this.AddUbicacionAEliminar();
         }
 
@@ -184,7 +184,7 @@ namespace PalcoNet.EditarPublicacion
 
         private void AddUbicacionAEliminar() 
         {
-            if (!(bool)dgvUbicaciones.SelectedRows[0].Cells[5].Value)
+            if (!this.EsUbicacionNueva(dgvUbicaciones.SelectedRows[0]))
             {
                 UbicacionPersistente ubicacionAEliminar = new UbicacionPersistente();
                 ubicacionAEliminar.CodPublicacion = publicacionSeleccionada.CodPublicacion;
@@ -239,6 +239,11 @@ namespace PalcoNet.EditarPublicacion
                 }
             }
             return false;
+        }
+
+        private bool EsUbicacionNueva(DataGridViewRow row)
+        {
+            return (bool)row.Cells[5].Value;
         }
         #endregion
     }
