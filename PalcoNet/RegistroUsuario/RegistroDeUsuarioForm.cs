@@ -43,9 +43,8 @@ namespace PalcoNet.RegistroUsuario
 
             try
             {
-                usuarioRepository.AltaDeUsuario(newUser);
-                MessageBox.Show("Usuario dado de alta correctamente");
-                NavigableFormUtil.BackwardTo(this, new Login.LoginForm());
+                NavigableFormUtil.ForwardTo(this, ABMClienteEmpresaFormFactory.CrearForm(selectedRolId, this, newUser));
+                //Falta volver al login
             }
             catch (StoredProcedureException ex)
             {
