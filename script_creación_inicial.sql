@@ -1007,8 +1007,8 @@ BEGIN
 
 		 
 /* inserto Ubicacion*/--revisar id_compra
-		 insert into LOS_DE_GESTION.Ubicacion(fila,asiento,ubicacion_sin_numerar,precio,cod_publicacion)
-		 SELECT distinct Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,(select p.cod_publicacion from LOS_DE_GESTION.Publicacion p where p.maestra_Espectaculo_Cod = espectaculo_cod)
+		 insert into LOS_DE_GESTION.Ubicacion(fila,asiento,ubicacion_sin_numerar,precio,id_Tipo_Ubicacion, cod_publicacion)
+		 SELECT distinct Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,Ubicacion_tipo_codigo, (select p.cod_publicacion from LOS_DE_GESTION.Publicacion p where p.maestra_Espectaculo_Cod = espectaculo_cod)
 		 FROM gd_esquema.Maestra 
 
 /* inserto rendicion*/
