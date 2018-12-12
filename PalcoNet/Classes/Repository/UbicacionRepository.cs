@@ -51,7 +51,6 @@ namespace PalcoNet.Classes.Repository
                 .AddParameter("@codPublicacion", ubicacion.CodPublicacion)
                 .AddParameter("@fila", ubicacion.Fila)
                 .AddParameter("@sinNumerar", ubicacion.SinNumerar)
-                .AddParameter("@cantidad", ubicacion.CantidadDeLugares)
                 .AddParameter("@precio", ubicacion.Precio)
                 .AddParameter("@idTipoUbicacion", ubicacion.IdTipoUbicacion);
 

@@ -48,6 +48,8 @@ namespace PalcoNet.EditarPublicacion
                 if (!publicacionRepository.ExisteUnaPublicacionIgual(publicacionSeleccionada))
                 {
                     publicacionRepository.ActualizarPublicacion(publicacionSeleccionada);
+                    ubicacionRepository.EliminarUbicaciones(ubicacionesAEliminar);
+                    ubicacionRepository.InsertarListaDeUbicaciones(ubicacionesAInsertar);
                     MessageBoxUtil.ShowInfo("Publicacion actualizada correctamente.");
                     
                     callerForm.ActualizarDataGrid();
@@ -72,8 +74,8 @@ namespace PalcoNet.EditarPublicacion
 
         private void btnRemoveUbicacion_Click(object sender, EventArgs e)
         {
-            dgvUbicaciones.Rows.Remove(dgvUbicaciones.SelectedRows[0]);
             this.AddUbicacionAEliminar();
+            dgvUbicaciones.Rows.Remove(dgvUbicaciones.SelectedRows[0]);
         }
 
         private void btnAgregarUbicacion_Click(object sender, EventArgs e)
@@ -195,6 +197,7 @@ namespace PalcoNet.EditarPublicacion
                 if (dgvUbicaciones.SelectedRows[0].Cells[0].Value.ToString().Equals("Sin numerar"))
                 {
                     ubicacionAEliminar.SinNumerar = true;
+                    ubicacionAEliminar.Fila = "";
                 }
                 else 
                 {

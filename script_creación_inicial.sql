@@ -118,6 +118,10 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_UBICACIONES_EDITABLES') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_UBICACIONES_EDITABLES
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_ELIMINAR_UBICACIONES') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_ELIMINAR_UBICACIONES
+go
+
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -816,12 +820,12 @@ AS
 BEGIN
 	select 'Fila ' + u.fila AS Ubicacion, count(u.asiento) as Cantidad, u.precio as Precio, t.descripcion as 'Tipo de ubicacion', t.id_Tipo_Ubicacion
 	from LOS_DE_GESTION.Ubicacion u inner join LOS_DE_GESTION.Tipo_Ubicacion t on t.id_Tipo_Ubicacion = u.id_Tipo_Ubicacion
-	where u.fila is not null and u.ubicacion_sin_numerar = 0
+	where u.fila is not null and u.ubicacion_sin_numerar = 0 and u.cod_publicacion = @codPublicacion
 	group by u.fila, u.precio, t.descripcion, t.id_Tipo_Ubicacion
 	union
 	select 'Sin numerar' as Ubicacion, count(u2.precio) as Cantidad, u2.precio as Precio, t2.descripcion as 'Tipo de ubicacion', t2.id_Tipo_Ubicacion
 	from LOS_DE_GESTION.Ubicacion u2 inner join LOS_DE_GESTION.Tipo_Ubicacion t2 on t2.id_Tipo_Ubicacion = u2.id_Tipo_Ubicacion
-	where u2.ubicacion_sin_numerar = 1
+	where u2.ubicacion_sin_numerar = 1 and u2.cod_publicacion = @codPublicacion
 	group by u2.ubicacion_sin_numerar, u2.precio, t2.descripcion, t2.id_Tipo_Ubicacion	
 END
 go
@@ -830,33 +834,13 @@ CREATE PROCEDURE LOS_DE_GESTION.PR_ELIMINAR_UBICACIONES
 @codPublicacion numeric(18,0),
 @fila varchar(3),
 @sinNumerar bit,
-@cantidad int,
 @precio numeric(18,0),
 @idTipoUbicacion numeric(18,0)
 AS
 BEGIN
-	declare @contador int
-	set @contador = 1
-	
-	/*WHILE @contador <= @cantidad
-	BEGIN
-		IF @sinNumerar = 1
-		BEGIN
-			delete from LOS_DE_GESTION.Ubicacion
-			where 
-			
-			INSERT INTO LOS_DE_GESTION.Ubicacion
-			(cod_publicacion, fila, asiento, ubicacion_sin_numerar, precio, id_Tipo_Ubicacion)
-			VALUES(@codPublicacion, null, null, 1, @precio, @idTipoUbicacion)			
-		END
-		ELSE
-		BEGIN
-			INSERT INTO GD2C2018.LOS_DE_GESTION.Ubicacion
-			(cod_publicacion, fila, asiento, ubicacion_sin_numerar, precio, id_Tipo_Ubicacion)
-			VALUES(@codPublicacion, @fila, @contador, 0, @precio, @idTipoUbicacion)
-		END
-		set @contador = @contador+1
-	END	*/
+	delete from LOS_DE_GESTION.Ubicacion
+	where cod_publicacion = @codPublicacion and precio = @precio and id_Tipo_Ubicacion = @idTipoUbicacion
+	and (@sinNumerar = 1 or @sinNumerar = 0 and fila = @fila)
 END
 go
 /*12.CANJE Y ADMINISTRACION DE PUNTOS*/
@@ -1007,9 +991,9 @@ BEGIN
 
 		 
 /* inserto Ubicacion*/--revisar id_compra
-		 insert into LOS_DE_GESTION.Ubicacion(fila,asiento,ubicacion_sin_numerar,precio,id_Tipo_Ubicacion, cod_publicacion)
-		 SELECT distinct Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,Ubicacion_tipo_codigo, (select p.cod_publicacion from LOS_DE_GESTION.Publicacion p where p.maestra_Espectaculo_Cod = espectaculo_cod)
-		 FROM gd_esquema.Maestra 
+		 insert into LOS_DE_GESTION.Ubicacion(cod_publicacion,fila,asiento,ubicacion_sin_numerar,precio,id_Tipo_Ubicacion)
+		 SELECT distinct (select p.cod_publicacion from LOS_DE_GESTION.Publicacion p where p.maestra_Espectaculo_Cod = espectaculo_cod),Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,Ubicacion_tipo_codigo
+		 FROM gd_esquema.Maestra
 
 /* inserto rendicion*/
 		 insert into LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
