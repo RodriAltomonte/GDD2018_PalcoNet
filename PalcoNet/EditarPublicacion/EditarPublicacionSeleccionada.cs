@@ -230,6 +230,7 @@ namespace PalcoNet.EditarPublicacion
             row.Cells[5].Value = true;
 
             dgvUbicaciones.Rows.Add(row);
+            ubicacionesAInsertar.Add(ubicacion);
         }
 
         private bool ExisteFila(string fila)
@@ -249,5 +250,10 @@ namespace PalcoNet.EditarPublicacion
             return (bool)row.Cells[5].Value;
         }
         #endregion
+
+        public Publicacion PublicacionSeleccionada()
+        {
+            return publicacionSeleccionada;
+        }
     }
 }

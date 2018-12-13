@@ -47,6 +47,7 @@ namespace PalcoNet.EditarPublicacion
             ubicacion.DescripcionTipoUbicacion = cmbTipoUbicacion.Text;
             ubicacion.IdTipoUbicacion = ((ComboBoxItem<decimal>)cmbTipoUbicacion.SelectedItem).Value;
             ubicacion.SinNumerar = rdbSinNumerar.Checked;
+            ubicacion.CodPublicacion = callerForm.PublicacionSeleccionada().CodPublicacion;
             return ubicacion;
         }
 
