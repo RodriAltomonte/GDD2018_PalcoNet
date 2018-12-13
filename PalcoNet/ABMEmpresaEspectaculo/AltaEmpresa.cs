@@ -15,6 +15,8 @@ using System.Windows.Forms;
 using TFUtilites;
 using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Model;
+using PalcoNet.Classes.Interfaces;
+using PalcoNet.Classes.Misc;
 
 namespace PalcoNet.ABMEmpresaEspectaculo
 {
@@ -22,17 +24,19 @@ namespace PalcoNet.ABMEmpresaEspectaculo
     {
         private Form callerForm;
         private Usuario newUser;
+        private IAccionPostCreacionUsuario accionPostCreacion = new NoVolverALogin();
 
         public AltaEmpresa()
         {
             InitializeComponent();
         }
 
-        public AltaEmpresa(Form callerForm, Usuario newUser)
+        public AltaEmpresa(Form callerForm, Usuario newUser, IAccionPostCreacionUsuario accionPostCreacion)
         {
             InitializeComponent();
             this.callerForm = callerForm;
             this.newUser = newUser;
+            this.accionPostCreacion = accionPostCreacion;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -68,6 +72,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                                  .ExecuteDataTableStoredProcedure(SpNames.AltaEmpresa, inputParameters);
                               
                 MessageBox.Show(this,"Empresa agregada de forma correcta!","Correcto",MessageBoxButtons.OK);
+                accionPostCreacion.Do(this);
             }
             catch (StoredProcedureException ex) { MessageBox.Show(this,ex.Message,"Error",MessageBoxButtons.OK); }
             }else{MessageBox.Show("Por favor rellena todos los campos");}
@@ -76,6 +81,11 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             TextFieldUtils.CleanAllControls(this);
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, callerForm);
         }
 
         

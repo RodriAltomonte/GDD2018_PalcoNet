@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PalcoNet.Classes.Constants;
 using PalcoNet.Classes.Model;
+using PalcoNet.Classes.Interfaces;
 
 namespace PalcoNet.Classes.Factory.Form
 {
@@ -18,17 +19,18 @@ namespace PalcoNet.Classes.Factory.Form
             tiposDeFormPorRol.Add(RolConstants.Cliente, typeof(ABMCliente.AltaCliente));
             tiposDeFormPorRol.Add(RolConstants.Empresa, typeof(ABMEmpresaEspectaculo.AltaEmpresa));
         }
-        public static System.Windows.Forms.Form CrearForm(decimal idRol, System.Windows.Forms.Form callerForm ,Usuario usuario)
+        public static System.Windows.Forms.Form CrearForm(decimal idRol, System.Windows.Forms.Form callerForm ,Usuario usuario, IAccionPostCreacionUsuario accion)
         {
             Type tipoForm = tiposDeFormPorRol[idRol];
-            return (System.Windows.Forms.Form)Activator.CreateInstance(tipoForm, CrearParametros(callerForm, usuario));
+            return (System.Windows.Forms.Form)Activator.CreateInstance(tipoForm, CrearParametros(callerForm, usuario, accion));
         }
 
-        private static object[] CrearParametros(System.Windows.Forms.Form form, Usuario usuario)
+        private static object[] CrearParametros(System.Windows.Forms.Form form, Usuario usuario, IAccionPostCreacionUsuario accion)
         {
-            object[] parametros = new object[2];
+            object[] parametros = new object[3];
             parametros[0] = form;
             parametros[1] = usuario;
+            parametros[2] = accion;
             return parametros;
         }
     }

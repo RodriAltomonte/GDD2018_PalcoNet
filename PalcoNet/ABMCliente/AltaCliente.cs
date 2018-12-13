@@ -15,6 +15,8 @@ using System.Windows.Forms;
 using TFUtilites;
 using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Model;
+using PalcoNet.Classes.Interfaces;
+using PalcoNet.Classes.Misc;
 
 namespace PalcoNet.ABMCliente
 {
@@ -22,17 +24,19 @@ namespace PalcoNet.ABMCliente
     {
         private Form callerForm;
         private Usuario newUser;
+        private IAccionPostCreacionUsuario accionPostCreacion = new NoVolverALogin();
 
         public AltaCliente()
         {
             InitializeComponent();
         }
 
-        public AltaCliente(Form callerForm, Usuario newUser) 
+        public AltaCliente(Form callerForm, Usuario newUser, IAccionPostCreacionUsuario accionPostCreacion) 
         {
             InitializeComponent();
             this.callerForm = callerForm;
             this.newUser = newUser;
+            this.accionPostCreacion = accionPostCreacion;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -78,7 +82,9 @@ namespace PalcoNet.ABMCliente
                     ConnectionFactory.Instance()
                                      .CreateConnection()
                                      .ExecuteDataTableStoredProcedure(SpNames.AltaCliente, inputParameters);
-                    MessageBox.Show("Cliente agreagado exitosamente!");
+                    MessageBoxUtil.ShowInfo("Cliente agreagado exitosamente!");
+                    
+                    accionPostCreacion.Do(this);                    
                 }
                 catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             }

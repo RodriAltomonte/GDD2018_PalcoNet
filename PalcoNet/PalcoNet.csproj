@@ -167,6 +167,9 @@
     <Compile Include="Classes\Factory\UsuarioFactory.cs" />
     <Compile Include="Classes\Interfaces\Form\IForwardableForm.cs" />
     <Compile Include="Classes\Interfaces\Form\IBackwardableForm.cs" />
+    <Compile Include="Classes\Interfaces\IAccionPostCreacionUsuario.cs" />
+    <Compile Include="Classes\Misc\NoVolverALogin.cs" />
+    <Compile Include="Classes\Misc\VolverALogin.cs" />
     <Compile Include="Classes\Model\Cliente.cs" />
     <Compile Include="Classes\Model\Empresa.cs" />
     <Compile Include="Classes\Model\EstadoDePublicacion.cs" />

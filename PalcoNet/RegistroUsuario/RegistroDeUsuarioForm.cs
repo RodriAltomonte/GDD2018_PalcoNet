@@ -13,6 +13,8 @@ using PalcoNet.Classes.Factory.Form;
 using PalcoNet.Classes.Factory;
 using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.CustomException;
+using PalcoNet.Classes.Interfaces;
+using PalcoNet.Classes.Misc;
 
 namespace PalcoNet.RegistroUsuario
 {
@@ -43,8 +45,8 @@ namespace PalcoNet.RegistroUsuario
 
             try
             {
-                NavigableFormUtil.ForwardTo(this, ABMClienteEmpresaFormFactory.CrearForm(selectedRolId, this, newUser));
-                //Falta volver al login
+                IAccionPostCreacionUsuario accionPostCreacion = new VolverALogin(this);
+                NavigableFormUtil.ForwardTo(this, ABMClienteEmpresaFormFactory.CrearForm(selectedRolId, this, newUser, accionPostCreacion));
             }
             catch (StoredProcedureException ex)
             {
