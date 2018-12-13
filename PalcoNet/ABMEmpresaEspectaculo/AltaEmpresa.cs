@@ -81,7 +81,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         
     }
 
-}
+}/*
 
             }else{MessageBox.Show("Por favor rellena todos los campos y comprueba el mail");}
             }else{MessageBox.Show("Por favor rellena todos los campos");}
@@ -90,3 +90,4 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         private void btnVolver_Click(object sender, EventArgs e)
         {
             NavigableFormUtil.BackwardTo(this, callerForm);
+*/

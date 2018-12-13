@@ -9,22 +9,91 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Util;
+using Classes.DatabaseConnection;
+using PalcoNet.Classes.CustomException;
+using PalcoNet.Classes.DatabaseConnection;
+using PalcoNet.Classes.Constants;
+using PalcoNet.Classes.Session;
+/*
+ * Esta funcionalidad permite a un cliente conocer todo su historial de compras.
+Debe presentarse en una grilla paginada igual a la utilizada para la visualización de las
+publicaciones. Se debe mostrar toda aquella información que se crea pertinente y el
+medio de pago utilizado por el cliente al momento de efectuarse la compra.
+ * */
 
 namespace PalcoNet.HistorialCliente
 {
     public partial class HistorialClienteForm : Form
     {
         private Form previousForm;
+        int posicion = -1;
+        string username;
+        //int totalPaginas;
 
         public HistorialClienteForm(Form previousForm)
         {
             InitializeComponent();
             this.previousForm = previousForm;
+            username = Session.Instance().LoggedUsername;
+            cantidadPaginas();
+            cargarResultados(1);
+        }
+
+        public HistorialClienteForm()
+        {
+            InitializeComponent();
+            this.previousForm = previousForm;
+            username = "35865429";
+            cantidadPaginas();
+            cargarResultados(1);
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
             NavigableFormUtil.BackwardTo(this, previousForm);
         }
+
+        private void cargarResultados(int pagina)
+        {
+            if (pagina > 0 /*&& pagina < totalPaginas*/)
+            {
+                posicion = pagina;
+                pagina--;
+                int x = pagina * 5;
+                string select = @"select fecha_compra,sum(monto_total) total, sum (cantidad_ubicaciones) cant_Ubicaciones,tarjeta_comprador  
+                                    from LOS_DE_GESTION.Compra where usuario_cliente_comprador = " + username +
+                                   @" group by fecha_compra,tarjeta_comprador ";
+
+                string final = @"ORDER BY fecha_compra 
+                                OFFSET " + x.ToString() + @" ROWS FETCH NEXT " + 5 + " ROWS ONLY";
+
+                select += final;
+                dgvResultados.DataSource = ConnectionFactory.Instance().CreateConnection().ExecuteDataTableSqlQuery(select);
+            }
+
+        }
+
+        private void BtnAnterior_Click(object sender, EventArgs e)
+        {
+            cargarResultados(posicion - 1);
+        }
+
+        private void BtnSiguiente_Click(object sender, EventArgs e)
+        {
+            cargarResultados(posicion + 1);
+        }
+
+        private void cantidadPaginas()
+        {/*
+            string select = @"select count(distinct fecha_compra) from LOS_DE_GESTION.Compra where usuario_cliente_comprador = " + username ;
+            int x;
+            x = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<int>(select);
+            totalPaginas = x / 5;
+            if (x % 5 != 0)
+            {
+                totalPaginas++;
+            }*/
+        }
+
     }
 }

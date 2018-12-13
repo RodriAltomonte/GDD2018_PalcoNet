@@ -100,10 +100,10 @@ namespace PalcoNet.Comprar
            
             DataSet ds = ConnectionFactory.Instance()
                                               .CreateConnection()
-                                              .ExecuteDataSetSqlQuery("SELECT id_Rubro FROM LOS_DE_GESTION.Rubro", "id_Rubro");
+                                              .ExecuteDataSetSqlQuery("SELECT descripcion FROM LOS_DE_GESTION.Rubro", "descripcion");
 
-          cmbCategoria.DisplayMember = "id_Rubro";
-          cmbCategoria.DataSource = ds.Tables["id_Rubro"];
+            cmbCategoria.DisplayMember = "descripcion";
+            cmbCategoria.DataSource = ds.Tables["descripcion"];
           cmbCategoria.SelectedIndex = 0;
           
           dtpFechaInicial.Value =ConfigurationManager.Instance().GetSystemDateTime();
