@@ -64,6 +64,6 @@ namespace PalcoNet.Classes.Constants
         public const string ListadoEmpresas = Schema + "ListadoEmpresas";
 
         public const string ListadoComprasEmpresa = Schema + "ComprasDeEmpresa";
-
+        public const string NuevaCompra = Schema + "NuevaCompra";
     }
 }

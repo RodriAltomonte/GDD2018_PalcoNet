@@ -1,4 +1,8 @@
 ﻿using Classes.DatabaseConnection;
+using PalcoNet.Classes.Constants;
+using PalcoNet.Classes.CustomException;
+using PalcoNet.Classes.DatabaseConnection;
+using PalcoNet.Classes.Session;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,9 +27,29 @@ namespace PalcoNet.Comprar
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            //Crear nueva compra
-            //actualizar las ubicaciones id_compra
-            MessageBox.Show("Falta implementar");
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+
+            decimal monto_total = 0; // ¡TEST!
+            DateTime fecha_compra = DateTime.Now;
+            string usuario_cliente_comprador = Session.Instance().LoggedUsername;
+            string tarjeta_comprador = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<string>("SELECT tarjeta FROM LOS_DE_GESTION.Cliente WHERE username="+ usuario_cliente_comprador);
+        //  int id_item_Rendicion =??
+            decimal cantidad_de_ubicaciones = dgvUbicaciones.SelectedRows.Count;
+
+            inputParameters.AddParameter("@monto_total", monto_total);
+            inputParameters.AddParameter("@fecha_compra", fecha_compra);
+            inputParameters.AddParameter("@usuario_cliente_comprador", usuario_cliente_comprador);
+            inputParameters.AddParameter("@tarjeta_comprador", tarjeta_comprador);
+        //  inputParameters.AddParameter("@id_item_Rendicion") 
+            inputParameters.AddParameter("@cantidad_ubicaciones",cantidad_de_ubicaciones);
+
+            try
+            {
+                ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.NuevaCompra, inputParameters);
+                MessageBox.Show("Compra realizada exitosamente!");
+            }
+            catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
+            
         }
 
         #region Initialization
