@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.Classes.Interfaces
 {
-    interface IAccionPostCreacionUsuario
+    public interface IAccionPostCreacionUsuario
     {
         void Do(System.Windows.Forms.Form from);
     }

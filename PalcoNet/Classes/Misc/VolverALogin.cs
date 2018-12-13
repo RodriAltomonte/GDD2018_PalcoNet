@@ -9,7 +9,7 @@ using PalcoNet.Login;
 
 namespace PalcoNet.Classes.Misc
 {
-    class VolverALogin : IAccionPostCreacionUsuario
+    public class VolverALogin : IAccionPostCreacionUsuario
     {
         private System.Windows.Forms.Form closeable;
 

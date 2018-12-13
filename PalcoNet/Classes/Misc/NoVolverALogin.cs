@@ -7,7 +7,7 @@ using PalcoNet.Classes.Interfaces;
 
 namespace PalcoNet.Classes.Misc
 {
-    class NoVolverALogin : IAccionPostCreacionUsuario
+    public class NoVolverALogin : IAccionPostCreacionUsuario
     {
         public void Do(System.Windows.Forms.Form from)
         {
