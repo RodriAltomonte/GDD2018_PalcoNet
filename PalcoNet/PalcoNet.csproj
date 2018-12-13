@@ -219,6 +219,12 @@
     <Compile Include="Comprar\ResPublicacion.Designer.cs">
       <DependentUpon>ResPublicacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comprar\UbicacionesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\UbicacionesForm.Designer.cs">
+      <DependentUpon>UbicacionesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditarPublicacion\AgregarUbicacionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -379,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comprar\ResPublicacion.resx">
       <DependentUpon>ResPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\UbicacionesForm.resx">
+      <DependentUpon>UbicacionesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditarPublicacion\AgregarUbicacionForm.resx">
       <DependentUpon>AgregarUbicacionForm.cs</DependentUpon>

@@ -56,19 +56,8 @@ namespace PalcoNet.Comprar
 
         private void dgvResultados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //OBTENER DATOS DE LAS CELDAS SELECIONADAS Y CREAR ITEMS RENDICION LUEGO CREAR LA RENDICION
-
-            /*
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-            inputParameters.AddParameter("@monto_total",);
-            try
-            {
-                ConnectionFactory.Instance()
-                                 .CreateConnection()
-                                 .ExecuteStoredProcedure(SpNames.NuevaCompra, inputParameters);
-            }
-            catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
-            */
+            var codigo_publicacion = dgvResultados.CurrentRow.Cells[0].Value.ToString();
+            NavigableFormUtil.ForwardTo(this, new UbicacionesForm(codigo_publicacion));
         }
 
         private void BtnSiguiente_Click(object sender, EventArgs e)
@@ -83,7 +72,7 @@ namespace PalcoNet.Comprar
                 posicion = pagina;
                 pagina--;
                 int x = pagina * 5;
-                string select = @"SELECT p.descripcion,p.fecha_publicacion,
+                string select = @"SELECT p.cod_publicacion,p.descripcion,p.fecha_publicacion,
                                     p.fecha_vencimiento_publicacion,p.fecha_hora_espectaculo,
                                     p.direccion_espectaculo,p.usuario_empresa_vendedora 
                                     from LOS_DE_GESTION.Publicacion p join LOS_DE_GESTION.Rubro r on (p.id_Rubro = r.id_Rubro ) ";
@@ -126,7 +115,7 @@ namespace PalcoNet.Comprar
 
                 select += final;
                 
-                ConnectionFactory.Instance().CreateConnection().ExecuteDataTableSqlQuery(select);
+              dgvResultados.DataSource = ConnectionFactory.Instance().CreateConnection().ExecuteDataTableSqlQuery(select);
             }
         }
     }
