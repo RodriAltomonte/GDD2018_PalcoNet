@@ -985,7 +985,7 @@ BEGIN
 
 /* inserto Compra*/
 		 insert into LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,id_item_Rendicion,cantidad_ubicaciones)
-		 SELECT null,Compra_Fecha,Cli_Dni,null,Factura_Nro,sum(Compra_Cantidad)
+		 SELECT sum(Ubicacion_Precio), Compra_Fecha,Cli_Dni,null,Factura_Nro,sum(Compra_Cantidad)
 		 FROM gd_esquema.Maestra where Compra_Cantidad is not null
 		 group by Compra_Fecha,Cli_Dni,Factura_Nro									       
 
@@ -1002,7 +1002,7 @@ BEGIN
 
 /* inserto Item_Rendicion*/--revisar sum(Item_Factura_Monto)
 		 insert into LOS_DE_GESTION.Item_Rendicion(id_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones,id_Compra)
-		 SELECT Factura_Nro, null,null,sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where c.id_item_Rendicion = Factura_Nro)
+		 SELECT Factura_Nro, sum(Ubicacion_Precio),sum(Ubicacion_Precio) - sum(Item_Factura_Monto),sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where c.id_item_Rendicion = Factura_Nro)
 		 FROM gd_esquema.Maestra where Factura_Nro is not null 
 		 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad
 		 
