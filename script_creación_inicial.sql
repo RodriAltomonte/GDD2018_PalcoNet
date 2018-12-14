@@ -230,6 +230,9 @@ IF OBJECT_ID(N'LOS_DE_GESTION.RolHabilitado') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.RolHabilitado
 GO
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_CLIENTE_TIENE_TARJETA') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_CLIENTE_TIENE_TARJETA
+go
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -1557,7 +1560,18 @@ BEGIN
 END
 GO
 
-
+CREATE PROCEDURE LOS_DE_GESTION.PR_CLIENTE_TIENE_TARJETA @username nvarchar(255), @tieneTarjeta bit output
+AS
+BEGIN
+	declare @usuarioTieneTarjeta bit
+	if exists(select * from LOS_DE_GESTION.Cliente where username = @username and (tarjeta is not null or tarjeta <> ''))
+		set @usuarioTieneTarjeta = 1
+	else
+		set @usuarioTieneTarjeta = 0
+		
+	return	
+END
+go
 
 
 

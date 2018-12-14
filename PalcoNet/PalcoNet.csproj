@@ -229,6 +229,12 @@
     <Compile Include="Classes\Util\RegexUtil.cs" />
     <Compile Include="Classes\Util\Form\TextFieldUtils.cs" />
     <Compile Include="Classes\Util\StringUtil.cs" />
+    <Compile Include="Comprar\AsociarTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\AsociarTarjeta.Designer.cs">
+      <DependentUpon>AsociarTarjeta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comprar\Comprar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -404,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CanjePuntos\CanjePuntosForm.resx">
       <DependentUpon>CanjePuntosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\AsociarTarjeta.resx">
+      <DependentUpon>AsociarTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comprar\Comprar.resx">
       <DependentUpon>Comprar.cs</DependentUpon>

@@ -22,5 +22,11 @@ namespace PalcoNet.Classes.Repository
                 .CreateConnection()
                 .ExecuteDataTableStoredProcedure(SpNames.ValidarVencimientoDePuntos, inputParameters);
         }
+
+        public bool ClienteTieneTarjeta(string username)
+        {
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteSingleOutputStoredProcedure<bool>(SpNames.ClienteTieneTarjeta, StoredProcedureParameterMap.Of("@username", username), "@tieneTarjeta");
+        }
     }
 }
