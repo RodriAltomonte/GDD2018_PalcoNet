@@ -11,6 +11,7 @@ using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.CustomException;
+using TFUtilites;
 
 namespace PalcoNet.ABMGrado
 {
@@ -28,16 +29,23 @@ namespace PalcoNet.ABMGrado
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            GradoDePublicacion grado = new GradoDePublicacion(nudCodigo.Value, txtDescripcion.Text, nudPorcentaje.Value);
-            try
+            if (TextFieldUtils.IsAnyFieldEmpty(this))
             {
-                gradoRepository.CrearGradoDePublicacion(grado);
-                MessageBoxUtil.ShowInfo("Grado de publicación creado correctamente.");
-                NavigableFormUtil.BackwardTo(this, callerForm);
+                MessageBoxUtil.ShowError("Complete el campo descripción.");
             }
-            catch (StoredProcedureException ex)
+            else
             {
-                MessageBoxUtil.ShowError(ex.Message);
+                GradoDePublicacion grado = new GradoDePublicacion(nudCodigo.Value, txtDescripcion.Text, nudPorcentaje.Value);
+                try
+                {
+                    gradoRepository.CrearGradoDePublicacion(grado);
+                    MessageBoxUtil.ShowInfo("Grado de publicación creado correctamente.");
+                    NavigableFormUtil.BackwardTo(this, callerForm);
+                }
+                catch (StoredProcedureException ex)
+                {
+                    MessageBoxUtil.ShowError(ex.Message);
+                }
             }
         }
 

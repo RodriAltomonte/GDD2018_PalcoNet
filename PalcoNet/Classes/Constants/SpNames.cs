@@ -40,6 +40,9 @@ namespace PalcoNet.Classes.Constants
         public const string UbicacionesEditables = Schema + "PR_UBICACIONES_EDITABLES";
         public const string EliminarUbicaciones = Schema + "PR_ELIMINAR_UBICACIONES";
         public const string CrearGradoPublicacion = Schema + "PR_CREAR_GRADO_PUBLICACION";
+        public const string EliminarGradoPublicacion = Schema + "PR_ELIMINAR_GRADO_PUBLICACION";
+        public const string ModificarGradoPublicacion = Schema + "PR_MODIFICAR_GRADO_PUBLICACION";
+        public const string BuscarGradoPorId = Schema + "PR_BUSCAR_GRADO_POR_ID";
         
         public const string AltaRol = Schema + "AltaRol";
         public const string AgregarFuncionalidadRol = Schema + "FuncionalidadRol";

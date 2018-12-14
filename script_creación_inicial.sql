@@ -125,6 +125,18 @@ go
 IF OBJECT_ID(N'LOS_DE_GESTION.PR_CREAR_GRADO_PUBLICACION') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_CREAR_GRADO_PUBLICACION
 go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_ELIMINAR_GRADO_PUBLICACION') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_ELIMINAR_GRADO_PUBLICACION
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_MODIFICAR_GRADO_PUBLICACION') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_MODIFICAR_GRADO_PUBLICACION
+go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_BUSCAR_GRADO_POR_ID') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_BUSCAR_GRADO_POR_ID
+go
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -681,6 +693,46 @@ BEGIN
 END
 go
 
+CREATE PROCEDURE LOS_DE_GESTION.PR_ELIMINAR_GRADO_PUBLICACION
+@idGrado numeric(18,0)
+AS
+BEGIN
+	if exists(select * from LOS_DE_GESTION.Grado_Publicacion where id_Grado_Publicacion = @idGrado)
+	begin
+		delete from LOS_DE_GESTION.Grado_Publicacion where id_Grado_Publicacion = @idGrado
+	end
+	else
+	begin
+		throw 50001, 'No existe un grado de publicacion con el codigo seleccionado', 1
+	end
+END
+go
+drop PROCEDURE LOS_DE_GESTION.PR_MODIFICAR_GRADO_PUBLICACION
+CREATE PROCEDURE LOS_DE_GESTION.PR_MODIFICAR_GRADO_PUBLICACION
+@idGrado numeric(18,0),
+@descripcion nvarchar(255),
+@porcentaje numeric(5,2)
+AS
+BEGIN
+	if exists (select * from LOS_DE_GESTION.Grado_Publicacion where id_Grado_Publicacion = @idGrado)
+	begin
+		update LOS_DE_GESTION.Grado_Publicacion
+		set descripcion = @descripcion, porcentaje_costo = @porcentaje
+		where id_Grado_Publicacion = @idGrado
+	end
+	else
+	begin
+		throw 50001, 'No existe un grado de publicacion con el codigo seleccionado.',1
+	end
+END
+go
+
+CREATE PROCEDURE LOS_DE_GESTION.PR_BUSCAR_GRADO_POR_ID @idGrado numeric(18,0)
+AS
+BEGIN
+	select id_Grado_Publicacion, descripcion, porcentaje_costo from LOS_DE_GESTION.Grado_Publicacion where id_Grado_Publicacion = @idGrado
+END
+go
 /*8. GENERAR PUBLICACION*/
 
 CREATE PROCEDURE LOS_DE_GESTION.PR_TODOS_LOS_RUBROS

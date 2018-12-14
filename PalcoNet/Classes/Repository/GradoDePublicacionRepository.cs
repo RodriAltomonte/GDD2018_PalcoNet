@@ -29,6 +29,32 @@ namespace PalcoNet.Classes.Repository
                 .ExecuteDataTableStoredProcedure(SpNames.CrearGradoPublicacion, inputParameters);
         }
 
+        public void EliminarGradoDePublicacion(decimal idGrado)
+        {
+            ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.EliminarGradoPublicacion, StoredProcedureParameterMap.Of("@idGrado", idGrado));
+        }
+
+        public void ModificarGradoDePublicacion(GradoDePublicacion grado)
+        {
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
+                .AddParameter("@idGrado", grado.IdGradoDePublicacion)
+                .AddParameter("@descripcion", grado.Descripcion)
+                .AddParameter("@porcentaje", grado.Porcentaje);
+
+            ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.ModificarGradoPublicacion, inputParameters);         
+        }
+
+        public GradoDePublicacion BuscarPorId(decimal idGrado)
+        {
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteMappedStoredProcedure<GradoDePublicacion>(
+                    SpNames.BuscarGradoPorId,
+                    StoredProcedureParameterMap.Of("@idGrado", idGrado),
+                    new Mapper.AutoMapper<GradoDePublicacion>()
+                    ).First();
+        }
 
     }
 }
