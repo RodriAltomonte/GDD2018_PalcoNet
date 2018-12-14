@@ -47,9 +47,9 @@
             this.grpBuscar.Controls.Add(this.lblDescripcion);
             this.grpBuscar.Controls.Add(this.btnBuscar);
             this.grpBuscar.Location = new System.Drawing.Point(17, 16);
-            this.grpBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.grpBuscar.Name = "grpBuscar";
-            this.grpBuscar.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBuscar.Padding = new System.Windows.Forms.Padding(4);
             this.grpBuscar.Size = new System.Drawing.Size(969, 107);
             this.grpBuscar.TabIndex = 0;
             this.grpBuscar.TabStop = false;
@@ -58,7 +58,7 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Location = new System.Drawing.Point(365, 27);
-            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(257, 22);
             this.txtDescripcion.TabIndex = 2;
@@ -76,7 +76,7 @@
             // btnBuscar
             // 
             this.btnBuscar.Location = new System.Drawing.Point(524, 59);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(100, 28);
             this.btnBuscar.TabIndex = 0;
@@ -89,9 +89,9 @@
             this.grpResultados.Controls.Add(this.btnEditar);
             this.grpResultados.Controls.Add(this.dgvPublicaciones);
             this.grpResultados.Location = new System.Drawing.Point(17, 143);
-            this.grpResultados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpResultados.Margin = new System.Windows.Forms.Padding(4);
             this.grpResultados.Name = "grpResultados";
-            this.grpResultados.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpResultados.Padding = new System.Windows.Forms.Padding(4);
             this.grpResultados.Size = new System.Drawing.Size(969, 358);
             this.grpResultados.TabIndex = 1;
             this.grpResultados.TabStop = false;
@@ -100,7 +100,7 @@
             // btnEditar
             // 
             this.btnEditar.Location = new System.Drawing.Point(839, 322);
-            this.btnEditar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEditar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(100, 28);
             this.btnEditar.TabIndex = 1;
@@ -110,9 +110,10 @@
             // 
             // dgvPublicaciones
             // 
+            this.dgvPublicaciones.AllowUserToAddRows = false;
             this.dgvPublicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPublicaciones.Location = new System.Drawing.Point(29, 23);
-            this.dgvPublicaciones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvPublicaciones.Margin = new System.Windows.Forms.Padding(4);
             this.dgvPublicaciones.MultiSelect = false;
             this.dgvPublicaciones.Name = "dgvPublicaciones";
             this.dgvPublicaciones.ReadOnly = true;
@@ -138,7 +139,7 @@
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.grpResultados);
             this.Controls.Add(this.grpBuscar);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EditarPublicacionForm";
             this.Text = "Form1";
             this.grpBuscar.ResumeLayout(false);

@@ -40,16 +40,6 @@ namespace PalcoNet.Comprar
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            this.Comprar();           
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            NavigableFormUtil.BackwardTo(this, callerForm);
-        }
-
-        private void Comprar()
-        {
             if (this.ValidarSeleccionDeUbicaciones() && this.TieneTarjeta())
             {
                 clienteRepository.ValidarVencimientoDePuntosDeCliente(Session.Instance().LoggedUsername);
@@ -64,12 +54,17 @@ namespace PalcoNet.Comprar
             }
         }
 
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, callerForm);
+        }
+
         #region Initialization
         private void InitializeForm()
         {
             dgvUbicaciones.DataSource = ubicacionRepository.UbicacionesComprables(decimal.Parse(codPublicacion));
-            dgvUbicaciones.Columns[0].Visible = false;
-            dgvUbicaciones.Columns[5].Visible = false;
+            dgvUbicaciones.Columns[0].Visible = false;//Ocultar ids de ubicacion
+            dgvUbicaciones.Columns[5].Visible = false;//Ocultar puntos de cliente
         }
         #endregion
 

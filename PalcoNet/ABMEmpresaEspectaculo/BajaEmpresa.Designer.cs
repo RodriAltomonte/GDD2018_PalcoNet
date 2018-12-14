@@ -42,9 +42,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(231, 253);
+            this.btnVolver.Location = new System.Drawing.Point(308, 311);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(100, 28);
             this.btnVolver.TabIndex = 24;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -52,9 +53,10 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(312, 253);
+            this.btnBuscar.Location = new System.Drawing.Point(416, 311);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.Size = new System.Drawing.Size(100, 28);
             this.btnBuscar.TabIndex = 25;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -62,66 +64,74 @@
             // 
             // dgvEmpresas
             // 
+            this.dgvEmpresas.AllowUserToAddRows = false;
             this.dgvEmpresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEmpresas.Location = new System.Drawing.Point(54, 85);
+            this.dgvEmpresas.Location = new System.Drawing.Point(72, 105);
+            this.dgvEmpresas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvEmpresas.Name = "dgvEmpresas";
-            this.dgvEmpresas.Size = new System.Drawing.Size(333, 150);
+            this.dgvEmpresas.Size = new System.Drawing.Size(444, 185);
             this.dgvEmpresas.TabIndex = 23;
             this.dgvEmpresas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmpresas_CellContentClick);
             // 
             // txtMail
             // 
-            this.txtMail.Location = new System.Drawing.Point(287, 34);
+            this.txtMail.Location = new System.Drawing.Point(383, 42);
+            this.txtMail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(100, 20);
+            this.txtMail.Size = new System.Drawing.Size(132, 22);
             this.txtMail.TabIndex = 22;
             // 
             // txtCUIT
             // 
-            this.txtCUIT.Location = new System.Drawing.Point(287, 9);
+            this.txtCUIT.Location = new System.Drawing.Point(383, 11);
+            this.txtCUIT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCUIT.Name = "txtCUIT";
-            this.txtCUIT.Size = new System.Drawing.Size(100, 20);
+            this.txtCUIT.Size = new System.Drawing.Size(132, 22);
             this.txtCUIT.TabIndex = 21;
             // 
             // txtRazonSocial
             // 
-            this.txtRazonSocial.Location = new System.Drawing.Point(123, 28);
+            this.txtRazonSocial.Location = new System.Drawing.Point(164, 34);
+            this.txtRazonSocial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtRazonSocial.Name = "txtRazonSocial";
-            this.txtRazonSocial.Size = new System.Drawing.Size(107, 20);
+            this.txtRazonSocial.Size = new System.Drawing.Size(141, 22);
             this.txtRazonSocial.TabIndex = 20;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(255, 35);
+            this.label4.Location = new System.Drawing.Point(340, 43);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.Size = new System.Drawing.Size(42, 17);
             this.label4.TabIndex = 17;
             this.label4.Text = "Email";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(255, 9);
+            this.label3.Location = new System.Drawing.Point(340, 11);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.Size = new System.Drawing.Size(39, 17);
             this.label3.TabIndex = 18;
             this.label3.Text = "CUIT";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 31);
+            this.label1.Location = new System.Drawing.Point(65, 38);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.Size = new System.Drawing.Size(89, 17);
             this.label1.TabIndex = 19;
             this.label1.Text = "Razon social";
             // 
             // BajaEmpresa
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 284);
+            this.ClientSize = new System.Drawing.Size(537, 350);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.dgvEmpresas);
@@ -131,6 +141,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "BajaEmpresa";
             this.Text = "BajaEmpresa";
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpresas)).EndInit();
