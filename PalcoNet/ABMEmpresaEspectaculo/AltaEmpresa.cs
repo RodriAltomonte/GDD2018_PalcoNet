@@ -26,9 +26,10 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         private Usuario newUser;
         private IAccionPostCreacionUsuario accionPostCreacion = new NoVolverALogin();
 
-        public AltaEmpresa()
+        public AltaEmpresa(Form caller)
         {
             InitializeComponent();
+            callerForm = caller;
         }
 
         public AltaEmpresa(Form callerForm, Usuario newUser, IAccionPostCreacionUsuario accionPostCreacion)
@@ -37,6 +38,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             this.callerForm = callerForm;
             this.newUser = newUser;
             this.accionPostCreacion = accionPostCreacion;
+            this.callerForm = callerForm;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)

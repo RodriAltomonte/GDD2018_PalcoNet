@@ -9,37 +9,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PalcoNet.ABMEmpresaEspectaculo
+namespace PalcoNet.ABMRol
 {
-    public partial class ABMClienteEmpresaFormFactory : Form
+    public partial class ABMRolSelectionForm : Form
     {
         private Form callerForm;
-        public ABMClienteEmpresaFormFactory(Form CallerForm)
+        public ABMRolSelectionForm(Form CallerForm)
         {
-            callerForm = CallerForm;
             InitializeComponent();
+            callerForm = CallerForm;
+        }
+        public ABMRolSelectionForm()
+        {
+            InitializeComponent();
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.ForwardTo(this, new ABMEmpresaEspectaculo.AltaEmpresa(this));
+            NavigableFormUtil.ForwardTo(this, new ABMRol.AltaRol());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.ForwardTo(this, new ABMEmpresaEspectaculo.ListadoEmpresa(this));
+            NavigableFormUtil.ForwardTo(this, new ABMRol.SeleccionRol());
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.BackwardTo(this, callerForm);
+            NavigableFormUtil.BackwardTo(this,callerForm);
         }
-
-        private void btnBaja_Click(object sender, EventArgs e)
-        {
-            NavigableFormUtil.ForwardTo(this, new ABMEmpresaEspectaculo.BajaEmpresa(this));
-        }
-
-
     }
 }

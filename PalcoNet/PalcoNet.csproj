@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABMCliente\ABMClienteSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMCliente\ABMClienteSelectionForm.Designer.cs">
+      <DependentUpon>ABMClienteSelectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABMCliente\AltaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,12 @@
     </Compile>
     <Compile Include="ABMGrado\ModificacionGradoForm.Designer.cs">
       <DependentUpon>ModificacionGradoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMRol\ABMRolSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMRol\ABMRolSelectionForm.Designer.cs">
+      <DependentUpon>ABMRolSelectionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ABMRol\AltaRol.cs">
       <SubType>Form</SubType>
@@ -351,6 +363,12 @@
     <Compile Include="RegistroUsuario\RegistroDeUsuarioForm.Designer.cs">
       <DependentUpon>RegistroDeUsuarioForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ABMCliente\ABMClienteSelectionForm.aa-DJ.resx">
+      <DependentUpon>ABMClienteSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMCliente\ABMClienteSelectionForm.resx">
+      <DependentUpon>ABMClienteSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABMCliente\AltaCliente.resx">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -389,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABMGrado\ModificacionGradoForm.resx">
       <DependentUpon>ModificacionGradoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMRol\ABMRolSelectionForm.resx">
+      <DependentUpon>ABMRolSelectionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABMRol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>

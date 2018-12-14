@@ -1124,7 +1124,7 @@ CREATE PROCEDURE LOS_DE_GESTION.FuncionalidadRol
 AS
 	BEGIN
 
-	IF(NOT EXISTS(SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Funcionalidad = @funcionalidadRol))
+	IF(NOT EXISTS(SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Funcionalidad = @funcionalidadRol AND id_Rol = @id_Rol))
 		BEGIN
 			BEGIN TRANSACTION
 				INSERT INTO LOS_DE_GESTION.Rol_X_Funcionalidad(id_Rol,id_Funcionalidad)

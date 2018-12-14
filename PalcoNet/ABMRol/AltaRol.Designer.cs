@@ -37,6 +37,7 @@
             this.cbHabilitado = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbIdRol = new System.Windows.Forms.TextBox();
+            this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,11 +119,22 @@
             this.tbIdRol.Size = new System.Drawing.Size(156, 20);
             this.tbIdRol.TabIndex = 1;
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(13, 312);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 5;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
             // AltaRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(508, 345);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.cbHabilitado);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
@@ -151,5 +163,6 @@
         private System.Windows.Forms.CheckBox cbHabilitado;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbIdRol;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

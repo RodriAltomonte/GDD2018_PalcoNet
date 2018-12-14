@@ -2,6 +2,7 @@
 using PalcoNet.Classes.Constants;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.DatabaseConnection;
+using PalcoNet.Classes.Util.Form;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,21 +17,11 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 {
     public partial class BajaEmpresa : Form
     {
-        public BajaEmpresa()
+        private Form CallerForm;
+        public BajaEmpresa(Form caller)
         {
             InitializeComponent();
-            try
-            {
-                DataTable dt = ConnectionFactory.Instance()
-                                                .CreateConnection()
-                                                .ExecuteDataTableSqlQuery(@"SELECT razon_social,mail,telefono,
-                                                                            calle,nro_calle,depto,localidad,
-                                                                            codigo_postal,ciudad,cuit,username
-                                                                            FROM LOS_DE_GESTION.Empresa
-                                                                            WHERE razon_social=" + "'" + txtRazonSocial.Text + "'"); // ARREGLAR ESTO
-                dgvEmpresas.DataSource = dt;
-            }
-            catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+            CallerForm = caller;
         }
 
         private void dgvEmpresas_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -50,6 +41,30 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                 }
                 catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable dt = ConnectionFactory.Instance()
+                                                .CreateConnection()
+                                                .ExecuteDataTableSqlQuery(@"SELECT razon_social,mail,telefono,
+                                                                            calle,nro_calle,depto,localidad,
+                                                                            codigo_postal,ciudad,cuit,username
+                                                                            FROM LOS_DE_GESTION.Empresa
+                                                                            WHERE razon_social=" + "'" + txtRazonSocial.Text + "'"
+                                                                            + "OR" + "'" + txtRazonSocial.Text + "'" + "IS NULL AND "
+                                                                            + "mail=" + "'" + txtMail.Text + "'" + "OR" + "'" + txtMail.Text + "'" +
+                                                                            "IS NULL AND cuit=" + "'" + txtCUIT.Text + "'" + "OR" + "'" + txtCUIT.Text + "'" + "IS NULL");
+                dgvEmpresas.DataSource = dt;
+            }
+            catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
     }
 }

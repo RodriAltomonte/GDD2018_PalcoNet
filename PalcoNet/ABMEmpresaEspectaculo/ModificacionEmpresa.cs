@@ -21,6 +21,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
     {
         private static string Username = "";
         private static string CUIT = "";
+        private Form CallerForm;
         
         public ModificacionEmpresa(string razon_social,
                                    string mail,
@@ -33,7 +34,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                                    string ciudad,
                                    string ciut,
                                    string username,
-                                   bool habilitada)
+                                   bool habilitada,
+                                   Form callerForm)
                                     
         {
             Username = username;
@@ -51,8 +53,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             txtCiudad.Text = ciudad;
             txtCUIT.Text = ciut;
             cbxHabilitado.Checked = habilitada;
-            
-            
+
+            CallerForm = callerForm;
             
         }
       
@@ -109,7 +111,12 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            //NavigableFormUtil.BackwardTo(this, previousForm);
+            NavigableFormUtil.BackwardTo(this, CallerForm);
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            TextFieldUtils.CleanAllControls(this);
         }
     }
 }

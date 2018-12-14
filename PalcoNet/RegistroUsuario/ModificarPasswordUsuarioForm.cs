@@ -24,6 +24,7 @@ namespace PalcoNet.RegistroUsuario
             InitializeComponent();
             this.usuarioRepository = new UsuarioRepository();
             this.usuarioAModificar = usuarioAModificar;
+           
         }
 
         public ModificarPasswordUsuarioForm(Form previousForm)
@@ -31,6 +32,7 @@ namespace PalcoNet.RegistroUsuario
             InitializeComponent();
             this.usuarioRepository = new UsuarioRepository();
             this.usuarioAModificar = Session.Instance().LoggedUsername;
+            callerForm = previousForm;
         }
 
         private void btnModificarPassword_Click(object sender, EventArgs e)

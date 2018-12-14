@@ -1,6 +1,6 @@
-﻿namespace PalcoNet.ABMEmpresaEspectaculo
+﻿namespace PalcoNet.ABMRol
 {
-    partial class ABMClienteEmpresaFormFactory
+    partial class ABMRolSelectionForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,60 +31,48 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.btnBaja = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(76, 12);
+            this.button1.Location = new System.Drawing.Point(98, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 23);
+            this.button1.Size = new System.Drawing.Size(154, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Alta Empresa";
+            this.button1.Text = "Alta de Rol";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(76, 41);
+            this.button2.Location = new System.Drawing.Point(98, 41);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Modificacion Empresa";
+            this.button2.Size = new System.Drawing.Size(154, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Modificacion Rol";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 122);
+            this.button3.Location = new System.Drawing.Point(12, 103);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
+            this.button3.Size = new System.Drawing.Size(85, 23);
+            this.button3.TabIndex = 0;
             this.button3.Text = "Volver";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // btnBaja
-            // 
-            this.btnBaja.Location = new System.Drawing.Point(76, 71);
-            this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(109, 23);
-            this.btnBaja.TabIndex = 3;
-            this.btnBaja.Text = "Baja Empresa";
-            this.btnBaja.UseVisualStyleBackColor = true;
-            this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
-            // 
-            // ABMClienteEmpresaFormFactory
+            // ABMRolSelectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 178);
-            this.Controls.Add(this.btnBaja);
+            this.ClientSize = new System.Drawing.Size(380, 142);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "ABMClienteEmpresaFormFactory";
-            this.Text = "ABM Empresa";
+            this.Name = "ABMRolSelectionForm";
+            this.Text = "ABMRolSelectionForm";
             this.ResumeLayout(false);
 
         }
@@ -94,6 +82,5 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button btnBaja;
     }
 }

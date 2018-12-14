@@ -17,9 +17,12 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 {
     public partial class ListadoEmpresa : Form
     {
-        public ListadoEmpresa()
+        private Form CallerForm;
+        public ListadoEmpresa(Form caller)
         {
             InitializeComponent();
+            CallerForm = caller;
+
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -70,7 +73,12 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                                                                       ciudad,
                                                                       ciut,
                                                                       username,
-                                                                      habilitada));
+                                                                      habilitada,this));
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
     }
 }
