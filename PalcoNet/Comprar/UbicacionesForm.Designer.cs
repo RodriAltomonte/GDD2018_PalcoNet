@@ -38,25 +38,29 @@
             // dgvUbicaciones
             // 
             this.dgvUbicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUbicaciones.Location = new System.Drawing.Point(12, 29);
+            this.dgvUbicaciones.Location = new System.Drawing.Point(16, 36);
+            this.dgvUbicaciones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvUbicaciones.Name = "dgvUbicaciones";
-            this.dgvUbicaciones.Size = new System.Drawing.Size(545, 187);
+            this.dgvUbicaciones.ReadOnly = true;
+            this.dgvUbicaciones.Size = new System.Drawing.Size(727, 230);
             this.dgvUbicaciones.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 10);
+            this.label1.Location = new System.Drawing.Point(17, 12);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.Size = new System.Drawing.Size(85, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Ubicaciones";
             // 
             // btnComprar
             // 
-            this.btnComprar.Location = new System.Drawing.Point(481, 223);
+            this.btnComprar.Location = new System.Drawing.Point(641, 274);
+            this.btnComprar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnComprar.Name = "btnComprar";
-            this.btnComprar.Size = new System.Drawing.Size(75, 23);
+            this.btnComprar.Size = new System.Drawing.Size(100, 28);
             this.btnComprar.TabIndex = 2;
             this.btnComprar.Text = "Comprar";
             this.btnComprar.UseVisualStyleBackColor = true;
@@ -64,22 +68,24 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(400, 223);
+            this.btnVolver.Location = new System.Drawing.Point(533, 274);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(100, 28);
             this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // UbicacionesForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 291);
+            this.ClientSize = new System.Drawing.Size(785, 358);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnComprar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvUbicaciones);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "UbicacionesForm";
             this.Text = "UbicacionesForm";
             ((System.ComponentModel.ISupportInitialize)(this.dgvUbicaciones)).EndInit();

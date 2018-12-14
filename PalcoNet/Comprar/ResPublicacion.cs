@@ -18,6 +18,7 @@ namespace PalcoNet.Comprar
 {
     public partial class ResPublicacion : Form
     {
+        private const int PAGE_SIZE = 10;
         private Form previousForm;
         string descripcion;
         string fechaInicial;
@@ -40,12 +41,10 @@ namespace PalcoNet.Comprar
         private void btnVolver_Click(object sender, EventArgs e)
         {
             NavigableFormUtil.BackwardTo(this, previousForm);
-
         }
 
         private void ResultadoPublicacion_Load(object sender, EventArgs e)
         {
-
         }
 
         private void BtnAnterior_Click(object sender, EventArgs e)
@@ -55,9 +54,9 @@ namespace PalcoNet.Comprar
 
         private void dgvResultados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string cod_publicacion = dgvResultados.CurrentRow.Cells[0].Value.ToString();
+            string codigoPublicacion = dgvResultados.CurrentRow.Cells[0].Value.ToString();
 
-            NavigableFormUtil.ForwardTo(this, new UbicacionesForm(cod_publicacion));
+            NavigableFormUtil.ForwardTo(this, new UbicacionesForm(codigoPublicacion));
         }
 
         private void BtnSiguiente_Click(object sender, EventArgs e)
@@ -65,24 +64,24 @@ namespace PalcoNet.Comprar
             cargarResultados(posicion + 1);
         }
 
+        #region Auxiliary methods
         private void cargarResultados(int pagina)
         {
             if (pagina > 0)
             {
                 posicion = pagina;
                 pagina--;
-                int x = pagina * 5;
-                string select = @"SELECT p.cod_publicacion AS Codigo,p.descripcion AS Descripcion,p.fecha_publicacion AS 'Fecha de publicacion',"+
-                                    "p.fecha_vencimiento_publicacion AS 'Fecha de vencimiento',p.fecha_hora_espectaculo AS 'Fecha y hora de espectaculo',"+
-                                    "p.direccion_espectaculo AS Direccion,p.usuario_empresa_vendedora AS 'Usuario empresa'"+
+                int basePagina = pagina * PAGE_SIZE;
+                string select = @"SELECT p.cod_publicacion AS Codigo,p.descripcion AS Descripcion,p.fecha_publicacion AS 'Fecha de publicacion'," +
+                                    "p.fecha_vencimiento_publicacion AS 'Fecha de vencimiento',p.fecha_hora_espectaculo AS 'Fecha y hora de espectaculo'," +
+                                    "p.direccion_espectaculo AS Direccion,p.usuario_empresa_vendedora AS 'Usuario empresa'" +
                                     "from LOS_DE_GESTION.Publicacion p join LOS_DE_GESTION.Rubro r on (p.id_Rubro = r.id_Rubro) ";
 
-                string final = @"ORDER BY cod_publicacion
-                                OFFSET " + x.ToString() + @" ROWS FETCH NEXT " + 5 + " ROWS ONLY";
+                string final = @"ORDER BY p.id_grado_publicacion,p.cod_publicacion ASC "+
+                                "OFFSET " + basePagina.ToString() + @" ROWS FETCH NEXT " + PAGE_SIZE + " ROWS ONLY";
                 if (categorias.Count != 0 || descripcion != "" || fechaInicial != "" || fechaFinal != "")
                 {
-                    select += "where ";
-
+                    select += "where p.id_estado_publicacion = 1 and ";
 
                     if (descripcion != "")
                     {
@@ -109,8 +108,14 @@ namespace PalcoNet.Comprar
                         select += " or ";
                     }
 
-                    select = select.Substring(0, select.Length - 4);
-
+                    if (categorias.Count > 0)
+                    {
+                        select = select.Substring(0, select.Length - 3);
+                    }
+                    else
+                    {
+                        select = select.Substring(0, select.Length - 4);
+                    }
                 }
 
                 select += final;
@@ -118,5 +123,6 @@ namespace PalcoNet.Comprar
               dgvResultados.DataSource = ConnectionFactory.Instance().CreateConnection().ExecuteDataTableSqlQuery(select);
             }
         }
+        #endregion
     }
 }
