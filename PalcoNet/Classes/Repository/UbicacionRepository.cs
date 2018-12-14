@@ -7,11 +7,13 @@ using PalcoNet.Classes.DatabaseConnection;
 using Classes.DatabaseConnection;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.Constants;
+using Classes.Util;
 
 namespace PalcoNet.Classes.Repository
 {
     class UbicacionRepository
     {
+        private const string Schema = "LOS_DE_GESTION.";
         public void CrearUbicaciones(UbicacionPersistente ubicacion)
         {
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
@@ -56,6 +58,15 @@ namespace PalcoNet.Classes.Repository
 
             ConnectionFactory.Instance().CreateConnection()
                 .ExecuteDataTableStoredProcedure(SpNames.EliminarUbicaciones, inputParameters);
+        }
+
+        public void ActualizarUbicacionesCompradas(decimal idCompra, IList<decimal> idsUbicaciones)
+        {
+            string query = "update " + Schema + "Ubicacion set id_Compra = " + idCompra.ToString() +
+                " where cod_publicacion in (" + StringUtil.ConcatSeparatedByComma<decimal>(idsUbicaciones) + ")";
+
+            ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableSqlQuery(query);
         }
     }
 }
