@@ -50,17 +50,24 @@ namespace PalcoNet.GenerarPublicacion
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (rdbFilasAsientos.Checked)
+            if (txtFila.Text.Length > 3)
             {
-                form.AgregarUbicacion("Fila " + txtFila.Text, txtAsientos.Text, txtPrecio.Text, cmbTipoUbicacion.Text);
+                MessageBoxUtil.ShowError("La fila debe tener un maximo de tres caracteres.");
             }
             else
             {
-                form.AgregarUbicacion("Sin numerar", txtAsientos.Text, txtPrecio.Text, cmbTipoUbicacion.Text);
-            }
+                if (rdbFilasAsientos.Checked)
+                {
+                    form.AgregarUbicacion("Fila " + txtFila.Text, nudCantidadLugares.Text, nudPrecio.Text, cmbTipoUbicacion.Text);
+                }
+                else
+                {
+                    form.AgregarUbicacion("Sin numerar", nudCantidadLugares.Text, nudPrecio.Text, cmbTipoUbicacion.Text);
+                }
 
-            this.Close();
-            this.Dispose();
+                this.Close();
+                this.Dispose();
+            }
         }
     }
 }

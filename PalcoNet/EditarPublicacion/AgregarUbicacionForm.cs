@@ -33,17 +33,24 @@ namespace PalcoNet.EditarPublicacion
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            callerForm.AddUbicacionAInsertar(this.CrearUbicacionPersistente());
-            this.Dispose();
-            this.Close();
+            if (txtFila.Text.Length > 3)
+            {
+                MessageBoxUtil.ShowError("La fila debe tener un maximo de tres caracteres.");
+            }
+            else
+            {
+                callerForm.AddUbicacionAInsertar(this.CrearUbicacionPersistente());
+                this.Dispose();
+                this.Close();
+            }
         }
 
         private UbicacionPersistente CrearUbicacionPersistente()
         {
             UbicacionPersistente ubicacion = new UbicacionPersistente();
             ubicacion.Fila = txtFila.Text;
-            ubicacion.Precio = txtPrecio.Text;
-            ubicacion.CantidadDeLugares = int.Parse(txtAsientos.Text);
+            ubicacion.Precio = nudPrecio.Text;
+            ubicacion.CantidadDeLugares = int.Parse(nudCantidadLugares.Text);
             ubicacion.DescripcionTipoUbicacion = cmbTipoUbicacion.Text;
             ubicacion.IdTipoUbicacion = ((ComboBoxItem<decimal>)cmbTipoUbicacion.SelectedItem).Value;
             ubicacion.SinNumerar = rdbSinNumerar.Checked;

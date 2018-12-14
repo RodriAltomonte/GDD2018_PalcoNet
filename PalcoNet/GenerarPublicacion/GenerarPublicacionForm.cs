@@ -56,7 +56,8 @@ namespace PalcoNet.GenerarPublicacion
 
                         ubicacionRepository.InsertarListaDeUbicaciones(ubicaciones);                                       
                     }
-                    MessageBoxUtil.ShowInfo("Publicación creada correctamente.");                    
+                    MessageBoxUtil.ShowInfo("Publicación creada correctamente.");
+                    NavigableFormUtil.BackwardTo(this, previousForm);
                 }
                 
             }
