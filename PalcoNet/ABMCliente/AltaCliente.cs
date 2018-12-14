@@ -67,7 +67,7 @@ namespace PalcoNet.ABMCliente
                 if (newUser == null)
                 {
                     inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(10));
-                    inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10));
+                    inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10)); // FALTA ENCRIPTAR 
                 }
                 else
                 {

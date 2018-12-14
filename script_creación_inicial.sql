@@ -137,6 +137,99 @@ go
 IF OBJECT_ID(N'LOS_DE_GESTION.PR_BUSCAR_GRADO_POR_ID') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_BUSCAR_GRADO_POR_ID
 go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.AgregarFuncionalidad') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.AgregarFuncionalidad
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.AltaCliente') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.AltaCliente
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.AltaEmpresa') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.AltaEmpresa
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.AltaRol') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.AltaRol
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.BajaCliente') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.BajaCliente
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.BajaEmpresa') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.BajaEmpresa
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.BajaRol') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.BajaRol
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.ComprasDeEmpresa') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ComprasDeEmpresa
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.CrearItemRendicion') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.CrearItemRendicion
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.CrearRendicion') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.CrearRendicion
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.EliminarFuncionalidad') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.EliminarFuncionalidad
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.FuncionalidadRol') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.FuncionalidadRol
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.HabilitarCliente') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.HabilitarCliente
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.HabilitarEmpresa') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.HabilitarEmpresa
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.HabilitarRol') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.HabilitarRol
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.ListadoClientes') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ListadoClientes
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.ListadoEmpresas') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ListadoEmpresas
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.ModificacionPasswordCliente') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ModificacionPasswordCliente
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.ModificarCliente') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ModificarCliente
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.ModificarEmpresa') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ModificarEmpresa
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.ModificarPasswordEmpresa') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ModificarPasswordEmpresa
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.ModificarRol') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ModificarRol
+GO
+
+IF OBJECT_ID(N'LOS_DE_GESTION.RolHabilitado') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.RolHabilitado
+GO
+
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -813,9 +906,9 @@ BEGIN
 		set @contador = @contador+1
 	END
 END
-go
+GO
 
-/*9. EDITAR PUBLICACION*/drop PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR
+/*9. EDITAR PUBLICACION*/drop PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR GO
 CREATE PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR @usernameEmpresa nvarchar(255), @descripcion nvarchar(255)--, @pagina int, @tamanio int
 AS
 BEGIN
@@ -1128,7 +1221,7 @@ AS
 	IF(NOT EXISTS (SELECT username FROM LOS_DE_GESTION.Usuario WHERE username=@username))
 		BEGIN
 			INSERT INTO LOS_DE_GESTION.Usuario(username,password,habilitado,intentos_login,bloqueado_login_fallidos)
-			VALUES(@username,@password,@habilitado,0,0)
+			VALUES(@username,LOS_DE_GESTION.FN_HASHPASS(@password),@habilitado,0,0)
 
 			INSERT INTO LOS_DE_GESTION.Usuario_X_Rol(id_Rol,username)
 			VALUES(@id_rol,@username)
@@ -1139,7 +1232,7 @@ AS
 		END
 
 		IF(NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento = @nro_documento)
-				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,9) = @nro_documento)
+				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,10) = @nro_documento)
 			BEGIN
 				
 					INSERT INTO LOS_DE_GESTION.Cliente(username,nombre,apellido,tipo_documento,numero_documento,
@@ -1215,7 +1308,7 @@ AS
 	BEGIN
 		IF(NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil=@cuil AND cuil != @cuil_original) --Arreglar esto!
 			AND NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento=@nro_documento AND numero_documento!=@nro_documentoOriginal)
-			AND SUBSTRING(@cuil,3,9) = @nro_documento)
+			AND SUBSTRING(@cuil,3,10) = @nro_documento)
 			BEGIN
 		UPDATE LOS_DE_GESTION.Cliente
 		SET nombre = @nombre,
@@ -1267,7 +1360,7 @@ BEGIN
 	IF(NOT EXISTS(SELECT username FROM LOS_DE_GESTION.Usuario WHERE username=@username))
 		BEGIN
 				INSERT INTO LOS_DE_GESTION.Usuario(username,password,habilitado,intentos_login,bloqueado_login_fallidos) --EXECUTE LOS_DE_GESTION.PR_ALTA_DE_USUARIO(args) 
-				VALUES(@username,@password,@habilitado,0,0)
+				VALUES(@username,LOS_DE_GESTION.FN_HASHPASS(@password),@habilitado,0,0)
 
 				INSERT INTO LOS_DE_GESTION.Usuario_X_Rol(username,id_Rol)
 				VALUES(@username,@rol)
