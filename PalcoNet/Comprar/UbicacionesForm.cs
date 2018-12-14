@@ -35,7 +35,6 @@ namespace PalcoNet.Comprar
             string usuario_cliente_comprador = Session.Instance().LoggedUsername;
             string tarjeta_comprador = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<string>(@"SELECT tarjeta FROM LOS_DE_GESTION.Cliente 
                                                                                                                             WHERE username="+ "'"+usuario_cliente_comprador+"'");
-        //  int id_item_Rendicion =  ??
             decimal cantidad_de_ubicaciones = dgvUbicaciones.SelectedRows.Count;
             if (cantidad_de_ubicaciones <= 0)
             {
@@ -51,7 +50,6 @@ namespace PalcoNet.Comprar
                     inputParameters.AddParameter("@fecha_compra", fecha_compra);
                     inputParameters.AddParameter("@usuario_cliente_comprador", usuario_cliente_comprador);
                     inputParameters.AddParameter("@tarjeta_comprador", tarjeta_comprador);
-                    //  inputParameters.AddParameter("@id_item_Rendicion") 
                     inputParameters.AddParameter("@cantidad_ubicaciones", cantidad_de_ubicaciones);
 
                     try

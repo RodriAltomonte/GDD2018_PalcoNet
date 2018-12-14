@@ -41,20 +41,22 @@
             // 
             this.grpResultados.Controls.Add(this.BtnSiguiente);
             this.grpResultados.Controls.Add(this.BtnAnterior);
-            this.grpResultados.Controls.Add(this.btnVolver);
             this.grpResultados.Controls.Add(this.dgvResultados);
-            this.grpResultados.Location = new System.Drawing.Point(13, 5);
+            this.grpResultados.Location = new System.Drawing.Point(17, 6);
+            this.grpResultados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpResultados.Name = "grpResultados";
-            this.grpResultados.Size = new System.Drawing.Size(614, 420);
+            this.grpResultados.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpResultados.Size = new System.Drawing.Size(1164, 428);
             this.grpResultados.TabIndex = 3;
             this.grpResultados.TabStop = false;
             this.grpResultados.Text = "Resultados";
             // 
             // BtnSiguiente
             // 
-            this.BtnSiguiente.Location = new System.Drawing.Point(526, 390);
+            this.BtnSiguiente.Location = new System.Drawing.Point(591, 386);
+            this.BtnSiguiente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnSiguiente.Name = "BtnSiguiente";
-            this.BtnSiguiente.Size = new System.Drawing.Size(75, 23);
+            this.BtnSiguiente.Size = new System.Drawing.Size(100, 28);
             this.BtnSiguiente.TabIndex = 3;
             this.BtnSiguiente.Text = "Siguiente";
             this.BtnSiguiente.UseVisualStyleBackColor = true;
@@ -62,9 +64,10 @@
             // 
             // BtnAnterior
             // 
-            this.BtnAnterior.Location = new System.Drawing.Point(419, 390);
+            this.BtnAnterior.Location = new System.Drawing.Point(470, 386);
+            this.BtnAnterior.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnAnterior.Name = "BtnAnterior";
-            this.BtnAnterior.Size = new System.Drawing.Size(75, 23);
+            this.BtnAnterior.Size = new System.Drawing.Size(100, 28);
             this.BtnAnterior.TabIndex = 2;
             this.BtnAnterior.Text = "Anterior";
             this.BtnAnterior.UseVisualStyleBackColor = true;
@@ -72,9 +75,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(6, 393);
+            this.btnVolver.Location = new System.Drawing.Point(17, 442);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(100, 28);
             this.btnVolver.TabIndex = 1;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -85,20 +89,22 @@
             this.dgvResultados.AllowUserToAddRows = false;
             this.dgvResultados.AllowUserToDeleteRows = false;
             this.dgvResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResultados.Location = new System.Drawing.Point(6, 27);
+            this.dgvResultados.Location = new System.Drawing.Point(28, 35);
+            this.dgvResultados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvResultados.Name = "dgvResultados";
             this.dgvResultados.ReadOnly = true;
-            this.dgvResultados.Size = new System.Drawing.Size(602, 348);
+            this.dgvResultados.Size = new System.Drawing.Size(1110, 343);
             this.dgvResultados.TabIndex = 0;
             this.dgvResultados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvResultados_CellContentClick);
             // 
             // ResPublicacion
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 430);
+            this.ClientSize = new System.Drawing.Size(1194, 480);
             this.Controls.Add(this.grpResultados);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.btnVolver);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ResPublicacion";
             this.Text = "Publicaciones";
             this.Load += new System.EventHandler(this.ResultadoPublicacion_Load);
