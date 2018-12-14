@@ -233,6 +233,11 @@ GO
 IF OBJECT_ID(N'LOS_DE_GESTION.PR_CLIENTE_TIENE_TARJETA') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_CLIENTE_TIENE_TARJETA
 go
+
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_UBICACIONES_COMPRABLES') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_UBICACIONES_COMPRABLES
+go
+
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -1573,6 +1578,18 @@ BEGIN
 END
 go
 
+CREATE PROCEDURE LOS_DE_GESTION.PR_UBICACIONES_COMPRABLES @codPublicacion numeric(18,0)
+AS
+BEGIN
+	SELECT u.id_Ubicacion, 
+	(case when u.ubicacion_sin_numerar = 1 then 'Sin numerar' else 'Fila ' + u.fila end) AS Ubicacion, 
+	(case when u.ubicacion_sin_numerar = 1 then ' - ' else convert(nvarchar(255),u.asiento) end) AS Asiento, 
+	u.precio AS Precio, t.descripcion AS 'Tipo de ubicacion'
+	FROM LOS_DE_GESTION.Ubicacion u 
+	inner join LOS_DE_GESTION.Tipo_Ubicacion t on t.id_Tipo_Ubicacion = u.id_Tipo_Ubicacion
+	where u.id_Compra is null and u.cod_publicacion = @codPublicacion
+END
+go
 
 
 

@@ -70,5 +70,6 @@ namespace PalcoNet.Classes.Constants
         public const string ListadoComprasEmpresa = Schema + "ComprasDeEmpresa";
         public const string NuevaCompra = Schema + "NuevaCompra";
         public const string ClienteTieneTarjeta = Schema + "PR_CLIENTE_TIENE_TARJETA";
+        public const string UbicacionesComprables = Schema + "PR_UBICACIONES_COMPRABLES";
     }
 }

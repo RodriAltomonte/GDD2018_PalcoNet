@@ -8,6 +8,7 @@ using Classes.DatabaseConnection;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.Constants;
 using Classes.Util;
+using System.Data;
 
 namespace PalcoNet.Classes.Repository
 {
@@ -67,6 +68,12 @@ namespace PalcoNet.Classes.Repository
 
             ConnectionFactory.Instance().CreateConnection()
                 .ExecuteDataTableSqlQuery(query);
+        }
+
+        public DataTable UbicacionesComprables(decimal codPublicacion)
+        {
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableStoredProcedure(SpNames.UbicacionesComprables, StoredProcedureParameterMap.Of("@codPublicacion", codPublicacion));
         }
     }
 }

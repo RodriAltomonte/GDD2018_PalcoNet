@@ -31,7 +31,7 @@ namespace PalcoNet.Comprar
             if (this.ValidarTarjeta())
             {
                 clienteRepository.AsociarTarjeta(txtNroTarjeta.Text, Session.Instance().LoggedUsername);
-                MessageBoxUtil.ShowInfo("Tarjeta asociada correctamente.");
+                MessageBoxUtil.ShowInfo("Tarjeta asociada correctamente. Intente hacer la compra nuevamente.");
                 NavigableFormUtil.BackwardTo(this, callerForm);
             }
         }

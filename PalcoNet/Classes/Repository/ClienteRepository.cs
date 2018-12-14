@@ -36,5 +36,12 @@ namespace PalcoNet.Classes.Repository
             ConnectionFactory.Instance().CreateConnection()
                 .ExecuteDataTableSqlQuery(query);
         }
+
+        public string TarjetaDeCliente(string username)
+        {
+            string query = "select tarjeta from LOS_DE_GESTION.Cliente where username = '" + username + "'";
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteSingleOutputSqlQuery<string>(query);
+        }
     }
 }

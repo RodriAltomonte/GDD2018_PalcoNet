@@ -14,25 +14,33 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Classes.Configuration;
 using PalcoNet.Classes.Util.Form;
+using PalcoNet.Classes.Repository;
+using PalcoNet.Classes.Model;
 
 namespace PalcoNet.Comprar
 {
     public partial class UbicacionesForm : Form
     {
         private Form callerForm;
-        private string CodPublicacion;
+        private string codPublicacion;
+        private UbicacionRepository ubicacionRepository;
+        private CompraRepository compraRepository;
+        private ClienteRepository clienteRepository;
 
         public UbicacionesForm(Form callerForm, string codigoPublicacion)
         {
             InitializeComponent();
-            InitializeForm();
             this.callerForm = callerForm;
-            CodPublicacion = codigoPublicacion;
+            this.codPublicacion = codigoPublicacion;
+            this.ubicacionRepository = new UbicacionRepository();
+            this.compraRepository = new CompraRepository();
+            this.clienteRepository = new ClienteRepository();
+            InitializeForm();
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+            /*StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
             decimal monto_total = 0;
             DateTime fecha_compra = DateTime.Now;
             string usuario_cliente_comprador = Session.Instance().LoggedUsername;
@@ -65,7 +73,9 @@ namespace PalcoNet.Comprar
                     MessageBox.Show("Compra realizada exitosamente!");
                 }
                 catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
-            }
+            }*/
+
+            this.Comprar();
            
         }
 
@@ -74,14 +84,74 @@ namespace PalcoNet.Comprar
             NavigableFormUtil.BackwardTo(this, callerForm);
         }
 
+        private void Comprar()
+        {
+            if (this.ValidarSeleccionDeUbicaciones() && this.TieneTarjeta())
+            {
+                IList<decimal> idsUbicaciones = this.IdsSeleccionados();
+                decimal idCompra = compraRepository.GenerarCompra(this.CrearCompra());
+                ubicacionRepository.ActualizarUbicacionesCompradas(idCompra, idsUbicaciones);
+
+                MessageBoxUtil.ShowInfo("Compra realizada correctamente.");
+                NavigableFormUtil.BackwardTo(this, callerForm);
+            }
+        }
+
         #region Initialization
         private void InitializeForm()
         {
-            dgvUbicaciones.DataSource = ConnectionFactory.Instance()
+            dgvUbicaciones.DataSource = ubicacionRepository.UbicacionesComprables(decimal.Parse(codPublicacion));
+            dgvUbicaciones.Columns[0].Visible = false;
+                /*ConnectionFactory.Instance()
                                                          .CreateConnection()
                                                          .ExecuteDataTableSqlQuery(@"SELECT u.fila AS Fila,u.asiento AS Asiento,u.precio AS Precio FROM LOS_DE_GESTION.Ubicacion u 
                                                                                      JOIN LOS_DE_GESTION.Publicacion p 
                                                                                       ON u.cod_publicacion=p.cod_publicacion ");
+                 */
+        }
+        #endregion
+
+        #region Auxiliary methods
+        private IList<decimal> IdsSeleccionados()
+        {
+            return DataGridViewUtil.ListOfRowCells<decimal>(dgvUbicaciones.SelectedRows, 0);
+        }
+
+        private IList<decimal> PreciosSeleccionados()
+        {
+            return DataGridViewUtil.ListOfRowCells<decimal>(dgvUbicaciones.SelectedRows, 3);
+        }
+
+        private bool TieneTarjeta()
+        {
+            if (!clienteRepository.ClienteTieneTarjeta(Session.Instance().LoggedUsername))
+            {
+                MessageBoxUtil.ShowError("No se puede realizar la compra, no tiene una tarjeta asociada.");
+                NavigableFormUtil.ForwardTo(this, new AsociarTarjeta(this));
+                return false;
+            }
+            return true;
+        }
+
+        private Compra CrearCompra()
+        {
+            Compra nuevaCompra = new Compra();
+            nuevaCompra.FechaDeCompra = ConfigurationManager.Instance().GetSystemDateTime();
+            nuevaCompra.UsuarioComprador = Session.Instance().LoggedUsername;
+            nuevaCompra.CantidadUbicaciones = dgvUbicaciones.SelectedRows.Count;
+            nuevaCompra.MontoTotal = this.PreciosSeleccionados().Sum();
+            nuevaCompra.TarjetaComprador = clienteRepository.TarjetaDeCliente(nuevaCompra.UsuarioComprador);
+            return nuevaCompra;
+        }
+
+        private bool ValidarSeleccionDeUbicaciones()
+        {
+            if (dgvUbicaciones.SelectedRows.Count <= 0)
+            {
+                MessageBoxUtil.ShowError("Seleccione al menos una ubicación.");
+                return false;
+            }
+            return true;
         }
         #endregion
     }

@@ -29,35 +29,26 @@
         private void InitializeComponent()
         {
             this.dgvUbicaciones = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnComprar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUbicaciones)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvUbicaciones
             // 
             this.dgvUbicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUbicaciones.Location = new System.Drawing.Point(16, 36);
+            this.dgvUbicaciones.Location = new System.Drawing.Point(21, 40);
             this.dgvUbicaciones.Margin = new System.Windows.Forms.Padding(4);
             this.dgvUbicaciones.Name = "dgvUbicaciones";
             this.dgvUbicaciones.ReadOnly = true;
-            this.dgvUbicaciones.Size = new System.Drawing.Size(727, 230);
+            this.dgvUbicaciones.Size = new System.Drawing.Size(617, 230);
             this.dgvUbicaciones.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 12);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Ubicaciones";
             // 
             // btnComprar
             // 
-            this.btnComprar.Location = new System.Drawing.Point(641, 274);
+            this.btnComprar.Location = new System.Drawing.Point(538, 289);
             this.btnComprar.Margin = new System.Windows.Forms.Padding(4);
             this.btnComprar.Name = "btnComprar";
             this.btnComprar.Size = new System.Drawing.Size(100, 28);
@@ -68,7 +59,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(533, 274);
+            this.btnVolver.Location = new System.Drawing.Point(430, 289);
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
@@ -77,29 +68,38 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dgvUbicaciones);
+            this.groupBox1.Controls.Add(this.btnVolver);
+            this.groupBox1.Controls.Add(this.btnComprar);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(658, 336);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ubicaciones";
+            // 
             // UbicacionesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(785, 358);
-            this.Controls.Add(this.btnVolver);
-            this.Controls.Add(this.btnComprar);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgvUbicaciones);
+            this.ClientSize = new System.Drawing.Size(687, 359);
+            this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UbicacionesForm";
             this.Text = "UbicacionesForm";
             ((System.ComponentModel.ISupportInitialize)(this.dgvUbicaciones)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView dgvUbicaciones;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnComprar;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
