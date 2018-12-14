@@ -32,7 +32,6 @@ namespace PalcoNet.Comprar
             this.descripcion = descripcion;
             this.fechaInicial = fechaInicial;
             this.fechaFinal = fechaFinal;
-            this.categorias = new List<String>();
             this.categorias = categorias;
          
             cargarResultados(1);
@@ -73,10 +72,10 @@ namespace PalcoNet.Comprar
                 posicion = pagina;
                 pagina--;
                 int x = pagina * 5;
-                string select = @"SELECT p.cod_publicacion,p.descripcion,p.fecha_publicacion,
-                                    p.fecha_vencimiento_publicacion,p.fecha_hora_espectaculo,
-                                    p.direccion_espectaculo,p.usuario_empresa_vendedora 
-                                    from LOS_DE_GESTION.Publicacion p join LOS_DE_GESTION.Rubro r on (p.id_Rubro = r.id_Rubro ) ";
+                string select = @"SELECT p.cod_publicacion AS Codigo,p.descripcion AS Descripcion,p.fecha_publicacion AS 'Fecha de publicacion',"+
+                                    "p.fecha_vencimiento_publicacion AS 'Fecha de vencimiento',p.fecha_hora_espectaculo AS 'Fecha y hora de espectaculo',"+
+                                    "p.direccion_espectaculo AS Direccion,p.usuario_empresa_vendedora AS 'Usuario empresa'"+
+                                    "from LOS_DE_GESTION.Publicacion p join LOS_DE_GESTION.Rubro r on (p.id_Rubro = r.id_Rubro) ";
 
                 string final = @"ORDER BY cod_publicacion
                                 OFFSET " + x.ToString() + @" ROWS FETCH NEXT " + 5 + " ROWS ONLY";
@@ -93,12 +92,12 @@ namespace PalcoNet.Comprar
 
                     if (fechaInicial != "")
                     {
-                        select += "p.fecha_publicacion = '" + fechaInicial + "' ";
+                        select += "p.fecha_publicacion >= '" + fechaInicial + "' ";
                         select += " and ";
                     }
                     if (fechaFinal != "")
                     {
-                        select += "p.fecha_vencimiento_publicacion = '" + fechaFinal + "' ";
+                        select += "p.fecha_publicacion <= '" + fechaFinal + "' ";
                         select += " and ";
                     }
                     string rDescripcion = "r.descripcion = ";
@@ -107,7 +106,7 @@ namespace PalcoNet.Comprar
                     {
                         select +=  rDescripcion ;
                         select += "'" + rubros + "'";
-                        select += " and ";
+                        select += " or ";
                     }
 
                     select = select.Substring(0, select.Length - 4);

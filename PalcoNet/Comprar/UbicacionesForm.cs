@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Classes.Configuration;
 
 namespace PalcoNet.Comprar
 {
@@ -62,7 +63,7 @@ namespace PalcoNet.Comprar
         {
             dgvUbicaciones.DataSource = ConnectionFactory.Instance()
                                                          .CreateConnection()
-                                                         .ExecuteDataTableSqlQuery(@"SELECT u.fila,u.asiento,u.precio FROM LOS_DE_GESTION.Ubicacion u 
+                                                         .ExecuteDataTableSqlQuery(@"SELECT u.fila AS Fila,u.asiento AS Asiento,u.precio AS Precio FROM LOS_DE_GESTION.Ubicacion u 
                                                                                      JOIN LOS_DE_GESTION.Publicacion p 
                                                                                       ON u.cod_publicacion=p.cod_publicacion ");
         }
