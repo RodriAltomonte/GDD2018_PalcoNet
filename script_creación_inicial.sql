@@ -482,8 +482,6 @@ CREATE TABLE LOS_DE_GESTION.Premio(
 	fecha_compra datetime,
 	usuario_cliente_comprador nvarchar(255),
 	tarjeta_comprador nvarchar(255),
-	--id_Rendicion numeric(18, 0),
-	id_item_Rendicion numeric(18, 0),
 	cantidad_ubicaciones numeric(18, 0)
  )
  go
@@ -1551,12 +1549,11 @@ CREATE PROCEDURE LOS_DE_GESTION.NuevaCompra
 @fecha_compra DATETIME,
 @usuario_cliente_comprador nvarchar(255),
 @tarjeta_comprador nvarchar(255),
-@id_item_Rendicion numeric(18, 0),
 @cantidad_ubicaciones numeric(18, 0)
 AS
 BEGIN
-	INSERT INTO LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,id_item_Rendicion,cantidad_ubicaciones)
-	VALUES(@monto_total,@fecha_compra,@usuario_cliente_comprador,@tarjeta_comprador,@id_item_Rendicion,@cantidad_ubicaciones)
+	INSERT INTO LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,cantidad_ubicaciones)
+	VALUES(@monto_total,@fecha_compra,@usuario_cliente_comprador,@tarjeta_comprador,@cantidad_ubicaciones)
 END
 GO
 
@@ -1636,8 +1633,8 @@ BEGIN
 		 FROM gd_esquema.Maestra
 
 /* inserto Compra*/
-		 insert into LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,id_item_Rendicion,cantidad_ubicaciones)
-		 SELECT sum(Ubicacion_Precio), Compra_Fecha,Cli_Dni,null,Factura_Nro,sum(Compra_Cantidad)
+		 insert into LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,cantidad_ubicaciones)
+		 SELECT sum(Ubicacion_Precio), Compra_Fecha,Cli_Dni,null,sum(Compra_Cantidad)
 		 FROM gd_esquema.Maestra where Compra_Cantidad is not null
 		 group by Compra_Fecha,Cli_Dni,Factura_Nro									       
 
