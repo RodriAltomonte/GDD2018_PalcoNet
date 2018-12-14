@@ -1456,12 +1456,11 @@ CREATE PROCEDURE LOS_DE_GESTION.NuevaCompra
 @fecha_compra DATETIME,
 @usuario_cliente_comprador nvarchar(255),
 @tarjeta_comprador nvarchar(255),
-@id_item_Rendicion numeric(18, 0),
 @cantidad_ubicaciones numeric(18, 0)
 AS
 BEGIN
-	INSERT INTO LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,id_item_Rendicion,cantidad_ubicaciones)
-	VALUES(@monto_total,@fecha_compra,@usuario_cliente_comprador,@tarjeta_comprador,@id_item_Rendicion,@cantidad_ubicaciones)
+	INSERT INTO LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,cantidad_ubicaciones)
+	VALUES(@monto_total,@fecha_compra,@usuario_cliente_comprador,@tarjeta_comprador,@cantidad_ubicaciones)
 END
 GO
 
