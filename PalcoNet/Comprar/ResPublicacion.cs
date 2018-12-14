@@ -124,5 +124,17 @@ namespace PalcoNet.Comprar
             }
         }
         #endregion
+
+        private void btnPrimera_Click(object sender, EventArgs e)
+        {
+            int primeraPagina = 1 ;
+            cargarResultados(primeraPagina);
+        }
+
+        private void btnUltima_Click(object sender, EventArgs e)
+        {
+            int ultimaPagina = posicion;
+            cargarResultados(ultimaPagina);
+        }
     }
 }

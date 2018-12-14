@@ -54,6 +54,8 @@ namespace PalcoNet.Comprar
                 inputParameters.AddParameter("@tarjeta_comprador", tarjeta_comprador);
                 inputParameters.AddParameter("@cantidad_ubicaciones", cantidad_de_ubicaciones);
 
+                //Actualizar el id_Compra de la ubicacion
+
                 try
                 {
                     ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.NuevaCompra, inputParameters);

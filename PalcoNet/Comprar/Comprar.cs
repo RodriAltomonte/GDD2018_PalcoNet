@@ -58,6 +58,13 @@ namespace PalcoNet.Comprar
 
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
+            if ((DateTime.Compare(Convert.ToDateTime(dtpFechaInicial.Text), Convert.ToDateTime(dtpFechaFinal.Text)) > 0)
+                || (DateTime.Compare(Convert.ToDateTime(dtpFechaFinal.Text), Convert.ToDateTime(dtpFechaInicial.Text)) < 0))
+            {
+                MessageBox.Show("Verifique las fechas");
+            }
+            else
+            {
                 try
                 {
                     this.Hide();
@@ -76,7 +83,7 @@ namespace PalcoNet.Comprar
                     MessageBoxUtil.ShowError("Error al generar la publicacion.");
                 }
 
-            
+            }
         }
 
         private void BtnQuitar_Click(object sender, EventArgs e)
