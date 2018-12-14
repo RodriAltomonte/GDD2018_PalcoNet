@@ -32,29 +32,37 @@ namespace PalcoNet.Comprar
             decimal monto_total = 0;
             DateTime fecha_compra = DateTime.Now;
             string usuario_cliente_comprador = Session.Instance().LoggedUsername;
-            string tarjeta_comprador = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<string>("SELECT tarjeta FROM LOS_DE_GESTION.Cliente WHERE username="+ "'"+usuario_cliente_comprador+"'");
+            string tarjeta_comprador = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<string>(@"SELECT tarjeta FROM LOS_DE_GESTION.Cliente 
+                                                                                                                            WHERE username="+ "'"+usuario_cliente_comprador+"'");
         //  int id_item_Rendicion =  ??
             decimal cantidad_de_ubicaciones = dgvUbicaciones.SelectedRows.Count;
-
-            foreach (DataGridViewRow row in dgvUbicaciones.SelectedRows)
+            if (cantidad_de_ubicaciones <= 0)
             {
-                monto_total += decimal.Parse(row.Cells[3].Value.ToString());
+                MessageBox.Show("Por favor elige al menos una ubicacion!");
             }
-
-            inputParameters.AddParameter("@monto_total", monto_total);
-            inputParameters.AddParameter("@fecha_compra", fecha_compra);
-            inputParameters.AddParameter("@usuario_cliente_comprador", usuario_cliente_comprador);
-            inputParameters.AddParameter("@tarjeta_comprador", tarjeta_comprador);
-        //  inputParameters.AddParameter("@id_item_Rendicion") 
-            inputParameters.AddParameter("@cantidad_ubicaciones",cantidad_de_ubicaciones);
-
-            try
+            else
             {
-                ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.NuevaCompra, inputParameters);
-                MessageBox.Show("Compra realizada exitosamente!");
-            }
-            catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
+
+                foreach (DataGridViewRow row in dgvUbicaciones.SelectedRows)
+                {
+                    monto_total += decimal.Parse(row.Cells[3].Value.ToString());
+                    inputParameters.AddParameter("@monto_total", monto_total);
+                    inputParameters.AddParameter("@fecha_compra", fecha_compra);
+                    inputParameters.AddParameter("@usuario_cliente_comprador", usuario_cliente_comprador);
+                    inputParameters.AddParameter("@tarjeta_comprador", tarjeta_comprador);
+                    //  inputParameters.AddParameter("@id_item_Rendicion") 
+                    inputParameters.AddParameter("@cantidad_ubicaciones", cantidad_de_ubicaciones);
+
+                    try
+                    {
+                        ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.NuevaCompra, inputParameters);
+                        MessageBox.Show("Compra realizada exitosamente!");
+                    }
+                    catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             
+                }
+            }
+           
         }
 
         #region Initialization

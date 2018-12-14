@@ -46,9 +46,7 @@ namespace PalcoNet.ABMCliente
                
                 StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                 inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
-                inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(15));
                 inputParameters.AddParameter("@id_rol", 2); // 2 Rol Cliente
-                inputParameters.AddParameter("@password",StringUtil.GenerateRandomPassword(15)); //Contraseña creada por defecto que luego debera ser cambiada por el usuario
                 inputParameters.AddParameter("@nombre", txtNombre.Text);
                 inputParameters.AddParameter("@apellido", txtApellido.Text);
                 inputParameters.AddParameter("@tipo_documento", cboTipoDoc.Text);
