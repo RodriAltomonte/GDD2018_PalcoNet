@@ -106,7 +106,7 @@ namespace PalcoNet.Comprar
 
                     if (descripcion != "")
                     {
-                        select += "p.descripcion = '" + descripcion + "' ";
+                        select += "p.descripcion like '%" + descripcion + "%' ";
                         select += " and ";
                     }
 
