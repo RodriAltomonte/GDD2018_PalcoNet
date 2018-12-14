@@ -277,11 +277,11 @@
     <Compile Include="GenerarPublicacion\AgregarUbicacionForm.Designer.cs">
       <DependentUpon>AgregarUbicacionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GenerarRendicionComisiones\GenerarRendicionV2.cs">
+    <Compile Include="GenerarRendicionComisiones\GenerarRendicionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenerarRendicionComisiones\GenerarRendicionV2.Designer.cs">
-      <DependentUpon>GenerarRendicionV2.cs</DependentUpon>
+    <Compile Include="GenerarRendicionComisiones\GenerarRendicionForm.Designer.cs">
+      <DependentUpon>GenerarRendicionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Inicio.cs">
       <SubType>Form</SubType>
@@ -294,12 +294,6 @@
     </Compile>
     <Compile Include="GenerarPublicacion\GenerarPublicacionForm.Designer.cs">
       <DependentUpon>GenerarPublicacionForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GenerarRendicionComisiones\GenerarRendicionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GenerarRendicionComisiones\GenerarRendicionForm.Designer.cs">
-      <DependentUpon>GenerarRendicionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="HistorialCliente\HistorialClienteForm.cs">
       <SubType>Form</SubType>
@@ -440,9 +434,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GenerarRendicionComisiones\GenerarRendicionForm.resx">
       <DependentUpon>GenerarRendicionForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GenerarRendicionComisiones\GenerarRendicionV2.resx">
-      <DependentUpon>GenerarRendicionV2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HistorialCliente\HistorialClienteForm.resx">
       <DependentUpon>HistorialClienteForm.cs</DependentUpon>

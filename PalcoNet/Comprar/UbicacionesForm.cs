@@ -22,19 +22,24 @@ namespace PalcoNet.Comprar
         {
             InitializeComponent();
             InitializeForm();
+            
             CodPublicacion = codigo_publicacion;
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-
-            decimal monto_total = 0; // ¡TEST!
+            decimal monto_total = 0;
             DateTime fecha_compra = DateTime.Now;
             string usuario_cliente_comprador = Session.Instance().LoggedUsername;
-            string tarjeta_comprador = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<string>("SELECT tarjeta FROM LOS_DE_GESTION.Cliente WHERE username="+ usuario_cliente_comprador);
-        //  int id_item_Rendicion =??
+            string tarjeta_comprador = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<string>("SELECT tarjeta FROM LOS_DE_GESTION.Cliente WHERE username="+ "'"+usuario_cliente_comprador+"'");
+        //  int id_item_Rendicion =  ??
             decimal cantidad_de_ubicaciones = dgvUbicaciones.SelectedRows.Count;
+
+            foreach (DataGridViewRow row in dgvUbicaciones.SelectedRows)
+            {
+                monto_total += decimal.Parse(row.Cells[3].Value.ToString());
+            }
 
             inputParameters.AddParameter("@monto_total", monto_total);
             inputParameters.AddParameter("@fecha_compra", fecha_compra);

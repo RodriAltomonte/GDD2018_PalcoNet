@@ -56,8 +56,9 @@ namespace PalcoNet.Comprar
 
         private void dgvResultados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var codigo_publicacion = dgvResultados.CurrentRow.Cells[0].Value.ToString();
-            NavigableFormUtil.ForwardTo(this, new UbicacionesForm(codigo_publicacion));
+            string cod_publicacion = dgvResultados.CurrentRow.Cells[0].Value.ToString();
+
+            NavigableFormUtil.ForwardTo(this, new UbicacionesForm(cod_publicacion));
         }
 
         private void BtnSiguiente_Click(object sender, EventArgs e)
