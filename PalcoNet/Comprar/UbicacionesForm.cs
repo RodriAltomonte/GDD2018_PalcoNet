@@ -13,18 +13,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Classes.Configuration;
+using PalcoNet.Classes.Util.Form;
 
 namespace PalcoNet.Comprar
 {
     public partial class UbicacionesForm : Form
     {
+        private Form callerForm;
         private string CodPublicacion;
-        public UbicacionesForm(string codigo_publicacion)
+
+        public UbicacionesForm(Form callerForm, string codigoPublicacion)
         {
             InitializeComponent();
             InitializeForm();
-            
-            CodPublicacion = codigo_publicacion;
+            this.callerForm = callerForm;
+            CodPublicacion = codigoPublicacion;
         }
 
         private void btnComprar_Click(object sender, EventArgs e)
@@ -64,6 +67,11 @@ namespace PalcoNet.Comprar
                 catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             }
            
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, callerForm);
         }
 
         #region Initialization

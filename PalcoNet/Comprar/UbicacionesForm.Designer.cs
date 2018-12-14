@@ -39,7 +39,7 @@
             // 
             this.dgvUbicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUbicaciones.Location = new System.Drawing.Point(16, 36);
-            this.dgvUbicaciones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvUbicaciones.Margin = new System.Windows.Forms.Padding(4);
             this.dgvUbicaciones.Name = "dgvUbicaciones";
             this.dgvUbicaciones.ReadOnly = true;
             this.dgvUbicaciones.Size = new System.Drawing.Size(727, 230);
@@ -58,7 +58,7 @@
             // btnComprar
             // 
             this.btnComprar.Location = new System.Drawing.Point(641, 274);
-            this.btnComprar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnComprar.Margin = new System.Windows.Forms.Padding(4);
             this.btnComprar.Name = "btnComprar";
             this.btnComprar.Size = new System.Drawing.Size(100, 28);
             this.btnComprar.TabIndex = 2;
@@ -69,12 +69,13 @@
             // btnVolver
             // 
             this.btnVolver.Location = new System.Drawing.Point(533, 274);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
             this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // UbicacionesForm
             // 
@@ -85,7 +86,7 @@
             this.Controls.Add(this.btnComprar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvUbicaciones);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UbicacionesForm";
             this.Text = "UbicacionesForm";
             ((System.ComponentModel.ISupportInitialize)(this.dgvUbicaciones)).EndInit();

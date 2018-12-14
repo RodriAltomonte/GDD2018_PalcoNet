@@ -54,14 +54,35 @@ namespace PalcoNet.Comprar
 
         private void dgvResultados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string codigoPublicacion = dgvResultados.CurrentRow.Cells[0].Value.ToString();
 
-            NavigableFormUtil.ForwardTo(this, new UbicacionesForm(codigoPublicacion));
+        }
+
+        private void btnSeleccionar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string codigoPublicacion = dgvResultados.SelectedRows[0].Cells[0].Value.ToString();
+                NavigableFormUtil.ForwardTo(this, new UbicacionesForm(this, codigoPublicacion));
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBoxUtil.ShowError("Seleccione una fila válida.");
+            }
         }
 
         private void BtnSiguiente_Click(object sender, EventArgs e)
         {
             cargarResultados(posicion + 1);
+        }
+
+        private void btnUltimaPag_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrimeraPag_Click(object sender, EventArgs e)
+        {
+            cargarResultados(1);
         }
 
         #region Auxiliary methods

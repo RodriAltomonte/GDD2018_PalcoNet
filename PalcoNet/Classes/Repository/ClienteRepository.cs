@@ -22,5 +22,19 @@ namespace PalcoNet.Classes.Repository
                 .CreateConnection()
                 .ExecuteDataTableStoredProcedure(SpNames.ValidarVencimientoDePuntos, inputParameters);
         }
+
+        public bool ClienteTieneTarjeta(string username)
+        {
+            return ConnectionFactory.Instance().CreateConnection()
+                .ExecuteSingleOutputStoredProcedure<bool>(SpNames.ClienteTieneTarjeta, StoredProcedureParameterMap.Of("@username", username), "@tieneTarjeta");
+        }
+
+        public void AsociarTarjeta(string tarjeta, string username)
+        {
+            string query = "update LOS_DE_GESTION.Cliente set tarjeta = '" + tarjeta + "' where username = '" + username + "'";
+            
+            ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableSqlQuery(query);
+        }
     }
 }

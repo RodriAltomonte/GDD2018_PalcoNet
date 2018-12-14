@@ -41,6 +41,16 @@ namespace Classes.Util
                             .Select(s => s[new Random().Next(s.Length)]).ToArray());
         }
 
+        public static string ConcatSeparatedByComma<T>(IList<T> list)
+        {
+            string concat = "";
+            foreach (T item in list)
+            {
+                concat += item.ToString() + ",";
+            }
+            return concat.Substring(0,concat.Length-1);
+        }
+
        
         public static class MailUtil
         {
