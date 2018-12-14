@@ -28,5 +28,13 @@ namespace PalcoNet.Classes.Repository
             return ConnectionFactory.Instance().CreateConnection()
                 .ExecuteSingleOutputStoredProcedure<bool>(SpNames.ClienteTieneTarjeta, StoredProcedureParameterMap.Of("@username", username), "@tieneTarjeta");
         }
+
+        public void AsociarTarjeta(string tarjeta, string username)
+        {
+            string query = "update LOS_DE_GESTION.Cliente set tarjeta = '" + tarjeta + "' where username = '" + username + "'";
+            
+            ConnectionFactory.Instance().CreateConnection()
+                .ExecuteDataTableSqlQuery(query);
+        }
     }
 }
