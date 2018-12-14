@@ -122,6 +122,9 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_ELIMINAR_UBICACIONES') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_ELIMINAR_UBICACIONES
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_CREAR_GRADO_PUBLICACION') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_CREAR_GRADO_PUBLICACION
+go
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -656,6 +659,25 @@ CREATE PROCEDURE LOS_DE_GESTION.PR_ACTUALIZAR_USUARIO_MIGRADO @username nvarchar
 AS
 BEGIN
 	update LOS_DE_GESTION.Usuario set intentos_login = 0 where username = @username	
+END
+go
+
+/*7. ABM GRADO DE PUBLICACION*/
+CREATE PROCEDURE LOS_DE_GESTION.PR_CREAR_GRADO_PUBLICACION
+@idGrado numeric(18,0),
+@descripcion nvarchar(255),
+@porcentaje numeric(5,2)
+AS
+BEGIN
+	BEGIN TRY
+		INSERT INTO LOS_DE_GESTION.Grado_Publicacion
+		(id_Grado_Publicacion, descripcion, porcentaje_costo)
+		VALUES(@idGrado, @descripcion, @porcentaje)	
+	END TRY
+	BEGIN CATCH
+		IF (select ERROR_NUMBER()) = 2627 --Violacion de PK
+			THROW 50001, 'Ya existe un grado de publicacion con el mismo codigo.',1
+	END CATCH	
 END
 go
 

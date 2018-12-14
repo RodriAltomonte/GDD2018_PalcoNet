@@ -9,24 +9,19 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Classes.Util.Form;
 
-namespace PalcoNet.ABMRubro
+namespace PalcoNet.ABMGrado
 {
-    public partial class ABMRubroForm : Form
+    public partial class ModificacionGradoForm : Form
     {
         private Form callerForm;
 
-        public ABMRubroForm(Form callerForm)
+        public ModificacionGradoForm(Form callerForm)
         {
             InitializeComponent();
             this.callerForm = callerForm;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             NavigableFormUtil.BackwardTo(this, callerForm);
         }

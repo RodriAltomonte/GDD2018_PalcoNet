@@ -104,6 +104,24 @@
     <Compile Include="ABMGrado\ABMGradoPublicacionForm.Designer.cs">
       <DependentUpon>ABMGradoPublicacionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABMGrado\AltaGradoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMGrado\AltaGradoForm.Designer.cs">
+      <DependentUpon>AltaGradoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMGrado\BajaGradoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMGrado\BajaGradoForm.Designer.cs">
+      <DependentUpon>BajaGradoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMGrado\ModificacionGradoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMGrado\ModificacionGradoForm.Designer.cs">
+      <DependentUpon>ModificacionGradoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABMRol\AltaRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +181,7 @@
     <Compile Include="Classes\DatabaseConnection\SqlDbTypes.cs" />
     <Compile Include="Classes\DatabaseConnection\StoredProcedureParameterMap.cs" />
     <Compile Include="Classes\Factory\Form\ABMClienteEmpresaFormFactory.cs" />
+    <Compile Include="Classes\Factory\Form\ABMGradoDePublicacionFactory.cs" />
     <Compile Include="Classes\Factory\Form\PostLoginFormFactory.cs" />
     <Compile Include="Classes\Factory\UsuarioFactory.cs" />
     <Compile Include="Classes\Interfaces\Form\IForwardableForm.cs" />
@@ -361,6 +380,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABMGrado\ABMGradoPublicacionForm.resx">
       <DependentUpon>ABMGradoPublicacionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMGrado\AltaGradoForm.resx">
+      <DependentUpon>AltaGradoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMGrado\BajaGradoForm.resx">
+      <DependentUpon>BajaGradoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMGrado\ModificacionGradoForm.resx">
+      <DependentUpon>ModificacionGradoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABMRol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
