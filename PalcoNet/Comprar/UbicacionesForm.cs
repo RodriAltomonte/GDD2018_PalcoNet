@@ -40,43 +40,7 @@ namespace PalcoNet.Comprar
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
-            /*StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-            decimal monto_total = 0;
-            DateTime fecha_compra = DateTime.Now;
-            string usuario_cliente_comprador = Session.Instance().LoggedUsername;
-            string tarjeta_comprador = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<string>(@"SELECT tarjeta FROM LOS_DE_GESTION.Cliente 
-                                                                                                                            WHERE username="+ "'"+usuario_cliente_comprador+"'");
-            decimal cantidad_de_ubicaciones = dgvUbicaciones.SelectedRows.Count;
-            if (cantidad_de_ubicaciones <= 0)
-            {
-                MessageBox.Show("Por favor elige al menos una ubicacion!");
-            }
-            else
-            {
-
-                foreach (DataGridViewRow row in dgvUbicaciones.SelectedRows)
-                {
-                    monto_total += decimal.Parse(row.Cells[3].Value.ToString());
-                    
-                }
-                inputParameters.AddParameter("@monto_total", monto_total);
-                inputParameters.AddParameter("@fecha_compra", fecha_compra);
-                inputParameters.AddParameter("@usuario_cliente_comprador", usuario_cliente_comprador);
-                inputParameters.AddParameter("@tarjeta_comprador", tarjeta_comprador);
-                inputParameters.AddParameter("@cantidad_ubicaciones", cantidad_de_ubicaciones);
-
-                //Actualizar el id_Compra de la ubicacion
-
-                try
-                {
-                    ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.NuevaCompra, inputParameters);
-                    MessageBox.Show("Compra realizada exitosamente!");
-                }
-                catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
-            }*/
-
-            this.Comprar();
-           
+            this.Comprar();           
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -88,8 +52,11 @@ namespace PalcoNet.Comprar
         {
             if (this.ValidarSeleccionDeUbicaciones() && this.TieneTarjeta())
             {
+                clienteRepository.ValidarVencimientoDePuntosDeCliente(Session.Instance().LoggedUsername);
+
                 IList<decimal> idsUbicaciones = this.IdsSeleccionados();
-                decimal idCompra = compraRepository.GenerarCompra(this.CrearCompra());
+                decimal idCompra = compraRepository.GenerarCompra(this.CrearCompra(), this.CalcularPuntosGanados());
+
                 ubicacionRepository.ActualizarUbicacionesCompradas(idCompra, idsUbicaciones);
 
                 MessageBoxUtil.ShowInfo("Compra realizada correctamente.");
@@ -102,12 +69,7 @@ namespace PalcoNet.Comprar
         {
             dgvUbicaciones.DataSource = ubicacionRepository.UbicacionesComprables(decimal.Parse(codPublicacion));
             dgvUbicaciones.Columns[0].Visible = false;
-                /*ConnectionFactory.Instance()
-                                                         .CreateConnection()
-                                                         .ExecuteDataTableSqlQuery(@"SELECT u.fila AS Fila,u.asiento AS Asiento,u.precio AS Precio FROM LOS_DE_GESTION.Ubicacion u 
-                                                                                     JOIN LOS_DE_GESTION.Publicacion p 
-                                                                                      ON u.cod_publicacion=p.cod_publicacion ");
-                 */
+            dgvUbicaciones.Columns[5].Visible = false;
         }
         #endregion
 
@@ -142,6 +104,11 @@ namespace PalcoNet.Comprar
             nuevaCompra.MontoTotal = this.PreciosSeleccionados().Sum();
             nuevaCompra.TarjetaComprador = clienteRepository.TarjetaDeCliente(nuevaCompra.UsuarioComprador);
             return nuevaCompra;
+        }
+
+        private int CalcularPuntosGanados()
+        {
+            return DataGridViewUtil.ListOfRowCells<int>(dgvUbicaciones.SelectedRows, 5).Sum();
         }
 
         private bool ValidarSeleccionDeUbicaciones()

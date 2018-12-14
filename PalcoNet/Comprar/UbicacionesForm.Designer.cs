@@ -38,6 +38,7 @@
             // 
             // dgvUbicaciones
             // 
+            this.dgvUbicaciones.AllowUserToAddRows = false;
             this.dgvUbicaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUbicaciones.Location = new System.Drawing.Point(21, 40);
             this.dgvUbicaciones.Margin = new System.Windows.Forms.Padding(4);

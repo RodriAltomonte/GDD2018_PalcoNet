@@ -238,6 +238,9 @@ IF OBJECT_ID(N'LOS_DE_GESTION.PR_UBICACIONES_COMPRABLES') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_UBICACIONES_COMPRABLES
 go
 
+IF OBJECT_ID(N'LOS_DE_GESTION.PR_GENERAR_COMPRA') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.PR_GENERAR_COMPRA
+go
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
@@ -1568,13 +1571,12 @@ GO
 CREATE PROCEDURE LOS_DE_GESTION.PR_CLIENTE_TIENE_TARJETA @username nvarchar(255), @tieneTarjeta bit output
 AS
 BEGIN
-	declare @usuarioTieneTarjeta bit
-	if exists(select * from LOS_DE_GESTION.Cliente where username = @username and (tarjeta is not null or tarjeta <> ''))
-		set @usuarioTieneTarjeta = 1
+	if exists(select * from LOS_DE_GESTION.Cliente where username = @username and tarjeta is not null and tarjeta <> '')
+		set @tieneTarjeta = 1
 	else
-		set @usuarioTieneTarjeta = 0
+		set @tieneTarjeta = 0
 		
-	return	
+	return;
 END
 go
 
@@ -1584,13 +1586,38 @@ BEGIN
 	SELECT u.id_Ubicacion, 
 	(case when u.ubicacion_sin_numerar = 1 then 'Sin numerar' else 'Fila ' + u.fila end) AS Ubicacion, 
 	(case when u.ubicacion_sin_numerar = 1 then ' - ' else convert(nvarchar(255),u.asiento) end) AS Asiento, 
-	u.precio AS Precio, t.descripcion AS 'Tipo de ubicacion'
+	u.precio AS Precio, 
+	t.descripcion AS 'Tipo de ubicacion',
+	t.puntos_cliente_frecuente
 	FROM LOS_DE_GESTION.Ubicacion u 
 	inner join LOS_DE_GESTION.Tipo_Ubicacion t on t.id_Tipo_Ubicacion = u.id_Tipo_Ubicacion
 	where u.id_Compra is null and u.cod_publicacion = @codPublicacion
 END
 go
 
+CREATE PROCEDURE LOS_DE_GESTION.PR_GENERAR_COMPRA
+@fechaCompra datetime,
+@usuarioComprador nvarchar(255),
+@cantidadUbicaciones numeric(18,0),
+@montoTotal numeric(18,2),
+@tarjetaComprador nvarchar(255),
+@puntosGanados int,
+@idCompra numeric(18,0) output
+AS
+BEGIN
+	INSERT INTO LOS_DE_GESTION.Compra
+	(monto_total, fecha_compra, usuario_cliente_comprador, tarjeta_comprador, cantidad_ubicaciones)
+	VALUES(@montoTotal, @fechaCompra, @usuarioComprador, @tarjetaComprador, @cantidadUbicaciones)
+	
+	set @idCompra = SCOPE_IDENTITY()
+	
+	update LOS_DE_GESTION.Cliente
+	set puntos_acum_validos = puntos_acum_validos + @puntosGanados
+	where username = @usuarioComprador
+	
+	return
+END
+go
 
 
 

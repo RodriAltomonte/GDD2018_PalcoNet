@@ -64,7 +64,7 @@ namespace PalcoNet.Classes.Repository
         public void ActualizarUbicacionesCompradas(decimal idCompra, IList<decimal> idsUbicaciones)
         {
             string query = "update " + Schema + "Ubicacion set id_Compra = " + idCompra.ToString() +
-                " where cod_publicacion in (" + StringUtil.ConcatSeparatedByComma<decimal>(idsUbicaciones) + ")";
+                " where id_ubicacion in (" + StringUtil.ConcatSeparatedByComma<decimal>(idsUbicaciones) + ")";
 
             ConnectionFactory.Instance().CreateConnection()
                 .ExecuteDataTableSqlQuery(query);
