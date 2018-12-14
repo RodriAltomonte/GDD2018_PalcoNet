@@ -58,25 +58,25 @@ namespace PalcoNet.Comprar
 
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                this.Hide();
-                List<String> categorias = new List<String>();
-                foreach (var cat in LbCategoria.Items)
+                try
                 {
-                    categorias.Add(cat.ToString());
-                }
-                ResPublicacion publicacion = new ResPublicacion(this, categorias, txtDescripcion.Text, DateTimeUtil.Of(dtpFechaInicial.Value, dtpHoraInicial.Value).ToString("yyyy-MM-dd HH:mm:ss"), DateTimeUtil.Of(dtpFechaFinal.Value, dtpHoraFinal.Value).ToString("yyyy-MM-dd HH:mm:ss"));
-                publicacion.Show();                 
-                
-                
-            }
-            catch (StoredProcedureException)
-            {
-                MessageBoxUtil.ShowError("Error al generar la publicacion.");
-            }
-          
+                    this.Hide();
+                    List<String> categorias = new List<String>();
+                    foreach (var cat in LbCategoria.Items)
+                    {
+                        categorias.Add(cat.ToString());
+                    }
+                    ResPublicacion publicacion = new ResPublicacion(this, categorias, txtDescripcion.Text, DateTimeUtil.Of(dtpFechaInicial.Value, dtpHoraInicial.Value).ToString("yyyy-dd-MM HH:mm:ss"), DateTimeUtil.Of(dtpFechaFinal.Value, dtpHoraFinal.Value).ToString("yyyy-dd-MM HH:mm:ss"));
+                    publicacion.Show();
 
+
+                }
+                catch (StoredProcedureException)
+                {
+                    MessageBoxUtil.ShowError("Error al generar la publicacion.");
+                }
+
+            
         }
 
         private void BtnQuitar_Click(object sender, EventArgs e)

@@ -46,20 +46,20 @@ namespace PalcoNet.Comprar
                 foreach (DataGridViewRow row in dgvUbicaciones.SelectedRows)
                 {
                     monto_total += decimal.Parse(row.Cells[3].Value.ToString());
-                    inputParameters.AddParameter("@monto_total", monto_total);
-                    inputParameters.AddParameter("@fecha_compra", fecha_compra);
-                    inputParameters.AddParameter("@usuario_cliente_comprador", usuario_cliente_comprador);
-                    inputParameters.AddParameter("@tarjeta_comprador", tarjeta_comprador);
-                    inputParameters.AddParameter("@cantidad_ubicaciones", cantidad_de_ubicaciones);
-
-                    try
-                    {
-                        ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.NuevaCompra, inputParameters);
-                        MessageBox.Show("Compra realizada exitosamente!");
-                    }
-                    catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
-            
+                    
                 }
+                inputParameters.AddParameter("@monto_total", monto_total);
+                inputParameters.AddParameter("@fecha_compra", fecha_compra);
+                inputParameters.AddParameter("@usuario_cliente_comprador", usuario_cliente_comprador);
+                inputParameters.AddParameter("@tarjeta_comprador", tarjeta_comprador);
+                inputParameters.AddParameter("@cantidad_ubicaciones", cantidad_de_ubicaciones);
+
+                try
+                {
+                    ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.NuevaCompra, inputParameters);
+                    MessageBox.Show("Compra realizada exitosamente!");
+                }
+                catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             }
            
         }
