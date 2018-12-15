@@ -44,13 +44,15 @@ namespace PalcoNet.ABMRol
             {
                 foreach (DataGridViewCell cell in cells)
                 {
+                    decimal Id_Funcionlidad = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<decimal>("SELECT id_Funcionalidad FROM LOS_DE_GESTION.Funcionalidad WHERE nombre=" + "'" + cell.Value.ToString() + "'");
                     FuncionalidadParameters.AddParameter("@id_Rol", IdRol);
-                    FuncionalidadParameters.AddParameter("@funcionalidadRol", decimal.Parse(cell.Value.ToString()));
+                    FuncionalidadParameters.AddParameter("@funcionalidadRol", Id_Funcionlidad);
                     ConnectionFactory.Instance()
                                      .CreateConnection()
                                      .ExecuteDataTableStoredProcedure(SpNames.AgregarFuncionalidadRol, FuncionalidadParameters);
                     FuncionalidadParameters.RemoveParameters();
                 }
+                Refresh();
                 MessageBox.Show("Funcionalidades agregadas al rol correctamente!");
             }
             catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
@@ -66,13 +68,15 @@ namespace PalcoNet.ABMRol
             {
                 foreach (DataGridViewCell cell in cells)
                 {
+                    decimal id_funcionalidad = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<decimal>("SELECT id_Funcionalidad FROM LOS_DE_GESTION.Funcionalidad WHERE nombre=" + "'" + cell.Value.ToString() + "'");
                     inputParameters.AddParameter("@id_rol", IdRol);
-                    inputParameters.AddParameter("@funcionalidad", decimal.Parse(cell.Value.ToString()));
+                    inputParameters.AddParameter("@funcionalidad", id_funcionalidad);
                     ConnectionFactory.Instance()
                                      .CreateConnection()
                                      .ExecuteDataTableStoredProcedure(SpNames.BorrarFuncionalidad, inputParameters);
                     inputParameters.RemoveParameters();
                 }
+                Refresh();
                 MessageBox.Show("Funcionalidades eliminadas del rol correctamente!");
             }
             catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
@@ -82,5 +86,19 @@ namespace PalcoNet.ABMRol
         {
             NavigableFormUtil.BackwardTo(this, new ModificacionRol(IdRol));
         }
+        #region Auxilliary
+        private void Refresh()
+        {
+            DataTable dt1 = ConnectionFactory.Instance()
+                                          .CreateConnection()
+                                          .ExecuteDataTableSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Funcionalidad WHERE id_Funcionalidad NOT IN (SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol=" + "'" + IdRol + "'" + ")");
+            dgvFunsDisponibles.DataSource = dt1;
+
+            DataTable dt2 = ConnectionFactory.Instance()
+                                             .CreateConnection()
+                                             .ExecuteDataTableSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Funcionalidad WHERE id_Funcionalidad IN (SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol=" + "'" + IdRol + "'" + ")");
+            dgvFnsRol.DataSource = dt2;
+        }
+        #endregion
     }
 }

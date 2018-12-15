@@ -43,8 +43,7 @@ namespace PalcoNet.ABMCliente
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             var cuil = txtCUIT1.Text + txtCUIT2 + txtCUIT3.Text;
-            if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text)
-              && TextFieldUtils.CUIT.EsCuilValido(cuil)   ) 
+            if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text))
             {
               
                 StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
@@ -89,7 +88,7 @@ namespace PalcoNet.ABMCliente
                 }
                 catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             }
-            else { MessageBox.Show("Por favor completa todos los campos y revisa el mail"); }
+            else { MessageBox.Show("Por favor completa todos los campos y reviselos"); }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
