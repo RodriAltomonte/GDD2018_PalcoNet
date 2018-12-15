@@ -47,14 +47,14 @@
             this.grpResultados.Margin = new System.Windows.Forms.Padding(4);
             this.grpResultados.Name = "grpResultados";
             this.grpResultados.Padding = new System.Windows.Forms.Padding(4);
-            this.grpResultados.Size = new System.Drawing.Size(790, 473);
+            this.grpResultados.Size = new System.Drawing.Size(644, 432);
             this.grpResultados.TabIndex = 4;
             this.grpResultados.TabStop = false;
             this.grpResultados.Text = "Resultados";
             // 
             // BtnSiguiente
             // 
-            this.BtnSiguiente.Location = new System.Drawing.Point(682, 437);
+            this.BtnSiguiente.Location = new System.Drawing.Point(536, 396);
             this.BtnSiguiente.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSiguiente.Name = "BtnSiguiente";
             this.BtnSiguiente.Size = new System.Drawing.Size(100, 28);
@@ -65,7 +65,7 @@
             // 
             // BtnAnterior
             // 
-            this.BtnAnterior.Location = new System.Drawing.Point(574, 437);
+            this.BtnAnterior.Location = new System.Drawing.Point(413, 396);
             this.BtnAnterior.Margin = new System.Windows.Forms.Padding(4);
             this.BtnAnterior.Name = "BtnAnterior";
             this.BtnAnterior.Size = new System.Drawing.Size(100, 28);
@@ -76,7 +76,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(8, 437);
+            this.btnVolver.Location = new System.Drawing.Point(8, 396);
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
@@ -94,14 +94,14 @@
             this.dgvResultados.Margin = new System.Windows.Forms.Padding(4);
             this.dgvResultados.Name = "dgvResultados";
             this.dgvResultados.ReadOnly = true;
-            this.dgvResultados.Size = new System.Drawing.Size(774, 361);
+            this.dgvResultados.Size = new System.Drawing.Size(628, 336);
             this.dgvResultados.TabIndex = 0;
             // 
             // HistorialClienteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 499);
+            this.ClientSize = new System.Drawing.Size(672, 458);
             this.Controls.Add(this.grpResultados);
             this.Name = "HistorialClienteForm";
             this.Text = "Historial";
