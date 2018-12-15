@@ -15,10 +15,14 @@ namespace PalcoNet.ABMRol
 {
     public partial class SeleccionRol : Form
     {
+        private Form CallerForm;
         private decimal IdRol;
-        public SeleccionRol()
+        private int Option;
+        public SeleccionRol(Form caller,int option)
         {
             InitializeComponent();
+            CallerForm = caller;
+            Option = option;
             try
             {
                 DataSet ds = ConnectionFactory.Instance()
@@ -37,7 +41,21 @@ namespace PalcoNet.ABMRol
             IdRol =ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<decimal>(@"SELECT id_Rol 
                                                                                                        FROM LOS_DE_GESTION.Rol 
                                                                                                        WHERE nombre="+"'"+selectedRol+"'");
-            NavigableFormUtil.ForwardTo(this, new ModificacionRol(IdRol));
+            //Si es una modificacion ir a la pantalla modificacion
+            if (Option == 1)
+            {
+                NavigableFormUtil.ForwardTo(this, new ModificacionRol(IdRol, this));
+            }
+            //Si no ir a la pantalla de baja
+            else
+            {
+                NavigableFormUtil.ForwardTo(this, new ABMRol.BajaRolForm(this, IdRol));
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
     }
 }

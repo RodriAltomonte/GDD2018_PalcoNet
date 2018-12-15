@@ -59,7 +59,7 @@ namespace PalcoNet.ABMRol
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.BackwardTo(this, new ABMRol.ABMRolSelectionForm());
+            NavigableFormUtil.BackwardTo(this, new ABMRol.ABMRolSelectionForm(this));
         }
     }
 }

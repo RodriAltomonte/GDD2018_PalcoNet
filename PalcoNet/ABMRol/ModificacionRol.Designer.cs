@@ -30,8 +30,7 @@
         {
             this.btnModNombre = new System.Windows.Forms.Button();
             this.btnModFuncs = new System.Windows.Forms.Button();
-            this.btnHabilitar = new System.Windows.Forms.Button();
-            this.btnDeshabilitar = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnModNombre
@@ -54,33 +53,22 @@
             this.btnModFuncs.UseVisualStyleBackColor = true;
             this.btnModFuncs.Click += new System.EventHandler(this.btnModFuncs_Click);
             // 
-            // btnHabilitar
+            // btnVolver
             // 
-            this.btnHabilitar.Location = new System.Drawing.Point(50, 71);
-            this.btnHabilitar.Name = "btnHabilitar";
-            this.btnHabilitar.Size = new System.Drawing.Size(169, 23);
-            this.btnHabilitar.TabIndex = 1;
-            this.btnHabilitar.Text = "Habilitar";
-            this.btnHabilitar.UseVisualStyleBackColor = true;
-            this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click);
-            // 
-            // btnDeshabilitar
-            // 
-            this.btnDeshabilitar.Location = new System.Drawing.Point(50, 100);
-            this.btnDeshabilitar.Name = "btnDeshabilitar";
-            this.btnDeshabilitar.Size = new System.Drawing.Size(169, 23);
-            this.btnDeshabilitar.TabIndex = 1;
-            this.btnDeshabilitar.Text = "Deshabilitar";
-            this.btnDeshabilitar.UseVisualStyleBackColor = true;
-            this.btnDeshabilitar.Click += new System.EventHandler(this.btnDeshabilitar_Click);
+            this.btnVolver.Location = new System.Drawing.Point(12, 70);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 2;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // ModificacionRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 187);
-            this.Controls.Add(this.btnDeshabilitar);
-            this.Controls.Add(this.btnHabilitar);
+            this.ClientSize = new System.Drawing.Size(299, 99);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnModFuncs);
             this.Controls.Add(this.btnModNombre);
             this.Name = "ModificacionRol";
@@ -93,7 +81,6 @@
 
         private System.Windows.Forms.Button btnModNombre;
         private System.Windows.Forms.Button btnModFuncs;
-        private System.Windows.Forms.Button btnHabilitar;
-        private System.Windows.Forms.Button btnDeshabilitar;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

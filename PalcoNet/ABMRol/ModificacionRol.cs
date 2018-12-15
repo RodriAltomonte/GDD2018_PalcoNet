@@ -18,24 +18,12 @@ namespace PalcoNet.ABMRol
     public partial class ModificacionRol : Form
     {
         private decimal IdRol;
-        private bool rolHabilitado;
-        public ModificacionRol(decimal IdRol)
+        private Form CallerForm;
+        public ModificacionRol(decimal IdRol,Form caller)
         {
             InitializeComponent();
-            this.IdRol = IdRol;
-
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-            inputParameters.AddParameter("@idRol", IdRol);
-
-            rolHabilitado = ConnectionFactory.Instance()
-                              .CreateConnection()
-                              .ExecuteSingleOutputStoredProcedure<bool>(SpNames.RolHabilitado, inputParameters, "@estaHabilitado");
-
-            if (rolHabilitado)
-            {
-                btnHabilitar.Enabled=false;
-            }
-            else { btnDeshabilitar.Enabled=false; }
+            CallerForm = caller;
+            this.IdRol = IdRol;         
         }
 
         private void btnModNombre_Click(object sender, EventArgs e)
@@ -48,41 +36,16 @@ namespace PalcoNet.ABMRol
             NavigableFormUtil.ForwardTo(this, new frmModificarFuncionalidades(IdRol));
         }
 
-        private void btnHabilitar_Click(object sender, EventArgs e)
+      
+        private void btnVolver_Click(object sender, EventArgs e)
         {
-            btnHabilitar.Enabled = false;
-            btnDeshabilitar.Enabled = true;
-
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-            inputParameters.AddParameter("@id_Rol", IdRol);
-            try
-            {
-                ConnectionFactory.Instance()
-                                 .CreateConnection()
-                                 .ExecuteDataTableStoredProcedure(SpNames.HabilitarRol, inputParameters);
-                MessageBox.Show("Rol habilitado correctamente!");
-            }
-            catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
+            
+                NavigableFormUtil.BackwardTo(this, CallerForm);
         }
-
-        private void btnDeshabilitar_Click(object sender, EventArgs e)
-        {
-            btnDeshabilitar.Enabled = false;
-            btnHabilitar.Enabled = true;
-
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-            inputParameters.AddParameter("@id_Rol", IdRol);
-            try
-            {
-                ConnectionFactory.Instance()
-                                 .CreateConnection()
-                                 .ExecuteDataTableStoredProcedure(SpNames.BajaRol, inputParameters);
-                MessageBox.Show("Rol deshabilitado correctamente!");
-            }
-            catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
+          
         }
 
       
         
     }
-}
+
