@@ -17,6 +17,7 @@ using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.Interfaces;
 using PalcoNet.Classes.Misc;
+using Classes.Configuration;
 
 namespace PalcoNet.ABMEmpresaEspectaculo
 {
@@ -58,6 +59,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                     inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
                     inputParameters.AddParameter("@ciudad", txtCiudad.Text);
                     inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
+                    inputParameters.AddParameter("@fecha_creacion", ConfigurationManager.Instance().GetSystemDateTime());
 
                     if (newUser == null)
                     {
