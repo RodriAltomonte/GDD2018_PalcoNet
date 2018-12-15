@@ -1481,8 +1481,8 @@ BEGIN
      nro_piso,depto,localidad,codigo_postal,
      fecha_nacimiento,fecha_creacion,tarjeta,username
      FROM LOS_DE_GESTION.Cliente
-     WHERE nombre = @nombre OR @nombre IS NULL AND apellido = @apellido OR @apellido IS NULL
-	 AND numero_documento = @dni OR @dni IS NULL AND mail=@mail OR @mail IS NULL
+     WHERE nombre = @nombre OR @nombre IS NULL OR @nombre='' AND apellido = @apellido OR @apellido IS NULL OR @apellido=''
+	 AND numero_documento = @dni OR @dni IS NULL OR @dni = '' AND mail=@mail OR @mail IS NULL OR @mail=''
 
 END
 GO
@@ -1498,8 +1498,8 @@ BEGIN
     calle,nro_calle,depto,localidad,
     codigo_postal,ciudad,cuit,username
     FROM LOS_DE_GESTION.Empresa
-    WHERE razon_social=@razon_social OR @razon_social IS NULL 
-	AND cuit=@CUIT OR @CUIT IS NULL AND mail=@mail OR @mail IS NULL
+    WHERE razon_social=@razon_social OR @razon_social IS NULL OR @razon_social = '' 
+	AND cuit=@CUIT OR @CUIT IS NULL OR @CUIT = '' AND mail=@mail OR @mail IS NULL OR @mail = ''
 
 END
 GO

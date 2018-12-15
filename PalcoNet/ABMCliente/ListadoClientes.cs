@@ -28,16 +28,19 @@ namespace PalcoNet.ABMCliente
         {
             decimal dni;
             decimal.TryParse(txtDNI.Text, out dni);
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-            inputParameters.AddParameter("@nombre", txtNombre.Text);
-            inputParameters.AddParameter("@apellido", txtApellido.Text);
-            inputParameters.AddParameter("@dni",dni);
-            inputParameters.AddParameter("@mail", txtMail.Text);
+           
             try
             {
+                StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+                inputParameters.AddParameter("@nombre", txtNombre.Text);
+                inputParameters.AddParameter("@apellido", txtApellido.Text);
+                inputParameters.AddParameter("@dni", dni);
+                inputParameters.AddParameter("@mail", txtMail.Text);
+               
+             
                 DataTable dt = ConnectionFactory.Instance()
                                                 .CreateConnection()
-                                                .ExecuteDataTableStoredProcedure(SpNames.ListadoClientes,inputParameters); 
+                                                .ExecuteDataTableStoredProcedure(SpNames.ListadoClientes,inputParameters);
                 dgvClientes.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }

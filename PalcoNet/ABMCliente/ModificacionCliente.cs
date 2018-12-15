@@ -77,7 +77,7 @@ namespace PalcoNet.ABMCliente
                 inputParameters.AddParameter("@apellido", txtApellido.Text);
                 inputParameters.AddParameter("@tipo_documento", cboTipoDoc.Text);
                 inputParameters.AddParameter("@nro_documento", decimal.Parse(txtNroDocumento.Text));
-                inputParameters.AddParameter("@cuil", cuil); 
+                inputParameters.AddParameter("@cuil", txtCUIL1+"-"+txtCUIL2+"-"+txtCUIL3); 
                 inputParameters.AddParameter("@mail", txtMail.Text);
                 inputParameters.AddParameter("@telefono", txtTelefono.Text);
                 inputParameters.AddParameter("@dir_calle", txtCalle.Text);

@@ -32,7 +32,7 @@ namespace PalcoNet.ABMCliente
 
         private void button3_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.BackwardTo(this, CallerForm);
+            NavigableFormUtil.BackwardTo(this, new ABMCliente.BajaCliente());
         }
     }
 }
