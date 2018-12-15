@@ -1241,7 +1241,7 @@ AS
 		END
 
 		IF(NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento = @nro_documento)
-				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil) AND SUBSTRING(@cuil,3,8) = @nro_documento)
+				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil)) --AND SUBSTRING(@cuil,3,8) = @nro_documento)
 			BEGIN
 				
 					INSERT INTO LOS_DE_GESTION.Cliente(username,nombre,apellido,tipo_documento,numero_documento,
@@ -1317,7 +1317,7 @@ AS
 	BEGIN
 		IF(NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil=@cuil AND cuil != @cuil_original) --Arreglar esto!
 			AND NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento=@nro_documento AND numero_documento!=@nro_documentoOriginal)
-			AND SUBSTRING(@cuil,3,8) = @nro_documento)
+			/*AND SUBSTRING(@cuil,3,8) = @nro_documento*/)
 			BEGIN
 		UPDATE LOS_DE_GESTION.Cliente
 		SET nombre = @nombre,

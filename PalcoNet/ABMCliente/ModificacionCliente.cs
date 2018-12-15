@@ -46,7 +46,7 @@ namespace PalcoNet.ABMCliente
             txtApellido.Text = apellido;
             cboTipoDoc.Text = tipo_documento;
             txtNroDocumento.Text = nro_documento;
-            txtCUIL.Text = CUIL;
+            txtCUIL1.Text = CUIL;
             txtMail.Text = mail;
             txtTelefono.Text = telefono;
             txtCalle.Text = calle;
@@ -65,6 +65,7 @@ namespace PalcoNet.ABMCliente
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            //VERIFICAR CUIT DIGITO VERIFICADOR
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
             inputParameters.AddParameter("@nro_documentoOriginal", decimal.Parse(doc_original));
             inputParameters.AddParameter("@cuil_original", cuil_original);
@@ -73,7 +74,7 @@ namespace PalcoNet.ABMCliente
             inputParameters.AddParameter("@apellido", txtApellido.Text);
             inputParameters.AddParameter("@tipo_documento", cboTipoDoc.Text);
             inputParameters.AddParameter("@nro_documento", decimal.Parse(txtNroDocumento.Text));
-            inputParameters.AddParameter("@cuil", txtCUIL.Text);
+            inputParameters.AddParameter("@cuil", txtCUIL1.Text); //MODIFICAR
             inputParameters.AddParameter("@mail", txtMail.Text);
             inputParameters.AddParameter("@telefono", txtTelefono.Text);
             inputParameters.AddParameter("@dir_calle", txtCalle.Text);
@@ -83,7 +84,7 @@ namespace PalcoNet.ABMCliente
             inputParameters.AddParameter("@localidad", txtLocalidad.Text);
             inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
             inputParameters.AddParameter("@fecha_nacimiento", dtpFechaNacimiento.Text);
-            inputParameters.AddParameter("@fecha_de_creacion", dtpFechaCreacion.Text);
+            inputParameters.AddParameter("@fecha_de_creacion", dtpFechaCreacion.Text); // VERIFICAR FECHA CON EL ARCHIVO DE CONFIGURACION
             inputParameters.AddParameter("@tarjeta", txtTarjeta.Text);
             
             try

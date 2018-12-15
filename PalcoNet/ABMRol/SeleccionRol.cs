@@ -23,17 +23,20 @@ namespace PalcoNet.ABMRol
             {
                 DataSet ds = ConnectionFactory.Instance()
                                               .CreateConnection()
-                                              .ExecuteDataSetSqlQuery("SELECT id_Rol FROM LOS_DE_GESTION.Rol", "id_Rol");
+                                              .ExecuteDataSetSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Rol", "nombre");
                 
-                cbRol.DisplayMember = "id_Rol";
-                cbRol.DataSource = ds.Tables["id_Rol"];
+                cbRol.DisplayMember = "nombre";
+                cbRol.DataSource = ds.Tables["nombre"];
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message); }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            IdRol = decimal.Parse(cbRol.Text);
+            string selectedRol = cbRol.Text;
+            IdRol =ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<decimal>(@"SELECT id_Rol 
+                                                                                                       FROM LOS_DE_GESTION.Rol 
+                                                                                                       WHERE nombre="+"'"+selectedRol+"'");
             NavigableFormUtil.ForwardTo(this, new ModificacionRol(IdRol));
         }
     }

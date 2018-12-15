@@ -25,12 +25,12 @@ namespace PalcoNet.ABMRol
             InitializeComponent();
             DataTable dt1 = ConnectionFactory.Instance()
                                              .CreateConnection()
-                                             .ExecuteDataTableSqlQuery("SELECT id_Funcionalidad FROM LOS_DE_GESTION.Funcionalidad WHERE id_Funcionalidad NOT IN (SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol=" + "'" + IdRol + "'" + ")");
+                                             .ExecuteDataTableSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Funcionalidad WHERE id_Funcionalidad NOT IN (SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol=" + "'" + IdRol + "'" + ")");
             dgvFunsDisponibles.DataSource = dt1;
 
             DataTable dt2 = ConnectionFactory.Instance()
                                              .CreateConnection()
-                                             .ExecuteDataTableSqlQuery("SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol=" + "'" + IdRol + "'" );
+                                             .ExecuteDataTableSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol=" + "'" + IdRol + "'" );
             dgvFnsRol.DataSource = dt2;
         }
 

@@ -41,7 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
-            this.txtCUIL = new System.Windows.Forms.TextBox();
+            this.txtCUIL1 = new System.Windows.Forms.TextBox();
             this.lblNacionalidad = new System.Windows.Forms.Label();
             this.txtTarjeta = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -64,6 +64,10 @@
             this.lblApellido = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtCUIL2 = new System.Windows.Forms.TextBox();
+            this.txtCUIL3 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbxHabilitado
@@ -187,21 +191,21 @@
             this.lblFechaNacimiento.TabIndex = 87;
             this.lblFechaNacimiento.Text = "Fecha de nacimiento";
             // 
-            // txtCUIL
+            // txtCUIL1
             // 
-            this.txtCUIL.Location = new System.Drawing.Point(117, 233);
-            this.txtCUIL.Name = "txtCUIL";
-            this.txtCUIL.Size = new System.Drawing.Size(372, 20);
-            this.txtCUIL.TabIndex = 86;
+            this.txtCUIL1.Location = new System.Drawing.Point(117, 233);
+            this.txtCUIL1.Name = "txtCUIL1";
+            this.txtCUIL1.Size = new System.Drawing.Size(33, 20);
+            this.txtCUIL1.TabIndex = 86;
             // 
             // lblNacionalidad
             // 
             this.lblNacionalidad.AutoSize = true;
             this.lblNacionalidad.Location = new System.Drawing.Point(58, 236);
             this.lblNacionalidad.Name = "lblNacionalidad";
-            this.lblNacionalidad.Size = new System.Drawing.Size(31, 13);
+            this.lblNacionalidad.Size = new System.Drawing.Size(32, 13);
             this.lblNacionalidad.TabIndex = 85;
-            this.lblNacionalidad.Text = "CUIL";
+            this.lblNacionalidad.Text = "CUIT";
             // 
             // txtTarjeta
             // 
@@ -372,11 +376,45 @@
             this.lblNombre.TabIndex = 64;
             this.lblNombre.Text = "Nombre";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(156, 236);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(10, 13);
+            this.label4.TabIndex = 100;
+            this.label4.Text = "-";
+            // 
+            // txtCUIL2
+            // 
+            this.txtCUIL2.Location = new System.Drawing.Point(172, 233);
+            this.txtCUIL2.Name = "txtCUIL2";
+            this.txtCUIL2.Size = new System.Drawing.Size(74, 20);
+            this.txtCUIL2.TabIndex = 86;
+            // 
+            // txtCUIL3
+            // 
+            this.txtCUIL3.Location = new System.Drawing.Point(263, 233);
+            this.txtCUIL3.Name = "txtCUIL3";
+            this.txtCUIL3.Size = new System.Drawing.Size(27, 20);
+            this.txtCUIL3.TabIndex = 86;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(250, 236);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(10, 13);
+            this.label5.TabIndex = 100;
+            this.label5.Text = "-";
+            // 
             // ModificacionCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(532, 393);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cbxHabilitado);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnGuardar);
@@ -390,7 +428,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtpFechaNacimiento);
             this.Controls.Add(this.lblFechaNacimiento);
-            this.Controls.Add(this.txtCUIL);
+            this.Controls.Add(this.txtCUIL3);
+            this.Controls.Add(this.txtCUIL2);
+            this.Controls.Add(this.txtCUIL1);
             this.Controls.Add(this.lblNacionalidad);
             this.Controls.Add(this.txtTarjeta);
             this.Controls.Add(this.label2);
@@ -435,7 +475,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
         private System.Windows.Forms.Label lblFechaNacimiento;
-        private System.Windows.Forms.TextBox txtCUIL;
+        private System.Windows.Forms.TextBox txtCUIL1;
         private System.Windows.Forms.Label lblNacionalidad;
         private System.Windows.Forms.TextBox txtTarjeta;
         private System.Windows.Forms.Label label2;
@@ -458,5 +498,9 @@
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtCUIL2;
+        private System.Windows.Forms.TextBox txtCUIL3;
+        private System.Windows.Forms.Label label5;
     }
 }
