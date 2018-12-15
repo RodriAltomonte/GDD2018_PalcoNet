@@ -51,7 +51,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             txtLocalidad.Text = localidad;
             txtPostal.Text = codigo_postal;
             txtCiudad.Text = ciudad;
-            txtCUIT.Text = ciut;
+            txtCUIT1.Text = ciut;
             cbxHabilitado.Checked = habilitada;
 
             CallerForm = callerForm;
@@ -74,7 +74,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                 inputParameters.AddParameter("@localidad", txtLocalidad.Text);
                 inputParameters.AddParameter("@cod_postal", txtPostal.Text);
                 inputParameters.AddParameter("@ciudad", txtCiudad.Text);
-                inputParameters.AddParameter("@cuit", txtCUIT.Text);
+                inputParameters.AddParameter("@cuit", txtCUIT1.Text);
                 try
                 {
                     ConnectionFactory.Instance()

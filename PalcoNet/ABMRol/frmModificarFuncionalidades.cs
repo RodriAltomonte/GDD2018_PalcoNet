@@ -30,7 +30,7 @@ namespace PalcoNet.ABMRol
 
             DataTable dt2 = ConnectionFactory.Instance()
                                              .CreateConnection()
-                                             .ExecuteDataTableSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol=" + "'" + IdRol + "'" );
+                                             .ExecuteDataTableSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Funcionalidad WHERE id_Funcionalidad IN (SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol="+"'"+idRol+"'"+")" );
             dgvFnsRol.DataSource = dt2;
         }
 

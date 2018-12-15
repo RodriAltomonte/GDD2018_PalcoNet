@@ -67,7 +67,7 @@ namespace PalcoNet.ABMCliente
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             var cuil = txtCUIL1.Text + txtCUIL2.Text + txtCUIL3.Text;
-            if (TextFieldUtils.CUIT.EsCuilValido(cuil))
+            if (TextFieldUtils.CUIT.EsCuilValido(cuil) && txtCUIL2.Text == txtNroDocumento.Text)
             {
                 StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                 inputParameters.AddParameter("@nro_documentoOriginal", decimal.Parse(doc_original));
@@ -86,8 +86,8 @@ namespace PalcoNet.ABMCliente
                 inputParameters.AddParameter("@depto", txtDpto.Text);
                 inputParameters.AddParameter("@localidad", txtLocalidad.Text);
                 inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
-                inputParameters.AddParameter("@fecha_nacimiento", dtpFechaNacimiento.Text);
-                inputParameters.AddParameter("@fecha_de_creacion", dtpFechaCreacion.Text); 
+                inputParameters.AddParameter("@fecha_nacimiento", Convert.ToDateTime(dtpFechaNacimiento.Text));
+                inputParameters.AddParameter("@fecha_de_creacion", Convert.ToDateTime(dtpFechaCreacion.Text)); 
                 inputParameters.AddParameter("@tarjeta", txtTarjeta.Text);
 
                 try

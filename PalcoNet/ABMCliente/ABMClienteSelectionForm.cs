@@ -27,7 +27,7 @@ namespace PalcoNet.ABMCliente
 
         private void button2_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.ForwardTo(this, new ABMCliente.ListadoClientes());
+            NavigableFormUtil.ForwardTo(this, new ABMCliente.ListadoClientes(this));
         }
 
         private void button3_Click(object sender, EventArgs e)

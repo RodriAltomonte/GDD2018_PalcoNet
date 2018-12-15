@@ -53,11 +53,11 @@
             this.lblMail = new System.Windows.Forms.Label();
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCUIT2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.txtCUIT = new System.Windows.Forms.TextBox();
+            this.txtCUIT3 = new System.Windows.Forms.TextBox();
+            this.txtCUIT1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnVolver
@@ -270,12 +270,12 @@
             this.lblNombre.TabIndex = 75;
             this.lblNombre.Text = "Razon social";
             // 
-            // textBox1
+            // txtCUIT2
             // 
-            this.textBox1.Location = new System.Drawing.Point(154, 194);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(123, 20);
-            this.textBox1.TabIndex = 105;
+            this.txtCUIT2.Location = new System.Drawing.Point(154, 194);
+            this.txtCUIT2.Name = "txtCUIT2";
+            this.txtCUIT2.Size = new System.Drawing.Size(123, 20);
+            this.txtCUIT2.TabIndex = 105;
             // 
             // label6
             // 
@@ -295,30 +295,30 @@
             this.label5.TabIndex = 104;
             this.label5.Text = "-";
             // 
-            // textBox2
+            // txtCUIT3
             // 
-            this.textBox2.Location = new System.Drawing.Point(291, 194);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(31, 20);
-            this.textBox2.TabIndex = 101;
+            this.txtCUIT3.Location = new System.Drawing.Point(291, 194);
+            this.txtCUIT3.Name = "txtCUIT3";
+            this.txtCUIT3.Size = new System.Drawing.Size(31, 20);
+            this.txtCUIT3.TabIndex = 101;
             // 
-            // txtCUIT
+            // txtCUIT1
             // 
-            this.txtCUIT.Location = new System.Drawing.Point(101, 194);
-            this.txtCUIT.Name = "txtCUIT";
-            this.txtCUIT.Size = new System.Drawing.Size(31, 20);
-            this.txtCUIT.TabIndex = 102;
+            this.txtCUIT1.Location = new System.Drawing.Point(101, 194);
+            this.txtCUIT1.Name = "txtCUIT1";
+            this.txtCUIT1.Size = new System.Drawing.Size(31, 20);
+            this.txtCUIT1.TabIndex = 102;
             // 
             // ModificacionEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 287);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtCUIT2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.txtCUIT);
+            this.Controls.Add(this.txtCUIT3);
+            this.Controls.Add(this.txtCUIT1);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnLimpiar);
@@ -378,10 +378,10 @@
         private System.Windows.Forms.Label lblMail;
         private System.Windows.Forms.TextBox txtRazonSocial;
         private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCUIT2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox txtCUIT;
+        private System.Windows.Forms.TextBox txtCUIT3;
+        private System.Windows.Forms.TextBox txtCUIT1;
     }
 }

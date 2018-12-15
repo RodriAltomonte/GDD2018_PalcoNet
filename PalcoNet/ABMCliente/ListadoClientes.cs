@@ -17,9 +17,11 @@ namespace PalcoNet.ABMCliente
 {
     public partial class ListadoClientes : Form
     {
-        public ListadoClientes()
+        private Form CallerForm;
+        public ListadoClientes(Form caller)
         {
             InitializeComponent();
+            CallerForm = caller;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -85,6 +87,11 @@ namespace PalcoNet.ABMCliente
                                                                       fecha_creacion,
                                                                       tarjeta));
            
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
     }
 }

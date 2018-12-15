@@ -48,15 +48,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCiudad = new System.Windows.Forms.TextBox();
-            this.txtCUIT = new System.Windows.Forms.TextBox();
-            this.lblNacionalidad = new System.Windows.Forms.Label();
+            this.txtCUIT1 = new System.Windows.Forms.TextBox();
+            this.lblCUIT = new System.Windows.Forms.Label();
             this.cbxHabilitado = new System.Windows.Forms.CheckBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtCUIT2 = new System.Windows.Forms.TextBox();
+            this.txtCUIT3 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -220,21 +220,21 @@
             this.txtCiudad.Size = new System.Drawing.Size(372, 20);
             this.txtCiudad.TabIndex = 68;
             // 
-            // txtCUIT
+            // txtCUIT1
             // 
-            this.txtCUIT.Location = new System.Drawing.Point(92, 194);
-            this.txtCUIT.Name = "txtCUIT";
-            this.txtCUIT.Size = new System.Drawing.Size(31, 20);
-            this.txtCUIT.TabIndex = 70;
+            this.txtCUIT1.Location = new System.Drawing.Point(92, 194);
+            this.txtCUIT1.Name = "txtCUIT1";
+            this.txtCUIT1.Size = new System.Drawing.Size(31, 20);
+            this.txtCUIT1.TabIndex = 70;
             // 
-            // lblNacionalidad
+            // lblCUIT
             // 
-            this.lblNacionalidad.AutoSize = true;
-            this.lblNacionalidad.Location = new System.Drawing.Point(18, 197);
-            this.lblNacionalidad.Name = "lblNacionalidad";
-            this.lblNacionalidad.Size = new System.Drawing.Size(31, 13);
-            this.lblNacionalidad.TabIndex = 69;
-            this.lblNacionalidad.Text = "CUIL";
+            this.lblCUIT.AutoSize = true;
+            this.lblCUIT.Location = new System.Drawing.Point(18, 197);
+            this.lblCUIT.Name = "lblCUIT";
+            this.lblCUIT.Size = new System.Drawing.Size(32, 13);
+            this.lblCUIT.TabIndex = 69;
+            this.lblCUIT.Text = "CUIT";
             // 
             // cbxHabilitado
             // 
@@ -285,19 +285,19 @@
             this.label5.TabIndex = 75;
             this.label5.Text = "-";
             // 
-            // textBox1
+            // txtCUIT2
             // 
-            this.textBox1.Location = new System.Drawing.Point(145, 194);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(123, 20);
-            this.textBox1.TabIndex = 76;
+            this.txtCUIT2.Location = new System.Drawing.Point(145, 194);
+            this.txtCUIT2.Name = "txtCUIT2";
+            this.txtCUIT2.Size = new System.Drawing.Size(123, 20);
+            this.txtCUIT2.TabIndex = 76;
             // 
-            // textBox2
+            // txtCUIT3
             // 
-            this.textBox2.Location = new System.Drawing.Point(282, 194);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(31, 20);
-            this.textBox2.TabIndex = 70;
+            this.txtCUIT3.Location = new System.Drawing.Point(282, 194);
+            this.txtCUIT3.Name = "txtCUIT3";
+            this.txtCUIT3.Size = new System.Drawing.Size(31, 20);
+            this.txtCUIT3.TabIndex = 70;
             // 
             // label6
             // 
@@ -313,16 +313,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(516, 287);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtCUIT2);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.cbxHabilitado);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.txtCUIT);
-            this.Controls.Add(this.lblNacionalidad);
+            this.Controls.Add(this.txtCUIT3);
+            this.Controls.Add(this.txtCUIT1);
+            this.Controls.Add(this.lblCUIT);
             this.Controls.Add(this.txtCiudad);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtPostal);
@@ -372,15 +372,15 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtCiudad;
-        private System.Windows.Forms.TextBox txtCUIT;
-        private System.Windows.Forms.Label lblNacionalidad;
+        private System.Windows.Forms.TextBox txtCUIT1;
+        private System.Windows.Forms.Label lblCUIT;
         private System.Windows.Forms.CheckBox cbxHabilitado;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtCUIT2;
+        private System.Windows.Forms.TextBox txtCUIT3;
         private System.Windows.Forms.Label label6;
     }
 }
