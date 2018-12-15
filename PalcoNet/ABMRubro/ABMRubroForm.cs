@@ -21,14 +21,13 @@ namespace PalcoNet.ABMRubro
             this.callerForm = callerForm;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             NavigableFormUtil.BackwardTo(this, callerForm);
+        }
+
+        private void btnAlta_Click(object sender, EventArgs e)
+        {
         }
     }
 }

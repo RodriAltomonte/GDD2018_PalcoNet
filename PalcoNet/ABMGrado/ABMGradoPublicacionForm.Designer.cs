@@ -30,15 +30,16 @@
         {
             this.btnVolver = new System.Windows.Forms.Button();
             this.grpGrado = new System.Windows.Forms.GroupBox();
-            this.cmbABM = new System.Windows.Forms.ComboBox();
+            this.btnBaja = new System.Windows.Forms.Button();
+            this.btnModificacion = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnAceptar = new System.Windows.Forms.Button();
+            this.btnAlta = new System.Windows.Forms.Button();
             this.grpGrado.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 157);
+            this.btnVolver.Location = new System.Drawing.Point(12, 201);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
             this.btnVolver.TabIndex = 3;
@@ -48,28 +49,36 @@
             // 
             // grpGrado
             // 
-            this.grpGrado.Controls.Add(this.cmbABM);
+            this.grpGrado.Controls.Add(this.btnBaja);
+            this.grpGrado.Controls.Add(this.btnModificacion);
             this.grpGrado.Controls.Add(this.label1);
-            this.grpGrado.Controls.Add(this.btnAceptar);
+            this.grpGrado.Controls.Add(this.btnAlta);
             this.grpGrado.Location = new System.Drawing.Point(12, 12);
             this.grpGrado.Name = "grpGrado";
-            this.grpGrado.Size = new System.Drawing.Size(338, 139);
+            this.grpGrado.Size = new System.Drawing.Size(342, 183);
             this.grpGrado.TabIndex = 2;
             this.grpGrado.TabStop = false;
             this.grpGrado.Text = "ABM de Grado de Publicación";
             // 
-            // cmbABM
+            // btnBaja
             // 
-            this.cmbABM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbABM.FormattingEnabled = true;
-            this.cmbABM.Items.AddRange(new object[] {
-            "Alta",
-            "Baja",
-            "Modificacion"});
-            this.cmbABM.Location = new System.Drawing.Point(21, 52);
-            this.cmbABM.Name = "cmbABM";
-            this.cmbABM.Size = new System.Drawing.Size(296, 24);
-            this.cmbABM.TabIndex = 2;
+            this.btnBaja.Location = new System.Drawing.Point(102, 100);
+            this.btnBaja.Name = "btnBaja";
+            this.btnBaja.Size = new System.Drawing.Size(100, 28);
+            this.btnBaja.TabIndex = 3;
+            this.btnBaja.Text = "Baja";
+            this.btnBaja.UseVisualStyleBackColor = true;
+            this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
+            // 
+            // btnModificacion
+            // 
+            this.btnModificacion.Location = new System.Drawing.Point(102, 134);
+            this.btnModificacion.Name = "btnModificacion";
+            this.btnModificacion.Size = new System.Drawing.Size(100, 28);
+            this.btnModificacion.TabIndex = 2;
+            this.btnModificacion.Text = "Modificación";
+            this.btnModificacion.UseVisualStyleBackColor = true;
+            this.btnModificacion.Click += new System.EventHandler(this.btnModificacion_Click);
             // 
             // label1
             // 
@@ -80,21 +89,21 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Seleccione una acción";
             // 
-            // btnAceptar
+            // btnAlta
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(217, 91);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(100, 28);
-            this.btnAceptar.TabIndex = 0;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.btnAlta.Location = new System.Drawing.Point(102, 66);
+            this.btnAlta.Name = "btnAlta";
+            this.btnAlta.Size = new System.Drawing.Size(100, 28);
+            this.btnAlta.TabIndex = 0;
+            this.btnAlta.Text = "Alta";
+            this.btnAlta.UseVisualStyleBackColor = true;
+            this.btnAlta.Click += new System.EventHandler(this.btnAlta_Click);
             // 
             // ABMGradoPublicacionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 194);
+            this.ClientSize = new System.Drawing.Size(374, 237);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.grpGrado);
             this.Name = "ABMGradoPublicacionForm";
@@ -109,8 +118,9 @@
 
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.GroupBox grpGrado;
-        private System.Windows.Forms.ComboBox cmbABM;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Button btnAlta;
+        private System.Windows.Forms.Button btnBaja;
+        private System.Windows.Forms.Button btnModificacion;
     }
 }

@@ -22,21 +22,24 @@ namespace PalcoNet.ABMGrado
             this.callerForm = callerForm;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
-        {
-            if (cmbABM.SelectedItem != null)
-            {
-                NavigableFormUtil.ForwardTo(this, ABMGradoDePublicacionFactory.CrearForm(cmbABM.SelectedItem.ToString(), this));
-            }
-            else
-            {
-                MessageBoxUtil.ShowError("Seleccione una acción.");
-            }
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             NavigableFormUtil.BackwardTo(this, callerForm);
+        }
+
+        private void btnBaja_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.ForwardTo(this, new BajaGradoForm(this));
+        }
+
+        private void btnModificacion_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.ForwardTo(this, new ModificacionGradoForm(this));
+        }
+
+        private void btnAlta_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.ForwardTo(this, new AltaGradoForm(this));
         }
     }
 }
