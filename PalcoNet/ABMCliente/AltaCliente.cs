@@ -42,7 +42,7 @@ namespace PalcoNet.ABMCliente
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            var cuil = txtCUIT1.Text + txtCUIT2 + txtCUIT3.Text;
+            var cuil = txtCUIT1.Text + txtCUIT2.Text + txtCUIT3.Text;
             if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text))
             {
               
@@ -53,7 +53,7 @@ namespace PalcoNet.ABMCliente
                 inputParameters.AddParameter("@apellido", txtApellido.Text);
                 inputParameters.AddParameter("@tipo_documento", cboTipoDoc.Text);
                 inputParameters.AddParameter("@nro_documento", decimal.Parse(txtNroDocumento.Text));
-                inputParameters.AddParameter("@cuil", txtCUIT1 + "-" + txtCUIT2 + "-" + txtCUIT3); 
+                inputParameters.AddParameter("@cuil", StringUtil.FormatCuil(cuil)); 
                 inputParameters.AddParameter("@mail", txtMail.Text);
                 inputParameters.AddParameter("@telefono", txtTelefono.Text);
                 inputParameters.AddParameter("@direccion_calle", txtCalle.Text);

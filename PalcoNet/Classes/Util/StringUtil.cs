@@ -12,7 +12,8 @@ namespace Classes.Util
     {
         public static string FormatCuil(string txt)
         {
-            return txt.Substring(1,2)+'-'+txt.Substring(3,8)+'-'+txt.Substring(10,1);
+           
+            return txt.Substring(0,2)+'-'+txt.Substring(3,7)+'-'+txt.Substring(10,1);
         }
         public static string GetStringFromArray(string[] array, string searchString) 
         {

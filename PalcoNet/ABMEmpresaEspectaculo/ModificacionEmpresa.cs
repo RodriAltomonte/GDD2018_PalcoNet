@@ -1,4 +1,5 @@
 ﻿using Classes.DatabaseConnection;
+using Classes.Util;
 using PalcoNet.Classes.Constants;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.DatabaseConnection;
@@ -60,7 +61,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
       
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!TextFieldUtils.IsAnyFieldEmpty(this))
+            var cuit = txtCUIT1.Text+txtCUIT2.Text+txtCUIT3.Text;
+            if (!TextFieldUtils.IsAnyFieldEmpty(this) && TextFieldUtils.CUIT.EsCuitValido(cuit))
             {
                 StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                 inputParameters.AddParameter("@cuitOriginal", CUIT);
@@ -74,7 +76,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                 inputParameters.AddParameter("@localidad", txtLocalidad.Text);
                 inputParameters.AddParameter("@cod_postal", txtPostal.Text);
                 inputParameters.AddParameter("@ciudad", txtCiudad.Text);
-                inputParameters.AddParameter("@cuit", txtCUIT1.Text);
+                inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
                 try
                 {
                     ConnectionFactory.Instance()

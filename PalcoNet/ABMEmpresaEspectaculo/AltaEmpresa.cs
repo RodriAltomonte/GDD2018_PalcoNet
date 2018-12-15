@@ -57,7 +57,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                     inputParameters.AddParameter("@nro_calle", decimal.Parse(txtNumero.Text));
                     inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
                     inputParameters.AddParameter("@ciudad", txtCiudad.Text);
-                    inputParameters.AddParameter("@cuit", cuit);
+                    inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
 
                     if (newUser == null)
                     {
