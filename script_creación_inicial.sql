@@ -1476,13 +1476,10 @@ CREATE PROCEDURE LOS_DE_GESTION.ListadoClientes
 AS
 BEGIN
 
-	SELECT nombre,apellido,tipo_documento,
-     numero_documento,cuil,mail,telefono,calle,nro_calle,
-     nro_piso,depto,localidad,codigo_postal,
-     fecha_nacimiento,fecha_creacion,tarjeta,username
+	SELECT *
      FROM LOS_DE_GESTION.Cliente
-     WHERE nombre = @nombre OR @nombre IS NULL OR @nombre='' AND apellido = @apellido OR @apellido IS NULL OR @apellido=''
-	 AND numero_documento = @dni OR @dni IS NULL OR @dni = '' AND mail=@mail OR @mail IS NULL OR @mail=''
+     WHERE nombre = @nombre OR @nombre='' AND apellido = @apellido OR @apellido=''
+	 AND numero_documento = @dni OR @dni = '' AND mail=@mail OR @mail=''
 
 END
 GO

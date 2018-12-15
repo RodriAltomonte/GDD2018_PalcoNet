@@ -37,10 +37,18 @@ namespace PalcoNet.ABMCliente
                 inputParameters.AddParameter("@dni", dni);
                 inputParameters.AddParameter("@mail", txtMail.Text);
                
-             
+             // NO FUNCIONA NO SE POR QUE HABRIA QUE ARREGLARLO
+               /* DataTable dt = ConnectionFactory.Instance()
+                                                .CreateConnection()
+                                                .ExecuteDataTableStoredProcedure(SpNames.ListadoClientes,inputParameters);*/
+                var query = @"SELECT * FROM LOS_DE_GESTION.Cliente
+                                                                            WHERE nombre=" + "'" + txtNombre.Text + "'" + " OR " + "'" + txtNombre.Text + "'" + "=" + "''"
+                                                                             + " AND apellido= " + "'" + txtApellido.Text + "'" + " OR " + "'" + txtApellido.Text + "'" + " = " + "''" +
+                                                                            " AND numero_documento= " + "'" + txtDNI.Text + "'" + " OR " + "'" + txtDNI.Text + "'" + "=" + "''" +
+                                                                            " AND mail=" + "'" + txtMail.Text + "'" + " OR " + "'" + txtMail.Text + "'" + " = " + "''";
                 DataTable dt = ConnectionFactory.Instance()
                                                 .CreateConnection()
-                                                .ExecuteDataTableStoredProcedure(SpNames.ListadoClientes,inputParameters);
+                                                .ExecuteDataTableSqlQuery(query);
                 dgvClientes.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
