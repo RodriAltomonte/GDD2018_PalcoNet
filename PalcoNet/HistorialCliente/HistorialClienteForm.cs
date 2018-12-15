@@ -28,23 +28,20 @@ namespace PalcoNet.HistorialCliente
         private Form previousForm;
         int posicion = -1;
         string username;
-        //int totalPaginas;
+        DataTable table = new DataTable();
 
         public HistorialClienteForm(Form previousForm)
         {
             InitializeComponent();
             this.previousForm = previousForm;
             username = Session.Instance().LoggedUsername;
-            cantidadPaginas();
             cargarResultados(1);
         }
 
         public HistorialClienteForm()
         {
             InitializeComponent();
-            this.previousForm = previousForm;
             username = "35865429";
-            cantidadPaginas();
             cargarResultados(1);
         }
 
@@ -55,20 +52,28 @@ namespace PalcoNet.HistorialCliente
 
         private void cargarResultados(int pagina)
         {
-            if (pagina > 0 /*&& pagina < totalPaginas*/)
+            if (pagina > 0 )
             {
                 posicion = pagina;
                 pagina--;
                 int x = pagina * 5;
-                string select = @"select fecha_compra,sum(monto_total) total, sum (cantidad_ubicaciones) cant_Ubicaciones,tarjeta_comprador  
-                                    from LOS_DE_GESTION.Compra where usuario_cliente_comprador = " + username +
-                                   @" group by fecha_compra,tarjeta_comprador ";
+                string select = @"select fecha_compra 'Fecha de Compra',sum(monto_total) 'Monto Total', sum (cantidad_ubicaciones) 'Cantidad de Ubicaciones',tarjeta_comprador 'Medios de Pago' 
+                                    from LOS_DE_GESTION.Compra where usuario_cliente_comprador = '" + username +
+                                   @"' group by fecha_compra,tarjeta_comprador ";
 
                 string final = @"ORDER BY fecha_compra 
                                 OFFSET " + x.ToString() + @" ROWS FETCH NEXT " + 5 + " ROWS ONLY";
 
                 select += final;
-                dgvResultados.DataSource = ConnectionFactory.Instance().CreateConnection().ExecuteDataTableSqlQuery(select);
+                 table = ConnectionFactory.Instance().CreateConnection().ExecuteDataTableSqlQuery(select);
+                 if (table.Rows.Count > 0)
+                 {
+                     dgvResultados.DataSource = table;
+                 }
+                 else
+                 {
+                     posicion--;
+                 }
             }
 
         }
@@ -83,17 +88,6 @@ namespace PalcoNet.HistorialCliente
             cargarResultados(posicion + 1);
         }
 
-        private void cantidadPaginas()
-        {/*
-            string select = @"select count(distinct fecha_compra) from LOS_DE_GESTION.Compra where usuario_cliente_comprador = " + username ;
-            int x;
-            x = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<int>(select);
-            totalPaginas = x / 5;
-            if (x % 5 != 0)
-            {
-                totalPaginas++;
-            }*/
-        }
-
+   
     }
 }
