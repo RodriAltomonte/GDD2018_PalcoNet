@@ -54,8 +54,6 @@
             this.lblApellido = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dtpFechaCreacion = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.txtTarjeta = new System.Windows.Forms.TextBox();
             this.btnVolver = new System.Windows.Forms.Button();
@@ -310,25 +308,6 @@
             this.lblNombre.TabIndex = 33;
             this.lblNombre.Text = "Nombre";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(359, 394);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 17);
-            this.label1.TabIndex = 52;
-            this.label1.Text = "Fecha de creacion";
-            // 
-            // dtpFechaCreacion
-            // 
-            this.dtpFechaCreacion.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaCreacion.Location = new System.Drawing.Point(492, 394);
-            this.dtpFechaCreacion.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpFechaCreacion.Name = "dtpFechaCreacion";
-            this.dtpFechaCreacion.Size = new System.Drawing.Size(131, 22);
-            this.dtpFechaCreacion.TabIndex = 53;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -401,7 +380,7 @@
             // cbxHabilitado
             // 
             this.cbxHabilitado.AutoSize = true;
-            this.cbxHabilitado.Location = new System.Drawing.Point(517, 366);
+            this.cbxHabilitado.Location = new System.Drawing.Point(523, 393);
             this.cbxHabilitado.Margin = new System.Windows.Forms.Padding(4);
             this.cbxHabilitado.Name = "cbxHabilitado";
             this.cbxHabilitado.Size = new System.Drawing.Size(93, 21);
@@ -423,8 +402,6 @@
             this.Controls.Add(this.lblDpto);
             this.Controls.Add(this.txtPiso);
             this.Controls.Add(this.lblPiso);
-            this.Controls.Add(this.dtpFechaCreacion);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dtpFechaNacimiento);
             this.Controls.Add(this.lblFechaNacimiento);
             this.Controls.Add(this.txtCUIL);
@@ -486,8 +463,6 @@
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dtpFechaCreacion;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTarjeta;
         private System.Windows.Forms.Button btnVolver;

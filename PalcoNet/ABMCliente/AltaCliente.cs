@@ -17,6 +17,7 @@ using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.Interfaces;
 using PalcoNet.Classes.Misc;
+using Classes.Configuration;
 
 namespace PalcoNet.ABMCliente
 {
@@ -61,13 +62,13 @@ namespace PalcoNet.ABMCliente
                 inputParameters.AddParameter("@localidad", txtLocalidad.Text);
                 inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
                 inputParameters.AddParameter("@fecha_de_nacimiento", Convert.ToDateTime(dtpFechaNacimiento.Text));
-                inputParameters.AddParameter("@fecha_de_creacion", Convert.ToDateTime(dtpFechaCreacion.Text)); // Verificar la fecha con el archivo de configuracion
+                inputParameters.AddParameter("@fecha_de_creacion", ConfigurationManager.Instance().GetSystemDateTime());
                 inputParameters.AddParameter("@tarjeta", txtTarjeta.Text);
 
                 if (newUser == null)
                 {
                     inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(10));
-                    inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10)); // FALTA ENCRIPTAR 
+                    inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10));
                 }
                 else
                 {
