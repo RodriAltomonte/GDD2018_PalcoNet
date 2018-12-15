@@ -39,7 +39,8 @@ namespace PalcoNet.ABMRol
             }
             else { btnDeshabilitar.Enabled = false; }
         }
-        private void btnHabilitar_Click(object sender, EventArgs e)
+      
+        private void btnHabilitar_Click_1(object sender, EventArgs e)
         {
             btnHabilitar.Enabled = false;
             btnDeshabilitar.Enabled = true;
@@ -56,7 +57,7 @@ namespace PalcoNet.ABMRol
             catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void btnDeshabilitar_Click(object sender, EventArgs e)
+        private void btnDeshabilitar_Click_1(object sender, EventArgs e)
         {
             btnDeshabilitar.Enabled = false;
             btnHabilitar.Enabled = true;

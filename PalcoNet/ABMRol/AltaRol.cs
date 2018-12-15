@@ -49,6 +49,23 @@ namespace PalcoNet.ABMRol
                     ConnectionFactory.Instance()
                                      .CreateConnection()
                                      .ExecuteDataTableStoredProcedure(SpNames.AltaRol,inputParameters);
+                   
+                    inputParameters.RemoveParameters();
+                    
+                    foreach (DataGridViewCell c in dgvFuncionalidades.SelectedCells)
+                    {
+                        inputParameters.AddParameter("@id_Rol", tbIdRol.Text);
+                    
+                        decimal id_funcionalidad = ConnectionFactory.Instance()
+                                                                    .CreateConnection()
+                                                                    .ExecuteSingleOutputSqlQuery<decimal>( @"SELECT id_Funcionalidad FROM LOS_DE_GESTION.Funcionalidad
+                                                                                                           WHERE id_Funcionalidad=" + "'" + c.Value.ToString() + "'");
+                        inputParameters.AddParameter("@funcionalidadRol",id_funcionalidad);
+                        ConnectionFactory.Instance()
+                                         .CreateConnection()
+                                         .ExecuteDataTableStoredProcedure(SpNames.AgregarFuncionalidadRol, inputParameters);
+                        inputParameters.RemoveParameters();
+                    }
                                     
                     MessageBox.Show("Rol dado de alta correctamente!");
                 }

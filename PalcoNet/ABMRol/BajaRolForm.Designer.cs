@@ -41,6 +41,7 @@
             this.btnDeshabilitar.TabIndex = 4;
             this.btnDeshabilitar.Text = "Deshabilitar";
             this.btnDeshabilitar.UseVisualStyleBackColor = true;
+            this.btnDeshabilitar.Click += new System.EventHandler(this.btnDeshabilitar_Click_1);
             // 
             // btnHabilitar
             // 
@@ -50,6 +51,7 @@
             this.btnHabilitar.TabIndex = 5;
             this.btnHabilitar.Text = "Habilitar";
             this.btnHabilitar.UseVisualStyleBackColor = true;
+            this.btnHabilitar.Click += new System.EventHandler(this.btnHabilitar_Click_1);
             // 
             // button1
             // 
