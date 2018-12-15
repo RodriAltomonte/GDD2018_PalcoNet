@@ -37,8 +37,6 @@
             this.lblDpto = new System.Windows.Forms.Label();
             this.txtPiso = new System.Windows.Forms.TextBox();
             this.lblPiso = new System.Windows.Forms.Label();
-            this.dtpFechaCreacion = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
             this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.txtCUIL1 = new System.Windows.Forms.TextBox();
@@ -68,6 +66,8 @@
             this.txtCUIL2 = new System.Windows.Forms.TextBox();
             this.txtCUIL3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.dtpFechaCreacion = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbxHabilitado
@@ -157,23 +157,6 @@
             this.lblPiso.TabIndex = 91;
             this.lblPiso.Text = "Piso";
             // 
-            // dtpFechaCreacion
-            // 
-            this.dtpFechaCreacion.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaCreacion.Location = new System.Drawing.Point(390, 320);
-            this.dtpFechaCreacion.Name = "dtpFechaCreacion";
-            this.dtpFechaCreacion.Size = new System.Drawing.Size(99, 20);
-            this.dtpFechaCreacion.TabIndex = 90;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(271, 320);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
-            this.label1.TabIndex = 88;
-            this.label1.Text = "Fecha de creacion";
-            // 
             // dtpFechaNacimiento
             // 
             this.dtpFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -185,7 +168,7 @@
             // lblFechaNacimiento
             // 
             this.lblFechaNacimiento.AutoSize = true;
-            this.lblFechaNacimiento.Location = new System.Drawing.Point(35, 320);
+            this.lblFechaNacimiento.Location = new System.Drawing.Point(25, 320);
             this.lblFechaNacimiento.Name = "lblFechaNacimiento";
             this.lblFechaNacimiento.Size = new System.Drawing.Size(106, 13);
             this.lblFechaNacimiento.TabIndex = 87;
@@ -408,6 +391,23 @@
             this.label5.TabIndex = 100;
             this.label5.Text = "-";
             // 
+            // dtpFechaCreacion
+            // 
+            this.dtpFechaCreacion.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaCreacion.Location = new System.Drawing.Point(383, 320);
+            this.dtpFechaCreacion.Name = "dtpFechaCreacion";
+            this.dtpFechaCreacion.Size = new System.Drawing.Size(99, 20);
+            this.dtpFechaCreacion.TabIndex = 89;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(281, 320);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 13);
+            this.label1.TabIndex = 87;
+            this.label1.Text = "Fecha de creacion";
+            // 
             // ModificacionCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,8 +425,8 @@
             this.Controls.Add(this.txtPiso);
             this.Controls.Add(this.lblPiso);
             this.Controls.Add(this.dtpFechaCreacion);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dtpFechaNacimiento);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblFechaNacimiento);
             this.Controls.Add(this.txtCUIL3);
             this.Controls.Add(this.txtCUIL2);
@@ -471,8 +471,6 @@
         private System.Windows.Forms.Label lblDpto;
         private System.Windows.Forms.TextBox txtPiso;
         private System.Windows.Forms.Label lblPiso;
-        private System.Windows.Forms.DateTimePicker dtpFechaCreacion;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
         private System.Windows.Forms.Label lblFechaNacimiento;
         private System.Windows.Forms.TextBox txtCUIL1;
@@ -502,5 +500,7 @@
         private System.Windows.Forms.TextBox txtCUIL2;
         private System.Windows.Forms.TextBox txtCUIL3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker dtpFechaCreacion;
+        private System.Windows.Forms.Label label1;
     }
 }

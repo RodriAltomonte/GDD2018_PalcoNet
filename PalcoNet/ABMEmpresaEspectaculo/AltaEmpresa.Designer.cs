@@ -54,6 +54,10 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtRazonSocial
@@ -220,7 +224,7 @@
             // 
             this.txtCUIT.Location = new System.Drawing.Point(92, 194);
             this.txtCUIT.Name = "txtCUIT";
-            this.txtCUIT.Size = new System.Drawing.Size(372, 20);
+            this.txtCUIT.Size = new System.Drawing.Size(31, 20);
             this.txtCUIT.TabIndex = 70;
             // 
             // lblNacionalidad
@@ -272,15 +276,51 @@
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(129, 197);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(10, 13);
+            this.label5.TabIndex = 75;
+            this.label5.Text = "-";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(145, 194);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(123, 20);
+            this.textBox1.TabIndex = 76;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(282, 194);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(31, 20);
+            this.textBox2.TabIndex = 70;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(270, 197);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(10, 13);
+            this.label6.TabIndex = 75;
+            this.label6.Text = "-";
+            // 
             // AltaEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(516, 287);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.cbxHabilitado);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.txtCUIT);
             this.Controls.Add(this.lblNacionalidad);
             this.Controls.Add(this.txtCiudad);
@@ -338,5 +378,9 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label6;
     }
 }

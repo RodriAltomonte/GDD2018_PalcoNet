@@ -42,9 +42,11 @@ namespace PalcoNet.ABMCliente
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text)) //&& StringUtil.IsDateCorrect(dtpFechaCreacion.Text))
+            var cuil = txtCUIT1.Text + txtCUIT2 + txtCUIT3.Text;
+            if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text)
+              && TextFieldUtils.CUIT.EsCuilValido(cuil)   ) 
             {
-                //VERIFICAR CUIT DIGITO VERIFICADOR
+              
                 StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                 inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
                 inputParameters.AddParameter("@id_rol", 2); // 2 Rol Cliente
@@ -52,7 +54,7 @@ namespace PalcoNet.ABMCliente
                 inputParameters.AddParameter("@apellido", txtApellido.Text);
                 inputParameters.AddParameter("@tipo_documento", cboTipoDoc.Text);
                 inputParameters.AddParameter("@nro_documento", decimal.Parse(txtNroDocumento.Text));
-                inputParameters.AddParameter("@cuil", txtCUIT1.Text); // MODIFICAR
+                inputParameters.AddParameter("@cuil", cuil); 
                 inputParameters.AddParameter("@mail", txtMail.Text);
                 inputParameters.AddParameter("@telefono", txtTelefono.Text);
                 inputParameters.AddParameter("@direccion_calle", txtCalle.Text);
@@ -99,7 +101,6 @@ namespace PalcoNet.ABMCliente
         {
             NavigableFormUtil.BackwardTo(this, callerForm);
         }
-        #region 
-        #endregion
+        
     }
 }

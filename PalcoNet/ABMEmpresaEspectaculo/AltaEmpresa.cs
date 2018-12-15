@@ -43,7 +43,9 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if(!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text)){
+            var cuit = txtCUIT
+            if(!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text)
+                ){
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
             inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
             inputParameters.AddParameter("@rol", 3);//3 rol Empresa

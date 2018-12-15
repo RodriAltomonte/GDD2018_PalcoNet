@@ -32,7 +32,6 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.cbxHabilitado = new System.Windows.Forms.CheckBox();
-            this.txtCUIT = new System.Windows.Forms.TextBox();
             this.lblNacionalidad = new System.Windows.Forms.Label();
             this.txtCiudad = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,6 +53,11 @@
             this.lblMail = new System.Windows.Forms.Label();
             this.txtRazonSocial = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtCUIT = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnVolver
@@ -96,13 +100,6 @@
             this.cbxHabilitado.Text = "Habilitado";
             this.cbxHabilitado.UseVisualStyleBackColor = true;
             this.cbxHabilitado.Click += new System.EventHandler(this.cbxHabilitado_Click);
-            // 
-            // txtCUIT
-            // 
-            this.txtCUIT.Location = new System.Drawing.Point(100, 194);
-            this.txtCUIT.Name = "txtCUIT";
-            this.txtCUIT.Size = new System.Drawing.Size(372, 20);
-            this.txtCUIT.TabIndex = 96;
             // 
             // lblNacionalidad
             // 
@@ -273,16 +270,59 @@
             this.lblNombre.TabIndex = 75;
             this.lblNombre.Text = "Razon social";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(154, 194);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(123, 20);
+            this.textBox1.TabIndex = 105;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(279, 197);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(10, 13);
+            this.label6.TabIndex = 103;
+            this.label6.Text = "-";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(138, 197);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(10, 13);
+            this.label5.TabIndex = 104;
+            this.label5.Text = "-";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(291, 194);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(31, 20);
+            this.textBox2.TabIndex = 101;
+            // 
+            // txtCUIT
+            // 
+            this.txtCUIT.Location = new System.Drawing.Point(101, 194);
+            this.txtCUIT.Name = "txtCUIT";
+            this.txtCUIT.Size = new System.Drawing.Size(31, 20);
+            this.txtCUIT.TabIndex = 102;
+            // 
             // ModificacionEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(518, 287);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtCUIT);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.cbxHabilitado);
-            this.Controls.Add(this.txtCUIT);
             this.Controls.Add(this.lblNacionalidad);
             this.Controls.Add(this.txtCiudad);
             this.Controls.Add(this.label4);
@@ -317,7 +357,6 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.CheckBox cbxHabilitado;
-        private System.Windows.Forms.TextBox txtCUIT;
         private System.Windows.Forms.Label lblNacionalidad;
         private System.Windows.Forms.TextBox txtCiudad;
         private System.Windows.Forms.Label label4;
@@ -339,5 +378,10 @@
         private System.Windows.Forms.Label lblMail;
         private System.Windows.Forms.TextBox txtRazonSocial;
         private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtCUIT;
     }
 }

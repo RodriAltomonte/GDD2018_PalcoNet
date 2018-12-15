@@ -31,5 +31,72 @@ namespace TFUtilites
                 tb.Text = "";
             }
         }
+       
+        public static class CUIT
+        {
+            private static string _CUIT = string.Empty;
+            private static bool _Valido = false;
+            
+        public static bool EsCuitValido(string cuit)
+        {
+            _CUIT = cuit;
+            _Valido = false;
+            return Validar();
+        }
+        public static bool EsCuilValido(string cuil)
+        {
+            _CUIT = cuil;
+            _Valido = false;
+            return Validar();
+        }
+        private static bool Validar()
+        {
+            if (_CUIT.Length == 0) return true;
+            string CUITValidado = string.Empty;
+            bool Valido = false;
+            char Ch;
+            for (int i = 0; i < _CUIT.Length; i++)
+            {
+                Ch = _CUIT[i];
+                if ((Ch > 47) && (Ch < 58))
+                {
+                    CUITValidado = CUITValidado + Ch;
+                }
+            }
+
+            _CUIT = CUITValidado;
+            Valido = (_CUIT.Length == 11);
+            if (Valido)
+            {
+                int Verificador = EncontrarVerificador(_CUIT);
+                Valido = (_CUIT[10].ToString() == Verificador.ToString());
+            }
+
+            return Valido;
+        }
+
+        private static int EncontrarVerificador(string CUIT)
+        {
+            int Sumador = 0;
+            int Producto = 0;
+            int Coeficiente = 0;
+            int Resta = 5;
+            for (int i = 0; i < 10; i++)
+            {
+                if (i == 4) Resta = 11;
+                Producto = CUIT[i];
+                Producto -= 48;
+                Coeficiente = Resta - i;
+                Producto = Producto * Coeficiente;
+                Sumador = Sumador + Producto;
+            }
+
+            int Resultado = Sumador - (11 * (Sumador / 11));
+            Resultado = 11 - Resultado;
+
+            if (Resultado == 11) return 0;
+            else return Resultado;
+        }
+    }	
     }
 }
