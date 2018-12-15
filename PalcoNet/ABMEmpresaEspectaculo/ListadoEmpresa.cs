@@ -35,6 +35,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             inputParameters.AddParameter("@mail", txtMail.Text);
             try
             {
+                //Falla no se porque
                 DataTable dt = ConnectionFactory.Instance()
                                                 .CreateConnection()
                                                 .ExecuteDataTableStoredProcedure(SpNames.ListadoEmpresas, inputParameters);
