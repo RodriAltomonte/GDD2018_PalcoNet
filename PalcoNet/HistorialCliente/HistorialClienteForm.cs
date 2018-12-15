@@ -57,7 +57,7 @@ namespace PalcoNet.HistorialCliente
                 posicion = pagina;
                 pagina--;
                 int x = pagina * 5;
-                string select = @"select fecha_compra,sum(monto_total) total, sum (cantidad_ubicaciones) cant_Ubicaciones,tarjeta_comprador  
+                string select = @"select fecha_compra 'Fecha de Compra',sum(monto_total) 'Monto Total', sum (cantidad_ubicaciones) 'Cantidad de Ubicaciones',tarjeta_comprador 'Medios de Pago' 
                                     from LOS_DE_GESTION.Compra where usuario_cliente_comprador = '" + username +
                                    @"' group by fecha_compra,tarjeta_comprador ";
 
