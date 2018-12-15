@@ -5,7 +5,9 @@ GO
 IF OBJECT_ID(N'LOS_DE_GESTION.PR_MIGRACION') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_MIGRACION;
 GO
-
+IF OBJECT_ID(N'LOS_DE_GESTION.NuevaCompra') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.NuevaCompra
+go
 IF OBJECT_ID(N'LOS_DE_GESTION.PR_Validar_login') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.PR_Validar_login
 go
@@ -809,7 +811,6 @@ BEGIN
 	end
 END
 go
-drop PROCEDURE LOS_DE_GESTION.PR_MODIFICAR_GRADO_PUBLICACION
 CREATE PROCEDURE LOS_DE_GESTION.PR_MODIFICAR_GRADO_PUBLICACION
 @idGrado numeric(18,0),
 @descripcion nvarchar(255),
@@ -917,7 +918,7 @@ BEGIN
 END
 GO
 
-/*9. EDITAR PUBLICACION*/drop PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR GO
+/*9. EDITAR PUBLICACION*/
 CREATE PROCEDURE LOS_DE_GESTION.PR_PUBLICACIONES_A_EDITAR @usernameEmpresa nvarchar(255), @descripcion nvarchar(255)--, @pagina int, @tamanio int
 AS
 BEGIN
@@ -1241,7 +1242,7 @@ AS
 		END
 
 		IF(NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento = @nro_documento)
-				AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil)) --AND SUBSTRING(@cuil,3,8) = @nro_documento)
+			AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil)) --AND SUBSTRING(@cuil,3,8) = @nro_documento) 
 			BEGIN
 				
 					INSERT INTO LOS_DE_GESTION.Cliente(username,nombre,apellido,tipo_documento,numero_documento,
@@ -1693,7 +1694,7 @@ BEGIN
 /* inserto Compra*/
 		 insert into LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,cantidad_ubicaciones)
 		 SELECT sum(Ubicacion_Precio), Compra_Fecha,Cli_Dni,null,sum(Compra_Cantidad)
-		 FROM gd_esquema.Maestra where Compra_Cantidad is not null
+		 FROM gd_esquema.Maestra where Item_Factura_Monto is not null
 		 group by Compra_Fecha,Cli_Dni,Factura_Nro									       
 
 		 
@@ -1709,9 +1710,9 @@ BEGIN
 
 /* inserto Item_Rendicion*/--revisar sum(Item_Factura_Monto)
 		 insert into LOS_DE_GESTION.Item_Rendicion(id_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones,id_Compra)
-		 SELECT Factura_Nro, sum(Ubicacion_Precio),sum(Ubicacion_Precio) - sum(Item_Factura_Monto),sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where c.id_item_Rendicion = Factura_Nro)
+		 SELECT Factura_Nro, sum(Ubicacion_Precio),sum(Ubicacion_Precio) - sum(Item_Factura_Monto),sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where sum(Ubicacion_Precio) = c.monto_total and c.fecha_compra =Compra_Fecha and Cli_Dni = c.usuario_cliente_comprador and sum(Compra_Cantidad) = c.cantidad_ubicaciones)
 		 FROM gd_esquema.Maestra where Factura_Nro is not null 
-		 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad
+		 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad,Compra_Fecha,Cli_Dni
 		 
 /*Decisiones de migracion*/
 		 update LOS_DE_GESTION.Cliente
@@ -1886,12 +1887,36 @@ GO
 --select* from LOS_DE_GESTION.Empresa
 --select* from LOS_DE_GESTION.Cliente
 --select* from LOS_DE_GESTION.Usuario
---select* from LOS_DE_GESTION.Tipo_Ubicacion
 --select* from LOS_DE_GESTION.Rubro
 --select* from LOS_DE_GESTION.Publicacion
 --select* from LOS_DE_GESTION.Ubicacion
+--select* from LOS_DE_GESTION.Tipo_Ubicacion
 --select * from LOS_DE_GESTION.Item_Rendicion
 --select * from LOS_DE_GESTION.Rendicion
 --select * from LOS_DE_GESTION.Compra
+--select * from LOS_DE_GESTION.Rol
+--select * from LOS_DE_GESTION.Premio
+--select * from LOS_DE_GESTION.Funcionalidad
+--select * from LOS_DE_GESTION.Grado_Publicacion
+--select * from LOS_DE_GESTION.Estado_Publicacion
+--select * from LOS_DE_GESTION.Premio_Canjeado
+--select * from LOS_DE_GESTION.Usuario_X_Rol
+--select * from LOS_DE_GESTION.Rol_X_Funcionalidad
 --select* from gd_esquema.Maestra
 --------------------------------------------
+/*
+SELECT Compra_Fecha, Factura_Nro, sum(Ubicacion_Precio),sum(Ubicacion_Precio) - sum(Item_Factura_Monto),sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where sum(Ubicacion_Precio) = c.monto_total and c.fecha_compra =Compra_Fecha and Cli_Dni = c.usuario_cliente_comprador and sum(Compra_Cantidad) = c.cantidad_ubicaciones)
+FROM gd_esquema.Maestra where Factura_Nro is not null 
+group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad,Compra_Fecha,Cli_Dni
+order by Compra_Fecha desc
+
+select * from LOS_DE_GESTION.Compra where fecha_compra = '2018-11-08 00:00:00.000'  and usuario_cliente_comprador ='1360518' order by fecha_compra desc
+select* from gd_esquema.Maestra where Compra_Fecha = '2018-11-08 00:00:00.000' and Cli_Dni ='1360518'
+select* from gd_esquema.Maestra where Factura_Nro = '122751' order by Cli_Dni
+
+
+select * from LOS_DE_GESTION.Item_Rendicion where id_Rendicion = '122751'
+
+select* from gd_esquema.Maestra where Cli_Dni ='8393848'
+
+*/
