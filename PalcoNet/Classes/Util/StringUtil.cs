@@ -20,98 +20,76 @@ namespace Classes.Util
         }
         public static string FormatClienteListado(string nombre, string apellido, string email, string dni)
         {
-            //MODIFICAR EL *
+            
             string query = "SELECT * FROM LOS_DE_GESTION.Cliente WHERE ";
-            string[] conditions = new string[4];
-            string and = " AND ";
+            List<string> conditions = new List<string>();
 
-            if( !String.Equals(nombre,""))
+              if( !String.Equals(nombre,""))
             {
-                conditions[0] = ("nombre like " + "'%" + nombre + "%'");
+                conditions.Add("nombre like " + "'%" + nombre + "%'");
             }
             if (!String.Equals(apellido, "") )
             {
-                conditions[1] = (" apellido like " + "'%" + apellido + "%'");
+                conditions.Add(" apellido like " + "'%" + apellido + "%'");
             }
             if (!String.Equals(email, ""))
             {
-                conditions[2] = ("  mail like " + "'%" + email + "%'");
+                conditions.Add("  mail like " + "'%" + email + "%'");
             }   
             if (!String.Equals(dni, ""))
             {
-                conditions[3] = (" numero_documento like " + "'%" + dni + "%'");
+                conditions.Add(" numero_documento like " + "'%" + dni + "%'");
                 
             }
-           if(conditions.Count(s=> s != null) > 1)
-           {
-               for (int i=0; i < conditions.Count(); i++)
-               {
-                   if (conditions[i] == null)
-                   {
-                       
-                   }
-                   else
-                   {
-                       if (i < conditions.Count(s => s != null))
-                       {
-                           query += conditions[i] + and;
-                       }
-                       else { query += conditions[i]; }
-                   }
-               }
-               return query;
-           }else
-           {
-               var condition = conditions.ToList().Find(s=> s != null);
-               return query + condition;
-           }
-            
+            List<string> conds = conditions.FindAll(s => s != null);
+            for (int i = 0; i < conds.Count; i++ )
+            {
+                if (i == conds.Count - 1)
+                {
+                    query += conds.ToArray()[i];
+                }
+                else
+                {
+                    query += conds.ToArray()[i] + " AND ";
+                }
+            }
+            return query;
+
         }
 
         public static string FormatEmpresaListado(string razon_social, string cuit, string email)
         {
             string query = @"SELECT razon_social,mail,telefono,calle,nro_calle,depto,localidad,codigo_postal,ciudad,cuit,username
                             FROM LOS_DE_GESTION.Empresa WHERE ";
-            string[] conditions = new string[3];
+            List<string> conditions = new List<string>();
             string and = " AND ";
 
             if (!String.Equals(razon_social, ""))
             {
-                conditions[0] = "razon_social=" + "'" + razon_social + "'";
+                conditions.Add("razon_social=" + "'" + razon_social + "'");
             }
             if (!String.Equals(cuit, ""))
             {
-                conditions[1] = "cuit=" + "'" + cuit + "'";
+                conditions.Add("cuit=" + "'" + cuit + "'");
             }
             if (!String.Equals(email, ""))
             {
-                conditions[2] = "  mail=" + "'" + email + "'";
+                conditions.Add("  mail=" + "'" + email + "'");
             }
-           
-            if (conditions.Count(s => s != null) > 1)
-            {
-                for (int i = 0; i < conditions.Count(); i++)
-                {
-                    if (conditions[i] == null)
-                    {
 
-                    }
-                    else
-                    {
-                        if (i < conditions.Count(s => s != null))
-                        {
-                            query += conditions[i] + and;
-                        }
-                        else { query += conditions[i]; }
-                    }
-                }
-                return query;
-            }
-            else
+            List<string> conds = conditions.FindAll(s => s != null);
+            for (int i = 0; i < conds.Count; i++)
             {
-                var condition = conditions.ToList().Find(s => s != null);
-                return query + condition;
+                if (i == conds.Count - 1)
+                {
+                    query += conds.ToArray()[i];
+                }
+                else
+                {
+                    query += conds.ToArray()[i] + " AND ";
+                }
             }
+            return query;
         }
 
         public static string GetStringFromArray(string[] array, string searchString) 
