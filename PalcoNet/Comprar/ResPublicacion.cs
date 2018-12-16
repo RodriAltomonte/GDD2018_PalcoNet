@@ -154,7 +154,7 @@ namespace PalcoNet.Comprar
 
         private void btnUltima_Click(object sender, EventArgs e)
         {
-            int ultimaPagina = posicion;
+            int ultimaPagina = posicion; 
             cargarResultados(ultimaPagina);
         }
     }

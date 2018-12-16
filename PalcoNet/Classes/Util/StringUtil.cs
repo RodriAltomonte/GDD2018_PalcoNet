@@ -12,9 +12,86 @@ namespace Classes.Util
     {
         public static string FormatCuil(string txt)
         {
-           
+            if (String.Equals(txt, ""))
+            {
+                return "";
+            }
             return txt.Substring(0,2)+'-'+txt.Substring(3,7)+'-'+txt.Substring(10,1);
         }
+        public static string FormatClienteListado(string nombre, string apellido, string email, string dni)
+        {
+            
+            string query = "SELECT * FROM LOS_DE_GESTION.Cliente WHERE ";
+            List<string> conditions = new List<string>();
+
+              if( !String.Equals(nombre,""))
+            {
+                conditions.Add("nombre like " + "'%" + nombre + "%'");
+            }
+            if (!String.Equals(apellido, "") )
+            {
+                conditions.Add(" apellido like " + "'%" + apellido + "%'");
+            }
+            if (!String.Equals(email, ""))
+            {
+                conditions.Add("  mail like " + "'%" + email + "%'");
+            }   
+            if (!String.Equals(dni, ""))
+            {
+                conditions.Add(" numero_documento like " + "'%" + dni + "%'");
+                
+            }
+            List<string> conds = conditions.FindAll(s => s != null);
+            for (int i = 0; i < conds.Count; i++ )
+            {
+                if (i == conds.Count - 1)
+                {
+                    query += conds.ToArray()[i];
+                }
+                else
+                {
+                    query += conds.ToArray()[i] + " AND ";
+                }
+            }
+            return query;
+
+        }
+
+        public static string FormatEmpresaListado(string razon_social, string cuit, string email)
+        {
+            string query = @"SELECT razon_social,mail,telefono,calle,nro_calle,depto,localidad,codigo_postal,ciudad,cuit,username
+                            FROM LOS_DE_GESTION.Empresa WHERE ";
+            List<string> conditions = new List<string>();
+            string and = " AND ";
+
+            if (!String.Equals(razon_social, ""))
+            {
+                conditions.Add("razon_social=" + "'" + razon_social + "'");
+            }
+            if (!String.Equals(cuit, ""))
+            {
+                conditions.Add("cuit=" + "'" + cuit + "'");
+            }
+            if (!String.Equals(email, ""))
+            {
+                conditions.Add("  mail=" + "'" + email + "'");
+            }
+
+            List<string> conds = conditions.FindAll(s => s != null);
+            for (int i = 0; i < conds.Count; i++)
+            {
+                if (i == conds.Count - 1)
+                {
+                    query += conds.ToArray()[i];
+                }
+                else
+                {
+                    query += conds.ToArray()[i] + " AND ";
+                }
+            }
+            return query;
+        }
+
         public static string GetStringFromArray(string[] array, string searchString) 
         {
             return array.Where(element => element.Contains(searchString)).ToArray()[0];

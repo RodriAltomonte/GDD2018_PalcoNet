@@ -3,6 +3,7 @@ using Classes.Util;
 using PalcoNet.Classes.Constants;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.DatabaseConnection;
+using PalcoNet.Classes.Util.Form;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +22,7 @@ namespace PalcoNet.ABMCliente
         private string Username;
         private string doc_original = "";
         private string cuil_original = "";
-
+        private Form CallerForm;
         public ModificacionCliente( bool habilitado,
                                     string username,
                                     string nombre,
@@ -39,7 +40,8 @@ namespace PalcoNet.ABMCliente
                                     string codigo_postal,
                                     string fecha_nacimiento,
                                     string fecha_creacion,
-                                    string tarjeta)
+                                    string tarjeta,
+                                    Form caller)
         {
             InitializeComponent();
             cbxHabilitado.Checked = habilitado;
@@ -62,6 +64,7 @@ namespace PalcoNet.ABMCliente
             Username = username;
             doc_original = nro_documento;
             cuil_original = CUIL;
+            CallerForm = caller;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -122,6 +125,11 @@ namespace PalcoNet.ABMCliente
                 MessageBox.Show("Cliente modificado correctamente!");
             }
            
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
 
     }

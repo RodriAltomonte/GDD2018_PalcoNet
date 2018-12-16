@@ -225,6 +225,7 @@
             // txtNroDocumento
             // 
             this.txtNroDocumento.Location = new System.Drawing.Point(337, 64);
+            this.txtNroDocumento.MaxLength = 8;
             this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(131, 20);
             this.txtNroDocumento.TabIndex = 39;
@@ -373,6 +374,7 @@
             // txtCUIT3
             // 
             this.txtCUIT3.Location = new System.Drawing.Point(242, 233);
+            this.txtCUIT3.MaxLength = 1;
             this.txtCUIT3.Name = "txtCUIT3";
             this.txtCUIT3.Size = new System.Drawing.Size(27, 20);
             this.txtCUIT3.TabIndex = 101;
@@ -380,6 +382,7 @@
             // txtCUIT2
             // 
             this.txtCUIT2.Location = new System.Drawing.Point(151, 233);
+            this.txtCUIT2.MaxLength = 8;
             this.txtCUIT2.Name = "txtCUIT2";
             this.txtCUIT2.Size = new System.Drawing.Size(74, 20);
             this.txtCUIT2.TabIndex = 102;
@@ -387,6 +390,7 @@
             // txtCUIT1
             // 
             this.txtCUIT1.Location = new System.Drawing.Point(96, 233);
+            this.txtCUIT1.MaxLength = 2;
             this.txtCUIT1.Name = "txtCUIT1";
             this.txtCUIT1.Size = new System.Drawing.Size(33, 20);
             this.txtCUIT1.TabIndex = 103;

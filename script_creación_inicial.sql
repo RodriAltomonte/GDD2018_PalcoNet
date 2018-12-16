@@ -654,6 +654,10 @@ BEGIN
 						BEGIN
 							THROW 50004, 'El usuario fue deshabilitado por exceder la cantidad de intentos de login.',1
 						END
+					ELSE IF NOT EXISTS(select * from LOS_DE_GESTION.Usuario u inner join LOS_DE_GESTION.Usuario_X_Rol ur on u.username = ur.username where u.username = @username)
+						BEGIN
+							THROW 50005, 'El usuario no tiene asignado un rol.',1
+						END
 					ELSE IF EXISTS(select * from LOS_DE_GESTION.Usuario where username = @username and intentos_login = -1)
 						BEGIN
 							set @loginCorrecto = 1
@@ -1158,6 +1162,9 @@ AS
 		UPDATE LOS_DE_GESTION.Rol
 		SET habilitado = 0
 		WHERE id_Rol = @id_rol
+		
+		delete from LOS_DE_GESTION.Usuario_X_Rol
+		where id_Rol = @id_Rol
 	END
 GO
 ---------------MODIFICACION---------------
@@ -1479,7 +1486,7 @@ BEGIN
 
 	SELECT *
      FROM LOS_DE_GESTION.Cliente
-     WHERE nombre = @nombre OR @nombre='' AND apellido = @apellido OR @apellido=''
+     WHERE nombre = @nombre OR @nombre= '' AND apellido = @apellido OR @apellido=''
 	 AND numero_documento = @dni OR @dni = '' AND mail=@mail OR @mail=''
 
 END

@@ -29,7 +29,7 @@ namespace Classes.DatabaseConnection
         {
             sqlConnection.Close();
         }
-
+        
         public void TestConnection()
         {
             SqlCommand command = new SqlCommand("select 1", sqlConnection);

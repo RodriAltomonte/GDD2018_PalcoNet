@@ -223,6 +223,7 @@
             // txtCUIT1
             // 
             this.txtCUIT1.Location = new System.Drawing.Point(92, 194);
+            this.txtCUIT1.MaxLength = 2;
             this.txtCUIT1.Name = "txtCUIT1";
             this.txtCUIT1.Size = new System.Drawing.Size(31, 20);
             this.txtCUIT1.TabIndex = 70;
@@ -288,6 +289,7 @@
             // txtCUIT2
             // 
             this.txtCUIT2.Location = new System.Drawing.Point(145, 194);
+            this.txtCUIT2.MaxLength = 8;
             this.txtCUIT2.Name = "txtCUIT2";
             this.txtCUIT2.Size = new System.Drawing.Size(123, 20);
             this.txtCUIT2.TabIndex = 76;
@@ -295,6 +297,7 @@
             // txtCUIT3
             // 
             this.txtCUIT3.Location = new System.Drawing.Point(282, 194);
+            this.txtCUIT3.MaxLength = 1;
             this.txtCUIT3.Name = "txtCUIT3";
             this.txtCUIT3.Size = new System.Drawing.Size(31, 20);
             this.txtCUIT3.TabIndex = 70;

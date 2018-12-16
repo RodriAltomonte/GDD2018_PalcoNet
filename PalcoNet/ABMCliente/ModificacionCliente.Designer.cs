@@ -89,6 +89,7 @@
             this.btnVolver.TabIndex = 98;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // btnGuardar
             // 
@@ -177,6 +178,7 @@
             // txtCUIL1
             // 
             this.txtCUIL1.Location = new System.Drawing.Point(117, 233);
+            this.txtCUIL1.MaxLength = 2;
             this.txtCUIL1.Name = "txtCUIL1";
             this.txtCUIL1.Size = new System.Drawing.Size(33, 20);
             this.txtCUIL1.TabIndex = 86;
@@ -305,6 +307,7 @@
             // txtNroDocumento
             // 
             this.txtNroDocumento.Location = new System.Drawing.Point(358, 64);
+            this.txtNroDocumento.MaxLength = 8;
             this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(131, 20);
             this.txtNroDocumento.TabIndex = 70;
@@ -371,6 +374,7 @@
             // txtCUIL2
             // 
             this.txtCUIL2.Location = new System.Drawing.Point(172, 233);
+            this.txtCUIL2.MaxLength = 8;
             this.txtCUIL2.Name = "txtCUIL2";
             this.txtCUIL2.Size = new System.Drawing.Size(74, 20);
             this.txtCUIL2.TabIndex = 86;
@@ -378,6 +382,7 @@
             // txtCUIL3
             // 
             this.txtCUIL3.Location = new System.Drawing.Point(263, 233);
+            this.txtCUIL3.MaxLength = 1;
             this.txtCUIL3.Name = "txtCUIL3";
             this.txtCUIL3.Size = new System.Drawing.Size(27, 20);
             this.txtCUIL3.TabIndex = 86;
