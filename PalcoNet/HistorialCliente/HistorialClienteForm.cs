@@ -38,13 +38,6 @@ namespace PalcoNet.HistorialCliente
             cargarResultados(1);
         }
 
-        public HistorialClienteForm()
-        {
-            InitializeComponent();
-            username = "35865429";
-            cargarResultados(1);
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             NavigableFormUtil.BackwardTo(this, previousForm);

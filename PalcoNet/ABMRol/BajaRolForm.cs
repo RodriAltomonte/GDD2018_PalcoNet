@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PalcoNet.Classes.Util.Form;
 
 namespace PalcoNet.ABMRol
 {
@@ -72,6 +73,11 @@ namespace PalcoNet.ABMRol
                 MessageBox.Show("Rol deshabilitado correctamente!");
             }
             catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
     }
 }

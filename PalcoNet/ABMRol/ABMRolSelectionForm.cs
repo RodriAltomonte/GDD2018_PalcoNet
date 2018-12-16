@@ -62,7 +62,7 @@ namespace PalcoNet.ABMRol
         private void btnBaja_Click(object sender, EventArgs e)
         {
 
-            NavigableFormUtil.BackwardTo(this, new SeleccionRol(this,OPTION_BAJA)); 
+            NavigableFormUtil.ForwardTo(this, new SeleccionRol(this,OPTION_BAJA)); 
         }
 
     }
