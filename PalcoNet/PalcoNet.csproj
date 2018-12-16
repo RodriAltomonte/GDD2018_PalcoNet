@@ -247,6 +247,10 @@
     <Compile Include="Classes\Util\Form\MessageBoxUtil.cs" />
     <Compile Include="Classes\Util\Form\NavigableFormUtil.cs" />
     <Compile Include="Classes\Factory\QuarterFactory.cs" />
+    <Compile Include="Classes\Validator\ControlValidation.cs" />
+    <Compile Include="Classes\Validator\ControlValidator.cs" />
+    <Compile Include="Classes\Validator\Validation.cs" />
+    <Compile Include="Classes\Validator\Validator.cs" />
     <Compile Include="Classes\Util\RegexUtil.cs" />
     <Compile Include="Classes\Util\Form\TextFieldUtils.cs" />
     <Compile Include="Classes\Util\StringUtil.cs" />

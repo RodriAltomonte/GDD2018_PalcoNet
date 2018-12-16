@@ -28,14 +28,13 @@ namespace PalcoNet.CanjePuntos
             this.clienteRepository = new ClienteRepository();
             this.previousForm = previousForm;
 
-            //TODO reemplazar string
             clienteRepository.ValidarVencimientoDePuntosDeCliente(Session.Instance().LoggedUsername);
 
             ComboBoxFiller<Premio, decimal>.Fill(cmbPremios)
                 .KeyAs(premio => premio.IdPremio)
                 .ValueAs(premio => premio.Descripcion + " - " + premio.PuntosRequeridos + " puntos requeridos")
                 .With(premioRepository.PremiosDisponibles());
-            //TODO reemplazar string
+
             this.ActualizarPuntosYFechaDeVencimiento(premioRepository.PuntosDeUsuario(Session.Instance().LoggedUsername));
         }
 
@@ -45,7 +44,6 @@ namespace PalcoNet.CanjePuntos
             {
                 if (this.ValidarPremioSeleccionado())
                 {
-                    //TODO reemplazar string
                     decimal idPremio = ((ComboBoxItem<decimal>)cmbPremios.SelectedItem).Value;
 
                     this.premioRepository.CanjearPremio(Session.Instance().LoggedUsername, idPremio);
