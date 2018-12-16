@@ -1162,6 +1162,9 @@ AS
 		UPDATE LOS_DE_GESTION.Rol
 		SET habilitado = 0
 		WHERE id_Rol = @id_rol
+		
+		delete from LOS_DE_GESTION.Usuario_X_Rol
+		where id_Rol = @id_Rol
 	END
 GO
 ---------------MODIFICACION---------------
