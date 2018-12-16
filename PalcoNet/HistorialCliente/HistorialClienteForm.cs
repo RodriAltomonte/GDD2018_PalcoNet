@@ -37,6 +37,12 @@ namespace PalcoNet.HistorialCliente
             username = Session.Instance().LoggedUsername;
             cargarResultados(1);
         }
+        public HistorialClienteForm()
+        {
+            InitializeComponent();
+            username = "10125617";
+            cargarResultados(1);
+        }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
@@ -50,11 +56,11 @@ namespace PalcoNet.HistorialCliente
                 posicion = pagina;
                 pagina--;
                 int x = pagina * 5;
-                string select = @"select fecha_compra 'Fecha de Compra',sum(monto_total) 'Monto Total', sum (cantidad_ubicaciones) 'Cantidad de Ubicaciones',tarjeta_comprador 'Medios de Pago' 
-                                    from LOS_DE_GESTION.Compra where usuario_cliente_comprador = '" + username +
-                                   @"' group by fecha_compra,tarjeta_comprador ";
+                string select = @"select fecha_compra 'Fecha de Compra',monto_total 'Monto Total',cantidad_ubicaciones 'Cantidad de Ubicaciones',tarjeta_comprador 'Medios de Pago' 
+                                    from LOS_DE_GESTION.Compra where usuario_cliente_comprador = '" + username+ "' ";
+                                   //@"' group by fecha_compra,tarjeta_comprador ";
 
-                string final = @"ORDER BY fecha_compra 
+                string final = @" ORDER BY fecha_compra 
                                 OFFSET " + x.ToString() + @" ROWS FETCH NEXT " + 5 + " ROWS ONLY";
 
                 select += final;
