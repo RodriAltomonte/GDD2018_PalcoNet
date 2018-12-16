@@ -19,12 +19,12 @@ namespace PalcoNet.RegistroUsuario
         private string usuarioAModificar;
         private Form callerForm;
 
-        public ModificarPasswordUsuarioForm(string usuarioAModificar)
+        public ModificarPasswordUsuarioForm(string usuarioAModificar, Form callerForm)
         {
             InitializeComponent();
             this.usuarioRepository = new UsuarioRepository();
             this.usuarioAModificar = usuarioAModificar;
-           
+            this.callerForm = callerForm;           
         }
 
         public ModificarPasswordUsuarioForm(Form previousForm)

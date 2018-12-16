@@ -39,7 +39,7 @@ namespace PalcoNet.Login
                 if (usuarioRepository.EsUsuarioMigrado(txtUsername.Text))
                 {
                     MessageBoxUtil.ShowInfo("Debe modificar su contraseña.");
-                    NavigableFormUtil.ForwardTo(this, new RegistroUsuario.ModificarPasswordUsuarioForm(txtUsername.Text));
+                    NavigableFormUtil.ForwardTo(this, new RegistroUsuario.ModificarPasswordUsuarioForm(txtUsername.Text, this));
                 }
                 else
                 {
@@ -60,6 +60,11 @@ namespace PalcoNet.Login
         private void btnRegistro_Click(object sender, EventArgs e)
         {
             NavigableFormUtil.ForwardTo(this, new RegistroDeUsuarioForm(this));
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
