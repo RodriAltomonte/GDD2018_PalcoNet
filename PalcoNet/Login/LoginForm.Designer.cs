@@ -35,44 +35,51 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.grpLogin.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpLogin
             // 
+            this.grpLogin.Controls.Add(this.btnSalir);
             this.grpLogin.Controls.Add(this.txtPassword);
             this.grpLogin.Controls.Add(this.txtUsername);
             this.grpLogin.Controls.Add(this.btnRegistro);
             this.grpLogin.Controls.Add(this.btnLogin);
             this.grpLogin.Controls.Add(this.lblPassword);
             this.grpLogin.Controls.Add(this.lblUsername);
-            this.grpLogin.Location = new System.Drawing.Point(23, 12);
+            this.grpLogin.Location = new System.Drawing.Point(31, 15);
+            this.grpLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grpLogin.Name = "grpLogin";
-            this.grpLogin.Size = new System.Drawing.Size(270, 192);
+            this.grpLogin.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpLogin.Size = new System.Drawing.Size(360, 236);
             this.grpLogin.TabIndex = 0;
             this.grpLogin.TabStop = false;
             this.grpLogin.Text = "Bienvenido al sistema";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(33, 88);
+            this.txtPassword.Location = new System.Drawing.Point(44, 108);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(204, 20);
+            this.txtPassword.Size = new System.Drawing.Size(271, 22);
             this.txtPassword.TabIndex = 5;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(33, 49);
+            this.txtUsername.Location = new System.Drawing.Point(44, 60);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(204, 20);
+            this.txtUsername.Size = new System.Drawing.Size(271, 22);
             this.txtUsername.TabIndex = 4;
             // 
             // btnRegistro
             // 
-            this.btnRegistro.Location = new System.Drawing.Point(162, 157);
+            this.btnRegistro.Location = new System.Drawing.Point(216, 193);
+            this.btnRegistro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRegistro.Name = "btnRegistro";
-            this.btnRegistro.Size = new System.Drawing.Size(75, 21);
+            this.btnRegistro.Size = new System.Drawing.Size(100, 26);
             this.btnRegistro.TabIndex = 3;
             this.btnRegistro.Text = "Registrarse";
             this.btnRegistro.UseVisualStyleBackColor = true;
@@ -80,9 +87,10 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(33, 114);
+            this.btnLogin.Location = new System.Drawing.Point(44, 140);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(204, 23);
+            this.btnLogin.Size = new System.Drawing.Size(272, 28);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Ingresar";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -91,27 +99,40 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(30, 72);
+            this.lblPassword.Location = new System.Drawing.Point(40, 89);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(61, 13);
+            this.lblPassword.Size = new System.Drawing.Size(81, 17);
             this.lblPassword.TabIndex = 1;
             this.lblPassword.Text = "Contraseña";
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(30, 32);
+            this.lblUsername.Location = new System.Drawing.Point(40, 39);
+            this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(96, 13);
+            this.lblUsername.Size = new System.Drawing.Size(129, 17);
             this.lblUsername.TabIndex = 0;
             this.lblUsername.Text = "Nombre de usuario";
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(43, 193);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(100, 26);
+            this.btnSalir.TabIndex = 6;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 221);
+            this.ClientSize = new System.Drawing.Size(424, 272);
             this.Controls.Add(this.grpLogin);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "LoginForm";
             this.Text = "LoginForm";
             this.grpLogin.ResumeLayout(false);
@@ -129,5 +150,6 @@
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Button btnSalir;
     }
 }
