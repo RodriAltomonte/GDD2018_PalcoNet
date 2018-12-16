@@ -49,9 +49,7 @@ namespace PalcoNet.ABMCliente
             txtApellido.Text = apellido;
             cboTipoDoc.Text = tipo_documento;
             txtNroDocumento.Text = nro_documento;
-            StringUtil.ParseCuil(txtCUIL1,
-                                txtCUIL2,
-                                txtCUIL3,CUIL);
+            StringUtil.ParseCuil(txtCUIL1,txtCUIL2,txtCUIL3,CUIL);
             txtMail.Text = mail;
             txtTelefono.Text = telefono;
             txtCalle.Text = calle;
