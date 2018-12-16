@@ -33,6 +33,8 @@ namespace PalcoNet.ABMCliente
                 DataTable dt = ConnectionFactory.Instance()
                                                 .CreateConnection()
                                                 .ExecuteDataTableSqlQuery(query);
+                dgvClientes.AllowUserToAddRows = false;
+                dgvClientes.ReadOnly = true;
                 dgvClientes.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }

@@ -27,6 +27,8 @@ namespace PalcoNet.ABMRol
             {
                 dt = ConnectionFactory.Instance().CreateConnection()
                         .ExecuteDataTableSqlQuery("SELECT id_Funcionalidad FROM LOS_DE_GESTION.Funcionalidad");
+                dgvFuncionalidades.AllowUserToAddRows = false;
+                dgvFuncionalidades.ReadOnly = true;
                 dgvFuncionalidades.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message); }

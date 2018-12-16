@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Classes.Util
 {
@@ -17,6 +18,12 @@ namespace Classes.Util
                 return "";
             }
             return txt.Substring(0,2)+'-'+txt.Substring(3,7)+'-'+txt.Substring(10,1);
+        }
+        public static void ParseCuil(TextBox text1, TextBox text2, TextBox text3,string cuil)
+        {
+            text1.Text = cuil.Substring(1, 1);
+            text2.Text = cuil.Substring(3, 8);
+            text3.Text = cuil.Substring(10, 1);
         }
         public static string FormatClienteListado(string nombre, string apellido, string email, string dni)
         {
@@ -66,15 +73,15 @@ namespace Classes.Util
 
             if (!String.Equals(razon_social, ""))
             {
-                conditions.Add("razon_social=" + "'" + razon_social + "'");
+                conditions.Add("razon_social like " + "'%" + razon_social + "%'");
             }
             if (!String.Equals(cuit, ""))
             {
-                conditions.Add("cuit=" + "'" + cuit + "'");
+                conditions.Add("cuit like" + "'%" + cuit + "%'");
             }
             if (!String.Equals(email, ""))
             {
-                conditions.Add("  mail=" + "'" + email + "'");
+                conditions.Add(" mail like" + "'%" + email + "%'");
             }
 
             List<string> conds = conditions.FindAll(s => s != null);

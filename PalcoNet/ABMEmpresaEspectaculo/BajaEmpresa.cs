@@ -1,4 +1,5 @@
 ﻿using Classes.DatabaseConnection;
+using Classes.Util;
 using PalcoNet.Classes.Constants;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.DatabaseConnection;
@@ -47,19 +48,16 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         {
             try
             {
-                //Arreglar
-                var query = @"SELECT razon_social,mail,telefono,
-                            calle,nro_calle,depto,localidad,
-                            codigo_postal,ciudad,cuit,username
-                            FROM LOS_DE_GESTION.Empresa
-                            WHERE razon_social=" + "'" + txtRazonSocial.Text + "'"
-                            + " OR " + "'" + txtRazonSocial.Text + "'" + " = " + "''"
-                            + " AND mail=" + "'" + txtMail.Text + "'" + " OR " + "'" + txtMail.Text + "'" +
-                            "=" + "''" + " AND cuit=" + "'" + txtCUIT.Text + "'" + " OR " + "'" + txtCUIT.Text + "'" + "=" + "''";
+                var cuit = StringUtil.FormatCuil(txtCUIT2.Text+txtCUIT1.Text+txtCUIT3.Text);
+                var query = StringUtil.FormatEmpresaListado(txtRazonSocial.Text, 
+                                                            StringUtil.FormatCuil(txtCUIT2.Text + txtCUIT1.Text + txtCUIT3.Text),
+                                                            txtMail.Text);
 
                 DataTable dt = ConnectionFactory.Instance()
                                                 .CreateConnection()
                                                 .ExecuteDataTableSqlQuery(query);
+                dgvEmpresas.AllowUserToAddRows = false;
+                dgvEmpresas.ReadOnly = true;
                 dgvEmpresas.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }

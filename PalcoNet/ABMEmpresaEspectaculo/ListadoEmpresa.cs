@@ -37,6 +37,9 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                 DataTable dt = ConnectionFactory.Instance()
                                                 .CreateConnection()
                                                 .ExecuteDataTableSqlQuery(query);
+
+                dgvEmpresas.AllowUserToAddRows = false;
+                dgvEmpresas.ReadOnly = true;
                 dgvEmpresas.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }

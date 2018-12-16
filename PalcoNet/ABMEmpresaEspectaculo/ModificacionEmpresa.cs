@@ -52,7 +52,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             txtLocalidad.Text = localidad;
             txtPostal.Text = codigo_postal;
             txtCiudad.Text = ciudad;
-            txtCUIT1.Text = ciut;
+            StringUtil.ParseCuil(txtCUIT1, txtCUIT2, txtCUIT3, ciut);
             cbxHabilitado.Checked = habilitada;
 
             CallerForm = callerForm;
@@ -62,31 +62,36 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             var cuit = txtCUIT1.Text+txtCUIT2.Text+txtCUIT3.Text;
-            if (!TextFieldUtils.IsAnyFieldEmpty(this) && TextFieldUtils.CUIT.EsCuitValido(cuit))
+            if (!TextFieldUtils.IsAnyFieldEmpty(this))
             {
-                StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-                inputParameters.AddParameter("@cuitOriginal", CUIT);
-                inputParameters.AddParameter("@razon_social", txtRazonSocial.Text);
-                inputParameters.AddParameter("@mail", txtMail.Text);
-                inputParameters.AddParameter("@telefono", decimal.Parse(txtTelefono.Text));
-                inputParameters.AddParameter("@direccion_calle", txtDirCalle.Text);
-                inputParameters.AddParameter("@numero_calle", decimal.Parse(txtNumero.Text));
-                inputParameters.AddParameter("@nro_piso", decimal.Parse(txtPiso.Text));
-                inputParameters.AddParameter("@depto", txtDpto.Text);
-                inputParameters.AddParameter("@localidad", txtLocalidad.Text);
-                inputParameters.AddParameter("@cod_postal", txtPostal.Text);
-                inputParameters.AddParameter("@ciudad", txtCiudad.Text);
-                inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
-                try
+                if (TextFieldUtils.CUIT.EsCuitValido(cuit))
                 {
-                    ConnectionFactory.Instance()
-                                     .CreateConnection()
-                                     .ExecuteDataTableStoredProcedure(SpNames.ModificarEmpresa, inputParameters);
-                    MessageBox.Show("La empresa fue modificada correctamente!");
+                    StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+                    inputParameters.AddParameter("@cuitOriginal", CUIT);
+                    inputParameters.AddParameter("@razon_social", txtRazonSocial.Text);
+                    inputParameters.AddParameter("@mail", txtMail.Text);
+                    inputParameters.AddParameter("@telefono", decimal.Parse(txtTelefono.Text));
+                    inputParameters.AddParameter("@direccion_calle", txtDirCalle.Text);
+                    inputParameters.AddParameter("@numero_calle", decimal.Parse(txtNumero.Text));
+                    inputParameters.AddParameter("@nro_piso", decimal.Parse(txtPiso.Text));
+                    inputParameters.AddParameter("@depto", txtDpto.Text);
+                    inputParameters.AddParameter("@localidad", txtLocalidad.Text);
+                    inputParameters.AddParameter("@cod_postal", txtPostal.Text);
+                    inputParameters.AddParameter("@ciudad", txtCiudad.Text);
+                    inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
+                    try
+                    {
+                        ConnectionFactory.Instance()
+                                         .CreateConnection()
+                                         .ExecuteDataTableStoredProcedure(SpNames.ModificarEmpresa, inputParameters);
+                        MessageBox.Show("La empresa fue modificada correctamente!");
+                    }
+                    catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
                 }
-                catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
+                else { MessageBox.Show("Revisa el cuit"); }
             }
             else { MessageBox.Show("Por favor completa todos los campos"); }
+
         }
 
         private void cbxHabilitado_Click(object sender, EventArgs e)

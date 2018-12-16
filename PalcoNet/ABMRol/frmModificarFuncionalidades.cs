@@ -26,11 +26,15 @@ namespace PalcoNet.ABMRol
             DataTable dt1 = ConnectionFactory.Instance()
                                              .CreateConnection()
                                              .ExecuteDataTableSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Funcionalidad WHERE id_Funcionalidad NOT IN (SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol=" + "'" + IdRol + "'" + ")");
+            dgvFunsDisponibles.AllowUserToAddRows = false;
+            dgvFunsDisponibles.ReadOnly = true;
             dgvFunsDisponibles.DataSource = dt1;
 
             DataTable dt2 = ConnectionFactory.Instance()
                                              .CreateConnection()
                                              .ExecuteDataTableSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Funcionalidad WHERE id_Funcionalidad IN (SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol="+"'"+idRol+"'"+")" );
+            dgvFnsRol.AllowUserToAddRows = false;
+            dgvFnsRol.ReadOnly = true;
             dgvFnsRol.DataSource = dt2;
         }
 
@@ -86,17 +90,21 @@ namespace PalcoNet.ABMRol
         {
             NavigableFormUtil.BackwardTo(this, new ModificacionRol(IdRol,this));
         }
-        #region Auxilliary
+        #region Auxilliary Methods
         private void Refresh()
         {
             DataTable dt1 = ConnectionFactory.Instance()
                                           .CreateConnection()
                                           .ExecuteDataTableSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Funcionalidad WHERE id_Funcionalidad NOT IN (SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol=" + "'" + IdRol + "'" + ")");
+            dgvFunsDisponibles.AllowUserToAddRows = false;
+            dgvFunsDisponibles.ReadOnly = true;
             dgvFunsDisponibles.DataSource = dt1;
 
             DataTable dt2 = ConnectionFactory.Instance()
                                              .CreateConnection()
                                              .ExecuteDataTableSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Funcionalidad WHERE id_Funcionalidad IN (SELECT id_Funcionalidad FROM LOS_DE_GESTION.Rol_X_Funcionalidad WHERE id_Rol=" + "'" + IdRol + "'" + ")");
+            dgvFnsRol.AllowUserToAddRows = false;
+            dgvFnsRol.ReadOnly = true;
             dgvFnsRol.DataSource = dt2;
         }
         #endregion
