@@ -246,7 +246,9 @@ go
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
-
+IF OBJECT_ID(N'LOS_DE_GESTION.ComprasDeUnaEmpresa') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ComprasDeUnaEmpresa;
+GO
 ------------------------------DROP FUNCIONES------------------------------
 IF OBJECT_ID('LOS_DE_GESTION.FN_HASHPASS','FN') IS NOT NULL
 DROP FUNCTION LOS_DE_GESTION.FN_HASHPASS
@@ -1509,7 +1511,7 @@ BEGIN
 END
 GO
 ---PROCEDURES RENDICION-----
-
+/*
 CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
 @importe_total_ventas NUMERIC(18, 2),
 @importe_comision_total NUMERIC(18, 2),
@@ -1528,6 +1530,26 @@ BEGIN
 
 END
 GO
+*/
+
+CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
+@fecha_rendicion DATETIME,
+@razon_social NVARCHAR(255),
+@idRendicion numeric output
+AS
+BEGIN
+
+	 select top 1 (id_Rendicion+1) from LOS_DE_GESTION.Rendicion order by id_Rendicion desc
+	INSERT INTO LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,
+										fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
+	VALUES((select top 1 (id_Rendicion+1) from LOS_DE_GESTION.Rendicion order by id_Rendicion desc),-1,-1,-1,@fecha_rendicion,(select username from LOS_DE_GESTION.Empresa where razon_social = razon_social ),'efectivo')
+	set @idRendicion = SCOPE_IDENTITY();
+	return
+
+END
+GO
+
+			      
 
 CREATE PROCEDURE LOS_DE_GESTION.CrearItemRendicion
 @id_Rendicion numeric(18, 0), -- FK
@@ -1546,7 +1568,7 @@ BEGIN
 
 END
 GO
-
+/*
 CREATE PROCEDURE LOS_DE_GESTION.ComprasDeEmpresa
 @razon_social NVARCHAR(255),
 @cantidad INT
@@ -1560,6 +1582,25 @@ BEGIN
 	WHERE e.razon_social = @razon_social		 
 END
 GO
+		      
+*/
+		      
+
+CREATE PROCEDURE LOS_DE_GESTION.ComprasDeUnaEmpresa
+@razon_social NVARCHAR(255),
+@cantidad INT
+AS
+BEGIN
+	SELECT TOP (@cantidad) c.id_Compra 'Compra Id',c.monto_total 'Total',c.fecha_compra'Fecha de Compra',c.cantidad_ubicaciones 'Cantidad de Ubicaciones'
+	FROM LOS_DE_GESTION.Compra c 
+	JOIN LOS_DE_GESTION.Ubicacion u ON c.id_Compra = u.id_Compra
+	JOIN LOS_DE_GESTION.Publicacion p ON u.cod_publicacion=p.cod_publicacion
+	JOIN LOS_DE_GESTION.Empresa e ON p.usuario_empresa_vendedora=e.username 
+	WHERE e.razon_social = @razon_social and c.id_Compra not in (select i.id_Compra from Item_Rendicion i)
+	order by c.fecha_compra 
+END
+GO
+
 
 CREATE PROCEDURE LOS_DE_GESTION.NuevaCompra
 @monto_total NUMERIC(18, 2),
