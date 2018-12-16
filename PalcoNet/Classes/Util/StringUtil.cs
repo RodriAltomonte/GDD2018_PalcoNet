@@ -21,9 +21,17 @@ namespace Classes.Util
         }
         public static void ParseCuil(TextBox text1, TextBox text2, TextBox text3,string cuil)
         {
-            text1.Text = cuil.Substring(1, 1);
-            text2.Text = cuil.Substring(3, 8);
-            text3.Text = cuil.Substring(10, 1);
+            if (cuil == null || cuil.Equals(""))
+            { 
+                return;
+            }
+            else
+            {
+                text1.Text = cuil.Substring(1, 1);
+                text2.Text = cuil.Substring(3, 8);
+                text3.Text = cuil.Substring(10, 1);
+                return;
+            }
         }
         public static string FormatClienteListado(string nombre, string apellido, string email, string dni)
         {

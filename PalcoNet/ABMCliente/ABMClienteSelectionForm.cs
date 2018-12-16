@@ -22,7 +22,7 @@ namespace PalcoNet.ABMCliente
 
         private void button1_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.ForwardTo(this, new ABMCliente.AltaCliente());
+            NavigableFormUtil.ForwardTo(this, new ABMCliente.AltaCliente(this));
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace PalcoNet.ABMCliente
 
         private void button3_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.BackwardTo(this, new ABMCliente.BajaCliente(this));
+            NavigableFormUtil.ForwardTo(this, new ABMCliente.BajaCliente(this));
         }
 
         private void button4_Click(object sender, EventArgs e)

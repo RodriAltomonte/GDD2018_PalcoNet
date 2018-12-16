@@ -23,19 +23,20 @@ namespace PalcoNet.ABMCliente
 {
     public partial class AltaCliente : Form
     {
-        private Form callerForm;
+        private Form CallerForm;
         private Usuario newUser;
         private IAccionPostCreacionUsuario accionPostCreacion = new NoVolverALogin();
 
-        public AltaCliente()
+        public AltaCliente(Form caller)
         {
             InitializeComponent();
+            CallerForm = caller;
         }
 
         public AltaCliente(Form callerForm, Usuario newUser, IAccionPostCreacionUsuario accionPostCreacion) 
         {
             InitializeComponent();
-            this.callerForm = callerForm;
+            CallerForm = callerForm;
             this.newUser = newUser;
             this.accionPostCreacion = accionPostCreacion;
         }
@@ -102,7 +103,7 @@ namespace PalcoNet.ABMCliente
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.BackwardTo(this, callerForm);
+            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
         
     }

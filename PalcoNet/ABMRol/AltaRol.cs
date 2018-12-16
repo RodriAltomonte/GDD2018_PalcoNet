@@ -19,9 +19,11 @@ namespace PalcoNet.ABMRol
 {
     public partial class AltaRol : Form
     {
-        public AltaRol()
+        private Form CallerForm;
+        public AltaRol(Form caller)
         {
             InitializeComponent();
+            CallerForm = caller;
             DataTable dt = new DataTable();
             try
             {
@@ -81,7 +83,12 @@ namespace PalcoNet.ABMRol
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.BackwardTo(this, new ABMRol.ABMRolSelectionForm(this));
+            NavigableFormUtil.BackwardTo(this, CallerForm);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
     }
 }

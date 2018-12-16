@@ -45,7 +45,7 @@ namespace PalcoNet.ABMRol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.ForwardTo(this, new ABMRol.AltaRol());
+            NavigableFormUtil.ForwardTo(this, new ABMRol.AltaRol(this));
         }
 
         private void button2_Click(object sender, EventArgs e)
