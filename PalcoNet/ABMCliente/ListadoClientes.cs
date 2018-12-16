@@ -80,7 +80,8 @@ namespace PalcoNet.ABMCliente
                                                                       codigo_postal,
                                                                       fecha_nacimiento,
                                                                       fecha_creacion,
-                                                                      tarjeta));
+                                                                      tarjeta,
+                                                                      this));
            
         }
 

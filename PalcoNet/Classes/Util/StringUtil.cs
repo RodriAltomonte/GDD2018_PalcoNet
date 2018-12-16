@@ -22,7 +22,7 @@ namespace Classes.Util
         {
             //MODIFICAR EL *
             string query = "SELECT * FROM LOS_DE_GESTION.Cliente WHERE ";
-            string[] conditions = new string[3];
+            string[] conditions = new string[4];
             string and = " AND ";
 
             if( !String.Equals(nombre,""))
@@ -48,10 +48,16 @@ namespace Classes.Util
                {
                    if (conditions[i] == null)
                    {
-                       continue;
+                       
                    }
-                   conditions[i] += conditions[i] + and;                   
-                   query += conditions[i];
+                   else
+                   {
+                       if (i < conditions.Count(s => s != null))
+                       {
+                           query += conditions[i] + and;
+                       }
+                       else { query += conditions[i]; }
+                   }
                }
                return query;
            }else
@@ -66,21 +72,46 @@ namespace Classes.Util
         {
             string query = @"SELECT razon_social,mail,telefono,calle,nro_calle,depto,localidad,codigo_postal,ciudad,cuit,username
                             FROM LOS_DE_GESTION.Empresa WHERE ";
+            string[] conditions = new string[3];
+            string and = " AND ";
 
             if (!String.Equals(razon_social, ""))
             {
-                query += "razon_social=" + "'" + razon_social + "'";
+                conditions[0] = "razon_social=" + "'" + razon_social + "'";
             }
             if (!String.Equals(cuit, ""))
             {
-                query += "cuit=" + "'" + cuit + "'";
+                conditions[1] = "cuit=" + "'" + cuit + "'";
             }
             if (!String.Equals(email, ""))
             {
-                query += "  mail=" + "'" + email + "'";
+                conditions[2] = "  mail=" + "'" + email + "'";
             }
            
-            return query;
+            if (conditions.Count(s => s != null) > 1)
+            {
+                for (int i = 0; i < conditions.Count(); i++)
+                {
+                    if (conditions[i] == null)
+                    {
+
+                    }
+                    else
+                    {
+                        if (i < conditions.Count(s => s != null))
+                        {
+                            query += conditions[i] + and;
+                        }
+                        else { query += conditions[i]; }
+                    }
+                }
+                return query;
+            }
+            else
+            {
+                var condition = conditions.ToList().Find(s => s != null);
+                return query + condition;
+            }
         }
 
         public static string GetStringFromArray(string[] array, string searchString) 
