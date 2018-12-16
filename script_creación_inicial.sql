@@ -654,6 +654,10 @@ BEGIN
 						BEGIN
 							THROW 50004, 'El usuario fue deshabilitado por exceder la cantidad de intentos de login.',1
 						END
+					ELSE IF NOT EXISTS(select * from LOS_DE_GESTION.Usuario u inner join LOS_DE_GESTION.Usuario_X_Rol ur on u.username = ur.username where u.username = @username)
+						BEGIN
+							THROW 50005, 'El usuario no tiene asignado un rol.',1
+						END
 					ELSE IF EXISTS(select * from LOS_DE_GESTION.Usuario where username = @username and intentos_login = -1)
 						BEGIN
 							set @loginCorrecto = 1
