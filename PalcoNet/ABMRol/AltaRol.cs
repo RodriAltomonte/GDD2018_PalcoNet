@@ -26,10 +26,13 @@ namespace PalcoNet.ABMRol
             try
             {
                 dt = ConnectionFactory.Instance().CreateConnection()
-                        .ExecuteDataTableSqlQuery("SELECT id_Funcionalidad FROM LOS_DE_GESTION.Funcionalidad");
+                        .ExecuteDataTableSqlQuery("SELECT id_Funcionalidad,nombre FROM LOS_DE_GESTION.Funcionalidad");
+               
+              
                 dgvFuncionalidades.AllowUserToAddRows = false;
                 dgvFuncionalidades.ReadOnly = true;
                 dgvFuncionalidades.DataSource = dt;
+                dgvFuncionalidades.Columns[0].Visible = false;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message); }
         }
@@ -61,7 +64,7 @@ namespace PalcoNet.ABMRol
                         decimal id_funcionalidad = ConnectionFactory.Instance()
                                                                     .CreateConnection()
                                                                     .ExecuteSingleOutputSqlQuery<decimal>( @"SELECT id_Funcionalidad FROM LOS_DE_GESTION.Funcionalidad
-                                                                                                           WHERE id_Funcionalidad=" + "'" + c.Value.ToString() + "'");
+                                                                                                           WHERE nombre=" + "'" + c.Value.ToString() + "'");
                         inputParameters.AddParameter("@funcionalidadRol",id_funcionalidad);
                         ConnectionFactory.Instance()
                                          .CreateConnection()
