@@ -1486,7 +1486,7 @@ BEGIN
 
 	SELECT *
      FROM LOS_DE_GESTION.Cliente
-     WHERE nombre = @nombre OR @nombre='' AND apellido = @apellido OR @apellido=''
+     WHERE nombre = @nombre OR @nombre= '' AND apellido = @apellido OR @apellido=''
 	 AND numero_documento = @dni OR @dni = '' AND mail=@mail OR @mail=''
 
 END

@@ -47,16 +47,19 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         {
             try
             {
+                //Arreglar
+                var query = @"SELECT razon_social,mail,telefono,
+                            calle,nro_calle,depto,localidad,
+                            codigo_postal,ciudad,cuit,username
+                            FROM LOS_DE_GESTION.Empresa
+                            WHERE razon_social=" + "'" + txtRazonSocial.Text + "'"
+                            + " OR " + "'" + txtRazonSocial.Text + "'" + " = " + "''"
+                            + " AND mail=" + "'" + txtMail.Text + "'" + " OR " + "'" + txtMail.Text + "'" +
+                            "=" + "''" + " AND cuit=" + "'" + txtCUIT.Text + "'" + " OR " + "'" + txtCUIT.Text + "'" + "=" + "''";
+
                 DataTable dt = ConnectionFactory.Instance()
                                                 .CreateConnection()
-                                                .ExecuteDataTableSqlQuery(@"SELECT razon_social,mail,telefono,
-                                                                            calle,nro_calle,depto,localidad,
-                                                                            codigo_postal,ciudad,cuit,username
-                                                                            FROM LOS_DE_GESTION.Empresa
-                                                                            WHERE razon_social=" + "'" + txtRazonSocial.Text + "'"
-                                                                            + "OR" + "'" + txtRazonSocial.Text + "'" + "IS NULL AND "
-                                                                            + "mail=" + "'" + txtMail.Text + "'" + "OR" + "'" + txtMail.Text + "'" +
-                                                                            "IS NULL AND cuit=" + "'" + txtCUIT.Text + "'" + "OR" + "'" + txtCUIT.Text + "'" + "IS NULL");
+                                                .ExecuteDataTableSqlQuery(query);
                 dgvEmpresas.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }

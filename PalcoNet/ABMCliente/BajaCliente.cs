@@ -1,7 +1,9 @@
 ﻿using Classes.DatabaseConnection;
+using Classes.Util;
 using PalcoNet.Classes.Constants;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.DatabaseConnection;
+using PalcoNet.Classes.Util.Form;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,24 +18,25 @@ namespace PalcoNet.ABMCliente
 {
     public partial class BajaCliente : Form
     {
-        public BajaCliente()
+        private Form CallerForm;
+        public BajaCliente(Form caller)
         {
             InitializeComponent();
+            CallerForm = caller;
             
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            
+           
             try
             {
+                string query = StringUtil.FormatClienteListado(txtNombre.Text, txtApellido.Text, txtMail.Text, txtDNI.Text);
                 DataTable dt = ConnectionFactory.Instance()
                                                 .CreateConnection()
-                                                .ExecuteDataTableSqlQuery(@"SELECT nombre,apellido,tipo_documento,
-                                                                            numero_documento,cuil,mail,telefono,calle,nro_calle,
-                                                                            nro_piso,depto,localidad,codigo_postal,
-                                                                            fecha_nacimiento,fecha_creacion,tarjeta,username
-                                                                            FROM LOS_DE_GESTION.Cliente
-                                                                           "); // FILTRAR RESULTADOS
+                                                .ExecuteDataTableSqlQuery(query);
+                
                 dgvClientes.DataSource = dt;
             }
             catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
@@ -56,6 +59,11 @@ namespace PalcoNet.ABMCliente
                 }
                 catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
     }
 }

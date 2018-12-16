@@ -12,9 +12,77 @@ namespace Classes.Util
     {
         public static string FormatCuil(string txt)
         {
-           
+            if (String.Equals(txt, ""))
+            {
+                return "";
+            }
             return txt.Substring(0,2)+'-'+txt.Substring(3,7)+'-'+txt.Substring(10,1);
         }
+        public static string FormatClienteListado(string nombre, string apellido, string email, string dni)
+        {
+            //MODIFICAR EL *
+            string query = "SELECT * FROM LOS_DE_GESTION.Cliente WHERE ";
+            string[] conditions = new string[3];
+            string and = " AND ";
+
+            if( !String.Equals(nombre,""))
+            {
+                conditions[0] = ("nombre like " + "'%" + nombre + "%'");
+            }
+            if (!String.Equals(apellido, "") )
+            {
+                conditions[1] = (" apellido like " + "'%" + apellido + "%'");
+            }
+            if (!String.Equals(email, ""))
+            {
+                conditions[2] = ("  mail like " + "'%" + email + "%'");
+            }   
+            if (!String.Equals(dni, ""))
+            {
+                conditions[3] = (" numero_documento like " + "'%" + dni + "%'");
+                
+            }
+           if(conditions.Count(s=> s != null) > 1)
+           {
+               for (int i=0; i < conditions.Count(); i++)
+               {
+                   if (conditions[i] == null)
+                   {
+                       continue;
+                   }
+                   conditions[i] += conditions[i] + and;                   
+                   query += conditions[i];
+               }
+               return query;
+           }else
+           {
+               var condition = conditions.ToList().Find(s=> s != null);
+               return query + condition;
+           }
+            
+        }
+
+        public static string FormatEmpresaListado(string razon_social, string cuit, string email)
+        {
+            string query = @"SELECT razon_social,mail,telefono,calle,nro_calle,depto,localidad,codigo_postal,ciudad,cuit,username
+                            FROM LOS_DE_GESTION.Empresa WHERE ";
+
+            if (!String.Equals(razon_social, ""))
+            {
+                query += "razon_social=" + "'" + razon_social + "'";
+            }
+            if (!String.Equals(cuit, ""))
+            {
+                query += "cuit=" + "'" + cuit + "'";
+            }
+            if (!String.Equals(email, ""))
+            {
+                query += "  mail=" + "'" + email + "'";
+            }
+           
+            return query;
+        }
+
         public static string GetStringFromArray(string[] array, string searchString) 
         {
             return array.Where(element => element.Contains(searchString)).ToArray()[0];
