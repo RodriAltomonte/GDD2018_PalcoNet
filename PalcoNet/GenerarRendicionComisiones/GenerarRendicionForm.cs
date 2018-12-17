@@ -40,12 +40,12 @@ namespace PalcoNet.GenerarRendicionComisiones
 
         private void InicializarForm()
         {
-            CbCantidad.Items.Add("10");
-            CbCantidad.Items.Add("20");
-            CbCantidad.Items.Add("30");
-            CbCantidad.Items.Add("40");
-            CbCantidad.Items.Add("50");
-            CbCantidad.SelectedIndex = 0;
+            CbCantidad.Items.Add(10);
+            CbCantidad.Items.Add(20);
+            CbCantidad.Items.Add(30);
+            CbCantidad.Items.Add(40);
+            CbCantidad.Items.Add(50);
+            //CbCantidad.SelectedIndex = 0;
             DataSet ds = ConnectionFactory.Instance()
                         .CreateConnection()
                         .ExecuteDataSetSqlQuery("SELECT razon_social FROM LOS_DE_GESTION.Empresa", "razon_social");
@@ -138,13 +138,16 @@ namespace PalcoNet.GenerarRendicionComisiones
 
         private void traerCompras()
         {
-            //Obtengo las compras que se le realizaron a la empresa
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-            inputParameters.AddParameter("@razon_social", "'" + cbEmpresas.Text + "'");
-            inputParameters.AddParameter("@cantidad", CbCantidad.Text);
-            dgvCompras.DataSource = ConnectionFactory.Instance()
-                                                      .CreateConnection()
-                                                      .ExecuteDataTableStoredProcedure(SpNames.ListadoComprasDeunaEmpresa, inputParameters);
+            if (cbEmpresas.Text != "" && CbCantidad.Text != "")
+            {
+                //Obtengo las compras que se le realizaron a la empresa
+                StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+                inputParameters.AddParameter("@razon_social", cbEmpresas.Text);
+                inputParameters.AddParameter("@cantidad", CbCantidad.Text);
+                dgvCompras.DataSource = ConnectionFactory.Instance()
+                                                          .CreateConnection()
+                                                          .ExecuteDataTableStoredProcedure(SpNames.ListadoComprasDeunaEmpresa, inputParameters);
+            }
         }
 
         private void ActualizarRendicion(decimal idRendicion, decimal TotalImpVenta, decimal TotalimpComi, decimal TotalimpRendi)
