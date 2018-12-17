@@ -11,14 +11,26 @@ namespace TFUtilites
 {
     static class TextFieldUtils
     {
-
+        public static bool DateIsValid(DateTime fecha)
+        {
+            DateTime fecha_de_sistema = ConfigurationManager.Instance().GetSystemDateTime();
+            var cond1 = DateTime.Compare(fecha, fecha_de_sistema) < 0;
+            var cond2 = (fecha_de_sistema - fecha).TotalDays / 356 > 18;
+            bool condition = DateTime.Compare(fecha, fecha_de_sistema) < 0 && (fecha_de_sistema-fecha).TotalDays/356 > 18;
+            if (condition)
+            {
+                return true;
+            }
+            else { MessageBox.Show("Revise la fecha"); return false; }
+            
+        }
         public static bool DatesAreValid(DateTime fecha_nacimiento,DateTime fecha_creacion)
         { 
             DateTime fecha_del_sistema = ConfigurationManager.Instance().GetSystemDateTime();
             bool condition = (DateTime.Compare(fecha_nacimiento,fecha_del_sistema) < 0) && (DateTime.Compare(fecha_creacion,fecha_del_sistema) < 0);
-            if (condition)
+            if (condition && DateIsValid(fecha_nacimiento))
             {
-                return true;
+                return true ;
             }
             else { MessageBox.Show("Por favor verifique las fechas"); return false; }
         }
@@ -29,6 +41,7 @@ namespace TFUtilites
             {
                 if (String.IsNullOrEmpty(tb.Text))
                 {
+                    MessageBox.Show("Por favor complete todos los campos");
                     return true;
                 }
             }

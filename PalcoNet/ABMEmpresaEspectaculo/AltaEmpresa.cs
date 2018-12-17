@@ -45,7 +45,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             string username = "", password = "";
-            if (!TextFieldUtils.IsValidTextField(Ciudad, Localidad, RazonSocial)
+            if (!TextFieldUtils.IsValidTextField(Ciudad, Localidad)
                 || !TextFieldUtils.IsValidNumericField(Verificador1, NroCuit, DigitoVerificador, Piso, Numero, Telefono))
             {
                
@@ -58,7 +58,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                     if (TextFieldUtils.CUIT.EsCuitValido(cuit))
                     {
                         StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-                        inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
+                        inputParameters.AddParameter("@habilitado", true);
                         inputParameters.AddParameter("@rol", 3);//3 rol Empresa
                         inputParameters.AddParameter("@razon_social", RazonSocial.Text);
                         inputParameters.AddParameter("@mail", Mail.Text);
@@ -92,8 +92,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                                              .CreateConnection()
                                              .ExecuteDataTableStoredProcedure(SpNames.AltaEmpresa, inputParameters);
 
-                            MessageBox.Show(this, @"Empresa agregada de forma correcta! 
-                                                    Puede ingresar al sistema con el usuario: "+username+" password:"+password, "Correcto", MessageBoxButtons.OK);
+                            MessageBox.Show(this, @"Empresa agregada de forma correcta!Puede ingresar al sistema con el usuario: "+username+" password:"+password, "Correcto", MessageBoxButtons.OK);
                             accionPostCreacion.Do(this);
                         }
                         catch (StoredProcedureException ex) { MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK); }

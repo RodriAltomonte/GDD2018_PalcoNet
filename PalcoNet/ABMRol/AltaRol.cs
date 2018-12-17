@@ -28,7 +28,7 @@ namespace PalcoNet.ABMRol
             DataTable dt = new DataTable();
             try
             {
-              decimal IdRol = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<decimal>("SELECT TOP 1 (id_Rol+1) FROM LOS_DE_GESTION.Rol ORDER BY id_Rol DESC ");
+             
                 dt = ConnectionFactory.Instance().CreateConnection()
                         .ExecuteDataTableSqlQuery("SELECT id_Funcionalidad,nombre FROM LOS_DE_GESTION.Funcionalidad");
                
@@ -45,14 +45,12 @@ namespace PalcoNet.ABMRol
         {
             if (!TextFieldUtils.IsAnyFieldEmpty(this))
             {
-                Rol nRol = new Rol();
-                nRol.Descripcion = tbRolNombre.Text;
-                nRol.Habilitado = cbHabilitado.Checked;
-                nRol.IdRol = IdRol;
+                
+                IdRol = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<decimal>("SELECT TOP 1 (id_Rol+1) FROM LOS_DE_GESTION.Rol ORDER BY id_Rol DESC ");
                 StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-                inputParameters.AddParameter("@nombreRol", nRol.Descripcion);
-                inputParameters.AddParameter("@id_rol", nRol.IdRol);
-                inputParameters.AddParameter("@habilitado", nRol.Habilitado);
+                inputParameters.AddParameter("@nombreRol", tbRolNombre.Text);
+                inputParameters.AddParameter("@id_rol", IdRol);
+                inputParameters.AddParameter("@habilitado", cbHabilitado.Checked);
                 try
                 {
                     ConnectionFactory.Instance()

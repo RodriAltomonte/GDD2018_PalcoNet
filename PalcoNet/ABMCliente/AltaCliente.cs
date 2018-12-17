@@ -53,13 +53,13 @@ namespace PalcoNet.ABMCliente
             }
             else{
             var cuil = Verificador1.Text + DNI.Text + DigitoVerificador.Text;
-            if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text))
+            if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text) && TextFieldUtils.DateIsValid(Convert.ToDateTime(dtpFechaNacimiento.Text)))
             {
                 if (TextFieldUtils.CUIT.EsCuilValido(cuil) && NroDocumento.Text == DNI.Text)
                 {
                     StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                    // inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
-                    inputParameters.AddParameter("@habilitado", 1);
+                    inputParameters.AddParameter("@habilitado", true);
                     inputParameters.AddParameter("@id_rol", 2); // 2 Rol Cliente
                     inputParameters.AddParameter("@nombre", Nombre.Text);
                     inputParameters.AddParameter("@apellido", Apellido.Text);
@@ -87,6 +87,8 @@ namespace PalcoNet.ABMCliente
                     }
                     else
                     {
+                        username = newUser.Username;
+                        password = newUser.Password;
                         inputParameters.AddParameter("@username", newUser.Username);
                         inputParameters.AddParameter("@password", newUser.Password);
                     }
@@ -104,7 +106,7 @@ namespace PalcoNet.ABMCliente
                 }
                 else { MessageBox.Show("Por favor verifique el cuil"); }
             }
-            else { MessageBox.Show("Por favor completa todos los campos y reviselos"); }
+           
             }
         }
 
