@@ -45,28 +45,28 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             string username = "", password = "";
-            if (!TextFieldUtils.IsValidTextField(txtCiudad, txtLocalidad, txtRazonSocial)
-                || !TextFieldUtils.IsValidNumericField(txtCUIT1, txtCUIT2, txtCUIT3, txtPiso, txtNumero, txtTelefono))
+            if (!TextFieldUtils.IsValidTextField(Ciudad, Localidad, RazonSocial)
+                || !TextFieldUtils.IsValidNumericField(Verificador1, NroCuit, DigitoVerificador, Piso, Numero, Telefono))
             {
                
             }
             else
             {
-                var cuit = txtCUIT1.Text + txtCUIT2.Text + txtCUIT3.Text;
-                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text))
+                var cuit = Verificador1.Text + NroCuit.Text + DigitoVerificador.Text;
+                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text))
                 {
                     if (TextFieldUtils.CUIT.EsCuitValido(cuit))
                     {
                         StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                         inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
                         inputParameters.AddParameter("@rol", 3);//3 rol Empresa
-                        inputParameters.AddParameter("@razon_social", txtRazonSocial.Text);
-                        inputParameters.AddParameter("@mail", txtMail.Text);
-                        inputParameters.AddParameter("@telefono", txtTelefono.Text);
-                        inputParameters.AddParameter("@direccion_calle", txtDirCalle.Text);
-                        inputParameters.AddParameter("@nro_calle", decimal.Parse(txtNumero.Text));
-                        inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
-                        inputParameters.AddParameter("@ciudad", txtCiudad.Text);
+                        inputParameters.AddParameter("@razon_social", RazonSocial.Text);
+                        inputParameters.AddParameter("@mail", Mail.Text);
+                        inputParameters.AddParameter("@telefono", Telefono.Text);
+                        inputParameters.AddParameter("@direccion_calle", DirCalle.Text);
+                        inputParameters.AddParameter("@nro_calle", decimal.Parse(Numero.Text));
+                        inputParameters.AddParameter("@codigo_postal", CodPostal.Text);
+                        inputParameters.AddParameter("@ciudad", Ciudad.Text);
                         inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
                         inputParameters.AddParameter("@fecha_creacion", ConfigurationManager.Instance().GetSystemDateTime());
 
