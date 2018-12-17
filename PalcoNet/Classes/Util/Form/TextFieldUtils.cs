@@ -2,14 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TFUtilites = PalcoNet.Classes.Util.Form;
-
+using Classes.Configuration;
 namespace TFUtilites
 {
     static class TextFieldUtils
     {
+
+        public static bool DatesAreValid(DateTime fecha_nacimiento,DateTime fecha_creacion)
+        { 
+            DateTime fecha_del_sistema = ConfigurationManager.Instance().GetSystemDateTime();
+            bool condition = (DateTime.Compare(fecha_nacimiento,fecha_del_sistema) < 0) && (DateTime.Compare(fecha_creacion,fecha_del_sistema) < 0);
+            if (condition)
+            {
+                return true;
+            }
+            else { MessageBox.Show("Por favor verifique las fechas"); return false; }
+        }
         public static bool IsAnyFieldEmpty(Form myForm)
         {
             var controls = myForm.Controls.OfType<TextBox>();
@@ -22,6 +34,13 @@ namespace TFUtilites
             }
             return false;
         }
+
+        public static bool AreAllFieldsEmpty(Form myForm)
+        {
+            var controls = myForm.Controls.OfType<TextBox>();
+            return controls.All(c => String.IsNullOrEmpty(c.Text));
+        }
+
         public static void CleanAllControls(Form myForm)
         {
             var txtControls = myForm.Controls.OfType<TextBox>();
@@ -31,6 +50,42 @@ namespace TFUtilites
                 tb.Text = "";
             }
         }
+
+
+        public static bool IsValidNumericField(params TextBox[] txtFields)
+        {
+            List<TextBox> fields = new List<TextBox>();
+            fields.AddRange(txtFields);
+
+            foreach (var f in fields.FindAll(fi => fi.Text != ""))
+            {
+                if (!f.Text.All(char.IsDigit))
+                {
+                    MessageBox.Show("Revise el campo " + f.Name);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool IsValidTextField(params TextBox[] txtFields)
+        {
+            string pattern = @"[\p{L} ]+$";
+            Regex regex = new Regex(pattern);
+
+            List<TextBox> fields = new List<TextBox>();
+            fields.AddRange(txtFields);
+            foreach (var f in fields.FindAll(fi => fi.Text != ""))
+            {
+                if (!regex.IsMatch(f.Text))
+                {
+                    MessageBox.Show("Revise el campo " + f.Name);
+                    return false;
+                }
+            }
+            return true;
+        }
+
        
         public static class CUIT
         {

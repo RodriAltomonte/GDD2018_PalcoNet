@@ -18,7 +18,7 @@ namespace Classes.Util
                 return "";
             }
            
-            return txt.Substring(0,2)+'-'+txt.Substring(3,8)+'-'+txt.Substring(10,1);
+            return txt.Substring(0,2)+'-'+txt.Substring(2,8)+'-'+txt.Substring(10,1);
         }
         public static void ParseCuil(TextBox text1, TextBox text2, TextBox text3,string cuil)
         {
@@ -30,7 +30,7 @@ namespace Classes.Util
             {
                 text1.Text = cuil.Substring(0, 2);
                 text2.Text = cuil.Substring(3, 8);
-                text3.Text = cuil.Substring(10, 1);
+                text3.Text = cuil.Substring(12, 1);
                 return;
             }
         }
@@ -157,8 +157,10 @@ namespace Classes.Util
             {
                 invalid = false;
                 if (String.IsNullOrEmpty(strIn))
+                {
+                    MessageBox.Show("Por favor verifique el mail");
                     return false;
-
+                }
 
                 // Use IdnMapping class to convert Unicode domain names.
                 try
@@ -168,19 +170,29 @@ namespace Classes.Util
                 }
                 catch (RegexMatchTimeoutException)
                 {
+                    MessageBox.Show("Por favor verifique el mail");
                     return false;
                 }
 
                 if (invalid)
+                {
+                    MessageBox.Show("Por favor verifique el mail");
                     return false;
-
+                }
                 // Return true if strIn is in valid email format.
                 try
                 {
-                    return Regex.IsMatch(strIn,
-                          @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
-                          @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
-                          RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                    if (Regex.IsMatch(strIn,
+                           @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                           @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-0-9a-z]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                           RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)))
+                    {
+                        return true;
+                    }
+                    else {
+                        MessageBox.Show("Por favor verifique el mail");
+                        return false;
+                    }
                 }
                 catch (RegexMatchTimeoutException)
                 {

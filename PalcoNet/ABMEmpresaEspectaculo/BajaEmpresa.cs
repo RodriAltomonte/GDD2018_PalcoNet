@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TFUtilites;
 
 namespace PalcoNet.ABMEmpresaEspectaculo
 {
@@ -27,40 +28,51 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void dgvEmpresas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string username = dgvEmpresas.CurrentRow.Cells[10].Value.ToString();
-
-            if (MessageBox.Show("Seguro que desea dar de baja a esta empresa?", "Atencion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (!TextFieldUtils.IsValidNumericField(txtCUIT1, txtCUIT2, txtCUIT3) || !TextFieldUtils.IsValidTextField(txtRazonSocial))
             {
-                StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-                inputParameters.AddParameter("@username", username);
-                try
+                MessageBox.Show("Verifique los datos ingresados");
+            }
+            else
+            {
+                string username = dgvEmpresas.CurrentRow.Cells[10].Value.ToString();
+
+                if (MessageBox.Show("Seguro que desea dar de baja a esta empresa?", "Atencion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 {
-                    ConnectionFactory.Instance()
-                                     .CreateConnection()
-                                     .ExecuteDataTableStoredProcedure(SpNames.BajaEmpresa, inputParameters);
-                    MessageBox.Show("Empresa dada de baja correctamente");
+                    StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+                    inputParameters.AddParameter("@username", username);
+                    try
+                    {
+                        ConnectionFactory.Instance()
+                                         .CreateConnection()
+                                         .ExecuteDataTableStoredProcedure(SpNames.BajaEmpresa, inputParameters);
+                        MessageBox.Show("Empresa dada de baja correctamente");
+                    }
+                    catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
                 }
-                catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            try
+            if (!TextFieldUtils.AreAllFieldsEmpty(this))
             {
-                var cuit = StringUtil.FormatCuil(txtCUIT2.Text+txtCUIT1.Text+txtCUIT3.Text);
-                var query = StringUtil.FormatEmpresaListado(txtRazonSocial.Text, 
-                                                            StringUtil.FormatCuil(txtCUIT2.Text + txtCUIT1.Text + txtCUIT3.Text),
-                                                            txtMail.Text);
+                try
+                {
+                    var cuit = StringUtil.FormatCuil(txtCUIT2.Text + txtCUIT1.Text + txtCUIT3.Text);
+                    var query = StringUtil.FormatEmpresaListado(txtRazonSocial.Text,
+                                                                StringUtil.FormatCuil(txtCUIT2.Text + txtCUIT1.Text + txtCUIT3.Text),
+                                                                txtMail.Text);
 
-                DataTable dt = ConnectionFactory.Instance()
-                                                .CreateConnection()
-                                                .ExecuteDataTableSqlQuery(query);
-                dgvEmpresas.AllowUserToAddRows = false;
-                dgvEmpresas.ReadOnly = true;
-                dgvEmpresas.DataSource = dt;
+                    DataTable dt = ConnectionFactory.Instance()
+                                                    .CreateConnection()
+                                                    .ExecuteDataTableSqlQuery(query);
+                    dgvEmpresas.AllowUserToAddRows = false;
+                    dgvEmpresas.ReadOnly = true;
+                    dgvEmpresas.DataSource = dt;
+                }
+                catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
             }
-            catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+            else { MessageBox.Show("Debe introducir al menos un dato"); }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

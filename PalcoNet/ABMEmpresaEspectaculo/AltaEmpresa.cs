@@ -44,49 +44,64 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            var cuit = txtCUIT1.Text + txtCUIT2.Text + txtCUIT3.Text;
-            if(!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text)){
-                if (TextFieldUtils.CUIT.EsCuitValido(cuit))
+            string username = "", password = "";
+            if (!TextFieldUtils.IsValidTextField(Ciudad, Localidad, RazonSocial)
+                || !TextFieldUtils.IsValidNumericField(Verificador1, NroCuit, DigitoVerificador, Piso, Numero, Telefono))
+            {
+               
+            }
+            else
+            {
+                var cuit = Verificador1.Text + NroCuit.Text + DigitoVerificador.Text;
+                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text))
                 {
-                    StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-                    inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
-                    inputParameters.AddParameter("@rol", 3);//3 rol Empresa
-                    inputParameters.AddParameter("@razon_social", txtRazonSocial.Text);
-                    inputParameters.AddParameter("@mail", txtMail.Text);
-                    inputParameters.AddParameter("@telefono", txtTelefono.Text);
-                    inputParameters.AddParameter("@direccion_calle", txtDirCalle.Text);
-                    inputParameters.AddParameter("@nro_calle", decimal.Parse(txtNumero.Text));
-                    inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
-                    inputParameters.AddParameter("@ciudad", txtCiudad.Text);
-                    inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
-                    inputParameters.AddParameter("@fecha_creacion", ConfigurationManager.Instance().GetSystemDateTime());
-
-                    if (newUser == null)
+                    if (TextFieldUtils.CUIT.EsCuitValido(cuit))
                     {
-                        inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(10));
-                        inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10));
-                    }
-                    else
-                    {
-                        inputParameters.AddParameter("@username", newUser.Username);
-                        inputParameters.AddParameter("@password", newUser.Password);
-                    }
+                        StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+                        inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
+                        inputParameters.AddParameter("@rol", 3);//3 rol Empresa
+                        inputParameters.AddParameter("@razon_social", RazonSocial.Text);
+                        inputParameters.AddParameter("@mail", Mail.Text);
+                        inputParameters.AddParameter("@telefono", Telefono.Text);
+                        inputParameters.AddParameter("@direccion_calle", DirCalle.Text);
+                        inputParameters.AddParameter("@nro_calle", decimal.Parse(Numero.Text));
+                        inputParameters.AddParameter("@codigo_postal", CodPostal.Text);
+                        inputParameters.AddParameter("@ciudad", Ciudad.Text);
+                        inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
+                        inputParameters.AddParameter("@fecha_creacion", ConfigurationManager.Instance().GetSystemDateTime());
 
-                    try
-                    {
-                        ConnectionFactory.Instance()
-                                         .CreateConnection()
-                                         .ExecuteDataTableStoredProcedure(SpNames.AltaEmpresa, inputParameters);
+                        if (newUser == null)
+                        {
+                            username = StringUtil.GenerateRandomUsername(10);
+                            password = StringUtil.GenerateRandomPassword(10);
 
-                        MessageBox.Show(this, "Empresa agregada de forma correcta!", "Correcto", MessageBoxButtons.OK);
-                        accionPostCreacion.Do(this);
+                            inputParameters.AddParameter("@username",username );
+                            inputParameters.AddParameter("@password", password);
+                        }
+                        else
+                        {
+                            inputParameters.AddParameter("@username", newUser.Username);
+                            inputParameters.AddParameter("@password", newUser.Password);
+                        }
+
+                        try
+                        {
+                            ConnectionFactory.Instance()
+                                             .CreateConnection()
+                                             .ExecuteDataTableStoredProcedure(SpNames.AltaEmpresa, inputParameters);
+
+                            MessageBox.Show(this, @"Empresa agregada de forma correcta! 
+                                                    Puede ingresar al sistema con el usuario: "+username+" password:"+password, "Correcto", MessageBoxButtons.OK);
+                            accionPostCreacion.Do(this);
+                        }
+                        catch (StoredProcedureException ex) { MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK); }
                     }
-                    catch (StoredProcedureException ex) { MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK); }
+                    else { MessageBox.Show("Verifica el CUIT"); }
                 }
-                else { MessageBox.Show("Verifica el CUIT"); }
-            }else{MessageBox.Show("Por favor rellena todos los campos");}
+                else { MessageBox.Show("Por favor rellena todos los campos"); }
+            }
         }
-
+        
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             TextFieldUtils.CleanAllControls(this);

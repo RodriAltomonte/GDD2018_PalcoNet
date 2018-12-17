@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TFUtilites;
 
 namespace PalcoNet.ABMCliente
 {
@@ -27,17 +28,28 @@ namespace PalcoNet.ABMCliente
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            try
+            if (!TextFieldUtils.IsValidTextField(txtApellido, txtNombre) || !TextFieldUtils.IsValidNumericField(txtDNI))
             {
-                var query = StringUtil.FormatClienteListado(txtNombre.Text, txtApellido.Text, txtMail.Text, txtDNI.Text);
-                DataTable dt = ConnectionFactory.Instance()
-                                                .CreateConnection()
-                                                .ExecuteDataTableSqlQuery(query);
-                dgvClientes.AllowUserToAddRows = false;
-                dgvClientes.ReadOnly = true;
-                dgvClientes.DataSource = dt;
+                MessageBox.Show("Por favor revise los datos ingresados");
             }
-            catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+            else
+            {
+                if (!TextFieldUtils.AreAllFieldsEmpty(this))
+                {
+                    try
+                    {
+                        var query = StringUtil.FormatClienteListado(txtNombre.Text, txtApellido.Text, txtMail.Text, txtDNI.Text);
+                        DataTable dt = ConnectionFactory.Instance()
+                                                        .CreateConnection()
+                                                        .ExecuteDataTableSqlQuery(query);
+                        dgvClientes.AllowUserToAddRows = false;
+                        dgvClientes.ReadOnly = true;
+                        dgvClientes.DataSource = dt;
+                    }
+                    catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+                }
+                else { MessageBox.Show("Debe introducir al menos un dato"); }
+            }
         }
 
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)

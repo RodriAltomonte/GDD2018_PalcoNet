@@ -35,8 +35,6 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.cbHabilitado = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbIdRol = new System.Windows.Forms.TextBox();
             this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).BeginInit();
             this.SuspendLayout();
@@ -113,6 +111,7 @@
             // 
             // label3
             // 
+            /*
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(92, 97);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -120,14 +119,17 @@
             this.label3.Size = new System.Drawing.Size(39, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Id rol";
+             */ 
             // 
             // tbIdRol
             // 
+            /*
             this.tbIdRol.Location = new System.Drawing.Point(141, 97);
             this.tbIdRol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbIdRol.Name = "tbIdRol";
             this.tbIdRol.Size = new System.Drawing.Size(207, 22);
             this.tbIdRol.TabIndex = 2;
+             */ 
             // 
             // btnVolver
             // 
@@ -150,9 +152,7 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvFuncionalidades);
-            this.Controls.Add(this.tbIdRol);
             this.Controls.Add(this.tbRolNombre);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
@@ -173,8 +173,6 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.CheckBox cbHabilitado;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbIdRol;
         private System.Windows.Forms.Button btnVolver;
     }
 }

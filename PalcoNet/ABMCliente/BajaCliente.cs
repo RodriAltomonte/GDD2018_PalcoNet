@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TFUtilites;
 
 namespace PalcoNet.ABMCliente
 {
@@ -28,24 +29,33 @@ namespace PalcoNet.ABMCliente
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            
-           
-            try
+            if (!TextFieldUtils.IsValidTextField(txtApellido, txtNombre) || !TextFieldUtils.IsValidNumericField(txtDNI))
             {
-                string query = StringUtil.FormatClienteListado(txtNombre.Text, txtApellido.Text, txtMail.Text, txtDNI.Text);
-                DataTable dt = ConnectionFactory.Instance()
-                                                .CreateConnection()
-                                                .ExecuteDataTableSqlQuery(query);
-                dgvClientes.AllowUserToAddRows = false;
-                dgvClientes.ReadOnly = true;
-                dgvClientes.DataSource = dt;
+                MessageBox.Show("Por favor revise los datos de entrada");
             }
-            catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+            else
+            {
+                if (!TextFieldUtils.AreAllFieldsEmpty(this))
+                {
+                    try
+                    {
+                        string query = StringUtil.FormatClienteListado(txtNombre.Text, txtApellido.Text, txtMail.Text, txtDNI.Text);
+                        DataTable dt = ConnectionFactory.Instance()
+                                                        .CreateConnection()
+                                                        .ExecuteDataTableSqlQuery(query);
+                        dgvClientes.AllowUserToAddRows = false;
+                        dgvClientes.ReadOnly = true;
+                        dgvClientes.DataSource = dt;
+                    }
+                    catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+                }
+                else { MessageBox.Show("Introduzca al menos un dato"); }
+            }
         }
 
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string username = dgvClientes.CurrentRow.Cells[16].Value.ToString();
+            string username = dgvClientes.CurrentRow.Cells[0].Value.ToString();
 
             if (MessageBox.Show("Seguro que desea dar de baja a este cliente?", "Atencion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {

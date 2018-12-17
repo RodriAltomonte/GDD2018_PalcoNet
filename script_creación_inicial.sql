@@ -1395,7 +1395,7 @@ BEGIN
 		END
 		
 		IF(NOT EXISTS(SELECT razon_social FROM LOS_DE_GESTION.Empresa WHERE razon_social=@razon_social)
-			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit) AND LEN(@cuit) = 11 )
+			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit))
 			BEGIN
 				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,nro_calle,codigo_postal,ciudad,cuit,fecha_creacion)
 				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@nro_calle,@codigo_postal,@ciudad,@cuit,@fecha_creacion)
@@ -1455,7 +1455,7 @@ CREATE PROCEDURE LOS_DE_GESTION.ModificarEmpresa
 @cuit NVARCHAR(255)
 AS
 	BEGIN
-	--falta comprobar que sea un cuit valido
+
 		IF(NOT EXISTS(SELECT cuit FROM LOS_DE_GESTION.Empresa WHERE cuit = @cuit AND cuit != @cuitOriginal))
 			BEGIN
 				UPDATE LOS_DE_GESTION.Empresa
@@ -1479,40 +1479,6 @@ AS
 	END
 GO
 
-
------PROCEDURES DE BUSQUEDA------
-CREATE PROCEDURE LOS_DE_GESTION.ListadoClientes
-@nombre NVARCHAR(255),
-@apellido NVARCHAR(255),
-@dni NUMERIC(18,0),
-@mail NVARCHAR(255)
-AS
-BEGIN
-
-	SELECT *
-     FROM LOS_DE_GESTION.Cliente
-     WHERE nombre = @nombre OR @nombre= '' AND apellido = @apellido OR @apellido=''
-	 AND numero_documento = @dni OR @dni = '' AND mail=@mail OR @mail=''
-
-END
-GO
-
-CREATE PROCEDURE LOS_DE_GESTION.ListadoEmpresas
-@razon_social NVARCHAR(255),
-@CUIT NVARCHAR(255),
-@mail NVARCHAR(50)
-AS
-BEGIN
-
-	SELECT razon_social,mail,telefono,
-    calle,nro_calle,depto,localidad,
-    codigo_postal,ciudad,cuit,username
-    FROM LOS_DE_GESTION.Empresa
-    WHERE razon_social=@razon_social OR @razon_social IS NULL OR @razon_social = '' 
-	AND cuit=@CUIT OR @CUIT IS NULL OR @CUIT = '' AND mail=@mail OR @mail IS NULL OR @mail = ''
-
-END
-GO
 ---PROCEDURES RENDICION-----
 /*
 CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
@@ -1531,6 +1497,7 @@ END
 GO
 */
 
+
 CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
 @fecha_rendicion DATETIME,
 @razon_social NVARCHAR(255),
@@ -1538,15 +1505,17 @@ CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
 AS
 BEGIN
 
-	 select top 1 (id_Rendicion+1) from LOS_DE_GESTION.Rendicion order by id_Rendicion desc
+	 declare @id numeric;
+	 set @id = ((select Max(id_Rendicion) from LOS_DE_GESTION.Rendicion)+1)
 	INSERT INTO LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,
 										fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
-	VALUES((select top 1 (id_Rendicion+1) from LOS_DE_GESTION.Rendicion order by id_Rendicion desc),-1,-1,-1,@fecha_rendicion,(select username from LOS_DE_GESTION.Empresa where razon_social = razon_social ),'efectivo')
-	set @idRendicion = SCOPE_IDENTITY();
+	VALUES(@id,-1,-1,-1,@fecha_rendicion,(select username from LOS_DE_GESTION.Empresa e where e.razon_social = @razon_social ),'efectivo')
+	set @idRendicion = @id;
 	return
 
 END
 GO
+
 
 			      
 
@@ -1595,7 +1564,7 @@ BEGIN
 	JOIN LOS_DE_GESTION.Ubicacion u ON c.id_Compra = u.id_Compra
 	JOIN LOS_DE_GESTION.Publicacion p ON u.cod_publicacion=p.cod_publicacion
 	JOIN LOS_DE_GESTION.Empresa e ON p.usuario_empresa_vendedora=e.username 
-	WHERE e.razon_social = @razon_social and c.id_Compra not in (select i.id_Compra from Item_Rendicion i)
+	WHERE e.razon_social = @razon_social and c.id_Compra not in (select i.id_Compra from LOS_DE_GESTION.Item_Rendicion i)
 	order by c.fecha_compra 
 END
 GO
