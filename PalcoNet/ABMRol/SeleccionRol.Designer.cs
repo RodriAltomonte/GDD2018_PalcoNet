@@ -82,6 +82,7 @@
             this.Controls.Add(this.cbRol);
             this.Name = "SeleccionRol";
             this.Text = "SeleccionRol";
+            this.Load += new System.EventHandler(this.SeleccionRol_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

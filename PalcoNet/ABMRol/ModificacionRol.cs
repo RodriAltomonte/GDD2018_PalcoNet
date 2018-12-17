@@ -18,14 +18,16 @@ namespace PalcoNet.ABMRol
     public partial class ModificacionRol : Form
     {
         private decimal IdRol;
-        private Form CallerForm;
-        public ModificacionRol(decimal IdRol,Form caller)
+        private SeleccionRol CallerForm;
+        
+
+        public ModificacionRol(decimal IdRol,SeleccionRol caller)
         {
             InitializeComponent();
             CallerForm = caller;
             this.IdRol = IdRol;         
         }
-       
+
         private void btnModNombre_Click(object sender, EventArgs e)
         {
             NavigableFormUtil.ForwardTo(this, new frmModificarNombre(IdRol,this));
@@ -39,6 +41,7 @@ namespace PalcoNet.ABMRol
       
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            CallerForm.Refrescar();
            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
           

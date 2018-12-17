@@ -20,6 +20,7 @@ namespace PalcoNet.ABMRol
     {
         private decimal IdRol;
         private Form CallerForm;
+        
         public frmModificarNombre(decimal IdRol,Form caller)
         {
             this.IdRol = IdRol;
@@ -41,9 +42,10 @@ namespace PalcoNet.ABMRol
                                  .ExecuteDataTableStoredProcedure(SpNames.ModificarRol,inputParameters);
                 MessageBox.Show("Nombre del rol modificado exitosamente!");
                 NavigableFormUtil.BackwardTo(this, CallerForm);
+                
             }
             catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
-        }else{MessageBox.Show("Por favor rellena todos los campos");}
+        }
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -18,6 +18,8 @@ namespace PalcoNet.ABMRol
         private Form CallerForm;
         private decimal IdRol;
         private int Option;
+       
+       
         public SeleccionRol(Form caller,int option)
         {
             InitializeComponent();
@@ -25,10 +27,9 @@ namespace PalcoNet.ABMRol
             Option = option;
             try
             {
-                DataSet ds = ConnectionFactory.Instance()
+                      DataSet  ds = ConnectionFactory.Instance()
                                               .CreateConnection()
                                               .ExecuteDataSetSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Rol", "nombre");
-                
                 cbRol.DisplayMember = "nombre";
                 cbRol.DataSource = ds.Tables["nombre"];
             }
@@ -57,5 +58,29 @@ namespace PalcoNet.ABMRol
         {
             NavigableFormUtil.BackwardTo(this, CallerForm);
         }
+
+        private void SeleccionRol_Load(object sender, EventArgs e)
+        {
+            DataSet ds = ConnectionFactory.Instance()
+                                              .CreateConnection()
+                                              .ExecuteDataSetSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Rol", "nombre");
+
+            cbRol.DisplayMember = "nombre";
+            cbRol.DataSource = ds.Tables["nombre"];
+        }
+
+        #region
+        public void Refrescar()
+        {
+
+            DataSet ds = ConnectionFactory.Instance()
+                                                     .CreateConnection()
+                                                     .ExecuteDataSetSqlQuery("SELECT nombre FROM LOS_DE_GESTION.Rol", "nombre");
+
+            cbRol.DisplayMember = "nombre";
+            cbRol.DataSource = ds.Tables["nombre"];
+        }
+        #endregion
+
     }
 }
