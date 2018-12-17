@@ -29,27 +29,31 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if (!TextFieldUtils.IsValidTextField(txtRazonSocial) 
+            if (!TextFieldUtils.IsValidTextField(txtRazonSocial)
                 || !TextFieldUtils.IsValidNumericField(txtCUIT1, txtCUIT2, txtCUIT3))
             {
                 MessageBox.Show("Por favor revise los datos ingresados");
             }
             else
             {
-                try
+                if (!TextFieldUtils.AreAllFieldsEmpty(this))
                 {
-                    string query = StringUtil.FormatEmpresaListado(txtRazonSocial.Text,
-                                                                StringUtil.FormatCuil(txtCUIT1.Text + txtCUIT2.Text + txtCUIT3.Text),
-                                                                txtMail.Text);
-                    DataTable dt = ConnectionFactory.Instance()
-                                                    .CreateConnection()
-                                                    .ExecuteDataTableSqlQuery(query);
+                    try
+                    {
+                        string query = StringUtil.FormatEmpresaListado(txtRazonSocial.Text,
+                                                                    StringUtil.FormatCuil(txtCUIT1.Text + txtCUIT2.Text + txtCUIT3.Text),
+                                                                    txtMail.Text);
+                        DataTable dt = ConnectionFactory.Instance()
+                                                        .CreateConnection()
+                                                        .ExecuteDataTableSqlQuery(query);
 
-                    dgvEmpresas.AllowUserToAddRows = false;
-                    dgvEmpresas.ReadOnly = true;
-                    dgvEmpresas.DataSource = dt;
+                        dgvEmpresas.AllowUserToAddRows = false;
+                        dgvEmpresas.ReadOnly = true;
+                        dgvEmpresas.DataSource = dt;
+                    }
+                    catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
                 }
-                catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+                else { MessageBox.Show("Introduzca al menos un dato"); }
             }
         }
 

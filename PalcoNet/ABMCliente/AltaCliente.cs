@@ -47,7 +47,7 @@ namespace PalcoNet.ABMCliente
 
             if(
        !TextFieldUtils.IsValidNumericField(txtCUIT1,txtCUIT2,txtCUIT3,txtNroDocumento,txtTelefono,txtNumero,txtPiso,txtTarjeta)
-                || !TextFieldUtils.IsValidTextField(txtNombre,txtApellido,txtCalle,txtLocalidad))
+                || !TextFieldUtils.IsValidTextField(txtNombre,txtApellido,txtLocalidad))
             {
                 MessageBox.Show("Verifique los datos ingresados!");
             }
@@ -55,7 +55,7 @@ namespace PalcoNet.ABMCliente
             var cuil = txtCUIT1.Text + txtCUIT2.Text + txtCUIT3.Text;
             if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text))
             {
-                if (TextFieldUtils.CUIT.EsCuilValido(cuil))
+                if (TextFieldUtils.CUIT.EsCuilValido(cuil) && txtNroDocumento.Text == txtCUIT2.Text)
                 {
                     StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                     inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);

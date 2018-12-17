@@ -35,17 +35,21 @@ namespace PalcoNet.ABMCliente
             }
             else
             {
-                try
+                if (!TextFieldUtils.AreAllFieldsEmpty(this))
                 {
-                    string query = StringUtil.FormatClienteListado(txtNombre.Text, txtApellido.Text, txtMail.Text, txtDNI.Text);
-                    DataTable dt = ConnectionFactory.Instance()
-                                                    .CreateConnection()
-                                                    .ExecuteDataTableSqlQuery(query);
-                    dgvClientes.AllowUserToAddRows = false;
-                    dgvClientes.ReadOnly = true;
-                    dgvClientes.DataSource = dt;
+                    try
+                    {
+                        string query = StringUtil.FormatClienteListado(txtNombre.Text, txtApellido.Text, txtMail.Text, txtDNI.Text);
+                        DataTable dt = ConnectionFactory.Instance()
+                                                        .CreateConnection()
+                                                        .ExecuteDataTableSqlQuery(query);
+                        dgvClientes.AllowUserToAddRows = false;
+                        dgvClientes.ReadOnly = true;
+                        dgvClientes.DataSource = dt;
+                    }
+                    catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
                 }
-                catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+                else { MessageBox.Show("Introduzca al menos un dato"); }
             }
         }
 

@@ -54,21 +54,25 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            try
+            if (!TextFieldUtils.AreAllFieldsEmpty(this))
             {
-                var cuit = StringUtil.FormatCuil(txtCUIT2.Text+txtCUIT1.Text+txtCUIT3.Text);
-                var query = StringUtil.FormatEmpresaListado(txtRazonSocial.Text, 
-                                                            StringUtil.FormatCuil(txtCUIT2.Text + txtCUIT1.Text + txtCUIT3.Text),
-                                                            txtMail.Text);
+                try
+                {
+                    var cuit = StringUtil.FormatCuil(txtCUIT2.Text + txtCUIT1.Text + txtCUIT3.Text);
+                    var query = StringUtil.FormatEmpresaListado(txtRazonSocial.Text,
+                                                                StringUtil.FormatCuil(txtCUIT2.Text + txtCUIT1.Text + txtCUIT3.Text),
+                                                                txtMail.Text);
 
-                DataTable dt = ConnectionFactory.Instance()
-                                                .CreateConnection()
-                                                .ExecuteDataTableSqlQuery(query);
-                dgvEmpresas.AllowUserToAddRows = false;
-                dgvEmpresas.ReadOnly = true;
-                dgvEmpresas.DataSource = dt;
+                    DataTable dt = ConnectionFactory.Instance()
+                                                    .CreateConnection()
+                                                    .ExecuteDataTableSqlQuery(query);
+                    dgvEmpresas.AllowUserToAddRows = false;
+                    dgvEmpresas.ReadOnly = true;
+                    dgvEmpresas.DataSource = dt;
+                }
+                catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
             }
-            catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+            else { MessageBox.Show("Debe introducir al menos un dato"); }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

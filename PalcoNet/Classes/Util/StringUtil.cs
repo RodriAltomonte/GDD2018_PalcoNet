@@ -18,7 +18,7 @@ namespace Classes.Util
                 return "";
             }
            
-            return txt.Substring(0,2)+'-'+txt.Substring(3,8)+'-'+txt.Substring(10,1);
+            return txt.Substring(0,2)+'-'+txt.Substring(2,8)+'-'+txt.Substring(10,1);
         }
         public static void ParseCuil(TextBox text1, TextBox text2, TextBox text3,string cuil)
         {
@@ -30,7 +30,7 @@ namespace Classes.Util
             {
                 text1.Text = cuil.Substring(0, 2);
                 text2.Text = cuil.Substring(3, 8);
-                text3.Text = cuil.Substring(10, 1);
+                text3.Text = cuil.Substring(12, 1);
                 return;
             }
         }

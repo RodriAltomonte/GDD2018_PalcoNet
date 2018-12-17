@@ -23,6 +23,13 @@ namespace TFUtilites
             }
             return false;
         }
+
+        public static bool AreAllFieldsEmpty(Form myForm)
+        {
+            var controls = myForm.Controls.OfType<TextBox>();
+            return controls.All(c => String.IsNullOrEmpty(c.Text));
+        }
+
         public static void CleanAllControls(Form myForm)
         {
             var txtControls = myForm.Controls.OfType<TextBox>();
