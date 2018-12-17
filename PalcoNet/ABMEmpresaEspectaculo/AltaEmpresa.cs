@@ -75,7 +75,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                         if (newUser == null)
                         {
                             username = StringUtil.GenerateRandomUsername(RazonSocial.Text);
-                            password = StringUtil.GenerateRandomPassword(cuit);
+                            password = StringUtil.GenerateRandomPassword();
 
                             inputParameters.AddParameter("@username",username );
                             inputParameters.AddParameter("@password", password);
@@ -124,13 +124,4 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         
     }
 
-}/*
-
-            }else{MessageBox.Show("Por favor rellena todos los campos y comprueba el mail");}
-            }else{MessageBox.Show("Por favor rellena todos los campos");}
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            NavigableFormUtil.BackwardTo(this, callerForm);
-*/
+}

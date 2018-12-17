@@ -1177,6 +1177,10 @@ AS
 			WHERE id_Rol = @id_Rol
 		END
 	END
+	ELSE
+		BEGIN
+		RAISERROR('Ya existe un rol con ese nombre',16,1)
+		END
 GO
 --ESTE ESTA DUPLICADO 
 CREATE PROCEDURE LOS_DE_GESTION.AgregarFuncionalidad

@@ -128,22 +128,12 @@ namespace Classes.Util
 
         public static string GenerateRandomUsername(string input)
         {
-            using (MD5 md5 = MD5.Create())
-            {
-                byte[] hash = md5.ComputeHash(Encoding.Default.GetBytes(input));
-                var res = Convert.ToBase64String(hash);
-                return res.Substring(0, res.Length - 2);
-            }
+            return input + "123";
         }
 
-        public static string GenerateRandomPassword(string input)
+        public static string GenerateRandomPassword()
         {
-            using (MD5 md5 = MD5.Create())
-            {
-                byte[] hash = md5.ComputeHash(Encoding.Default.GetBytes(input));
-                var res = Convert.ToBase64String(hash);
-                return res.Substring(0, res.Length - 2);
-            }
+            return "Cambiame";
         }
 
         public static string ConcatSeparatedByComma<T>(IList<T> list)

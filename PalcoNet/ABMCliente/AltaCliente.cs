@@ -53,7 +53,7 @@ namespace PalcoNet.ABMCliente
             }
             else{
             var cuil = Verificador1.Text + DNI.Text + DigitoVerificador.Text;
-            if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text) && TextFieldUtils.DateIsValid(Convert.ToDateTime(dtpFechaNacimiento.Text)))
+            if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text))
             {
                 if (TextFieldUtils.CUIT.EsCuilValido(cuil) && NroDocumento.Text == DNI.Text)
                 {
@@ -82,7 +82,7 @@ namespace PalcoNet.ABMCliente
                     if (newUser == null)
                     {   
                         username = StringUtil.GenerateRandomUsername(Nombre.Text);
-                        password = StringUtil.GenerateRandomPassword(Telefono.Text);
+                        password = StringUtil.GenerateRandomPassword();
                         inputParameters.AddParameter("@username",username);
                         inputParameters.AddParameter("@password",password );
                     }
