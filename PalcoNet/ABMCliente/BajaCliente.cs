@@ -55,7 +55,7 @@ namespace PalcoNet.ABMCliente
 
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string username = dgvClientes.CurrentRow.Cells[16].Value.ToString();
+            string username = dgvClientes.CurrentRow.Cells[0].Value.ToString();
 
             if (MessageBox.Show("Seguro que desea dar de baja a este cliente?", "Atencion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
