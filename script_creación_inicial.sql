@@ -1561,7 +1561,7 @@ BEGIN
 	JOIN LOS_DE_GESTION.Ubicacion u ON c.id_Compra = u.id_Compra
 	JOIN LOS_DE_GESTION.Publicacion p ON u.cod_publicacion=p.cod_publicacion
 	JOIN LOS_DE_GESTION.Empresa e ON p.usuario_empresa_vendedora=e.username 
-	WHERE e.razon_social = @razon_social and c.id_Compra not in (select i.id_Compra from Item_Rendicion i)
+	WHERE e.razon_social = @razon_social and c.id_Compra not in (select i.id_Compra from LOS_DE_GESTION.Item_Rendicion i)
 	order by c.fecha_compra 
 END
 GO
