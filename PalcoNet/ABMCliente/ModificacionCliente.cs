@@ -45,19 +45,19 @@ namespace PalcoNet.ABMCliente
         {
             InitializeComponent();
             cbxHabilitado.Checked = habilitado;
-            txtNombre.Text = nombre;
-            txtApellido.Text = apellido;
+            Nombre.Text = nombre;
+            Apellido.Text = apellido;
             cboTipoDoc.Text = tipo_documento;
-            txtNroDocumento.Text = nro_documento;
-            StringUtil.ParseCuil(txtCUIL1,txtCUIL2,txtCUIL3,CUIL);
-            txtMail.Text = mail;
-            txtTelefono.Text = telefono;
-            txtCalle.Text = calle;
-            txtNumero.Text = nro_calle;
-            txtPiso.Text = nro_piso;
-            txtDpto.Text = depto;
-            txtLocalidad.Text = localidad;
-            txtPostal.Text = codigo_postal;
+            Documento.Text = nro_documento;
+            StringUtil.ParseCuil(Verificador1,DNI,DigitoVerificador,CUIL);
+            Mail.Text = mail;
+            Telefono.Text = telefono;
+            Calle.Text = calle;
+            Numero.Text = nro_calle;
+            Piso.Text = nro_piso;
+            Departamento.Text = depto;
+            Localidad.Text = localidad;
+            CodPostal.Text = codigo_postal;
             dtpFechaCreacion.Text = fecha_creacion;
             dtpFechaNacimiento.Text = fecha_nacimiento;
             txtTarjeta.Text = tarjeta;
@@ -70,32 +70,32 @@ namespace PalcoNet.ABMCliente
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (
-  !TextFieldUtils.IsValidNumericField(txtCUIL1, txtCUIL2, txtCUIL3, txtNroDocumento, txtTelefono, txtNumero, txtPiso, txtTarjeta)
-           || !TextFieldUtils.IsValidTextField(txtNombre, txtApellido, txtLocalidad))
+  !TextFieldUtils.IsValidNumericField(Verificador1, DNI, DigitoVerificador, Documento, Telefono, Numero, Piso, txtTarjeta)
+           || !TextFieldUtils.IsValidTextField(Nombre, Apellido, Localidad))
             {
             }else{ 
-                var cuil = txtCUIL1.Text + txtCUIL2.Text + txtCUIL3.Text;
-                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text) && TextFieldUtils.DatesAreValid(Convert.ToDateTime(dtpFechaNacimiento.Text), Convert.ToDateTime(dtpFechaCreacion.Text)))
+                var cuil = Verificador1.Text + DNI.Text + DigitoVerificador.Text;
+                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text) && TextFieldUtils.DatesAreValid(Convert.ToDateTime(dtpFechaNacimiento.Text), Convert.ToDateTime(dtpFechaCreacion.Text)))
                 {
-                    if (TextFieldUtils.CUIT.EsCuilValido(cuil) && txtCUIL2.Text == txtNroDocumento.Text)
+                    if (TextFieldUtils.CUIT.EsCuilValido(cuil) && DNI.Text == Documento.Text)
                     {
                         StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                         inputParameters.AddParameter("@nro_documentoOriginal", decimal.Parse(doc_original));
                         inputParameters.AddParameter("@cuil_original", cuil_original);
                         inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
-                        inputParameters.AddParameter("@nombre", txtNombre.Text);
-                        inputParameters.AddParameter("@apellido", txtApellido.Text);
+                        inputParameters.AddParameter("@nombre", Nombre.Text);
+                        inputParameters.AddParameter("@apellido", Apellido.Text);
                         inputParameters.AddParameter("@tipo_documento", cboTipoDoc.Text);
-                        inputParameters.AddParameter("@nro_documento", decimal.Parse(txtNroDocumento.Text));
+                        inputParameters.AddParameter("@nro_documento", decimal.Parse(Documento.Text));
                         inputParameters.AddParameter("@cuil", StringUtil.FormatCuil(cuil));
-                        inputParameters.AddParameter("@mail", txtMail.Text);
-                        inputParameters.AddParameter("@telefono", txtTelefono.Text);
-                        inputParameters.AddParameter("@dir_calle", txtCalle.Text);
-                        inputParameters.AddParameter("@nro_calle", decimal.Parse(txtNumero.Text));
-                        inputParameters.AddParameter("@nro_piso", decimal.Parse(txtPiso.Text));
-                        inputParameters.AddParameter("@depto", txtDpto.Text);
-                        inputParameters.AddParameter("@localidad", txtLocalidad.Text);
-                        inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
+                        inputParameters.AddParameter("@mail", Mail.Text);
+                        inputParameters.AddParameter("@telefono", Telefono.Text);
+                        inputParameters.AddParameter("@dir_calle", Calle.Text);
+                        inputParameters.AddParameter("@nro_calle", decimal.Parse(Numero.Text));
+                        inputParameters.AddParameter("@nro_piso", decimal.Parse(Piso.Text));
+                        inputParameters.AddParameter("@depto", Departamento.Text);
+                        inputParameters.AddParameter("@localidad", Localidad.Text);
+                        inputParameters.AddParameter("@codigo_postal", CodPostal.Text);
                         inputParameters.AddParameter("@fecha_nacimiento", Convert.ToDateTime(dtpFechaNacimiento.Text));
                         inputParameters.AddParameter("@fecha_de_creacion", Convert.ToDateTime(dtpFechaCreacion.Text));
                         inputParameters.AddParameter("@tarjeta", txtTarjeta.Text);

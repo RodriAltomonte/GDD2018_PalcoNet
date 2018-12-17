@@ -101,7 +101,7 @@ namespace PalcoNet.ABMCliente
                     }
                     catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
                 }
-                else { }
+                else { MessageBox.Show("Por favor verifique el cuil"); }
             }
             else { MessageBox.Show("Por favor completa todos los campos y reviselos"); }
             }
