@@ -11,6 +11,7 @@ using PalcoNet.Classes.Model;
 using PalcoNet.Classes.Util;
 using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Repository;
+using PalcoNet.Classes.Validator;
 
 namespace PalcoNet.EditarPublicacion
 {
@@ -18,6 +19,8 @@ namespace PalcoNet.EditarPublicacion
     {
         private EditarPublicacionSeleccionada callerForm;
         private TipoDeUbicacionRepository tipoUbicacionRepository;
+        private ControlValidator controlValidator;
+        private Validator<Control> validator;
 
         public AgregarUbicacionForm(EditarPublicacionSeleccionada callerForm)
         {
@@ -29,15 +32,12 @@ namespace PalcoNet.EditarPublicacion
                 .KeyAs(tipo => tipo.IdTipoUbicacion)
                 .ValueAs(tipo => tipo.Descripcion)
                 .With(tipoUbicacionRepository.TodosLosTiposDeUbicacion());
+            this.InitializeValidator();
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (txtFila.Text.Length > 3)
-            {
-                MessageBoxUtil.ShowError("La fila debe tener un maximo de tres caracteres.");
-            }
-            else
+            if (controlValidator.Validate())
             {
                 callerForm.AddUbicacionAInsertar(this.CrearUbicacionPersistente());
                 this.Dispose();
@@ -74,6 +74,13 @@ namespace PalcoNet.EditarPublicacion
                 lblFila.Visible = false;
                 txtFila.Visible = false;
             }
+        }
+
+        private void InitializeValidator()
+        {
+            this.controlValidator = new ControlValidator();
+            controlValidator.Add(new ControlValidation(txtFila, control => control.Text.Length <= 3, "La fila debe tener un maximo de tres caracteres."));
+            controlValidator.Add(new ControlValidation(cmbTipoUbicacion, control => ((ComboBox)control).SelectedItem != null, "Seleccione un tipo de ubicación."));
         }
     }
 }

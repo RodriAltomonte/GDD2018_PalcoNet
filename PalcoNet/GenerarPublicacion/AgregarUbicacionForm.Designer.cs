@@ -84,7 +84,7 @@
             0});
             this.nudCantidadLugares.Name = "nudCantidadLugares";
             this.nudCantidadLugares.Size = new System.Drawing.Size(161, 22);
-            this.nudCantidadLugares.TabIndex = 17;
+            this.nudCantidadLugares.TabIndex = 4;
             this.nudCantidadLugares.Value = new decimal(new int[] {
             1,
             0,
@@ -101,7 +101,7 @@
             0});
             this.nudPrecio.Name = "nudPrecio";
             this.nudPrecio.Size = new System.Drawing.Size(158, 22);
-            this.nudPrecio.TabIndex = 16;
+            this.nudPrecio.TabIndex = 2;
             // 
             // btnAceptar
             // 
@@ -109,7 +109,7 @@
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(100, 28);
-            this.btnAceptar.TabIndex = 15;
+            this.btnAceptar.TabIndex = 6;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -140,7 +140,7 @@
             this.txtFila.Margin = new System.Windows.Forms.Padding(4);
             this.txtFila.Name = "txtFila";
             this.txtFila.Size = new System.Drawing.Size(160, 22);
-            this.txtFila.TabIndex = 9;
+            this.txtFila.TabIndex = 5;
             // 
             // cmbTipoUbicacion
             // 
@@ -150,7 +150,7 @@
             this.cmbTipoUbicacion.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTipoUbicacion.Name = "cmbTipoUbicacion";
             this.cmbTipoUbicacion.Size = new System.Drawing.Size(160, 24);
-            this.cmbTipoUbicacion.TabIndex = 7;
+            this.cmbTipoUbicacion.TabIndex = 3;
             // 
             // rdbFilasAsientos
             // 
@@ -159,7 +159,7 @@
             this.rdbFilasAsientos.Margin = new System.Windows.Forms.Padding(4);
             this.rdbFilasAsientos.Name = "rdbFilasAsientos";
             this.rdbFilasAsientos.Size = new System.Drawing.Size(148, 21);
-            this.rdbFilasAsientos.TabIndex = 6;
+            this.rdbFilasAsientos.TabIndex = 1;
             this.rdbFilasAsientos.TabStop = true;
             this.rdbFilasAsientos.Text = "Por filas y asientos";
             this.rdbFilasAsientos.UseVisualStyleBackColor = true;
@@ -172,7 +172,7 @@
             this.rdbSinNumerar.Margin = new System.Windows.Forms.Padding(4);
             this.rdbSinNumerar.Name = "rdbSinNumerar";
             this.rdbSinNumerar.Size = new System.Drawing.Size(106, 21);
-            this.rdbSinNumerar.TabIndex = 5;
+            this.rdbSinNumerar.TabIndex = 0;
             this.rdbSinNumerar.TabStop = true;
             this.rdbSinNumerar.Text = "Sin numerar";
             this.rdbSinNumerar.UseVisualStyleBackColor = true;

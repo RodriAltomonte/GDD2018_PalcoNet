@@ -58,7 +58,7 @@
             this.BtnSiguiente.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSiguiente.Name = "BtnSiguiente";
             this.BtnSiguiente.Size = new System.Drawing.Size(100, 28);
-            this.BtnSiguiente.TabIndex = 3;
+            this.BtnSiguiente.TabIndex = 0;
             this.BtnSiguiente.Text = "Siguiente";
             this.BtnSiguiente.UseVisualStyleBackColor = true;
             this.BtnSiguiente.Click += new System.EventHandler(this.BtnSiguiente_Click);
@@ -69,7 +69,7 @@
             this.BtnAnterior.Margin = new System.Windows.Forms.Padding(4);
             this.BtnAnterior.Name = "BtnAnterior";
             this.BtnAnterior.Size = new System.Drawing.Size(100, 28);
-            this.BtnAnterior.TabIndex = 2;
+            this.BtnAnterior.TabIndex = 1;
             this.BtnAnterior.Text = "Anterior";
             this.BtnAnterior.UseVisualStyleBackColor = true;
             this.BtnAnterior.Click += new System.EventHandler(this.BtnAnterior_Click);
@@ -80,7 +80,7 @@
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
-            this.btnVolver.TabIndex = 1;
+            this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -96,6 +96,7 @@
             this.dgvResultados.ReadOnly = true;
             this.dgvResultados.Size = new System.Drawing.Size(628, 336);
             this.dgvResultados.TabIndex = 0;
+            this.dgvResultados.TabStop = false;
             // 
             // HistorialClienteForm
             // 

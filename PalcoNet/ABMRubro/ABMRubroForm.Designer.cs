@@ -30,10 +30,10 @@
         {
             this.btnVolver = new System.Windows.Forms.Button();
             this.grpGrado = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnAlta = new System.Windows.Forms.Button();
-            this.btnModificacion = new System.Windows.Forms.Button();
             this.btnBaja = new System.Windows.Forms.Button();
+            this.btnModificacion = new System.Windows.Forms.Button();
+            this.btnAlta = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.grpGrado.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +42,7 @@
             this.btnVolver.Location = new System.Drawing.Point(12, 198);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
-            this.btnVolver.TabIndex = 5;
+            this.btnVolver.TabIndex = 4;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -60,6 +60,34 @@
             this.grpGrado.TabStop = false;
             this.grpGrado.Text = "ABM de Rubro";
             // 
+            // btnBaja
+            // 
+            this.btnBaja.Location = new System.Drawing.Point(115, 97);
+            this.btnBaja.Name = "btnBaja";
+            this.btnBaja.Size = new System.Drawing.Size(100, 28);
+            this.btnBaja.TabIndex = 1;
+            this.btnBaja.Text = "Baja";
+            this.btnBaja.UseVisualStyleBackColor = true;
+            // 
+            // btnModificacion
+            // 
+            this.btnModificacion.Location = new System.Drawing.Point(115, 131);
+            this.btnModificacion.Name = "btnModificacion";
+            this.btnModificacion.Size = new System.Drawing.Size(100, 28);
+            this.btnModificacion.TabIndex = 2;
+            this.btnModificacion.Text = "Modificación";
+            this.btnModificacion.UseVisualStyleBackColor = true;
+            // 
+            // btnAlta
+            // 
+            this.btnAlta.Location = new System.Drawing.Point(115, 63);
+            this.btnAlta.Name = "btnAlta";
+            this.btnAlta.Size = new System.Drawing.Size(100, 28);
+            this.btnAlta.TabIndex = 0;
+            this.btnAlta.Text = "Alta";
+            this.btnAlta.UseVisualStyleBackColor = true;
+            this.btnAlta.Click += new System.EventHandler(this.btnAlta_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -68,34 +96,6 @@
             this.label1.Size = new System.Drawing.Size(150, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Seleccione una acción";
-            // 
-            // btnAlta
-            // 
-            this.btnAlta.Location = new System.Drawing.Point(115, 63);
-            this.btnAlta.Name = "btnAlta";
-            this.btnAlta.Size = new System.Drawing.Size(100, 28);
-            this.btnAlta.TabIndex = 2;
-            this.btnAlta.Text = "Alta";
-            this.btnAlta.UseVisualStyleBackColor = true;
-            this.btnAlta.Click += new System.EventHandler(this.btnAlta_Click);
-            // 
-            // btnModificacion
-            // 
-            this.btnModificacion.Location = new System.Drawing.Point(115, 131);
-            this.btnModificacion.Name = "btnModificacion";
-            this.btnModificacion.Size = new System.Drawing.Size(100, 28);
-            this.btnModificacion.TabIndex = 3;
-            this.btnModificacion.Text = "Modificación";
-            this.btnModificacion.UseVisualStyleBackColor = true;
-            // 
-            // btnBaja
-            // 
-            this.btnBaja.Location = new System.Drawing.Point(115, 97);
-            this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(100, 28);
-            this.btnBaja.TabIndex = 4;
-            this.btnBaja.Text = "Baja";
-            this.btnBaja.UseVisualStyleBackColor = true;
             // 
             // ABMRubroForm
             // 

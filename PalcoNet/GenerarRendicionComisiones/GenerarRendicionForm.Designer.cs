@@ -30,105 +30,118 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.cbEmpresas = new System.Windows.Forms.ComboBox();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.nudCantidadRendicion = new System.Windows.Forms.NumericUpDown();
-            this.btnGenerar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadRendicion)).BeginInit();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CbCantidad = new System.Windows.Forms.ComboBox();
+            this.dgvCompras = new System.Windows.Forms.DataGridView();
+            this.btnVolver = new System.Windows.Forms.Button();
+            this.BtnGenerar = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 40);
+            this.label1.Location = new System.Drawing.Point(7, 46);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.Size = new System.Drawing.Size(151, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Empresa";
+            this.label1.Text = "Empresa Razon Social";
             // 
             // cbEmpresas
             // 
             this.cbEmpresas.FormattingEnabled = true;
-            this.cbEmpresas.Location = new System.Drawing.Point(108, 37);
+            this.cbEmpresas.Location = new System.Drawing.Point(166, 39);
+            this.cbEmpresas.Margin = new System.Windows.Forms.Padding(4);
             this.cbEmpresas.Name = "cbEmpresas";
-            this.cbEmpresas.Size = new System.Drawing.Size(296, 21);
-            this.cbEmpresas.TabIndex = 1;
-            // 
-            // dgvClientes
-            // 
-            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Location = new System.Drawing.Point(57, 112);
-            this.dgvClientes.Name = "dgvClientes";
-            this.dgvClientes.Size = new System.Drawing.Size(347, 150);
-            this.dgvClientes.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(54, 96);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Compras";
+            this.cbEmpresas.Size = new System.Drawing.Size(280, 24);
+            this.cbEmpresas.TabIndex = 0;
+            this.cbEmpresas.SelectedIndexChanged += new System.EventHandler(this.cbEmpresas_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 70);
+            this.label3.Location = new System.Drawing.Point(7, 86);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 13);
+            this.label3.Size = new System.Drawing.Size(122, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Cantidad a Rendir";
             // 
-            // nudCantidadRendicion
+            // groupBox1
             // 
-            this.nudCantidadRendicion.Location = new System.Drawing.Point(109, 68);
-            this.nudCantidadRendicion.Name = "nudCantidadRendicion";
-            this.nudCantidadRendicion.Size = new System.Drawing.Size(295, 20);
-            this.nudCantidadRendicion.TabIndex = 3;
-            this.nudCantidadRendicion.ValueChanged += new System.EventHandler(this.nudCantidadRendicion_ValueChanged);
+            this.groupBox1.Controls.Add(this.CbCantidad);
+            this.groupBox1.Controls.Add(this.dgvCompras);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.cbEmpresas);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(469, 337);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Empresa Y Cantidad a Rendir";
             // 
-            // btnGenerar
+            // CbCantidad
             // 
-            this.btnGenerar.Location = new System.Drawing.Point(328, 269);
-            this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerar.TabIndex = 4;
-            this.btnGenerar.Text = "Generar";
-            this.btnGenerar.UseVisualStyleBackColor = true;
-            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            this.CbCantidad.FormattingEnabled = true;
+            this.CbCantidad.Location = new System.Drawing.Point(166, 79);
+            this.CbCantidad.Margin = new System.Windows.Forms.Padding(4);
+            this.CbCantidad.Name = "CbCantidad";
+            this.CbCantidad.Size = new System.Drawing.Size(280, 24);
+            this.CbCantidad.TabIndex = 1;
+            this.CbCantidad.SelectedIndexChanged += new System.EventHandler(this.CbCantidad_SelectedIndexChanged);
             // 
-            // btnCancelar
+            // dgvCompras
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(247, 269);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 4;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.dgvCompras.AllowUserToAddRows = false;
+            this.dgvCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCompras.Location = new System.Drawing.Point(10, 130);
+            this.dgvCompras.Name = "dgvCompras";
+            this.dgvCompras.RowTemplate.Height = 24;
+            this.dgvCompras.Size = new System.Drawing.Size(436, 190);
+            this.dgvCompras.TabIndex = 4;
+            this.dgvCompras.TabStop = false;
             // 
-            // GenerarRendicionV2
+            // btnVolver
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.btnVolver.Location = new System.Drawing.Point(13, 356);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(100, 28);
+            this.btnVolver.TabIndex = 3;
+            this.btnVolver.Text = "<< Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // BtnGenerar
+            // 
+            this.BtnGenerar.Location = new System.Drawing.Point(381, 356);
+            this.BtnGenerar.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnGenerar.Name = "BtnGenerar";
+            this.BtnGenerar.Size = new System.Drawing.Size(100, 28);
+            this.BtnGenerar.TabIndex = 2;
+            this.BtnGenerar.Text = "Generar";
+            this.BtnGenerar.UseVisualStyleBackColor = true;
+            this.BtnGenerar.Click += new System.EventHandler(this.BtnGenerar_Click);
+            // 
+            // GenerarRendicionForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 342);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnGenerar);
-            this.Controls.Add(this.nudCantidadRendicion);
-            this.Controls.Add(this.dgvClientes);
-            this.Controls.Add(this.cbEmpresas);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label1);
-            this.Name = "GenerarRendicionV2";
+            this.ClientSize = new System.Drawing.Size(495, 397);
+            this.Controls.Add(this.BtnGenerar);
+            this.Controls.Add(this.btnVolver);
+            this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "GenerarRendicionForm";
             this.Text = "Generar Rendicion";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadRendicion)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -136,11 +149,11 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbEmpresas;
-        private System.Windows.Forms.DataGridView dgvClientes;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown nudCantidadRendicion;
-        private System.Windows.Forms.Button btnGenerar;
-        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.DataGridView dgvCompras;
+        private System.Windows.Forms.Button BtnGenerar;
+        private System.Windows.Forms.ComboBox CbCantidad;
     }
 }

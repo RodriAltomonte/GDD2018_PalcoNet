@@ -42,52 +42,58 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 33);
+            this.label1.Location = new System.Drawing.Point(32, 41);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.Size = new System.Drawing.Size(101, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre del rol";
             // 
             // tbRolNombre
             // 
-            this.tbRolNombre.Location = new System.Drawing.Point(106, 33);
+            this.tbRolNombre.Location = new System.Drawing.Point(141, 41);
+            this.tbRolNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbRolNombre.Name = "tbRolNombre";
-            this.tbRolNombre.Size = new System.Drawing.Size(156, 20);
-            this.tbRolNombre.TabIndex = 1;
+            this.tbRolNombre.Size = new System.Drawing.Size(207, 22);
+            this.tbRolNombre.TabIndex = 0;
             // 
             // dgvFuncionalidades
             // 
             this.dgvFuncionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFuncionalidades.Location = new System.Drawing.Point(22, 89);
+            this.dgvFuncionalidades.Location = new System.Drawing.Point(36, 193);
+            this.dgvFuncionalidades.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvFuncionalidades.Name = "dgvFuncionalidades";
-            this.dgvFuncionalidades.Size = new System.Drawing.Size(240, 150);
-            this.dgvFuncionalidades.TabIndex = 2;
+            this.dgvFuncionalidades.Size = new System.Drawing.Size(320, 185);
+            this.dgvFuncionalidades.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 73);
+            this.label2.Location = new System.Drawing.Point(39, 174);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 13);
+            this.label2.Size = new System.Drawing.Size(111, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Funcionalidades";
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(187, 245);
+            this.btnAgregar.Location = new System.Drawing.Point(256, 385);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 3;
+            this.btnAgregar.Size = new System.Drawing.Size(100, 28);
+            this.btnAgregar.TabIndex = 4;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(106, 245);
+            this.btnCancelar.Location = new System.Drawing.Point(148, 385);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 3;
+            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
+            this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -95,28 +101,48 @@
             // cbHabilitado
             // 
             this.cbHabilitado.AutoSize = true;
-            this.cbHabilitado.Location = new System.Drawing.Point(305, 36);
+            this.cbHabilitado.Location = new System.Drawing.Point(407, 44);
+            this.cbHabilitado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbHabilitado.Name = "cbHabilitado";
-            this.cbHabilitado.Size = new System.Drawing.Size(73, 17);
-            this.cbHabilitado.TabIndex = 4;
+            this.cbHabilitado.Size = new System.Drawing.Size(93, 21);
+            this.cbHabilitado.TabIndex = 1;
             this.cbHabilitado.Text = "Habilitado";
             this.cbHabilitado.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(92, 97);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(39, 17);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Id rol";
+            // 
+            // tbIdRol
+            // 
+            this.tbIdRol.Location = new System.Drawing.Point(141, 97);
+            this.tbIdRol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbIdRol.Name = "tbIdRol";
+            this.tbIdRol.Size = new System.Drawing.Size(207, 22);
+            this.tbIdRol.TabIndex = 2;
+            // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(8, 244);
+            this.btnVolver.Location = new System.Drawing.Point(17, 384);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
-            this.btnVolver.TabIndex = 5;
+            this.btnVolver.Size = new System.Drawing.Size(100, 28);
+            this.btnVolver.TabIndex = 6;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // AltaRol
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 285);
+            this.ClientSize = new System.Drawing.Size(677, 425);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.cbHabilitado);
             this.Controls.Add(this.btnCancelar);
@@ -125,6 +151,7 @@
             this.Controls.Add(this.tbRolNombre);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AltaRol";
             this.Text = "AltaRol";
             ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).EndInit();

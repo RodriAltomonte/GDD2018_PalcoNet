@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PalcoNet.Classes.Util.Form
 {
@@ -13,12 +14,12 @@ namespace PalcoNet.Classes.Util.Form
 
         public static void ShowError(string message)
         {
-            System.Windows.Forms.MessageBox.Show(message, ERROR, System.Windows.Forms.MessageBoxButtons.OK);
+            MessageBox.Show(message, ERROR, System.Windows.Forms.MessageBoxButtons.OK);
         }
 
         public static void ShowInfo(string message)
         {
-            System.Windows.Forms.MessageBox.Show(message, INFO, System.Windows.Forms.MessageBoxButtons.OK);
+            MessageBox.Show(message, INFO, System.Windows.Forms.MessageBoxButtons.OK);
         }
 
     }

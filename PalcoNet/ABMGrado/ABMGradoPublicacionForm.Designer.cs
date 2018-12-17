@@ -65,7 +65,7 @@
             this.btnBaja.Location = new System.Drawing.Point(102, 100);
             this.btnBaja.Name = "btnBaja";
             this.btnBaja.Size = new System.Drawing.Size(100, 28);
-            this.btnBaja.TabIndex = 3;
+            this.btnBaja.TabIndex = 1;
             this.btnBaja.Text = "Baja";
             this.btnBaja.UseVisualStyleBackColor = true;
             this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);

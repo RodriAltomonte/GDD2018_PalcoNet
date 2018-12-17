@@ -43,10 +43,10 @@
             // btnSiguiente
             // 
             this.btnSiguiente.Location = new System.Drawing.Point(309, 151);
-            this.btnSiguiente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSiguiente.Margin = new System.Windows.Forms.Padding(4);
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(100, 28);
-            this.btnSiguiente.TabIndex = 0;
+            this.btnSiguiente.TabIndex = 3;
             this.btnSiguiente.Text = "Siguiente";
             this.btnSiguiente.UseVisualStyleBackColor = true;
             this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
@@ -56,10 +56,10 @@
             this.cmbRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRoles.FormattingEnabled = true;
             this.cmbRoles.Location = new System.Drawing.Point(144, 106);
-            this.cmbRoles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbRoles.Margin = new System.Windows.Forms.Padding(4);
             this.cmbRoles.Name = "cmbRoles";
             this.cmbRoles.Size = new System.Drawing.Size(264, 24);
-            this.cmbRoles.TabIndex = 1;
+            this.cmbRoles.TabIndex = 2;
             // 
             // lblUsername
             // 
@@ -94,18 +94,18 @@
             // txtUsername
             // 
             this.txtUsername.Location = new System.Drawing.Point(144, 42);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(264, 22);
-            this.txtUsername.TabIndex = 5;
+            this.txtUsername.TabIndex = 0;
             // 
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(144, 74);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(264, 22);
-            this.txtPassword.TabIndex = 6;
+            this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // grpRegistroUsuario
@@ -119,9 +119,9 @@
             this.grpRegistroUsuario.Controls.Add(this.lblPassword);
             this.grpRegistroUsuario.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.grpRegistroUsuario.Location = new System.Drawing.Point(19, 27);
-            this.grpRegistroUsuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpRegistroUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.grpRegistroUsuario.Name = "grpRegistroUsuario";
-            this.grpRegistroUsuario.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpRegistroUsuario.Padding = new System.Windows.Forms.Padding(4);
             this.grpRegistroUsuario.Size = new System.Drawing.Size(437, 198);
             this.grpRegistroUsuario.TabIndex = 7;
             this.grpRegistroUsuario.TabStop = false;
@@ -133,7 +133,7 @@
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
-            this.btnVolver.TabIndex = 7;
+            this.btnVolver.TabIndex = 4;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -145,7 +145,7 @@
             this.ClientSize = new System.Drawing.Size(477, 274);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.grpRegistroUsuario);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RegistroDeUsuarioForm";
             this.Text = "RegistroDeUsuario";
             this.grpRegistroUsuario.ResumeLayout(false);

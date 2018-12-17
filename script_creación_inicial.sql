@@ -246,7 +246,12 @@ go
 /*IF OBJECT_ID(N'') IS NOT NULL
 DROP PROCEDURE 
 go*/
-
+IF OBJECT_ID(N'LOS_DE_GESTION.ComprasDeUnaEmpresa') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ComprasDeUnaEmpresa;
+GO
+IF OBJECT_ID(N'LOS_DE_GESTION.ActualizarRendicion') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ActualizarRendicion;
+GO
 ------------------------------DROP FUNCIONES------------------------------
 IF OBJECT_ID('LOS_DE_GESTION.FN_HASHPASS','FN') IS NOT NULL
 DROP FUNCTION LOS_DE_GESTION.FN_HASHPASS
@@ -1475,7 +1480,7 @@ AS
 GO
 
 ---PROCEDURES RENDICION-----
-
+/*
 CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
 @importe_total_ventas NUMERIC(18, 2),
 @importe_comision_total NUMERIC(18, 2),
@@ -1485,15 +1490,31 @@ CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
 @forma_pago_a_empresa NVARCHAR(255)
 AS
 BEGIN
-
-
 	INSERT INTO LOS_DE_GESTION.Rendicion(importe_total_ventas,importe_comision_total,importe_rendicion_total,
 										fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
 	VALUES(@importe_total_ventas,@importe_comision_total,@importe_rendicion_total,@fecha_rendicion,@usuario_empresa_a_rendir,@forma_pago_a_empresa)
+END
+GO
+*/
 
+CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
+@fecha_rendicion DATETIME,
+@razon_social NVARCHAR(255),
+@idRendicion numeric output
+AS
+BEGIN
+
+	 select top 1 (id_Rendicion+1) from LOS_DE_GESTION.Rendicion order by id_Rendicion desc
+	INSERT INTO LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,
+										fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
+	VALUES((select top 1 (id_Rendicion+1) from LOS_DE_GESTION.Rendicion order by id_Rendicion desc),-1,-1,-1,@fecha_rendicion,(select username from LOS_DE_GESTION.Empresa where razon_social = razon_social ),'efectivo')
+	set @idRendicion = SCOPE_IDENTITY();
+	return
 
 END
 GO
+
+			      
 
 CREATE PROCEDURE LOS_DE_GESTION.CrearItemRendicion
 @id_Rendicion numeric(18, 0), -- FK
@@ -1512,7 +1533,7 @@ BEGIN
 
 END
 GO
-
+/*
 CREATE PROCEDURE LOS_DE_GESTION.ComprasDeEmpresa
 @razon_social NVARCHAR(255),
 @cantidad INT
@@ -1526,6 +1547,45 @@ BEGIN
 	WHERE e.razon_social = @razon_social		 
 END
 GO
+		      
+*/
+		      
+
+CREATE PROCEDURE LOS_DE_GESTION.ComprasDeUnaEmpresa
+@razon_social NVARCHAR(255),
+@cantidad INT
+AS
+BEGIN
+	SELECT TOP (@cantidad) c.id_Compra 'Compra Id',c.monto_total 'Total',c.fecha_compra'Fecha de Compra',c.cantidad_ubicaciones 'Cantidad de Ubicaciones'
+	FROM LOS_DE_GESTION.Compra c 
+	JOIN LOS_DE_GESTION.Ubicacion u ON c.id_Compra = u.id_Compra
+	JOIN LOS_DE_GESTION.Publicacion p ON u.cod_publicacion=p.cod_publicacion
+	JOIN LOS_DE_GESTION.Empresa e ON p.usuario_empresa_vendedora=e.username 
+	WHERE e.razon_social = @razon_social and c.id_Compra not in (select i.id_Compra from Item_Rendicion i)
+	order by c.fecha_compra 
+END
+GO
+
+CREATE PROCEDURE LOS_DE_GESTION.ActualizarRendicion
+@id_Rendicion numeric(18, 0), 
+@importe_venta numeric(18, 2),
+@importe_comision numeric(18, 2),
+@importe_rendicion numeric(18, 2)
+AS
+BEGIN
+	if exists (select * from LOS_DE_GESTION.Rendicion where id_Rendicion = @id_Rendicion)
+	begin
+		update LOS_DE_GESTION.Rendicion
+		set importe_total_ventas = @importe_venta, importe_comision_total = @importe_comision, importe_rendicion_total = @importe_rendicion
+		where id_Rendicion = @id_Rendicion
+	end
+	else
+	begin
+		throw 50010, 'No existe una Rendicion con el codigo seleccionado.',1
+	end
+END
+go
+
 
 CREATE PROCEDURE LOS_DE_GESTION.NuevaCompra
 @monto_total NUMERIC(18, 2),
@@ -1666,14 +1726,8 @@ BEGIN
 		 insert into LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,cantidad_ubicaciones)
 		 SELECT sum(Ubicacion_Precio), Compra_Fecha,Cli_Dni,null,sum(Compra_Cantidad)
 		 FROM gd_esquema.Maestra where Item_Factura_Monto is not null
-		 group by Compra_Fecha,Cli_Dni,Factura_Nro									       
-
+		 group by Espec_Empresa_Razon_Social ,Cli_Dni, Compra_Fecha,Espectaculo_Cod,Factura_Nro							       
 		 
-/* inserto Ubicacion*/--revisar id_compra
-		 insert into LOS_DE_GESTION.Ubicacion(cod_publicacion,fila,asiento,ubicacion_sin_numerar,precio,id_Tipo_Ubicacion)
-		 SELECT distinct (select p.cod_publicacion from LOS_DE_GESTION.Publicacion p where p.maestra_Espectaculo_Cod = espectaculo_cod),Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,Ubicacion_tipo_codigo
-		 FROM gd_esquema.Maestra
-
 /* inserto rendicion*/
 		 insert into LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
 		 SELECT distinct Factura_Nro, null,null,Factura_Total,Factura_Fecha,Espec_Empresa_Mail,Forma_Pago_Desc
@@ -1684,6 +1738,14 @@ BEGIN
 		 SELECT Factura_Nro, sum(Ubicacion_Precio),sum(Ubicacion_Precio) - sum(Item_Factura_Monto),sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where sum(Ubicacion_Precio) = c.monto_total and c.fecha_compra =Compra_Fecha and Cli_Dni = c.usuario_cliente_comprador and sum(Compra_Cantidad) = c.cantidad_ubicaciones)
 		 FROM gd_esquema.Maestra where Factura_Nro is not null 
 		 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad,Compra_Fecha,Cli_Dni
+
+/* inserto Ubicacion*/
+		 insert into LOS_DE_GESTION.Ubicacion(cod_publicacion,fila,asiento,ubicacion_sin_numerar,precio,id_Tipo_Ubicacion,id_Compra)
+		 SELECT p.cod_publicacion, Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,Ubicacion_tipo_codigo,
+		 (select c.id_Compra from LOS_DE_GESTION.Compra c join LOS_DE_GESTION.Item_Rendicion i on (c.id_Compra = i.id_Compra) 
+			where c.usuario_cliente_comprador = Cli_Dni and i.id_Rendicion = Factura_Nro and i.descripcion = Item_Factura_Descripcion and i.cantidad_ubicaciones = Item_Factura_Cantidad  and c.fecha_compra = Compra_Fecha)
+		 FROM gd_esquema.Maestra join  LOS_DE_GESTION.Publicacion p on p.maestra_Espectaculo_Cod = espectaculo_cod
+		 where Factura_Nro is not null
 		 
 /*Decisiones de migracion*/
 		 update LOS_DE_GESTION.Cliente
@@ -1880,14 +1942,9 @@ SELECT Compra_Fecha, Factura_Nro, sum(Ubicacion_Precio),sum(Ubicacion_Precio) - 
 FROM gd_esquema.Maestra where Factura_Nro is not null 
 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad,Compra_Fecha,Cli_Dni
 order by Compra_Fecha desc
-
 select * from LOS_DE_GESTION.Compra where fecha_compra = '2018-11-08 00:00:00.000'  and usuario_cliente_comprador ='1360518' order by fecha_compra desc
 select* from gd_esquema.Maestra where Compra_Fecha = '2018-11-08 00:00:00.000' and Cli_Dni ='1360518'
 select* from gd_esquema.Maestra where Factura_Nro = '122751' order by Cli_Dni
-
-
 select * from LOS_DE_GESTION.Item_Rendicion where id_Rendicion = '122751'
-
 select* from gd_esquema.Maestra where Cli_Dni ='8393848'
-
 */

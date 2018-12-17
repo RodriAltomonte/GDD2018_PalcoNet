@@ -42,26 +42,29 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 27);
+            this.label1.Location = new System.Drawing.Point(43, 33);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(59, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Agregar";
             // 
             // dgvFunsDisponibles
             // 
             this.dgvFunsDisponibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFunsDisponibles.Location = new System.Drawing.Point(35, 60);
+            this.dgvFunsDisponibles.Location = new System.Drawing.Point(47, 74);
+            this.dgvFunsDisponibles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvFunsDisponibles.Name = "dgvFunsDisponibles";
-            this.dgvFunsDisponibles.Size = new System.Drawing.Size(240, 150);
+            this.dgvFunsDisponibles.Size = new System.Drawing.Size(320, 185);
             this.dgvFunsDisponibles.TabIndex = 1;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(200, 216);
+            this.btnAgregar.Location = new System.Drawing.Point(267, 266);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 2;
+            this.btnAgregar.Size = new System.Drawing.Size(100, 28);
+            this.btnAgregar.TabIndex = 0;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -69,35 +72,39 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(332, 27);
+            this.label2.Location = new System.Drawing.Point(443, 33);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.Size = new System.Drawing.Size(58, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Eliminar";
             // 
             // dgvFnsRol
             // 
             this.dgvFnsRol.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFnsRol.Location = new System.Drawing.Point(335, 60);
+            this.dgvFnsRol.Location = new System.Drawing.Point(447, 74);
+            this.dgvFnsRol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvFnsRol.Name = "dgvFnsRol";
-            this.dgvFnsRol.Size = new System.Drawing.Size(240, 150);
+            this.dgvFnsRol.Size = new System.Drawing.Size(320, 185);
             this.dgvFnsRol.TabIndex = 1;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(500, 216);
+            this.btnEliminar.Location = new System.Drawing.Point(667, 266);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 2;
+            this.btnEliminar.Size = new System.Drawing.Size(100, 28);
+            this.btnEliminar.TabIndex = 1;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(526, 283);
+            this.btnVolver.Location = new System.Drawing.Point(701, 348);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(100, 28);
             this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -105,9 +112,9 @@
             // 
             // frmModificarFuncionalidades
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 318);
+            this.ClientSize = new System.Drawing.Size(817, 391);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAgregar);
@@ -115,6 +122,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgvFunsDisponibles);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmModificarFuncionalidades";
             this.Text = "Modificar Funcionalidades";
             ((System.ComponentModel.ISupportInitialize)(this.dgvFunsDisponibles)).EndInit();

@@ -72,7 +72,7 @@
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
-            this.btnVolver.TabIndex = 1;
+            this.btnVolver.TabIndex = 12;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -129,7 +129,7 @@
             this.dtpVencimiento.Margin = new System.Windows.Forms.Padding(4);
             this.dtpVencimiento.Name = "dtpVencimiento";
             this.dtpVencimiento.Size = new System.Drawing.Size(148, 22);
-            this.dtpVencimiento.TabIndex = 27;
+            this.dtpVencimiento.TabIndex = 6;
             // 
             // lvFechaHora
             // 
@@ -195,7 +195,7 @@
             this.btnRemoverFechaHora.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoverFechaHora.Name = "btnRemoverFechaHora";
             this.btnRemoverFechaHora.Size = new System.Drawing.Size(44, 23);
-            this.btnRemoverFechaHora.TabIndex = 23;
+            this.btnRemoverFechaHora.TabIndex = 5;
             this.btnRemoverFechaHora.Text = "-";
             this.tTipRemover.SetToolTip(this.btnRemoverFechaHora, "Remover");
             this.btnRemoverFechaHora.UseVisualStyleBackColor = true;
@@ -207,7 +207,7 @@
             this.btnAgregarFechaHora.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregarFechaHora.Name = "btnAgregarFechaHora";
             this.btnAgregarFechaHora.Size = new System.Drawing.Size(44, 23);
-            this.btnAgregarFechaHora.TabIndex = 22;
+            this.btnAgregarFechaHora.TabIndex = 4;
             this.btnAgregarFechaHora.Text = "+";
             this.tTipAgregar.SetToolTip(this.btnAgregarFechaHora, "Añadir");
             this.btnAgregarFechaHora.UseVisualStyleBackColor = true;
@@ -219,7 +219,7 @@
             this.btnRemoveUbicacion.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoveUbicacion.Name = "btnRemoveUbicacion";
             this.btnRemoveUbicacion.Size = new System.Drawing.Size(44, 23);
-            this.btnRemoveUbicacion.TabIndex = 20;
+            this.btnRemoveUbicacion.TabIndex = 2;
             this.btnRemoveUbicacion.Text = "-";
             this.tTipRemover.SetToolTip(this.btnRemoveUbicacion, "Remover");
             this.btnRemoveUbicacion.UseVisualStyleBackColor = true;
@@ -231,7 +231,7 @@
             this.btnAgregarUbicacion.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregarUbicacion.Name = "btnAgregarUbicacion";
             this.btnAgregarUbicacion.Size = new System.Drawing.Size(44, 23);
-            this.btnAgregarUbicacion.TabIndex = 19;
+            this.btnAgregarUbicacion.TabIndex = 1;
             this.btnAgregarUbicacion.Text = "+";
             this.tTipAgregar.SetToolTip(this.btnAgregarUbicacion, "Añadir");
             this.btnAgregarUbicacion.UseVisualStyleBackColor = true;
@@ -243,7 +243,7 @@
             this.btnCrear.Margin = new System.Windows.Forms.Padding(4);
             this.btnCrear.Name = "btnCrear";
             this.btnCrear.Size = new System.Drawing.Size(100, 28);
-            this.btnCrear.TabIndex = 16;
+            this.btnCrear.TabIndex = 11;
             this.btnCrear.Text = "Crear";
             this.btnCrear.UseVisualStyleBackColor = true;
             this.btnCrear.Click += new System.EventHandler(this.btnCrear_Click);
@@ -266,7 +266,7 @@
             this.cmbEstado.Margin = new System.Windows.Forms.Padding(4);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(444, 24);
-            this.cmbEstado.TabIndex = 14;
+            this.cmbEstado.TabIndex = 10;
             // 
             // lblGrado
             // 
@@ -286,7 +286,7 @@
             this.cmbGrado.Margin = new System.Windows.Forms.Padding(4);
             this.cmbGrado.Name = "cmbGrado";
             this.cmbGrado.Size = new System.Drawing.Size(444, 24);
-            this.cmbGrado.TabIndex = 12;
+            this.cmbGrado.TabIndex = 9;
             // 
             // txtDireccion
             // 
@@ -294,7 +294,7 @@
             this.txtDireccion.Margin = new System.Windows.Forms.Padding(4);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(444, 22);
-            this.txtDireccion.TabIndex = 11;
+            this.txtDireccion.TabIndex = 8;
             // 
             // lblDireccion
             // 
@@ -314,7 +314,7 @@
             this.cmbRubro.Margin = new System.Windows.Forms.Padding(4);
             this.cmbRubro.Name = "cmbRubro";
             this.cmbRubro.Size = new System.Drawing.Size(444, 24);
-            this.cmbRubro.TabIndex = 9;
+            this.cmbRubro.TabIndex = 7;
             // 
             // dtpFechaPublicacion
             // 
@@ -324,7 +324,7 @@
             this.dtpFechaPublicacion.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaPublicacion.Name = "dtpFechaPublicacion";
             this.dtpFechaPublicacion.Size = new System.Drawing.Size(148, 22);
-            this.dtpFechaPublicacion.TabIndex = 7;
+            this.dtpFechaPublicacion.TabIndex = 3;
             // 
             // lblRubro
             // 

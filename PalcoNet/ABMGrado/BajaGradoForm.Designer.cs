@@ -54,7 +54,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(207, 93);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(100, 28);
-            this.btnCancelar.TabIndex = 23;
+            this.btnCancelar.TabIndex = 2;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -64,7 +64,7 @@
             this.btnBaja.Location = new System.Drawing.Point(313, 93);
             this.btnBaja.Name = "btnBaja";
             this.btnBaja.Size = new System.Drawing.Size(100, 28);
-            this.btnBaja.TabIndex = 22;
+            this.btnBaja.TabIndex = 1;
             this.btnBaja.Text = "Baja";
             this.btnBaja.UseVisualStyleBackColor = true;
             this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
@@ -85,7 +85,7 @@
             this.cmbBaja.Location = new System.Drawing.Point(134, 39);
             this.cmbBaja.Name = "cmbBaja";
             this.cmbBaja.Size = new System.Drawing.Size(279, 24);
-            this.cmbBaja.TabIndex = 20;
+            this.cmbBaja.TabIndex = 0;
             // 
             // BajaGradoForm
             // 
