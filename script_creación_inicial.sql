@@ -1497,6 +1497,7 @@ END
 GO
 */
 
+
 CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
 @fecha_rendicion DATETIME,
 @razon_social NVARCHAR(255),
@@ -1504,15 +1505,17 @@ CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
 AS
 BEGIN
 
-	 select top 1 (id_Rendicion+1) from LOS_DE_GESTION.Rendicion order by id_Rendicion desc
+	 declare @id numeric;
+	 set @id = ((select Max(id_Rendicion) from LOS_DE_GESTION.Rendicion)+1)
 	INSERT INTO LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,
 										fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
-	VALUES((select top 1 (id_Rendicion+1) from LOS_DE_GESTION.Rendicion order by id_Rendicion desc),-1,-1,-1,@fecha_rendicion,(select username from LOS_DE_GESTION.Empresa where razon_social = razon_social ),'efectivo')
-	set @idRendicion = SCOPE_IDENTITY();
+	VALUES(@id,-1,-1,-1,@fecha_rendicion,(select username from LOS_DE_GESTION.Empresa e where e.razon_social = @razon_social ),'efectivo')
+	set @idRendicion = @id;
 	return
 
 END
 GO
+
 
 			      
 
