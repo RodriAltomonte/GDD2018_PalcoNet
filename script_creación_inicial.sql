@@ -1524,13 +1524,9 @@ CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
 @forma_pago_a_empresa NVARCHAR(255)
 AS
 BEGIN
-
-
 	INSERT INTO LOS_DE_GESTION.Rendicion(importe_total_ventas,importe_comision_total,importe_rendicion_total,
 										fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
 	VALUES(@importe_total_ventas,@importe_comision_total,@importe_rendicion_total,@fecha_rendicion,@usuario_empresa_a_rendir,@forma_pago_a_empresa)
-
-
 END
 GO
 */
@@ -1764,14 +1760,8 @@ BEGIN
 		 insert into LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,cantidad_ubicaciones)
 		 SELECT sum(Ubicacion_Precio), Compra_Fecha,Cli_Dni,null,sum(Compra_Cantidad)
 		 FROM gd_esquema.Maestra where Item_Factura_Monto is not null
-		 group by Compra_Fecha,Cli_Dni,Factura_Nro									       
-
+		 group by Espec_Empresa_Razon_Social ,Cli_Dni, Compra_Fecha,Espectaculo_Cod,Factura_Nro							       
 		 
-/* inserto Ubicacion*/--revisar id_compra
-		 insert into LOS_DE_GESTION.Ubicacion(cod_publicacion,fila,asiento,ubicacion_sin_numerar,precio,id_Tipo_Ubicacion)
-		 SELECT distinct (select p.cod_publicacion from LOS_DE_GESTION.Publicacion p where p.maestra_Espectaculo_Cod = espectaculo_cod),Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,Ubicacion_tipo_codigo
-		 FROM gd_esquema.Maestra
-
 /* inserto rendicion*/
 		 insert into LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
 		 SELECT distinct Factura_Nro, null,null,Factura_Total,Factura_Fecha,Espec_Empresa_Mail,Forma_Pago_Desc
@@ -1782,6 +1772,14 @@ BEGIN
 		 SELECT Factura_Nro, sum(Ubicacion_Precio),sum(Ubicacion_Precio) - sum(Item_Factura_Monto),sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where sum(Ubicacion_Precio) = c.monto_total and c.fecha_compra =Compra_Fecha and Cli_Dni = c.usuario_cliente_comprador and sum(Compra_Cantidad) = c.cantidad_ubicaciones)
 		 FROM gd_esquema.Maestra where Factura_Nro is not null 
 		 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad,Compra_Fecha,Cli_Dni
+
+/* inserto Ubicacion*/
+		 insert into LOS_DE_GESTION.Ubicacion(cod_publicacion,fila,asiento,ubicacion_sin_numerar,precio,id_Tipo_Ubicacion,id_Compra)
+		 SELECT p.cod_publicacion, Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,Ubicacion_tipo_codigo,
+		 (select c.id_Compra from LOS_DE_GESTION.Compra c join LOS_DE_GESTION.Item_Rendicion i on (c.id_Compra = i.id_Compra) 
+			where c.usuario_cliente_comprador = Cli_Dni and i.id_Rendicion = Factura_Nro and i.descripcion = Item_Factura_Descripcion and i.cantidad_ubicaciones = Item_Factura_Cantidad  and c.fecha_compra = Compra_Fecha)
+		 FROM gd_esquema.Maestra join  LOS_DE_GESTION.Publicacion p on p.maestra_Espectaculo_Cod = espectaculo_cod
+		 where Factura_Nro is not null
 		 
 /*Decisiones de migracion*/
 		 update LOS_DE_GESTION.Cliente
@@ -1978,14 +1976,9 @@ SELECT Compra_Fecha, Factura_Nro, sum(Ubicacion_Precio),sum(Ubicacion_Precio) - 
 FROM gd_esquema.Maestra where Factura_Nro is not null 
 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad,Compra_Fecha,Cli_Dni
 order by Compra_Fecha desc
-
 select * from LOS_DE_GESTION.Compra where fecha_compra = '2018-11-08 00:00:00.000'  and usuario_cliente_comprador ='1360518' order by fecha_compra desc
 select* from gd_esquema.Maestra where Compra_Fecha = '2018-11-08 00:00:00.000' and Cli_Dni ='1360518'
 select* from gd_esquema.Maestra where Factura_Nro = '122751' order by Cli_Dni
-
-
 select * from LOS_DE_GESTION.Item_Rendicion where id_Rendicion = '122751'
-
 select* from gd_esquema.Maestra where Cli_Dni ='8393848'
-
 */
