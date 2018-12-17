@@ -13,7 +13,8 @@ using System.Windows.Forms;
 using PalcoNet.Classes.Util.Form;
 using Classes.Configuration;
 
-namespace PalcoNet.GenerarRendicionComisiones
+
+using PalcoNet.Classes.CustomException;namespace PalcoNet.GenerarRendicionComisiones
 {
     /// <summary>
     /// Cuando el cliente hace una compra para una publicacion se debe crear una rendicion de esa compra
@@ -29,7 +30,7 @@ namespace PalcoNet.GenerarRendicionComisiones
             InitializeComponent();
             this.previousForm = previousForm;
             this.InicializarForm();
-           }
+        }
 
         public GenerarRendicionForm()
         {
@@ -50,11 +51,11 @@ namespace PalcoNet.GenerarRendicionComisiones
                         .CreateConnection()
                         .ExecuteDataSetSqlQuery("SELECT razon_social FROM LOS_DE_GESTION.Empresa", "razon_social");
 
-              cbEmpresas.DisplayMember = "razon_social";
-              cbEmpresas.DataSource = ds.Tables["razon_social"];
-      
+            cbEmpresas.DisplayMember = "razon_social";
+            cbEmpresas.DataSource = ds.Tables["razon_social"];
 
-        
+
+
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -64,38 +65,38 @@ namespace PalcoNet.GenerarRendicionComisiones
 
         private void BtnGenerar_Click(object sender, EventArgs e)
         {
-            if (cbEmpresas.Text != " " && cbEmpresas.Text != " " && dgvCompras.Rows.Count > 0 )
+            if (cbEmpresas.Text != " " && cbEmpresas.Text != " " && dgvCompras.Rows.Count > 0)
             {
 
                 decimal TotalImpVenta = 0;
                 decimal TotalimpComi = 0;
                 decimal TotalimpRendi = 0;
-               
-                string select =@"SELECT TOP 1 g.porcentaje_costo
+
+                string select = @"SELECT TOP 1 g.porcentaje_costo
 	                            FROM LOS_DE_GESTION.Compra c 
 	                            JOIN LOS_DE_GESTION.Ubicacion u ON c.id_Compra = u.id_Compra
 	                            JOIN LOS_DE_GESTION.Publicacion p ON u.cod_publicacion=p.cod_publicacion
 	                            join LOS_DE_GESTION.Grado_Publicacion g on ( g.id_Grado_Publicacion =p.id_Grado_Publicacion)
 	                            WHERE c.id_Compra = ";
 
-                decimal idRendicion= CrearRendicion();
+                decimal idRendicion = CrearRendicion();
 
                 foreach (DataGridViewRow x in dgvCompras.Rows)
                 {
-                  decimal idCompra =  (decimal)x.Cells[0].Value;
-                  decimal monto = (decimal)x.Cells[1].Value;
-                  decimal Ubicaciones = (decimal)x.Cells[3].Value;
+                    decimal idCompra = (decimal)x.Cells[0].Value;
+                    decimal monto = (decimal)x.Cells[1].Value;
+                    decimal Ubicaciones = (decimal)x.Cells[3].Value;
 
-                  decimal porcentaje = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<decimal>(select + idCompra);
-                  decimal imporComision = monto * porcentaje/100;
-                  decimal imporRendicion = monto-imporComision;
+                    decimal porcentaje = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<decimal>(select + idCompra);
+                    decimal imporComision = monto * porcentaje / 100;
+                    decimal imporRendicion = monto - imporComision;
 
-                  TotalImpVenta += monto;
-                  TotalimpComi += imporComision;
-                  TotalimpRendi += imporRendicion;
+                    TotalImpVenta += monto;
+                    TotalimpComi += imporComision;
+                    TotalimpRendi += imporRendicion;
 
-                  CrearItemRendicion(idRendicion,monto,imporComision,imporRendicion, Ubicaciones,idCompra);
-                 }
+                    CrearItemRendicion(idRendicion, monto, imporComision, imporRendicion, Ubicaciones, idCompra);
+                }
                 ActualizarRendicion(idRendicion, TotalImpVenta, TotalimpComi, TotalimpRendi);
             }
 
@@ -105,23 +106,23 @@ namespace PalcoNet.GenerarRendicionComisiones
         {
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
             inputParameters.AddParameter("@fecha_rendicion", ConfigurationManager.Instance().GetSystemDateTime());
-            inputParameters.AddParameter("@razon_social", cbEmpresas.Text );
-           return ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputStoredProcedure<decimal>(SpNames.CrearRendicion, inputParameters, "@idRendicion");
+            inputParameters.AddParameter("@razon_social", cbEmpresas.Text);
+            return ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputStoredProcedure<decimal>(SpNames.CrearRendicion, inputParameters, "@idRendicion");
 
-             
+
         }
 
-        private void CrearItemRendicion(decimal idRendicion,decimal impVenta,decimal impComi,decimal impRendic,decimal cantUbicaciones,decimal idCompra)
+        private void CrearItemRendicion(decimal idRendicion, decimal impVenta, decimal impComi, decimal impRendic, decimal cantUbicaciones, decimal idCompra)
         {
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-             inputParameters.AddParameter("@id_Rendicion",idRendicion);
-             inputParameters.AddParameter("@importe_venta",impVenta);
-             inputParameters.AddParameter("@importe_comision",impComi);
-             inputParameters.AddParameter("@importe_rendicion",impRendic);
-             inputParameters.AddParameter("@descripcion", "Comision por compra n " + idCompra);
-             inputParameters.AddParameter("@cantidad_ubicaciones", cantUbicaciones);
-             inputParameters.AddParameter("@id_Compra",idCompra);
-            
+            inputParameters.AddParameter("@id_Rendicion", idRendicion);
+            inputParameters.AddParameter("@importe_venta", impVenta);
+            inputParameters.AddParameter("@importe_comision", impComi);
+            inputParameters.AddParameter("@importe_rendicion", impRendic);
+            inputParameters.AddParameter("@descripcion", "Comision por compra n " + idCompra);
+            inputParameters.AddParameter("@cantidad_ubicaciones", cantUbicaciones);
+            inputParameters.AddParameter("@id_Compra", idCompra);
+
             ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.CrearItemRendicion, inputParameters);
 
         }
@@ -152,16 +153,21 @@ namespace PalcoNet.GenerarRendicionComisiones
 
         private void ActualizarRendicion(decimal idRendicion, decimal TotalImpVenta, decimal TotalimpComi, decimal TotalimpRendi)
         {
-            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-            inputParameters.AddParameter("@razon_social", idRendicion);
-            inputParameters.AddParameter("", TotalImpVenta);
-            inputParameters.AddParameter("", TotalimpComi);
-            inputParameters.AddParameter("", TotalimpRendi);
+            try
+            {
+                StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+                inputParameters.AddParameter("@id_Rendicion", idRendicion);
+                inputParameters.AddParameter("@importe_venta", TotalImpVenta);
+                inputParameters.AddParameter("@importe_comision", TotalimpComi);
+                inputParameters.AddParameter("@importe_rendicion", TotalimpRendi);
 
-            dgvCompras.DataSource = ConnectionFactory.Instance()
-                                                      .CreateConnection()
-                                                      .ExecuteDataTableStoredProcedure(SpNames.ActualizarRendicion, inputParameters);
-      
+                dgvCompras.DataSource = ConnectionFactory.Instance()
+                                                          .CreateConnection()
+                                                          .ExecuteDataTableStoredProcedure(SpNames.ActualizarRendicion, inputParameters);
+
+                MessageBox.Show("Rendicion Generada Correctamente");
+            }
+            catch (StoredProcedureException ex ){MessageBox .Show(ex.Message);}
         }
     }
 }
