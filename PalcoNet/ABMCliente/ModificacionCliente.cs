@@ -78,7 +78,7 @@ namespace PalcoNet.ABMCliente
             else
             {
                 var cuil = txtCUIL1.Text + txtCUIL2.Text + txtCUIL3.Text;
-                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text))
+                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text) && TextFieldUtils.DatesAreValid(Convert.ToDateTime(dtpFechaNacimiento.Text),Convert.ToDateTime(dtpFechaCreacion.Text)))
                 {
                     if (TextFieldUtils.CUIT.EsCuilValido(cuil) && txtCUIL2.Text == txtNroDocumento.Text)
                     {

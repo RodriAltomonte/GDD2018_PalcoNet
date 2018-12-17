@@ -111,6 +111,7 @@
             // 
             // label3
             // 
+            /*
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(92, 97);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -118,14 +119,17 @@
             this.label3.Size = new System.Drawing.Size(39, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Id rol";
+             */ 
             // 
             // tbIdRol
             // 
+            /*
             this.tbIdRol.Location = new System.Drawing.Point(141, 97);
             this.tbIdRol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbIdRol.Name = "tbIdRol";
             this.tbIdRol.Size = new System.Drawing.Size(207, 22);
             this.tbIdRol.TabIndex = 2;
+             */ 
             // 
             // btnVolver
             // 

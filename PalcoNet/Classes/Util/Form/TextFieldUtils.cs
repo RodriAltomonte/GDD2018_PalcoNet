@@ -6,11 +6,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TFUtilites = PalcoNet.Classes.Util.Form;
-
+using Classes.Configuration;
 namespace TFUtilites
 {
     static class TextFieldUtils
     {
+
+        public static bool DatesAreValid(DateTime fecha_nacimiento,DateTime fecha_creacion)
+        { 
+            DateTime fecha_del_sistema = ConfigurationManager.Instance().GetSystemDateTime();
+            return (DateTime.Compare(fecha_nacimiento,fecha_del_sistema) < 0) && (DateTime.Compare(fecha_creacion,fecha_del_sistema) < 0);
+        }
         public static bool IsAnyFieldEmpty(Form myForm)
         {
             var controls = myForm.Controls.OfType<TextBox>();
