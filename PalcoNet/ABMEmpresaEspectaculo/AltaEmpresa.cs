@@ -44,10 +44,11 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            string username = "", password = "";
             if (!TextFieldUtils.IsValidTextField(txtCiudad, txtLocalidad, txtRazonSocial)
                 || !TextFieldUtils.IsValidNumericField(txtCUIT1, txtCUIT2, txtCUIT3, txtPiso, txtNumero, txtTelefono))
             {
-                MessageBox.Show("Verifique los datos ingresados");
+               
             }
             else
             {
@@ -71,8 +72,11 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
                         if (newUser == null)
                         {
-                            inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(10));
-                            inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10));
+                            username = StringUtil.GenerateRandomUsername(10);
+                            password = StringUtil.GenerateRandomPassword(10);
+
+                            inputParameters.AddParameter("@username",username );
+                            inputParameters.AddParameter("@password", password);
                         }
                         else
                         {
@@ -86,7 +90,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                                              .CreateConnection()
                                              .ExecuteDataTableStoredProcedure(SpNames.AltaEmpresa, inputParameters);
 
-                            MessageBox.Show(this, "Empresa agregada de forma correcta!", "Correcto", MessageBoxButtons.OK);
+                            MessageBox.Show(this, @"Empresa agregada de forma correcta! 
+                                                    Puede ingresar al sistema con el usuario: "+username+" password:"+password, "Correcto", MessageBoxButtons.OK);
                             accionPostCreacion.Do(this);
                         }
                         catch (StoredProcedureException ex) { MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK); }

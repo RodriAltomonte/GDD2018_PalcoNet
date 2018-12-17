@@ -1395,7 +1395,7 @@ BEGIN
 		END
 		
 		IF(NOT EXISTS(SELECT razon_social FROM LOS_DE_GESTION.Empresa WHERE razon_social=@razon_social)
-			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit) AND LEN(@cuit) = 11 )
+			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit))
 			BEGIN
 				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,nro_calle,codigo_postal,ciudad,cuit,fecha_creacion)
 				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@nro_calle,@codigo_postal,@ciudad,@cuit,@fecha_creacion)
