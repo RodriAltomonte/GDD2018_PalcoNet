@@ -1240,19 +1240,6 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaCliente
 AS
 	BEGIN
 	
-	IF(NOT EXISTS (SELECT username FROM LOS_DE_GESTION.Usuario WHERE username=@username))
-		BEGIN
-			INSERT INTO LOS_DE_GESTION.Usuario(username,password,habilitado,intentos_login,bloqueado_login_fallidos)
-			VALUES(@username,LOS_DE_GESTION.FN_HASHPASS(@password),@habilitado,0,0)
-
-			INSERT INTO LOS_DE_GESTION.Usuario_X_Rol(id_Rol,username)
-			VALUES(@id_rol,@username)
-		END
-		ELSE
-			BEGIN
-				RAISERROR('Este username ya existe!',16,1)
-		END
-
 		IF(NOT EXISTS(SELECT numero_documento FROM LOS_DE_GESTION.Cliente WHERE numero_documento = @nro_documento)
 			AND NOT EXISTS(SELECT cuil FROM LOS_DE_GESTION.Cliente WHERE cuil = @cuil)) --AND SUBSTRING(@cuil,3,8) = @nro_documento) 
 			BEGIN
@@ -1378,22 +1365,7 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaEmpresa
 @cuit NVARCHAR(255),
 @fecha_creacion DATETIME
 AS
-BEGIN
-	
-	IF(NOT EXISTS(SELECT username FROM LOS_DE_GESTION.Usuario WHERE username=@username))
-		BEGIN
-				INSERT INTO LOS_DE_GESTION.Usuario(username,password,habilitado,intentos_login,bloqueado_login_fallidos) --EXECUTE LOS_DE_GESTION.PR_ALTA_DE_USUARIO(args) 
-				VALUES(@username,LOS_DE_GESTION.FN_HASHPASS(@password),@habilitado,0,0)
-
-				INSERT INTO LOS_DE_GESTION.Usuario_X_Rol(username,id_Rol)
-				VALUES(@username,@rol)
-		END
-		
-		ELSE
-		BEGIN
-			RAISERROR('Este username ya existe',16,1)
-		END
-		
+BEGIN	
 		IF(NOT EXISTS(SELECT razon_social FROM LOS_DE_GESTION.Empresa WHERE razon_social=@razon_social)
 			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit))
 			BEGIN
