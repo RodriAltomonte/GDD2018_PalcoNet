@@ -64,7 +64,7 @@ namespace PalcoNet.GenerarRendicionComisiones
 
         private void BtnGenerar_Click(object sender, EventArgs e)
         {
-            if (cbEmpresas.Text != " " && cbEmpresas.Text != " " && dgvCompras.Rows.Count >0)
+            if (cbEmpresas.Text != " " && cbEmpresas.Text != " " && dgvCompras.Rows.Count > 0 )
             {
 
                 decimal TotalImpVenta = 0;

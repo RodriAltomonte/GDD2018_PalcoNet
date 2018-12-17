@@ -32,10 +32,10 @@
             this.cbEmpresas = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CbCantidad = new System.Windows.Forms.ComboBox();
             this.dgvCompras = new System.Windows.Forms.DataGridView();
             this.btnVolver = new System.Windows.Forms.Button();
             this.BtnGenerar = new System.Windows.Forms.Button();
-            this.CbCantidad = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCompras)).BeginInit();
             this.SuspendLayout();
@@ -84,8 +84,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Empresa Y Cantidad a Rendir";
             // 
+            // CbCantidad
+            // 
+            this.CbCantidad.FormattingEnabled = true;
+            this.CbCantidad.Location = new System.Drawing.Point(166, 79);
+            this.CbCantidad.Margin = new System.Windows.Forms.Padding(4);
+            this.CbCantidad.Name = "CbCantidad";
+            this.CbCantidad.Size = new System.Drawing.Size(280, 24);
+            this.CbCantidad.TabIndex = 5;
+            this.CbCantidad.SelectedIndexChanged += new System.EventHandler(this.CbCantidad_SelectedIndexChanged);
+            // 
             // dgvCompras
             // 
+            this.dgvCompras.AllowUserToAddRows = false;
             this.dgvCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCompras.Location = new System.Drawing.Point(10, 130);
             this.dgvCompras.Name = "dgvCompras";
@@ -114,16 +125,6 @@
             this.BtnGenerar.Text = "Generar";
             this.BtnGenerar.UseVisualStyleBackColor = true;
             this.BtnGenerar.Click += new System.EventHandler(this.BtnGenerar_Click);
-            // 
-            // CbCantidad
-            // 
-            this.CbCantidad.FormattingEnabled = true;
-            this.CbCantidad.Location = new System.Drawing.Point(166, 79);
-            this.CbCantidad.Margin = new System.Windows.Forms.Padding(4);
-            this.CbCantidad.Name = "CbCantidad";
-            this.CbCantidad.Size = new System.Drawing.Size(280, 24);
-            this.CbCantidad.TabIndex = 5;
-            this.CbCantidad.SelectedIndexChanged += new System.EventHandler(this.CbCantidad_SelectedIndexChanged);
             // 
             // GenerarRendicionForm
             // 
