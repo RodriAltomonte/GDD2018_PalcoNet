@@ -43,16 +43,16 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             CUIT = ciut;
 
             InitializeComponent();
-            txtRazonSocial.Text = razon_social;
-            txtMail.Text = mail;
-            txtTelefono.Text = telefono;
-            txtDirCalle.Text = calle;
-            txtNumero.Text = nro_calle;
-            txtDpto.Text = depto;
-            txtLocalidad.Text = localidad;
-            txtPostal.Text = codigo_postal;
-            txtCiudad.Text = ciudad;
-            StringUtil.ParseCuil(txtCUIT1, txtCUIT2, txtCUIT3, ciut);
+            RazonSocial.Text = razon_social;
+            Mail.Text = mail;
+            Telefono.Text = telefono;
+            DirCalle.Text = calle;
+            Numero.Text = nro_calle;
+            Departamento.Text = depto;
+            Localidad.Text = localidad;
+            CodPostal.Text = codigo_postal;
+            Ciudad.Text = ciudad;
+            StringUtil.ParseCuil(Verificador1, NroCUIT, DigitoVerificador, ciut);
             cbxHabilitado.Checked = habilitada;
 
             CallerForm = callerForm;
@@ -61,30 +61,30 @@ namespace PalcoNet.ABMEmpresaEspectaculo
       
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!TextFieldUtils.IsValidNumericField(txtCUIT1, txtCUIT2, txtCUIT3, txtNumero, txtTelefono, txtPiso)
-                || !TextFieldUtils.IsValidTextField(txtCiudad, txtRazonSocial, txtLocalidad))
+            if (!TextFieldUtils.IsValidNumericField(Verificador1, NroCUIT, DigitoVerificador, Numero, Telefono, Piso)
+                || !TextFieldUtils.IsValidTextField(Ciudad, RazonSocial, Localidad))
             {
-                MessageBox.Show("Por favor revise los datos de entrada");
+               
             }
             else
             {
-                var cuit = txtCUIT1.Text + txtCUIT2.Text + txtCUIT3.Text;
+                var cuit = Verificador1.Text + NroCUIT.Text + DigitoVerificador.Text;
                 if (!TextFieldUtils.IsAnyFieldEmpty(this))
                 {
                     if (TextFieldUtils.CUIT.EsCuitValido(cuit))
                     {
                         StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                         inputParameters.AddParameter("@cuitOriginal", CUIT);
-                        inputParameters.AddParameter("@razon_social", txtRazonSocial.Text);
-                        inputParameters.AddParameter("@mail", txtMail.Text);
-                        inputParameters.AddParameter("@telefono", decimal.Parse(txtTelefono.Text));
-                        inputParameters.AddParameter("@direccion_calle", txtDirCalle.Text);
-                        inputParameters.AddParameter("@numero_calle", decimal.Parse(txtNumero.Text));
-                        inputParameters.AddParameter("@nro_piso", decimal.Parse(txtPiso.Text));
-                        inputParameters.AddParameter("@depto", txtDpto.Text);
-                        inputParameters.AddParameter("@localidad", txtLocalidad.Text);
-                        inputParameters.AddParameter("@cod_postal", txtPostal.Text);
-                        inputParameters.AddParameter("@ciudad", txtCiudad.Text);
+                        inputParameters.AddParameter("@razon_social", RazonSocial.Text);
+                        inputParameters.AddParameter("@mail", Mail.Text);
+                        inputParameters.AddParameter("@telefono", decimal.Parse(Telefono.Text));
+                        inputParameters.AddParameter("@direccion_calle", DirCalle.Text);
+                        inputParameters.AddParameter("@numero_calle", decimal.Parse(Numero.Text));
+                        inputParameters.AddParameter("@nro_piso", decimal.Parse(Piso.Text));
+                        inputParameters.AddParameter("@depto", Departamento.Text);
+                        inputParameters.AddParameter("@localidad", Localidad.Text);
+                        inputParameters.AddParameter("@cod_postal", CodPostal.Text);
+                        inputParameters.AddParameter("@ciudad", Ciudad.Text);
                         inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
                         try
                         {
