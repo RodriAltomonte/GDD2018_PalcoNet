@@ -6,7 +6,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Security.Cryptography; 
+ 
 namespace Classes.Util
 {
     static class StringUtil
@@ -125,18 +126,24 @@ namespace Classes.Util
             return ParseConfigurationFileLine(line);
         }
 
-        public static string GenerateRandomUsername(int length)
+        public static string GenerateRandomUsername(string input)
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            return new string(Enumerable.Repeat(chars, length)
-                            .Select(s => s[new Random().Next(s.Length)]).ToArray());
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] hash = md5.ComputeHash(Encoding.Default.GetBytes(input));
+                var res = Convert.ToBase64String(hash);
+                return res.Substring(0, res.Length - 2);
+            }
         }
 
-        public static string GenerateRandomPassword(int length)
+        public static string GenerateRandomPassword(string input)
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-                            .Select(s => s[new Random().Next(s.Length)]).ToArray());
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] hash = md5.ComputeHash(Encoding.Default.GetBytes(input));
+                var res = Convert.ToBase64String(hash);
+                return res.Substring(0, res.Length - 2);
+            }
         }
 
         public static string ConcatSeparatedByComma<T>(IList<T> list)

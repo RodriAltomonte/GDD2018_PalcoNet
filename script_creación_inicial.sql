@@ -200,14 +200,6 @@ IF OBJECT_ID(N'LOS_DE_GESTION.HabilitarRol') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.HabilitarRol
 GO
 
-IF OBJECT_ID(N'LOS_DE_GESTION.ListadoClientes') IS NOT NULL
-DROP PROCEDURE LOS_DE_GESTION.ListadoClientes
-GO
-
-IF OBJECT_ID(N'LOS_DE_GESTION.ListadoEmpresas') IS NOT NULL
-DROP PROCEDURE LOS_DE_GESTION.ListadoEmpresas
-GO
-
 IF OBJECT_ID(N'LOS_DE_GESTION.ModificacionPasswordCliente') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.ModificacionPasswordCliente
 GO
@@ -1177,10 +1169,13 @@ CREATE PROCEDURE LOS_DE_GESTION.ModificarRol
 @id_Rol NUMERIC(18,0),
 @nombreRolNuevo NVARCHAR(255)
 AS
+	IF(NOT EXISTS(SELECT nombre FROM LOS_DE_GESTION.Rol WHERE nombre = @nombreRolNuevo))
 	BEGIN
-		UPDATE LOS_DE_GESTION.Rol
-		SET nombre = @nombreRolNuevo
-		WHERE id_Rol = @id_Rol
+		BEGIN
+			UPDATE LOS_DE_GESTION.Rol
+			SET nombre = @nombreRolNuevo
+			WHERE id_Rol = @id_Rol
+		END
 	END
 GO
 --ESTE ESTA DUPLICADO 

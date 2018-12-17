@@ -58,6 +58,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                     if (TextFieldUtils.CUIT.EsCuitValido(cuit))
                     {
                         StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+                        StoredProcedureParameterMap userParameters = new StoredProcedureParameterMap();
+
                         inputParameters.AddParameter("@habilitado", true);
                         inputParameters.AddParameter("@rol", 3);//3 rol Empresa
                         inputParameters.AddParameter("@razon_social", RazonSocial.Text);
@@ -72,8 +74,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
                         if (newUser == null)
                         {
-                            username = StringUtil.GenerateRandomUsername(10);
-                            password = StringUtil.GenerateRandomPassword(10);
+                            username = StringUtil.GenerateRandomUsername(RazonSocial.Text);
+                            password = StringUtil.GenerateRandomPassword(cuit);
 
                             inputParameters.AddParameter("@username",username );
                             inputParameters.AddParameter("@password", password);
@@ -88,6 +90,12 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
                         try
                         {
+                            //Crear Usuario
+                            userParameters.AddParameter("@username", username);
+                            userParameters.AddParameter("@password", password);
+                            userParameters.AddParameter("@idRol", 3);
+                            ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.AltaDeUsuario, userParameters);
+                            //Crear Empresa
                             ConnectionFactory.Instance()
                                              .CreateConnection()
                                              .ExecuteDataTableStoredProcedure(SpNames.AltaEmpresa, inputParameters);

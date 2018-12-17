@@ -58,6 +58,7 @@ namespace PalcoNet.ABMCliente
                 if (TextFieldUtils.CUIT.EsCuilValido(cuil) && NroDocumento.Text == DNI.Text)
                 {
                     StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+                    StoredProcedureParameterMap userParameters = new StoredProcedureParameterMap();
                    // inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
                     inputParameters.AddParameter("@habilitado", true);
                     inputParameters.AddParameter("@id_rol", 2); // 2 Rol Cliente
@@ -80,8 +81,8 @@ namespace PalcoNet.ABMCliente
 
                     if (newUser == null)
                     {   
-                        username = StringUtil.GenerateRandomUsername(10);
-                        password = StringUtil.GenerateRandomPassword(10);
+                        username = StringUtil.GenerateRandomUsername(Nombre.Text);
+                        password = StringUtil.GenerateRandomPassword(Telefono.Text);
                         inputParameters.AddParameter("@username",username);
                         inputParameters.AddParameter("@password",password );
                     }
@@ -95,6 +96,13 @@ namespace PalcoNet.ABMCliente
 
                     try
                     {
+                        //Crear Usuario
+                        userParameters.AddParameter("@username",username);
+                        userParameters.AddParameter("@password",password);
+                        userParameters.AddParameter("@idRol", 2);
+                        ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.AltaDeUsuario,userParameters);
+
+                        //Crear Cliente
                         ConnectionFactory.Instance()
                                          .CreateConnection()
                                          .ExecuteDataTableStoredProcedure(SpNames.AltaCliente, inputParameters);
