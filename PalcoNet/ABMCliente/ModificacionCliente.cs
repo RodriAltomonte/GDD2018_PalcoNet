@@ -73,12 +73,9 @@ namespace PalcoNet.ABMCliente
   !TextFieldUtils.IsValidNumericField(txtCUIL1, txtCUIL2, txtCUIL3, txtNroDocumento, txtTelefono, txtNumero, txtPiso, txtTarjeta)
            || !TextFieldUtils.IsValidTextField(txtNombre, txtApellido, txtLocalidad))
             {
-                MessageBox.Show("Verifique los datos ingresados!");
-            }
-            else
-            {
+            }else{ 
                 var cuil = txtCUIL1.Text + txtCUIL2.Text + txtCUIL3.Text;
-                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text) && TextFieldUtils.DatesAreValid(Convert.ToDateTime(dtpFechaNacimiento.Text),Convert.ToDateTime(dtpFechaCreacion.Text)))
+                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text) && TextFieldUtils.DatesAreValid(Convert.ToDateTime(dtpFechaNacimiento.Text), Convert.ToDateTime(dtpFechaCreacion.Text)))
                 {
                     if (TextFieldUtils.CUIT.EsCuilValido(cuil) && txtCUIL2.Text == txtNroDocumento.Text)
                     {
@@ -114,7 +111,7 @@ namespace PalcoNet.ABMCliente
                     }
                     else { MessageBox.Show("Por favor verifique el cuil"); }
                 }
-                else { MessageBox.Show("Por favor ingrese todos los datos y reviselos"); }
+                
             }
         }
 

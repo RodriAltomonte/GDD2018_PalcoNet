@@ -15,7 +15,12 @@ namespace TFUtilites
         public static bool DatesAreValid(DateTime fecha_nacimiento,DateTime fecha_creacion)
         { 
             DateTime fecha_del_sistema = ConfigurationManager.Instance().GetSystemDateTime();
-            return (DateTime.Compare(fecha_nacimiento,fecha_del_sistema) < 0) && (DateTime.Compare(fecha_creacion,fecha_del_sistema) < 0);
+            bool condition = (DateTime.Compare(fecha_nacimiento,fecha_del_sistema) < 0) && (DateTime.Compare(fecha_creacion,fecha_del_sistema) < 0);
+            if (condition)
+            {
+                return true;
+            }
+            else { MessageBox.Show("Por favor verifique las fechas"); return false; }
         }
         public static bool IsAnyFieldEmpty(Form myForm)
         {
@@ -56,6 +61,7 @@ namespace TFUtilites
             {
                 if (!f.Text.All(char.IsDigit))
                 {
+                    MessageBox.Show("Revise el campo " + f.Name);
                     return false;
                 }
             }
@@ -73,6 +79,7 @@ namespace TFUtilites
             {
                 if (!regex.IsMatch(f.Text))
                 {
+                    MessageBox.Show("Revise el campo " + f.Name);
                     return false;
                 }
             }
