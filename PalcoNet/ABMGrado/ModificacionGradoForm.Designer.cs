@@ -64,7 +64,7 @@
             this.nudPorcentaje.Location = new System.Drawing.Point(191, 121);
             this.nudPorcentaje.Name = "nudPorcentaje";
             this.nudPorcentaje.Size = new System.Drawing.Size(215, 22);
-            this.nudPorcentaje.TabIndex = 24;
+            this.nudPorcentaje.TabIndex = 2;
             // 
             // label3
             // 
@@ -80,7 +80,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(191, 93);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(215, 22);
-            this.txtDescripcion.TabIndex = 22;
+            this.txtDescripcion.TabIndex = 1;
             // 
             // label2
             // 
@@ -107,7 +107,7 @@
             this.cmbModificacion.Location = new System.Drawing.Point(127, 41);
             this.cmbModificacion.Name = "cmbModificacion";
             this.cmbModificacion.Size = new System.Drawing.Size(279, 24);
-            this.cmbModificacion.TabIndex = 18;
+            this.cmbModificacion.TabIndex = 0;
             this.cmbModificacion.SelectedIndexChanged += new System.EventHandler(this.cmbModificacion_SelectedIndexChanged);
             // 
             // btnCancelar
@@ -115,7 +115,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(200, 162);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(100, 28);
-            this.btnCancelar.TabIndex = 17;
+            this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -125,7 +125,7 @@
             this.btnModificar.Location = new System.Drawing.Point(306, 162);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(100, 28);
-            this.btnModificar.TabIndex = 16;
+            this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);

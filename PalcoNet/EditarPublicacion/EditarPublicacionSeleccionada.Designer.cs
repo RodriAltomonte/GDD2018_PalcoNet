@@ -88,9 +88,9 @@
             this.grpEditarPublicacion.Controls.Add(this.lblDescripcion);
             this.grpEditarPublicacion.Controls.Add(this.rTxtDescripcion);
             this.grpEditarPublicacion.Location = new System.Drawing.Point(16, 15);
-            this.grpEditarPublicacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpEditarPublicacion.Margin = new System.Windows.Forms.Padding(4);
             this.grpEditarPublicacion.Name = "grpEditarPublicacion";
-            this.grpEditarPublicacion.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpEditarPublicacion.Padding = new System.Windows.Forms.Padding(4);
             this.grpEditarPublicacion.Size = new System.Drawing.Size(711, 613);
             this.grpEditarPublicacion.TabIndex = 3;
             this.grpEditarPublicacion.TabStop = false;
@@ -110,7 +110,7 @@
             this.Column5,
             this.Column6});
             this.dgvUbicaciones.Location = new System.Drawing.Point(229, 160);
-            this.dgvUbicaciones.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvUbicaciones.Margin = new System.Windows.Forms.Padding(4);
             this.dgvUbicaciones.MultiSelect = false;
             this.dgvUbicaciones.Name = "dgvUbicaciones";
             this.dgvUbicaciones.ReadOnly = true;
@@ -163,10 +163,10 @@
             // btnCancelar
             // 
             this.btnCancelar.Location = new System.Drawing.Point(449, 555);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(100, 28);
-            this.btnCancelar.TabIndex = 31;
+            this.btnCancelar.TabIndex = 12;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -176,21 +176,21 @@
             this.dtpHoraEspectaculo.CustomFormat = "HH:mm";
             this.dtpHoraEspectaculo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpHoraEspectaculo.Location = new System.Drawing.Point(387, 321);
-            this.dtpHoraEspectaculo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpHoraEspectaculo.Margin = new System.Windows.Forms.Padding(4);
             this.dtpHoraEspectaculo.Name = "dtpHoraEspectaculo";
             this.dtpHoraEspectaculo.ShowUpDown = true;
             this.dtpHoraEspectaculo.Size = new System.Drawing.Size(148, 22);
-            this.dtpHoraEspectaculo.TabIndex = 30;
+            this.dtpHoraEspectaculo.TabIndex = 5;
             // 
             // dtpFechaDeEspectaculo
             // 
             this.dtpFechaDeEspectaculo.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaDeEspectaculo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaDeEspectaculo.Location = new System.Drawing.Point(229, 321);
-            this.dtpFechaDeEspectaculo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaDeEspectaculo.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaDeEspectaculo.Name = "dtpFechaDeEspectaculo";
             this.dtpFechaDeEspectaculo.Size = new System.Drawing.Size(148, 22);
-            this.dtpFechaDeEspectaculo.TabIndex = 29;
+            this.dtpFechaDeEspectaculo.TabIndex = 4;
             // 
             // lblVencimiento
             // 
@@ -207,18 +207,18 @@
             this.dtpVencimiento.CustomFormat = "dd/MM/yyyy";
             this.dtpVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpVencimiento.Location = new System.Drawing.Point(229, 353);
-            this.dtpVencimiento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpVencimiento.Margin = new System.Windows.Forms.Padding(4);
             this.dtpVencimiento.Name = "dtpVencimiento";
             this.dtpVencimiento.Size = new System.Drawing.Size(148, 22);
-            this.dtpVencimiento.TabIndex = 27;
+            this.dtpVencimiento.TabIndex = 6;
             // 
             // btnRemoveUbicacion
             // 
             this.btnRemoveUbicacion.Location = new System.Drawing.Point(163, 198);
-            this.btnRemoveUbicacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRemoveUbicacion.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoveUbicacion.Name = "btnRemoveUbicacion";
             this.btnRemoveUbicacion.Size = new System.Drawing.Size(44, 23);
-            this.btnRemoveUbicacion.TabIndex = 20;
+            this.btnRemoveUbicacion.TabIndex = 2;
             this.btnRemoveUbicacion.Text = "-";
             this.btnRemoveUbicacion.UseVisualStyleBackColor = true;
             this.btnRemoveUbicacion.Click += new System.EventHandler(this.btnRemoveUbicacion_Click);
@@ -226,10 +226,10 @@
             // btnAgregarUbicacion
             // 
             this.btnAgregarUbicacion.Location = new System.Drawing.Point(163, 167);
-            this.btnAgregarUbicacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAgregarUbicacion.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregarUbicacion.Name = "btnAgregarUbicacion";
             this.btnAgregarUbicacion.Size = new System.Drawing.Size(44, 23);
-            this.btnAgregarUbicacion.TabIndex = 19;
+            this.btnAgregarUbicacion.TabIndex = 1;
             this.btnAgregarUbicacion.Text = "+";
             this.btnAgregarUbicacion.UseVisualStyleBackColor = true;
             this.btnAgregarUbicacion.Click += new System.EventHandler(this.btnAgregarUbicacion_Click);
@@ -237,10 +237,10 @@
             // btnActualizar
             // 
             this.btnActualizar.Location = new System.Drawing.Point(575, 554);
-            this.btnActualizar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnActualizar.Margin = new System.Windows.Forms.Padding(4);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(100, 28);
-            this.btnActualizar.TabIndex = 16;
+            this.btnActualizar.TabIndex = 11;
             this.btnActualizar.Text = "Actualizar";
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
@@ -260,10 +260,10 @@
             this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEstado.FormattingEnabled = true;
             this.cmbEstado.Location = new System.Drawing.Point(229, 495);
-            this.cmbEstado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbEstado.Margin = new System.Windows.Forms.Padding(4);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(444, 24);
-            this.cmbEstado.TabIndex = 14;
+            this.cmbEstado.TabIndex = 10;
             // 
             // lblGrado
             // 
@@ -280,18 +280,18 @@
             this.cmbGrado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGrado.FormattingEnabled = true;
             this.cmbGrado.Location = new System.Drawing.Point(229, 462);
-            this.cmbGrado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbGrado.Margin = new System.Windows.Forms.Padding(4);
             this.cmbGrado.Name = "cmbGrado";
             this.cmbGrado.Size = new System.Drawing.Size(444, 24);
-            this.cmbGrado.TabIndex = 12;
+            this.cmbGrado.TabIndex = 9;
             // 
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(229, 430);
-            this.txtDireccion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDireccion.Margin = new System.Windows.Forms.Padding(4);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(444, 22);
-            this.txtDireccion.TabIndex = 11;
+            this.txtDireccion.TabIndex = 8;
             // 
             // lblDireccion
             // 
@@ -308,20 +308,20 @@
             this.cmbRubro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRubro.FormattingEnabled = true;
             this.cmbRubro.Location = new System.Drawing.Point(229, 396);
-            this.cmbRubro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbRubro.Margin = new System.Windows.Forms.Padding(4);
             this.cmbRubro.Name = "cmbRubro";
             this.cmbRubro.Size = new System.Drawing.Size(444, 24);
-            this.cmbRubro.TabIndex = 9;
+            this.cmbRubro.TabIndex = 7;
             // 
             // dtpFechaPublicacion
             // 
             this.dtpFechaPublicacion.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaPublicacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaPublicacion.Location = new System.Drawing.Point(229, 287);
-            this.dtpFechaPublicacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaPublicacion.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaPublicacion.Name = "dtpFechaPublicacion";
             this.dtpFechaPublicacion.Size = new System.Drawing.Size(148, 22);
-            this.dtpFechaPublicacion.TabIndex = 7;
+            this.dtpFechaPublicacion.TabIndex = 3;
             // 
             // lblRubro
             // 
@@ -376,7 +376,7 @@
             // rTxtDescripcion
             // 
             this.rTxtDescripcion.Location = new System.Drawing.Point(229, 44);
-            this.rTxtDescripcion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rTxtDescripcion.Margin = new System.Windows.Forms.Padding(4);
             this.rTxtDescripcion.Name = "rTxtDescripcion";
             this.rTxtDescripcion.Size = new System.Drawing.Size(444, 73);
             this.rTxtDescripcion.TabIndex = 0;
@@ -388,7 +388,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 651);
             this.Controls.Add(this.grpEditarPublicacion);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EditarPublicacionSeleccionada";
             this.Text = "EditarPublicacionSeleccionada";
             this.grpEditarPublicacion.ResumeLayout(false);

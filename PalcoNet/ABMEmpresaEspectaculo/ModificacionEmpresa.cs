@@ -125,5 +125,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         {
             TextFieldUtils.CleanAllControls(this);
         }
+
+      
     }
 }

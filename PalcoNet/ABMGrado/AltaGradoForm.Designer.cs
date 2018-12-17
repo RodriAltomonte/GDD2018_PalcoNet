@@ -74,7 +74,7 @@
             0});
             this.nudCodigo.Name = "nudCodigo";
             this.nudCodigo.Size = new System.Drawing.Size(215, 22);
-            this.nudCodigo.TabIndex = 9;
+            this.nudCodigo.TabIndex = 0;
             this.nudCodigo.Value = new decimal(new int[] {
             1,
             0,
@@ -87,7 +87,7 @@
             this.nudPorcentaje.Location = new System.Drawing.Point(179, 92);
             this.nudPorcentaje.Name = "nudPorcentaje";
             this.nudPorcentaje.Size = new System.Drawing.Size(215, 22);
-            this.nudPorcentaje.TabIndex = 8;
+            this.nudPorcentaje.TabIndex = 2;
             // 
             // label3
             // 
@@ -103,7 +103,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(179, 66);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(215, 22);
-            this.txtDescripcion.TabIndex = 5;
+            this.txtDescripcion.TabIndex = 1;
             // 
             // label2
             // 
@@ -128,7 +128,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(188, 134);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(100, 28);
-            this.btnCancelar.TabIndex = 1;
+            this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -138,7 +138,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(294, 134);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(100, 28);
-            this.btnAceptar.TabIndex = 0;
+            this.btnAceptar.TabIndex = 3;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);

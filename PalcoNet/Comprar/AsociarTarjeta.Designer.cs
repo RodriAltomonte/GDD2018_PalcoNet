@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAceptar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtNroTarjeta = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,25 +49,12 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Asociar tarjeta";
             // 
-            // btnAceptar
+            // txtNroTarjeta
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(295, 90);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(100, 28);
-            this.btnAceptar.TabIndex = 0;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(189, 90);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
-            this.btnCancelar.TabIndex = 1;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.txtNroTarjeta.Location = new System.Drawing.Point(165, 40);
+            this.txtNroTarjeta.Name = "txtNroTarjeta";
+            this.txtNroTarjeta.Size = new System.Drawing.Size(230, 22);
+            this.txtNroTarjeta.TabIndex = 0;
             // 
             // label1
             // 
@@ -78,12 +65,25 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Número de tarjeta";
             // 
-            // txtNroTarjeta
+            // btnCancelar
             // 
-            this.txtNroTarjeta.Location = new System.Drawing.Point(165, 40);
-            this.txtNroTarjeta.Name = "txtNroTarjeta";
-            this.txtNroTarjeta.Size = new System.Drawing.Size(230, 22);
-            this.txtNroTarjeta.TabIndex = 3;
+            this.btnCancelar.Location = new System.Drawing.Point(189, 90);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
+            this.btnCancelar.TabIndex = 2;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Location = new System.Drawing.Point(295, 90);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(100, 28);
+            this.btnAceptar.TabIndex = 1;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // AsociarTarjeta
             // 

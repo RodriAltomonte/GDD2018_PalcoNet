@@ -50,9 +50,9 @@
             this.grpConsultaPuntos.Controls.Add(this.lblFechaVencimiento);
             this.grpConsultaPuntos.Controls.Add(this.lblPuntosValidos);
             this.grpConsultaPuntos.Location = new System.Drawing.Point(17, 16);
-            this.grpConsultaPuntos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpConsultaPuntos.Margin = new System.Windows.Forms.Padding(4);
             this.grpConsultaPuntos.Name = "grpConsultaPuntos";
-            this.grpConsultaPuntos.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpConsultaPuntos.Padding = new System.Windows.Forms.Padding(4);
             this.grpConsultaPuntos.Size = new System.Drawing.Size(505, 126);
             this.grpConsultaPuntos.TabIndex = 0;
             this.grpConsultaPuntos.TabStop = false;
@@ -61,20 +61,20 @@
             // txtFechaVencimiento
             // 
             this.txtFechaVencimiento.Location = new System.Drawing.Point(227, 65);
-            this.txtFechaVencimiento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFechaVencimiento.Margin = new System.Windows.Forms.Padding(4);
             this.txtFechaVencimiento.Name = "txtFechaVencimiento";
             this.txtFechaVencimiento.ReadOnly = true;
             this.txtFechaVencimiento.Size = new System.Drawing.Size(212, 22);
-            this.txtFechaVencimiento.TabIndex = 3;
+            this.txtFechaVencimiento.TabIndex = 1;
             // 
             // txtPuntosValidos
             // 
             this.txtPuntosValidos.Location = new System.Drawing.Point(227, 33);
-            this.txtPuntosValidos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPuntosValidos.Margin = new System.Windows.Forms.Padding(4);
             this.txtPuntosValidos.Name = "txtPuntosValidos";
             this.txtPuntosValidos.ReadOnly = true;
             this.txtPuntosValidos.Size = new System.Drawing.Size(212, 22);
-            this.txtPuntosValidos.TabIndex = 2;
+            this.txtPuntosValidos.TabIndex = 0;
             // 
             // lblFechaVencimiento
             // 
@@ -102,9 +102,9 @@
             this.grpCanjePuntos.Controls.Add(this.cmbPremios);
             this.grpCanjePuntos.Controls.Add(this.lblItemsCanje);
             this.grpCanjePuntos.Location = new System.Drawing.Point(17, 169);
-            this.grpCanjePuntos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCanjePuntos.Margin = new System.Windows.Forms.Padding(4);
             this.grpCanjePuntos.Name = "grpCanjePuntos";
-            this.grpCanjePuntos.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpCanjePuntos.Padding = new System.Windows.Forms.Padding(4);
             this.grpCanjePuntos.Size = new System.Drawing.Size(505, 133);
             this.grpCanjePuntos.TabIndex = 1;
             this.grpCanjePuntos.TabStop = false;
@@ -113,10 +113,10 @@
             // btnCanjear
             // 
             this.btnCanjear.Location = new System.Drawing.Point(329, 94);
-            this.btnCanjear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCanjear.Margin = new System.Windows.Forms.Padding(4);
             this.btnCanjear.Name = "btnCanjear";
             this.btnCanjear.Size = new System.Drawing.Size(137, 28);
-            this.btnCanjear.TabIndex = 2;
+            this.btnCanjear.TabIndex = 3;
             this.btnCanjear.Text = "Canjear";
             this.btnCanjear.UseVisualStyleBackColor = true;
             this.btnCanjear.Click += new System.EventHandler(this.btnCanjear_Click);
@@ -126,10 +126,10 @@
             this.cmbPremios.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPremios.FormattingEnabled = true;
             this.cmbPremios.Location = new System.Drawing.Point(43, 59);
-            this.cmbPremios.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbPremios.Margin = new System.Windows.Forms.Padding(4);
             this.cmbPremios.Name = "cmbPremios";
             this.cmbPremios.Size = new System.Drawing.Size(423, 24);
-            this.cmbPremios.TabIndex = 1;
+            this.cmbPremios.TabIndex = 2;
             // 
             // lblItemsCanje
             // 
@@ -147,7 +147,7 @@
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(104, 28);
-            this.btnVolver.TabIndex = 3;
+            this.btnVolver.TabIndex = 4;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -160,7 +160,7 @@
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.grpCanjePuntos);
             this.Controls.Add(this.grpConsultaPuntos);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CanjePuntosForm";
             this.Text = "Canje y administración de puntos";
             this.grpConsultaPuntos.ResumeLayout(false);

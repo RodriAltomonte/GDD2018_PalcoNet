@@ -51,10 +51,10 @@
             // btnVolver
             // 
             this.btnVolver.Location = new System.Drawing.Point(16, 369);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
-            this.btnVolver.TabIndex = 6;
+            this.btnVolver.TabIndex = 10;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -75,9 +75,9 @@
             this.grpBusqueda.Controls.Add(this.cmbCategoria);
             this.grpBusqueda.Controls.Add(this.lblTipoListado);
             this.grpBusqueda.Location = new System.Drawing.Point(16, 30);
-            this.grpBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBusqueda.Margin = new System.Windows.Forms.Padding(4);
             this.grpBusqueda.Name = "grpBusqueda";
-            this.grpBusqueda.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBusqueda.Padding = new System.Windows.Forms.Padding(4);
             this.grpBusqueda.Size = new System.Drawing.Size(672, 331);
             this.grpBusqueda.TabIndex = 0;
             this.grpBusqueda.TabStop = false;
@@ -88,11 +88,11 @@
             this.dtpHoraFinal.CustomFormat = "HH:mm";
             this.dtpHoraFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpHoraFinal.Location = new System.Drawing.Point(239, 149);
-            this.dtpHoraFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpHoraFinal.Margin = new System.Windows.Forms.Padding(4);
             this.dtpHoraFinal.Name = "dtpHoraFinal";
             this.dtpHoraFinal.ShowUpDown = true;
             this.dtpHoraFinal.Size = new System.Drawing.Size(68, 22);
-            this.dtpHoraFinal.TabIndex = 15;
+            this.dtpHoraFinal.TabIndex = 7;
             this.dtpHoraFinal.Value = new System.DateTime(2016, 9, 1, 14, 45, 0, 0);
             // 
             // dtpFechaFinal
@@ -100,10 +100,10 @@
             this.dtpFechaFinal.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaFinal.Location = new System.Drawing.Point(108, 149);
-            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaFinal.Name = "dtpFechaFinal";
             this.dtpFechaFinal.Size = new System.Drawing.Size(112, 22);
-            this.dtpFechaFinal.TabIndex = 14;
+            this.dtpFechaFinal.TabIndex = 6;
             this.dtpFechaFinal.Value = new System.DateTime(2016, 9, 1, 14, 45, 0, 0);
             // 
             // dtpHoraInicial
@@ -111,11 +111,11 @@
             this.dtpHoraInicial.CustomFormat = "HH:mm";
             this.dtpHoraInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpHoraInicial.Location = new System.Drawing.Point(239, 119);
-            this.dtpHoraInicial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpHoraInicial.Margin = new System.Windows.Forms.Padding(4);
             this.dtpHoraInicial.Name = "dtpHoraInicial";
             this.dtpHoraInicial.ShowUpDown = true;
             this.dtpHoraInicial.Size = new System.Drawing.Size(68, 22);
-            this.dtpHoraInicial.TabIndex = 13;
+            this.dtpHoraInicial.TabIndex = 5;
             this.dtpHoraInicial.Value = new System.DateTime(2016, 9, 1, 14, 45, 0, 0);
             // 
             // dtpFechaInicial
@@ -123,19 +123,19 @@
             this.dtpFechaInicial.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaInicial.Location = new System.Drawing.Point(107, 119);
-            this.dtpFechaInicial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaInicial.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaInicial.Name = "dtpFechaInicial";
             this.dtpFechaInicial.Size = new System.Drawing.Size(113, 22);
-            this.dtpFechaInicial.TabIndex = 12;
+            this.dtpFechaInicial.TabIndex = 4;
             this.dtpFechaInicial.Value = new System.DateTime(2018, 12, 8, 0, 0, 0, 0);
             // 
             // BtnQuitar
             // 
             this.BtnQuitar.Location = new System.Drawing.Point(564, 287);
-            this.BtnQuitar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnQuitar.Margin = new System.Windows.Forms.Padding(4);
             this.BtnQuitar.Name = "BtnQuitar";
             this.BtnQuitar.Size = new System.Drawing.Size(100, 28);
-            this.BtnQuitar.TabIndex = 5;
+            this.BtnQuitar.TabIndex = 2;
             this.BtnQuitar.Text = "Quitar";
             this.BtnQuitar.UseVisualStyleBackColor = true;
             this.BtnQuitar.Click += new System.EventHandler(this.BtnQuitar_Click);
@@ -143,7 +143,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(355, 33);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 1;
@@ -188,7 +188,7 @@
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(200, 22);
-            this.txtDescripcion.TabIndex = 2;
+            this.txtDescripcion.TabIndex = 3;
             // 
             // label1
             // 
@@ -205,7 +205,7 @@
             this.cmbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategoria.FormattingEnabled = true;
             this.cmbCategoria.Location = new System.Drawing.Point(107, 33);
-            this.cmbCategoria.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbCategoria.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCategoria.Name = "cmbCategoria";
             this.cmbCategoria.Size = new System.Drawing.Size(200, 24);
             this.cmbCategoria.TabIndex = 0;
@@ -223,10 +223,10 @@
             // BtnBuscar
             // 
             this.BtnBuscar.Location = new System.Drawing.Point(293, 369);
-            this.BtnBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.BtnBuscar.Name = "BtnBuscar";
             this.BtnBuscar.Size = new System.Drawing.Size(100, 28);
-            this.BtnBuscar.TabIndex = 7;
+            this.BtnBuscar.TabIndex = 8;
             this.BtnBuscar.Text = "Buscar";
             this.BtnBuscar.UseVisualStyleBackColor = true;
             this.BtnBuscar.Click += new System.EventHandler(this.BtnBuscar_Click);
@@ -234,10 +234,10 @@
             // BtnLimpiar
             // 
             this.BtnLimpiar.Location = new System.Drawing.Point(588, 369);
-            this.BtnLimpiar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnLimpiar.Margin = new System.Windows.Forms.Padding(4);
             this.BtnLimpiar.Name = "BtnLimpiar";
             this.BtnLimpiar.Size = new System.Drawing.Size(100, 28);
-            this.BtnLimpiar.TabIndex = 8;
+            this.BtnLimpiar.TabIndex = 9;
             this.BtnLimpiar.Text = "Limpiar";
             this.BtnLimpiar.UseVisualStyleBackColor = true;
             this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
@@ -251,7 +251,7 @@
             this.Controls.Add(this.BtnBuscar);
             this.Controls.Add(this.grpBusqueda);
             this.Controls.Add(this.btnVolver);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Comprar";
             this.Text = "Comprar Entrada";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ComprarForm_FormClosed);

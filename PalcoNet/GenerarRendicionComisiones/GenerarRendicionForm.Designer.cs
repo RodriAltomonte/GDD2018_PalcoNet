@@ -57,7 +57,7 @@
             this.cbEmpresas.Margin = new System.Windows.Forms.Padding(4);
             this.cbEmpresas.Name = "cbEmpresas";
             this.cbEmpresas.Size = new System.Drawing.Size(280, 24);
-            this.cbEmpresas.TabIndex = 1;
+            this.cbEmpresas.TabIndex = 0;
             this.cbEmpresas.SelectedIndexChanged += new System.EventHandler(this.cbEmpresas_SelectedIndexChanged);
             // 
             // label3
@@ -91,7 +91,7 @@
             this.CbCantidad.Margin = new System.Windows.Forms.Padding(4);
             this.CbCantidad.Name = "CbCantidad";
             this.CbCantidad.Size = new System.Drawing.Size(280, 24);
-            this.CbCantidad.TabIndex = 5;
+            this.CbCantidad.TabIndex = 1;
             this.CbCantidad.SelectedIndexChanged += new System.EventHandler(this.CbCantidad_SelectedIndexChanged);
             // 
             // dgvCompras
@@ -103,6 +103,7 @@
             this.dgvCompras.RowTemplate.Height = 24;
             this.dgvCompras.Size = new System.Drawing.Size(436, 190);
             this.dgvCompras.TabIndex = 4;
+            this.dgvCompras.TabStop = false;
             // 
             // btnVolver
             // 
@@ -110,7 +111,7 @@
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
-            this.btnVolver.TabIndex = 6;
+            this.btnVolver.TabIndex = 3;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -121,7 +122,7 @@
             this.BtnGenerar.Margin = new System.Windows.Forms.Padding(4);
             this.BtnGenerar.Name = "BtnGenerar";
             this.BtnGenerar.Size = new System.Drawing.Size(100, 28);
-            this.BtnGenerar.TabIndex = 7;
+            this.BtnGenerar.TabIndex = 2;
             this.BtnGenerar.Text = "Generar";
             this.BtnGenerar.UseVisualStyleBackColor = true;
             this.BtnGenerar.Click += new System.EventHandler(this.BtnGenerar_Click);

@@ -54,9 +54,9 @@
             this.grpBusqueda.Controls.Add(this.lblAnio);
             this.grpBusqueda.Controls.Add(this.lblTipoListado);
             this.grpBusqueda.Location = new System.Drawing.Point(16, 30);
-            this.grpBusqueda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBusqueda.Margin = new System.Windows.Forms.Padding(4);
             this.grpBusqueda.Name = "grpBusqueda";
-            this.grpBusqueda.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpBusqueda.Padding = new System.Windows.Forms.Padding(4);
             this.grpBusqueda.Size = new System.Drawing.Size(672, 172);
             this.grpBusqueda.TabIndex = 0;
             this.grpBusqueda.TabStop = false;
@@ -65,28 +65,28 @@
             // txtAnio
             // 
             this.txtAnio.Location = new System.Drawing.Point(171, 76);
-            this.txtAnio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAnio.Margin = new System.Windows.Forms.Padding(4);
             this.txtAnio.Name = "txtAnio";
             this.txtAnio.Size = new System.Drawing.Size(132, 22);
-            this.txtAnio.TabIndex = 6;
+            this.txtAnio.TabIndex = 1;
             // 
             // cmbTrimestre
             // 
             this.cmbTrimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTrimestre.FormattingEnabled = true;
             this.cmbTrimestre.Location = new System.Drawing.Point(408, 76);
-            this.cmbTrimestre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbTrimestre.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTrimestre.Name = "cmbTrimestre";
             this.cmbTrimestre.Size = new System.Drawing.Size(213, 24);
-            this.cmbTrimestre.TabIndex = 5;
+            this.cmbTrimestre.TabIndex = 2;
             // 
             // btnBuscar
             // 
             this.btnBuscar.Location = new System.Drawing.Point(523, 123);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(100, 28);
-            this.btnBuscar.TabIndex = 4;
+            this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -96,10 +96,10 @@
             this.cmbTipoListado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoListado.FormattingEnabled = true;
             this.cmbTipoListado.Location = new System.Drawing.Point(171, 41);
-            this.cmbTipoListado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbTipoListado.Margin = new System.Windows.Forms.Padding(4);
             this.cmbTipoListado.Name = "cmbTipoListado";
             this.cmbTipoListado.Size = new System.Drawing.Size(451, 24);
-            this.cmbTipoListado.TabIndex = 3;
+            this.cmbTipoListado.TabIndex = 0;
             // 
             // lblTrimestre
             // 
@@ -135,9 +135,9 @@
             // 
             this.grpResultados.Controls.Add(this.dgvResultados);
             this.grpResultados.Location = new System.Drawing.Point(17, 223);
-            this.grpResultados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpResultados.Margin = new System.Windows.Forms.Padding(4);
             this.grpResultados.Name = "grpResultados";
-            this.grpResultados.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpResultados.Padding = new System.Windows.Forms.Padding(4);
             this.grpResultados.Size = new System.Drawing.Size(671, 281);
             this.grpResultados.TabIndex = 1;
             this.grpResultados.TabStop = false;
@@ -149,20 +149,21 @@
             this.dgvResultados.AllowUserToDeleteRows = false;
             this.dgvResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvResultados.Location = new System.Drawing.Point(8, 44);
-            this.dgvResultados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvResultados.Margin = new System.Windows.Forms.Padding(4);
             this.dgvResultados.MultiSelect = false;
             this.dgvResultados.Name = "dgvResultados";
             this.dgvResultados.ReadOnly = true;
             this.dgvResultados.Size = new System.Drawing.Size(655, 207);
             this.dgvResultados.TabIndex = 0;
+            this.dgvResultados.TabStop = false;
             // 
             // btnVolver
             // 
             this.btnVolver.Location = new System.Drawing.Point(16, 514);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
-            this.btnVolver.TabIndex = 2;
+            this.btnVolver.TabIndex = 4;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -175,7 +176,7 @@
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.grpResultados);
             this.Controls.Add(this.grpBusqueda);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ListadoEstadisticoForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.ListadoEstadisticoForm_Load);

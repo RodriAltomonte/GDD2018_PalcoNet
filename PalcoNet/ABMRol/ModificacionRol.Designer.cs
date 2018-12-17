@@ -35,9 +35,10 @@
             // 
             // btnModNombre
             // 
-            this.btnModNombre.Location = new System.Drawing.Point(50, 12);
+            this.btnModNombre.Location = new System.Drawing.Point(67, 15);
+            this.btnModNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModNombre.Name = "btnModNombre";
-            this.btnModNombre.Size = new System.Drawing.Size(169, 23);
+            this.btnModNombre.Size = new System.Drawing.Size(225, 28);
             this.btnModNombre.TabIndex = 0;
             this.btnModNombre.Text = "Modificar Nombre";
             this.btnModNombre.UseVisualStyleBackColor = true;
@@ -45,19 +46,21 @@
             // 
             // btnModFuncs
             // 
-            this.btnModFuncs.Location = new System.Drawing.Point(50, 41);
+            this.btnModFuncs.Location = new System.Drawing.Point(67, 50);
+            this.btnModFuncs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModFuncs.Name = "btnModFuncs";
-            this.btnModFuncs.Size = new System.Drawing.Size(169, 23);
-            this.btnModFuncs.TabIndex = 0;
+            this.btnModFuncs.Size = new System.Drawing.Size(225, 28);
+            this.btnModFuncs.TabIndex = 1;
             this.btnModFuncs.Text = "Modificar Funcionalidades";
             this.btnModFuncs.UseVisualStyleBackColor = true;
             this.btnModFuncs.Click += new System.EventHandler(this.btnModFuncs_Click);
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 70);
+            this.btnVolver.Location = new System.Drawing.Point(16, 86);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(100, 28);
             this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -65,12 +68,13 @@
             // 
             // ModificacionRol
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 99);
+            this.ClientSize = new System.Drawing.Size(399, 122);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnModFuncs);
             this.Controls.Add(this.btnModNombre);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ModificacionRol";
             this.Text = "ModificacionRol";
             this.ResumeLayout(false);

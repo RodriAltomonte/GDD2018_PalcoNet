@@ -61,7 +61,7 @@
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(257, 22);
-            this.txtDescripcion.TabIndex = 2;
+            this.txtDescripcion.TabIndex = 0;
             // 
             // lblDescripcion
             // 
@@ -79,7 +79,7 @@
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(100, 28);
-            this.btnBuscar.TabIndex = 0;
+            this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -103,7 +103,7 @@
             this.btnEditar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(100, 28);
-            this.btnEditar.TabIndex = 1;
+            this.btnEditar.TabIndex = 3;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
@@ -118,7 +118,7 @@
             this.dgvPublicaciones.Name = "dgvPublicaciones";
             this.dgvPublicaciones.ReadOnly = true;
             this.dgvPublicaciones.Size = new System.Drawing.Size(909, 292);
-            this.dgvPublicaciones.TabIndex = 0;
+            this.dgvPublicaciones.TabIndex = 2;
             // 
             // btnVolver
             // 
@@ -126,7 +126,7 @@
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 28);
-            this.btnVolver.TabIndex = 3;
+            this.btnVolver.TabIndex = 4;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
