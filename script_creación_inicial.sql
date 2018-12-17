@@ -249,6 +249,9 @@ go*/
 IF OBJECT_ID(N'LOS_DE_GESTION.ComprasDeUnaEmpresa') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.ComprasDeUnaEmpresa;
 GO
+IF OBJECT_ID(N'LOS_DE_GESTION.ActualizarRendicion') IS NOT NULL
+DROP PROCEDURE LOS_DE_GESTION.ActualizarRendicion;
+GO
 ------------------------------DROP FUNCIONES------------------------------
 IF OBJECT_ID('LOS_DE_GESTION.FN_HASHPASS','FN') IS NOT NULL
 DROP FUNCTION LOS_DE_GESTION.FN_HASHPASS
@@ -1600,6 +1603,26 @@ BEGIN
 	order by c.fecha_compra 
 END
 GO
+
+CREATE PROCEDURE LOS_DE_GESTION.ActualizarRendicion
+@id_Rendicion numeric(18, 0), 
+@importe_venta numeric(18, 2),
+@importe_comision numeric(18, 2),
+@importe_rendicion numeric(18, 2)
+AS
+BEGIN
+	if exists (select * from LOS_DE_GESTION.Rendicion where id_Rendicion = @id_Rendicion)
+	begin
+		update LOS_DE_GESTION.Rendicion
+		set importe_total_ventas = @importe_venta, importe_comision_total = @importe_comision, importe_rendicion_total = @importe_rendicion
+		where id_Rendicion = @id_Rendicion
+	end
+	else
+	begin
+		throw 50010, 'No existe una Rendicion con el codigo seleccionado.',1
+	end
+END
+go
 
 
 CREATE PROCEDURE LOS_DE_GESTION.NuevaCompra
