@@ -126,9 +126,9 @@ namespace Classes.Util
             return ParseConfigurationFileLine(line);
         }
 
-        public static string GenerateRandomUsername(string input)
+        public static string GenerateRandomUsername(string input,string input2)
         {
-            return input + "123";
+            return input + input2.Substring(0,4);
         }
 
         public static string GenerateRandomPassword()

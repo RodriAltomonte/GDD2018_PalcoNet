@@ -69,13 +69,15 @@ namespace PalcoNet.ABMCliente
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (
-  !TextFieldUtils.IsValidNumericField(Verificador1, DNI, DigitoVerificador, Documento, Telefono, Numero, Piso, txtTarjeta)
-           || !TextFieldUtils.IsValidTextField(Nombre, Apellido, Localidad))
-            {
-            }else{ 
+            if (!TextFieldUtils.IsValidNumericField(Verificador1, DNI, DigitoVerificador, Documento, Telefono, Numero, Piso, txtTarjeta)
+                || !TextFieldUtils.IsValidTextField(Nombre, Apellido, Localidad))
+            {}
+
+            else{ 
                 var cuil = Verificador1.Text + DNI.Text + DigitoVerificador.Text;
-                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text) && TextFieldUtils.DatesAreValid(Convert.ToDateTime(dtpFechaNacimiento.Text), Convert.ToDateTime(dtpFechaCreacion.Text)))
+                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text) 
+                    && TextFieldUtils.DatesAreValid(Convert.ToDateTime(dtpFechaNacimiento.Text), 
+                                                    Convert.ToDateTime(dtpFechaCreacion.Text)))
                 {
                     if (TextFieldUtils.CUIT.EsCuilValido(cuil) && DNI.Text == Documento.Text)
                     {
@@ -125,7 +127,7 @@ namespace PalcoNet.ABMCliente
                 ConnectionFactory.Instance()
                             .CreateConnection()
                             .ExecuteDataTableStoredProcedure(SpNames.HabilitarCliente, inputParameters);
-                MessageBox.Show("Cliente modificado correctamente!");
+                MessageBox.Show("Cliente habilitado correctamente!");
             }
             else
             {
@@ -133,7 +135,7 @@ namespace PalcoNet.ABMCliente
                 ConnectionFactory.Instance()
                             .CreateConnection()
                             .ExecuteDataTableStoredProcedure(SpNames.BajaCliente, inputParameters);
-                MessageBox.Show("Cliente modificado correctamente!");
+                MessageBox.Show("Cliente dado de baja correctamente!");
             }
            
         }

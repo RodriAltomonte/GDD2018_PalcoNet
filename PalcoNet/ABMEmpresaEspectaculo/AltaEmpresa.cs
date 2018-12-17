@@ -74,7 +74,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
                         if (newUser == null)
                         {
-                            username = StringUtil.GenerateRandomUsername(RazonSocial.Text);
+                            //Si el usuario es creado desde el abm se genera el usuario y la contraseña de forma aleatoria
+                            username = StringUtil.GenerateRandomUsername(RazonSocial.Text,Telefono.Text);
                             password = StringUtil.GenerateRandomPassword();
 
                             inputParameters.AddParameter("@username",username );
@@ -94,7 +95,9 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                             userParameters.AddParameter("@username", username);
                             userParameters.AddParameter("@password", password);
                             userParameters.AddParameter("@idRol", 3);
-                            ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.AltaDeUsuario, userParameters);
+                            ConnectionFactory.Instance()
+                                             .CreateConnection()
+                                             .ExecuteDataTableStoredProcedure(SpNames.AltaDeUsuario, userParameters);
                             //Crear Empresa
                             ConnectionFactory.Instance()
                                              .CreateConnection()

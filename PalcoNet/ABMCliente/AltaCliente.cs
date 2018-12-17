@@ -45,8 +45,7 @@ namespace PalcoNet.ABMCliente
         {
             string username="",password = "";
 
-            if(
-       !TextFieldUtils.IsValidNumericField(Verificador1,DNI,DigitoVerificador,NroDocumento,Telefono,Numero,Piso,Tarjeta)
+            if(!TextFieldUtils.IsValidNumericField(Verificador1,DNI,DigitoVerificador,NroDocumento,Telefono,Numero,Piso,Tarjeta)
                 || !TextFieldUtils.IsValidTextField(Nombre,Apellido,Localidad))
             {
                
@@ -59,8 +58,7 @@ namespace PalcoNet.ABMCliente
                 {
                     StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                     StoredProcedureParameterMap userParameters = new StoredProcedureParameterMap();
-                   // inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
-                    inputParameters.AddParameter("@habilitado", true);
+                    inputParameters.AddParameter("@habilitado", true); // habilitado por defecto
                     inputParameters.AddParameter("@id_rol", 2); // 2 Rol Cliente
                     inputParameters.AddParameter("@nombre", Nombre.Text);
                     inputParameters.AddParameter("@apellido", Apellido.Text);
@@ -81,7 +79,8 @@ namespace PalcoNet.ABMCliente
 
                     if (newUser == null)
                     {   
-                        username = StringUtil.GenerateRandomUsername(Nombre.Text);
+                        //Si el usuario es creado desde el abm se genera el usuario y la contraseña de forma aleatoria
+                        username = StringUtil.GenerateRandomUsername(Nombre.Text,Telefono.Text);
                         password = StringUtil.GenerateRandomPassword();
                         inputParameters.AddParameter("@username",username);
                         inputParameters.AddParameter("@password",password );

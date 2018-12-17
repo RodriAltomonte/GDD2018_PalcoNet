@@ -30,7 +30,7 @@ namespace PalcoNet.ABMCliente
         {
             if (!TextFieldUtils.IsValidTextField(txtApellido, txtNombre) || !TextFieldUtils.IsValidNumericField(txtDNI))
             {
-                MessageBox.Show("Por favor revise los datos ingresados");
+                //No hacer nada
             }
             else
             {

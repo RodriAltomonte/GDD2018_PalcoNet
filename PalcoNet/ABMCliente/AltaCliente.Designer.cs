@@ -338,6 +338,7 @@
             // Codigo_Postal
             // 
             this.Codigo_Postal.Location = new System.Drawing.Point(96, 180);
+            this.Codigo_Postal.MaxLength = 8;
             this.Codigo_Postal.Name = "Codigo_Postal";
             this.Codigo_Postal.Size = new System.Drawing.Size(280, 20);
             this.Codigo_Postal.TabIndex = 11;
@@ -346,7 +347,7 @@
             // 
             this.cbxHabilitado.AutoSize = true;
             this.cbxHabilitado.Location = new System.Drawing.Point(517, 366);
-            this.cbxHabilitado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxHabilitado.Margin = new System.Windows.Forms.Padding(4);
             this.cbxHabilitado.Name = "cbxHabilitado";
             this.cbxHabilitado.Size = new System.Drawing.Size(73, 17);
             this.cbxHabilitado.TabIndex = 63;
