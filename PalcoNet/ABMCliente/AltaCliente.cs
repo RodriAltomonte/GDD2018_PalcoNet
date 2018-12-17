@@ -58,7 +58,8 @@ namespace PalcoNet.ABMCliente
                 if (TextFieldUtils.CUIT.EsCuilValido(cuil) && NroDocumento.Text == DNI.Text)
                 {
                     StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-                    inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
+                   // inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
+                    inputParameters.AddParameter("@habilitado", 1);
                     inputParameters.AddParameter("@id_rol", 2); // 2 Rol Cliente
                     inputParameters.AddParameter("@nombre", Nombre.Text);
                     inputParameters.AddParameter("@apellido", Apellido.Text);

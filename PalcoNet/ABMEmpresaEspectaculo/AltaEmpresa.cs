@@ -80,6 +80,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                         }
                         else
                         {
+                            username = newUser.Username;
+                            password = newUser.Password;
                             inputParameters.AddParameter("@username", newUser.Username);
                             inputParameters.AddParameter("@password", newUser.Password);
                         }
