@@ -69,39 +69,49 @@ namespace PalcoNet.ABMCliente
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            var cuil = txtCUIL1.Text + txtCUIL2.Text + txtCUIL3.Text;
-            if (TextFieldUtils.CUIT.EsCuilValido(cuil) && txtCUIL2.Text == txtNroDocumento.Text)
+            if (
+  !TextFieldUtils.IsValidNumericField(txtCUIL1, txtCUIL2, txtCUIL3, txtNroDocumento, txtTelefono, txtNumero, txtPiso, txtTarjeta)
+           || !TextFieldUtils.IsValidTextField(txtNombre, txtApellido, txtCalle, txtLocalidad))
             {
-                StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-                inputParameters.AddParameter("@nro_documentoOriginal", decimal.Parse(doc_original));
-                inputParameters.AddParameter("@cuil_original", cuil_original);
-                inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
-                inputParameters.AddParameter("@nombre", txtNombre.Text);
-                inputParameters.AddParameter("@apellido", txtApellido.Text);
-                inputParameters.AddParameter("@tipo_documento", cboTipoDoc.Text);
-                inputParameters.AddParameter("@nro_documento", decimal.Parse(txtNroDocumento.Text));
-                inputParameters.AddParameter("@cuil", StringUtil.FormatCuil(cuil)); 
-                inputParameters.AddParameter("@mail", txtMail.Text);
-                inputParameters.AddParameter("@telefono", txtTelefono.Text);
-                inputParameters.AddParameter("@dir_calle", txtCalle.Text);
-                inputParameters.AddParameter("@nro_calle", decimal.Parse(txtNumero.Text));
-                inputParameters.AddParameter("@nro_piso", decimal.Parse(txtPiso.Text));
-                inputParameters.AddParameter("@depto", txtDpto.Text);
-                inputParameters.AddParameter("@localidad", txtLocalidad.Text);
-                inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
-                inputParameters.AddParameter("@fecha_nacimiento", Convert.ToDateTime(dtpFechaNacimiento.Text));
-                inputParameters.AddParameter("@fecha_de_creacion", Convert.ToDateTime(dtpFechaCreacion.Text)); 
-                inputParameters.AddParameter("@tarjeta", txtTarjeta.Text);
-
-                try
+                MessageBox.Show("Verifique los datos ingresados!");
+            }
+            else
+            {
+                var cuil = txtCUIL1.Text + txtCUIL2.Text + txtCUIL3.Text;
+                if (TextFieldUtils.CUIT.EsCuilValido(cuil) && txtCUIL2.Text == txtNroDocumento.Text)
                 {
-                    ConnectionFactory.Instance()
-                                     .CreateConnection()
-                                     .ExecuteDataTableStoredProcedure(SpNames.ModificarCliente, inputParameters);
-                    MessageBox.Show("Cliente modificado correctamente!");
+                    StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+                    inputParameters.AddParameter("@nro_documentoOriginal", decimal.Parse(doc_original));
+                    inputParameters.AddParameter("@cuil_original", cuil_original);
+                    inputParameters.AddParameter("@habilitado", cbxHabilitado.Checked);
+                    inputParameters.AddParameter("@nombre", txtNombre.Text);
+                    inputParameters.AddParameter("@apellido", txtApellido.Text);
+                    inputParameters.AddParameter("@tipo_documento", cboTipoDoc.Text);
+                    inputParameters.AddParameter("@nro_documento", decimal.Parse(txtNroDocumento.Text));
+                    inputParameters.AddParameter("@cuil", StringUtil.FormatCuil(cuil));
+                    inputParameters.AddParameter("@mail", txtMail.Text);
+                    inputParameters.AddParameter("@telefono", txtTelefono.Text);
+                    inputParameters.AddParameter("@dir_calle", txtCalle.Text);
+                    inputParameters.AddParameter("@nro_calle", decimal.Parse(txtNumero.Text));
+                    inputParameters.AddParameter("@nro_piso", decimal.Parse(txtPiso.Text));
+                    inputParameters.AddParameter("@depto", txtDpto.Text);
+                    inputParameters.AddParameter("@localidad", txtLocalidad.Text);
+                    inputParameters.AddParameter("@codigo_postal", txtPostal.Text);
+                    inputParameters.AddParameter("@fecha_nacimiento", Convert.ToDateTime(dtpFechaNacimiento.Text));
+                    inputParameters.AddParameter("@fecha_de_creacion", Convert.ToDateTime(dtpFechaCreacion.Text));
+                    inputParameters.AddParameter("@tarjeta", txtTarjeta.Text);
+
+                    try
+                    {
+                        ConnectionFactory.Instance()
+                                         .CreateConnection()
+                                         .ExecuteDataTableStoredProcedure(SpNames.ModificarCliente, inputParameters);
+                        MessageBox.Show("Cliente modificado correctamente!");
+                    }
+                    catch (StoredProcedureException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
                 }
-                catch (StoredProcedureException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
-            }else{MessageBox.Show("Por favor verifique el cuil");}
+                else { MessageBox.Show("Por favor verifique el cuil"); }
+            }
         }
 
         private void cbxHabilitado_Click(object sender, EventArgs e)

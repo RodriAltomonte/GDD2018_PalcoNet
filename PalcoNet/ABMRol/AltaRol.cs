@@ -20,6 +20,7 @@ namespace PalcoNet.ABMRol
     public partial class AltaRol : Form
     {
         private Form CallerForm;
+        private decimal IdRol;
         public AltaRol(Form caller)
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace PalcoNet.ABMRol
             DataTable dt = new DataTable();
             try
             {
+              decimal IdRol = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<decimal>("SELECT TOP 1 (id_Rol+1) FROM LOS_DE_GESTION.Rol ORDER BY id_Rol DESC ");
                 dt = ConnectionFactory.Instance().CreateConnection()
                         .ExecuteDataTableSqlQuery("SELECT id_Funcionalidad,nombre FROM LOS_DE_GESTION.Funcionalidad");
                
@@ -46,7 +48,7 @@ namespace PalcoNet.ABMRol
                 Rol nRol = new Rol();
                 nRol.Descripcion = tbRolNombre.Text;
                 nRol.Habilitado = cbHabilitado.Checked;
-                nRol.IdRol = decimal.Parse(tbIdRol.Text);
+                nRol.IdRol = IdRol;
                 StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                 inputParameters.AddParameter("@nombreRol", nRol.Descripcion);
                 inputParameters.AddParameter("@id_rol", nRol.IdRol);
@@ -61,7 +63,7 @@ namespace PalcoNet.ABMRol
                     
                     foreach (DataGridViewCell c in dgvFuncionalidades.SelectedCells)
                     {
-                        inputParameters.AddParameter("@id_Rol", tbIdRol.Text);
+                        inputParameters.AddParameter("@id_Rol", IdRol);
                     
                         decimal id_funcionalidad = ConnectionFactory.Instance()
                                                                     .CreateConnection()

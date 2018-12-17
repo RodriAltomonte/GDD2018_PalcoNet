@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TFUtilites = PalcoNet.Classes.Util.Form;
@@ -31,6 +32,40 @@ namespace TFUtilites
                 tb.Text = "";
             }
         }
+
+
+        public static bool IsValidNumericField(params TextBox[] txtFields)
+        {
+            List<TextBox> fields = new List<TextBox>();
+            fields.AddRange(txtFields);
+
+            foreach (var f in fields.FindAll(fi => fi.Text != ""))
+            {
+                if (!f.Text.All(char.IsDigit))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool IsValidTextField(params TextBox[] txtFields)
+        {
+            string pattern = @"[\p{L} ]+$";
+            Regex regex = new Regex(pattern);
+
+            List<TextBox> fields = new List<TextBox>();
+            fields.AddRange(txtFields);
+            foreach (var f in fields.FindAll(fi => fi.Text != ""))
+            {
+                if (!regex.IsMatch(f.Text))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
        
         public static class CUIT
         {

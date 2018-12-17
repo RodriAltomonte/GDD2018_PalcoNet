@@ -35,8 +35,6 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.cbHabilitado = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbIdRol = new System.Windows.Forms.TextBox();
             this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFuncionalidades)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +58,7 @@
             // dgvFuncionalidades
             // 
             this.dgvFuncionalidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFuncionalidades.Location = new System.Drawing.Point(27, 157);
+            this.dgvFuncionalidades.Location = new System.Drawing.Point(22, 89);
             this.dgvFuncionalidades.Name = "dgvFuncionalidades";
             this.dgvFuncionalidades.Size = new System.Drawing.Size(240, 150);
             this.dgvFuncionalidades.TabIndex = 2;
@@ -68,7 +66,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 141);
+            this.label2.Location = new System.Drawing.Point(24, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 13);
             this.label2.TabIndex = 0;
@@ -76,7 +74,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(192, 313);
+            this.btnAgregar.Location = new System.Drawing.Point(187, 245);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 3;
@@ -86,7 +84,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(111, 313);
+            this.btnCancelar.Location = new System.Drawing.Point(106, 245);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 3;
@@ -104,25 +102,9 @@
             this.cbHabilitado.Text = "Habilitado";
             this.cbHabilitado.UseVisualStyleBackColor = true;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(69, 79);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Id rol";
-            // 
-            // tbIdRol
-            // 
-            this.tbIdRol.Location = new System.Drawing.Point(106, 79);
-            this.tbIdRol.Name = "tbIdRol";
-            this.tbIdRol.Size = new System.Drawing.Size(156, 20);
-            this.tbIdRol.TabIndex = 1;
-            // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(13, 312);
+            this.btnVolver.Location = new System.Drawing.Point(8, 244);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 5;
@@ -134,15 +116,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 345);
+            this.ClientSize = new System.Drawing.Size(404, 285);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.cbHabilitado);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvFuncionalidades);
-            this.Controls.Add(this.tbIdRol);
             this.Controls.Add(this.tbRolNombre);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "AltaRol";
@@ -162,8 +142,6 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.CheckBox cbHabilitado;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbIdRol;
         private System.Windows.Forms.Button btnVolver;
     }
 }

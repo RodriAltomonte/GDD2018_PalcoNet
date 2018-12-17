@@ -82,14 +82,14 @@
             this.cboTipoDoc.Location = new System.Drawing.Point(96, 64);
             this.cboTipoDoc.Name = "cboTipoDoc";
             this.cboTipoDoc.Size = new System.Drawing.Size(116, 21);
-            this.cboTipoDoc.TabIndex = 59;
+            this.cboTipoDoc.TabIndex = 3;
             // 
             // txtDpto
             // 
             this.txtDpto.Location = new System.Drawing.Point(415, 149);
             this.txtDpto.Name = "txtDpto";
             this.txtDpto.Size = new System.Drawing.Size(53, 20);
-            this.txtDpto.TabIndex = 58;
+            this.txtDpto.TabIndex = 10;
             // 
             // lblDpto
             // 
@@ -105,7 +105,7 @@
             this.txtPiso.Location = new System.Drawing.Point(337, 149);
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(36, 20);
-            this.txtPiso.TabIndex = 56;
+            this.txtPiso.TabIndex = 9;
             // 
             // lblPiso
             // 
@@ -122,7 +122,7 @@
             this.dtpFechaNacimiento.Location = new System.Drawing.Point(126, 314);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(99, 20);
-            this.dtpFechaNacimiento.TabIndex = 53;
+            this.dtpFechaNacimiento.TabIndex = 17;
             // 
             // lblFechaNacimiento
             // 
@@ -147,7 +147,7 @@
             this.txtLocalidad.Location = new System.Drawing.Point(96, 207);
             this.txtLocalidad.Name = "txtLocalidad";
             this.txtLocalidad.Size = new System.Drawing.Size(372, 20);
-            this.txtLocalidad.TabIndex = 49;
+            this.txtLocalidad.TabIndex = 12;
             // 
             // lblLocalidad
             // 
@@ -163,7 +163,7 @@
             this.txtNumero.Location = new System.Drawing.Point(252, 149);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(46, 20);
-            this.txtNumero.TabIndex = 47;
+            this.txtNumero.TabIndex = 8;
             // 
             // lblNumero
             // 
@@ -179,7 +179,7 @@
             this.txtCalle.Location = new System.Drawing.Point(96, 149);
             this.txtCalle.Name = "txtCalle";
             this.txtCalle.Size = new System.Drawing.Size(100, 20);
-            this.txtCalle.TabIndex = 45;
+            this.txtCalle.TabIndex = 7;
             // 
             // lblCalle
             // 
@@ -195,7 +195,7 @@
             this.txtTelefono.Location = new System.Drawing.Point(96, 123);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(372, 20);
-            this.txtTelefono.TabIndex = 43;
+            this.txtTelefono.TabIndex = 6;
             // 
             // lblTelefono
             // 
@@ -211,7 +211,7 @@
             this.txtMail.Location = new System.Drawing.Point(96, 94);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(372, 20);
-            this.txtMail.TabIndex = 41;
+            this.txtMail.TabIndex = 5;
             // 
             // lblMail
             // 
@@ -228,7 +228,7 @@
             this.txtNroDocumento.MaxLength = 8;
             this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(131, 20);
-            this.txtNroDocumento.TabIndex = 39;
+            this.txtNroDocumento.TabIndex = 4;
             // 
             // lblNroDocumento
             // 
@@ -253,7 +253,7 @@
             this.txtApellido.Location = new System.Drawing.Point(96, 38);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(372, 20);
-            this.txtApellido.TabIndex = 36;
+            this.txtApellido.TabIndex = 2;
             // 
             // lblApellido
             // 
@@ -269,7 +269,7 @@
             this.txtNombre.Location = new System.Drawing.Point(96, 12);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(372, 20);
-            this.txtNombre.TabIndex = 34;
+            this.txtNombre.TabIndex = 1;
             // 
             // lblNombre
             // 
@@ -294,14 +294,14 @@
             this.txtTarjeta.Location = new System.Drawing.Point(96, 259);
             this.txtTarjeta.Name = "txtTarjeta";
             this.txtTarjeta.Size = new System.Drawing.Size(372, 20);
-            this.txtTarjeta.TabIndex = 49;
+            this.txtTarjeta.TabIndex = 16;
             // 
             // btnVolver
             // 
             this.btnVolver.Location = new System.Drawing.Point(311, 355);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 23);
-            this.btnVolver.TabIndex = 62;
+            this.btnVolver.TabIndex = 19;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -311,7 +311,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(392, 355);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardar.TabIndex = 61;
+            this.btnGuardar.TabIndex = 20;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -321,7 +321,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(29, 355);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 60;
+            this.btnLimpiar.TabIndex = 18;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -340,7 +340,7 @@
             this.txtPostal.Location = new System.Drawing.Point(96, 180);
             this.txtPostal.Name = "txtPostal";
             this.txtPostal.Size = new System.Drawing.Size(372, 20);
-            this.txtPostal.TabIndex = 49;
+            this.txtPostal.TabIndex = 11;
             // 
             // cbxHabilitado
             // 
@@ -377,7 +377,7 @@
             this.txtCUIT3.MaxLength = 1;
             this.txtCUIT3.Name = "txtCUIT3";
             this.txtCUIT3.Size = new System.Drawing.Size(27, 20);
-            this.txtCUIT3.TabIndex = 101;
+            this.txtCUIT3.TabIndex = 15;
             // 
             // txtCUIT2
             // 
@@ -385,7 +385,7 @@
             this.txtCUIT2.MaxLength = 8;
             this.txtCUIT2.Name = "txtCUIT2";
             this.txtCUIT2.Size = new System.Drawing.Size(74, 20);
-            this.txtCUIT2.TabIndex = 102;
+            this.txtCUIT2.TabIndex = 14;
             // 
             // txtCUIT1
             // 
@@ -393,7 +393,7 @@
             this.txtCUIT1.MaxLength = 2;
             this.txtCUIT1.Name = "txtCUIT1";
             this.txtCUIT1.Size = new System.Drawing.Size(33, 20);
-            this.txtCUIT1.TabIndex = 103;
+            this.txtCUIT1.TabIndex = 13;
             // 
             // AltaCliente
             // 

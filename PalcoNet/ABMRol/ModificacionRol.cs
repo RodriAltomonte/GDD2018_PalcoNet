@@ -25,15 +25,15 @@ namespace PalcoNet.ABMRol
             CallerForm = caller;
             this.IdRol = IdRol;         
         }
-
+       
         private void btnModNombre_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.ForwardTo(this, new frmModificarNombre(IdRol));
+            NavigableFormUtil.ForwardTo(this, new frmModificarNombre(IdRol,this));
         }
 
         private void btnModFuncs_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.ForwardTo(this, new frmModificarFuncionalidades(IdRol));
+            NavigableFormUtil.ForwardTo(this, new frmModificarFuncionalidades(IdRol,this));
         }
 
       

@@ -43,7 +43,15 @@ namespace PalcoNet.ABMCliente
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //VERIFICAR DATOS DE ENTRADA
+            string username="",password = "";
+
+            if(
+       !TextFieldUtils.IsValidNumericField(txtCUIT1,txtCUIT2,txtCUIT3,txtNroDocumento,txtTelefono,txtNumero,txtPiso,txtTarjeta)
+                || !TextFieldUtils.IsValidTextField(txtNombre,txtApellido,txtCalle,txtLocalidad))
+            {
+                MessageBox.Show("Verifique los datos ingresados!");
+            }
+            else{
             var cuil = txtCUIT1.Text + txtCUIT2.Text + txtCUIT3.Text;
             if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(txtMail.Text))
             {
@@ -70,9 +78,11 @@ namespace PalcoNet.ABMCliente
                     inputParameters.AddParameter("@tarjeta", txtTarjeta.Text);
 
                     if (newUser == null)
-                    {
-                        inputParameters.AddParameter("@username", StringUtil.GenerateRandomUsername(10));
-                        inputParameters.AddParameter("@password", StringUtil.GenerateRandomPassword(10));
+                    {   
+                        username = StringUtil.GenerateRandomUsername(10);
+                        password = StringUtil.GenerateRandomPassword(10);
+                        inputParameters.AddParameter("@username",username);
+                        inputParameters.AddParameter("@password",password );
                     }
                     else
                     {
@@ -85,7 +95,7 @@ namespace PalcoNet.ABMCliente
                         ConnectionFactory.Instance()
                                          .CreateConnection()
                                          .ExecuteDataTableStoredProcedure(SpNames.AltaCliente, inputParameters);
-                        MessageBoxUtil.ShowInfo("Cliente agreagado exitosamente!");
+                        MessageBoxUtil.ShowInfo("Cliente agreagado exitosamente! El usuario para ingresar es:"+username+" y el password es:"+password);
 
                         accionPostCreacion.Do(this);
                     }
@@ -94,6 +104,7 @@ namespace PalcoNet.ABMCliente
                 else { MessageBox.Show("Comprueba el cuil!"); }
             }
             else { MessageBox.Show("Por favor completa todos los campos y reviselos"); }
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)

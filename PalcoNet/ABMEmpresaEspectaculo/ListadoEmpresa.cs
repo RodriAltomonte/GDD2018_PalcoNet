@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TFUtilites;
 
 namespace PalcoNet.ABMEmpresaEspectaculo
 {
@@ -28,21 +29,28 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-           
-            try
+            if (!TextFieldUtils.IsValidTextField(txtRazonSocial) 
+                || !TextFieldUtils.IsValidNumericField(txtCUIT1, txtCUIT2, txtCUIT3))
             {
-                string query = StringUtil.FormatEmpresaListado(txtRazonSocial.Text, 
-                                                            StringUtil.FormatCuil(txtCUIT1.Text + txtCUIT2.Text + txtCUIT3.Text),
-                                                            txtMail.Text);
-                DataTable dt = ConnectionFactory.Instance()
-                                                .CreateConnection()
-                                                .ExecuteDataTableSqlQuery(query);
-
-                dgvEmpresas.AllowUserToAddRows = false;
-                dgvEmpresas.ReadOnly = true;
-                dgvEmpresas.DataSource = dt;
+                MessageBox.Show("Por favor revise los datos ingresados");
             }
-            catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+            else
+            {
+                try
+                {
+                    string query = StringUtil.FormatEmpresaListado(txtRazonSocial.Text,
+                                                                StringUtil.FormatCuil(txtCUIT1.Text + txtCUIT2.Text + txtCUIT3.Text),
+                                                                txtMail.Text);
+                    DataTable dt = ConnectionFactory.Instance()
+                                                    .CreateConnection()
+                                                    .ExecuteDataTableSqlQuery(query);
+
+                    dgvEmpresas.AllowUserToAddRows = false;
+                    dgvEmpresas.ReadOnly = true;
+                    dgvEmpresas.DataSource = dt;
+                }
+                catch (SqlQueryException ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK); }
+            }
         }
 
         private void dgvEmpresas_CellContentClick(object sender, DataGridViewCellEventArgs e)

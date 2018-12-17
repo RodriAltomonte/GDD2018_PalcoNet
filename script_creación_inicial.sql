@@ -1450,7 +1450,7 @@ CREATE PROCEDURE LOS_DE_GESTION.ModificarEmpresa
 @cuit NVARCHAR(255)
 AS
 	BEGIN
-	--falta comprobar que sea un cuit valido
+
 		IF(NOT EXISTS(SELECT cuit FROM LOS_DE_GESTION.Empresa WHERE cuit = @cuit AND cuit != @cuitOriginal))
 			BEGIN
 				UPDATE LOS_DE_GESTION.Empresa
@@ -1474,40 +1474,6 @@ AS
 	END
 GO
 
-
------PROCEDURES DE BUSQUEDA------
-CREATE PROCEDURE LOS_DE_GESTION.ListadoClientes
-@nombre NVARCHAR(255),
-@apellido NVARCHAR(255),
-@dni NUMERIC(18,0),
-@mail NVARCHAR(255)
-AS
-BEGIN
-
-	SELECT *
-     FROM LOS_DE_GESTION.Cliente
-     WHERE nombre = @nombre OR @nombre= '' AND apellido = @apellido OR @apellido=''
-	 AND numero_documento = @dni OR @dni = '' AND mail=@mail OR @mail=''
-
-END
-GO
-
-CREATE PROCEDURE LOS_DE_GESTION.ListadoEmpresas
-@razon_social NVARCHAR(255),
-@CUIT NVARCHAR(255),
-@mail NVARCHAR(50)
-AS
-BEGIN
-
-	SELECT razon_social,mail,telefono,
-    calle,nro_calle,depto,localidad,
-    codigo_postal,ciudad,cuit,username
-    FROM LOS_DE_GESTION.Empresa
-    WHERE razon_social=@razon_social OR @razon_social IS NULL OR @razon_social = '' 
-	AND cuit=@CUIT OR @CUIT IS NULL OR @CUIT = '' AND mail=@mail OR @mail IS NULL OR @mail = ''
-
-END
-GO
 ---PROCEDURES RENDICION-----
 
 CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion

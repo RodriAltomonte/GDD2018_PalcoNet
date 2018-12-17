@@ -19,9 +19,11 @@ namespace PalcoNet.ABMRol
     public partial class frmModificarFuncionalidades : Form
     {
         private decimal IdRol;
-        public frmModificarFuncionalidades(decimal idRol)
+        private Form CallerForm;
+        public frmModificarFuncionalidades(decimal idRol,Form caller)
         {
             IdRol = idRol;
+            CallerForm = caller;
             InitializeComponent();
             DataTable dt1 = ConnectionFactory.Instance()
                                              .CreateConnection()
@@ -88,7 +90,7 @@ namespace PalcoNet.ABMRol
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.BackwardTo(this, new ModificacionRol(IdRol,this));
+            NavigableFormUtil.BackwardTo(this, CallerForm);
         }
         #region Auxilliary Methods
         private void Refresh()

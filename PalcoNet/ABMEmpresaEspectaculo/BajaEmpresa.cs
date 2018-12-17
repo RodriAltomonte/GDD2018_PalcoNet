@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TFUtilites;
 
 namespace PalcoNet.ABMEmpresaEspectaculo
 {
@@ -27,20 +28,27 @@ namespace PalcoNet.ABMEmpresaEspectaculo
 
         private void dgvEmpresas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string username = dgvEmpresas.CurrentRow.Cells[10].Value.ToString();
-
-            if (MessageBox.Show("Seguro que desea dar de baja a esta empresa?", "Atencion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            if (!TextFieldUtils.IsValidNumericField(txtCUIT1, txtCUIT2, txtCUIT3) || !TextFieldUtils.IsValidTextField(txtRazonSocial))
             {
-                StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
-                inputParameters.AddParameter("@username", username);
-                try
+                MessageBox.Show("Verifique los datos ingresados");
+            }
+            else
+            {
+                string username = dgvEmpresas.CurrentRow.Cells[10].Value.ToString();
+
+                if (MessageBox.Show("Seguro que desea dar de baja a esta empresa?", "Atencion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 {
-                    ConnectionFactory.Instance()
-                                     .CreateConnection()
-                                     .ExecuteDataTableStoredProcedure(SpNames.BajaEmpresa, inputParameters);
-                    MessageBox.Show("Empresa dada de baja correctamente");
+                    StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+                    inputParameters.AddParameter("@username", username);
+                    try
+                    {
+                        ConnectionFactory.Instance()
+                                         .CreateConnection()
+                                         .ExecuteDataTableStoredProcedure(SpNames.BajaEmpresa, inputParameters);
+                        MessageBox.Show("Empresa dada de baja correctamente");
+                    }
+                    catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
                 }
-                catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             }
         }
 

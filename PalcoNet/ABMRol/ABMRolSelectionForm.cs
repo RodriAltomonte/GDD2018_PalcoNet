@@ -28,13 +28,7 @@ namespace PalcoNet.ABMRol
             InitializeComponent();
             callerForm = CallerForm;
             IdRol = idRol;
-
          
-        }
-
-        public ABMRolSelectionForm(decimal idRol)
-        {
-            InitializeComponent(); 
         }
 
         public ABMRolSelectionForm(Form caller)
