@@ -36,6 +36,11 @@ namespace PalcoNet.Comprar
             this.compraRepository = new CompraRepository();
             this.clienteRepository = new ClienteRepository();
             InitializeForm();
+            StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
+            inputParameters.AddParameter("@codPublicacion",codigoPublicacion);
+            dgvUbicaciones.DataSource = ConnectionFactory.Instance()
+                                                         .CreateConnection()
+                                                         .ExecuteDataTableStoredProcedure(SpNames.UbicacionesComprables, inputParameters);
         }
 
         private void btnComprar_Click(object sender, EventArgs e)

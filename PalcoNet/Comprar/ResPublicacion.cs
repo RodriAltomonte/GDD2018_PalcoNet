@@ -31,7 +31,7 @@ namespace PalcoNet.Comprar
             InitializeComponent();
             this.previousForm = previousForm;
             this.descripcion = descripcion;
-            this.fechaInicial = fechaInicial;
+            this.fechaInicial =fechaInicial;
             this.fechaFinal = fechaFinal;
             this.categorias = categorias;
          

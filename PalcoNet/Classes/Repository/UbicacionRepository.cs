@@ -15,7 +15,7 @@ namespace PalcoNet.Classes.Repository
     class UbicacionRepository
     {
         private const string Schema = "LOS_DE_GESTION.";
-        public void CrearUbicaciones(UbicacionPersistente ubicacion)
+        public DataTable CrearUbicaciones(UbicacionPersistente ubicacion)
         {
             StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap()
                 .AddParameter("@codPublicacion", ubicacion.CodPublicacion)
@@ -25,9 +25,11 @@ namespace PalcoNet.Classes.Repository
                 .AddParameter("@precio", ubicacion.Precio)
                 .AddParameter("@idTipoUbicacion", ubicacion.IdTipoUbicacion);
 
-            ConnectionFactory.Instance().CreateConnection()
+           return ConnectionFactory.Instance().CreateConnection()
                 .ExecuteDataTableStoredProcedure(SpNames.CrearUbicaciones, inputParameters);
         }
+
+        
 
         public void InsertarListaDeUbicaciones(IList<UbicacionPersistente> ubicaciones) 
         {
