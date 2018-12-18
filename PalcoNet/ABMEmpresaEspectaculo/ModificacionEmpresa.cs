@@ -98,7 +98,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                     }
                     else { MessageBox.Show("Revisa el cuit"); }
                 }
-                else { MessageBox.Show("Por favor completa todos los campos"); }
+                
             }
 
         }

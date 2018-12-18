@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Session;
 using PalcoNet.Classes.Util.Form;
+using TFUtilites;
 
 namespace PalcoNet.EditarPublicacion
 {
@@ -32,9 +33,18 @@ namespace PalcoNet.EditarPublicacion
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            NavigableFormUtil.ForwardTo(this, new EditarPublicacionSeleccionada(
-                decimal.Parse(dgvPublicaciones.SelectedRows[0].Cells[0].Value.ToString()), this)
-                );
+            if (dgvPublicaciones.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Por favor seleccione una publicacion");
+            }
+            else
+            {
+
+                NavigableFormUtil.ForwardTo(this, new EditarPublicacionSeleccionada(
+               decimal.Parse(dgvPublicaciones.SelectedRows[0].Cells[0].Value.ToString()), this)
+               );
+            }
+           
         }
 
         public void ActualizarDataGrid()

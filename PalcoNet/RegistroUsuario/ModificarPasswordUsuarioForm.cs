@@ -19,34 +19,35 @@ namespace PalcoNet.RegistroUsuario
         private string usuarioAModificar;
         private Form callerForm;
 
-        public ModificarPasswordUsuarioForm(string usuarioAModificar, Form callerForm)
+       public ModificarPasswordUsuarioForm(string usuarioAModificar, Form callerForm)
         {
             InitializeComponent();
             this.usuarioRepository = new UsuarioRepository();
             this.usuarioAModificar = usuarioAModificar;
             this.callerForm = callerForm;           
         }
-
+        /*
         public ModificarPasswordUsuarioForm(Form previousForm)
         {
             InitializeComponent();
             this.usuarioRepository = new UsuarioRepository();
             this.usuarioAModificar = Session.Instance().LoggedUsername;
             callerForm = previousForm;
+            this.usuarioAModificar = usuarioAModificar;
         }
-
+        */
         private void btnModificarPassword_Click(object sender, EventArgs e)
         {
             if (this.ValidarPasswordNoVacio())
             {
                 if (this.ValidarPasswordNuevo())
                 {
-                    usuarioRepository.CambiarPassword(Session.Instance().LoggedUsername, txtNuevoPassword.Text);
-                    if (usuarioRepository.EsUsuarioMigrado(Session.Instance().LoggedUsername))
+                    usuarioRepository.CambiarPassword(usuarioAModificar, txtNuevoPassword.Text);
+                    if (usuarioRepository.EsUsuarioMigrado(usuarioAModificar))
                     {
-                        usuarioRepository.ActualizarUsuarioMigrado(Session.Instance().LoggedUsername);
+                        usuarioRepository.ActualizarUsuarioMigrado(usuarioAModificar);
                     }
-                    Session.Instance().CloseSession();
+                   // Session.Instance().CloseSession();
                     MessageBoxUtil.ShowInfo("Contraseña modificada correctamente. Acceda nuevamente.");
                     NavigableFormUtil.BackwardTo(this, new Login.LoginForm());
                 }
