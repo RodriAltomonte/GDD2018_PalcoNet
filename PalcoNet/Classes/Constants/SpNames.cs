@@ -55,13 +55,11 @@ namespace PalcoNet.Classes.Constants
         public const string AltaCliente = Schema + "AltaCliente";
         public const string BajaCliente = Schema + "BajaCliente";
         public const string HabilitarCliente = Schema + "HabilitarCliente";
-        public const string ModificacionPasswordCliente = Schema + "ModificacionPasswordCliente";
         public const string ModificarCliente = Schema + "ModificarCliente";
 
         public const string AltaEmpresa = Schema + "AltaEmpresa";
         public const string BajaEmpresa = Schema + "BajaEmpresa";
         public const string HabilitarEmpresa = Schema + "HabilitarEmpresa";
-        public const string ModificarPasswordEmpresa = Schema + "ModificarPasswordEmpresa";
         public const string ModificarEmpresa = Schema + "ModificarEmpresa";
 
         public const string ListadoClientes = Schema + "ListadoClientes";
