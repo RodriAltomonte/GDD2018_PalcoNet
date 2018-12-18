@@ -118,5 +118,13 @@ namespace PalcoNet.Comprar
             return true;
         }
         #endregion
+
+        private void UbicacionesForm_Shown(object sender, EventArgs e)
+        {
+            if (DataGridViewUtil.IsEmpty(dgvUbicaciones))
+            {
+                MessageBoxUtil.ShowInfo("Todas las ubicaciones fueron compradas.");
+            }
+        }
     }
 }

@@ -37,12 +37,6 @@ namespace PalcoNet.HistorialCliente
             username = Session.Instance().LoggedUsername;
             cargarResultados(1);
         }
-        public HistorialClienteForm()
-        {
-            InitializeComponent();
-            username = "10125617";
-            cargarResultados(1);
-        }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {

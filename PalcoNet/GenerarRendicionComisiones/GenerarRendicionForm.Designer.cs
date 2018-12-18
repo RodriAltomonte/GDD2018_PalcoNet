@@ -52,6 +52,7 @@
             // 
             // cbEmpresas
             // 
+            this.cbEmpresas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEmpresas.FormattingEnabled = true;
             this.cbEmpresas.Location = new System.Drawing.Point(166, 39);
             this.cbEmpresas.Margin = new System.Windows.Forms.Padding(4);
@@ -86,6 +87,7 @@
             // 
             // CbCantidad
             // 
+            this.CbCantidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbCantidad.FormattingEnabled = true;
             this.CbCantidad.Location = new System.Drawing.Point(166, 79);
             this.CbCantidad.Margin = new System.Windows.Forms.Padding(4);
