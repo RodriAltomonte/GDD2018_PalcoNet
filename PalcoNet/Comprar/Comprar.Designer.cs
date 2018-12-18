@@ -30,15 +30,16 @@
         {
             this.btnVolver = new System.Windows.Forms.Button();
             this.grpBusqueda = new System.Windows.Forms.GroupBox();
-            this.dtpHoraFinal = new System.Windows.Forms.DateTimePicker();
-            this.dtpFechaFinal = new System.Windows.Forms.DateTimePicker();
-            this.dtpHoraInicial = new System.Windows.Forms.DateTimePicker();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.dtpFechaInicial = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtpHoraFinal = new System.Windows.Forms.DateTimePicker();
+            this.dtpHoraInicial = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaFinal = new System.Windows.Forms.DateTimePicker();
             this.BtnQuitar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.LbCategoria = new System.Windows.Forms.ListBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbCategoria = new System.Windows.Forms.ComboBox();
@@ -46,6 +47,7 @@
             this.BtnBuscar = new System.Windows.Forms.Button();
             this.BtnLimpiar = new System.Windows.Forms.Button();
             this.grpBusqueda.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnVolver
@@ -61,15 +63,10 @@
             // 
             // grpBusqueda
             // 
-            this.grpBusqueda.Controls.Add(this.dtpHoraFinal);
-            this.grpBusqueda.Controls.Add(this.dtpFechaFinal);
-            this.grpBusqueda.Controls.Add(this.dtpHoraInicial);
-            this.grpBusqueda.Controls.Add(this.dtpFechaInicial);
+            this.grpBusqueda.Controls.Add(this.groupBox1);
             this.grpBusqueda.Controls.Add(this.BtnQuitar);
             this.grpBusqueda.Controls.Add(this.button1);
             this.grpBusqueda.Controls.Add(this.LbCategoria);
-            this.grpBusqueda.Controls.Add(this.label3);
-            this.grpBusqueda.Controls.Add(this.label2);
             this.grpBusqueda.Controls.Add(this.txtDescripcion);
             this.grpBusqueda.Controls.Add(this.label1);
             this.grpBusqueda.Controls.Add(this.cmbCategoria);
@@ -83,11 +80,57 @@
             this.grpBusqueda.TabStop = false;
             this.grpBusqueda.Text = "Filtros de Búsqueda";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.dtpFechaInicial);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.dtpHoraFinal);
+            this.groupBox1.Controls.Add(this.dtpHoraInicial);
+            this.groupBox1.Controls.Add(this.dtpFechaFinal);
+            this.groupBox1.Location = new System.Drawing.Point(18, 140);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(323, 141);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Rango de Fechas";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 35);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(94, 17);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Fecha Inicial: ";
+            // 
+            // dtpFechaInicial
+            // 
+            this.dtpFechaInicial.CustomFormat = "dd/MM/yyyy";
+            this.dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaInicial.Location = new System.Drawing.Point(106, 35);
+            this.dtpFechaInicial.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpFechaInicial.Name = "dtpFechaInicial";
+            this.dtpFechaInicial.Size = new System.Drawing.Size(113, 22);
+            this.dtpFechaInicial.TabIndex = 4;
+            this.dtpFechaInicial.Value = new System.DateTime(2018, 12, 8, 0, 0, 0, 0);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 70);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 17);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Fecha final: ";
+            // 
             // dtpHoraFinal
             // 
             this.dtpHoraFinal.CustomFormat = "HH:mm";
             this.dtpHoraFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpHoraFinal.Location = new System.Drawing.Point(239, 149);
+            this.dtpHoraFinal.Location = new System.Drawing.Point(238, 70);
             this.dtpHoraFinal.Margin = new System.Windows.Forms.Padding(4);
             this.dtpHoraFinal.Name = "dtpHoraFinal";
             this.dtpHoraFinal.ShowUpDown = true;
@@ -95,22 +138,11 @@
             this.dtpHoraFinal.TabIndex = 7;
             this.dtpHoraFinal.Value = new System.DateTime(2016, 9, 1, 14, 45, 0, 0);
             // 
-            // dtpFechaFinal
-            // 
-            this.dtpFechaFinal.CustomFormat = "dd/MM/yyyy";
-            this.dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaFinal.Location = new System.Drawing.Point(108, 149);
-            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpFechaFinal.Name = "dtpFechaFinal";
-            this.dtpFechaFinal.Size = new System.Drawing.Size(112, 22);
-            this.dtpFechaFinal.TabIndex = 6;
-            this.dtpFechaFinal.Value = new System.DateTime(2016, 9, 1, 14, 45, 0, 0);
-            // 
             // dtpHoraInicial
             // 
             this.dtpHoraInicial.CustomFormat = "HH:mm";
             this.dtpHoraInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpHoraInicial.Location = new System.Drawing.Point(239, 119);
+            this.dtpHoraInicial.Location = new System.Drawing.Point(238, 35);
             this.dtpHoraInicial.Margin = new System.Windows.Forms.Padding(4);
             this.dtpHoraInicial.Name = "dtpHoraInicial";
             this.dtpHoraInicial.ShowUpDown = true;
@@ -118,16 +150,16 @@
             this.dtpHoraInicial.TabIndex = 5;
             this.dtpHoraInicial.Value = new System.DateTime(2016, 9, 1, 14, 45, 0, 0);
             // 
-            // dtpFechaInicial
+            // dtpFechaFinal
             // 
-            this.dtpFechaInicial.CustomFormat = "dd/MM/yyyy";
-            this.dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaInicial.Location = new System.Drawing.Point(107, 119);
-            this.dtpFechaInicial.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpFechaInicial.Name = "dtpFechaInicial";
-            this.dtpFechaInicial.Size = new System.Drawing.Size(113, 22);
-            this.dtpFechaInicial.TabIndex = 4;
-            this.dtpFechaInicial.Value = new System.DateTime(2018, 12, 8, 0, 0, 0, 0);
+            this.dtpFechaFinal.CustomFormat = "dd/MM/yyyy";
+            this.dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaFinal.Location = new System.Drawing.Point(107, 70);
+            this.dtpFechaFinal.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpFechaFinal.Name = "dtpFechaFinal";
+            this.dtpFechaFinal.Size = new System.Drawing.Size(112, 22);
+            this.dtpFechaFinal.TabIndex = 6;
+            this.dtpFechaFinal.Value = new System.DateTime(2016, 9, 1, 14, 45, 0, 0);
             // 
             // BtnQuitar
             // 
@@ -161,26 +193,6 @@
             this.LbCategoria.Size = new System.Drawing.Size(311, 196);
             this.LbCategoria.TabIndex = 11;
             this.LbCategoria.SelectedIndexChanged += new System.EventHandler(this.LbCategoria_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 154);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 17);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Fecha final: ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 124);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 17);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Fecha Inicial: ";
             // 
             // txtDescripcion
             // 
@@ -257,6 +269,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ComprarForm_FormClosed);
             this.grpBusqueda.ResumeLayout(false);
             this.grpBusqueda.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -280,5 +294,6 @@
         private System.Windows.Forms.DateTimePicker dtpFechaFinal;
         private System.Windows.Forms.DateTimePicker dtpHoraFinal;
         private System.Windows.Forms.DateTimePicker dtpHoraInicial;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
