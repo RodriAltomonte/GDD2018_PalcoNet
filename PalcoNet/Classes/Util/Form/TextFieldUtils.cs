@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TFUtilites = PalcoNet.Classes.Util.Form;
 using Classes.Configuration;
+using PalcoNet.ABMCliente;
 namespace TFUtilites
 {
     static class TextFieldUtils
@@ -25,9 +26,9 @@ namespace TFUtilites
         public static bool IsAnyFieldEmpty(Form myForm)
         {
             var controls = myForm.Controls.OfType<TextBox>();
-            foreach (var tb in controls)
+            foreach (var c in controls)
             {
-                if (String.IsNullOrEmpty(tb.Text))
+                if (String.IsNullOrEmpty(c.Text))
                 {
                     MessageBox.Show("Por favor complete todos los campos");
                     return true;
@@ -35,13 +36,12 @@ namespace TFUtilites
             }
             return false;
         }
-
-        public static bool AreAllFieldsEmpty(Form myForm)
-        {
-            var controls = myForm.Controls.OfType<TextBox>();
-            return controls.All(c => String.IsNullOrEmpty(c.Text));
-        }
-
+        
+      public static bool AreAllFieldsEmpty(Form myForm)
+      {
+          var controls = myForm.Controls.OfType<TextBox>();
+          return controls.All(c => String.IsNullOrEmpty(c.Text));
+      }
         public static void CleanAllControls(Form myForm)
         {
             var txtControls = myForm.Controls.OfType<TextBox>();

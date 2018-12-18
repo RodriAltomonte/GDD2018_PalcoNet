@@ -927,7 +927,7 @@ BEGIN
 	inner join LOS_DE_GESTION.Rubro r on r.id_Rubro = p.id_Rubro
 	inner join LOS_DE_GESTION.Grado_Publicacion g on g.id_Grado_Publicacion = p.id_Grado_Publicacion
 	where (p.usuario_empresa_vendedora = @usernameEmpresa 
-		or @usernameEmpresa in (select u.username from LOS_DE_GESTION.Usuario u inner join Usuario_X_Rol j on (u.username = j.username) where j.id_Rol = 1))--Es un admin
+		or @usernameEmpresa in (select u.username from LOS_DE_GESTION.Usuario u inner join LOS_DE_GESTION.Usuario_X_Rol j on (u.username = j.username) where j.id_Rol = 1))--Es un admin
 	and p.id_Estado_Publicacion = 2 --Es borrador
 	and p.descripcion like '%'+@descripcion+'%'
 	order by p.cod_publicacion asc
@@ -1363,14 +1363,15 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaEmpresa
 @codigo_postal NVARCHAR(50),
 @ciudad NVARCHAR(255),
 @cuit NVARCHAR(255),
-@fecha_creacion DATETIME
+@fecha_creacion DATETIME,
+@depto NVARCHAR(255)
 AS
 BEGIN	
 		IF(NOT EXISTS(SELECT razon_social FROM LOS_DE_GESTION.Empresa WHERE razon_social=@razon_social)
 			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit))
 			BEGIN
-				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,nro_calle,codigo_postal,ciudad,cuit,fecha_creacion,nro_piso)
-				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@nro_calle,@codigo_postal,@ciudad,@cuit,@fecha_creacion,@nro_piso)
+				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,nro_calle,codigo_postal,ciudad,cuit,fecha_creacion,nro_piso,depto)
+				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@nro_calle,@codigo_postal,@ciudad,@cuit,@fecha_creacion,@nro_piso,@depto)
 			END
 		ELSE
 			BEGIN

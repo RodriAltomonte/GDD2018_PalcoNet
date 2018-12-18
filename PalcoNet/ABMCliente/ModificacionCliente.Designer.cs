@@ -41,7 +41,7 @@
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.Verificador1 = new System.Windows.Forms.TextBox();
             this.lblNacionalidad = new System.Windows.Forms.Label();
-            this.txtTarjeta = new System.Windows.Forms.TextBox();
+            this.Tarjeta = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.CodPostal = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -193,12 +193,12 @@
             this.lblNacionalidad.TabIndex = 85;
             this.lblNacionalidad.Text = "CUIT";
             // 
-            // txtTarjeta
+            // Tarjeta
             // 
-            this.txtTarjeta.Location = new System.Drawing.Point(117, 259);
-            this.txtTarjeta.Name = "txtTarjeta";
-            this.txtTarjeta.Size = new System.Drawing.Size(372, 20);
-            this.txtTarjeta.TabIndex = 15;
+            this.Tarjeta.Location = new System.Drawing.Point(117, 259);
+            this.Tarjeta.Name = "Tarjeta";
+            this.Tarjeta.Size = new System.Drawing.Size(372, 20);
+            this.Tarjeta.TabIndex = 15;
             // 
             // label2
             // 
@@ -438,7 +438,7 @@
             this.Controls.Add(this.DNI);
             this.Controls.Add(this.Verificador1);
             this.Controls.Add(this.lblNacionalidad);
-            this.Controls.Add(this.txtTarjeta);
+            this.Controls.Add(this.Tarjeta);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CodPostal);
             this.Controls.Add(this.label3);
@@ -481,7 +481,7 @@
         private System.Windows.Forms.Label lblFechaNacimiento;
         private System.Windows.Forms.TextBox Verificador1;
         private System.Windows.Forms.Label lblNacionalidad;
-        private System.Windows.Forms.TextBox txtTarjeta;
+        private System.Windows.Forms.TextBox Tarjeta;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox CodPostal;
         private System.Windows.Forms.Label label3;
