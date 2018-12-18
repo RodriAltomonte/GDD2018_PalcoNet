@@ -200,20 +200,12 @@ IF OBJECT_ID(N'LOS_DE_GESTION.HabilitarRol') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.HabilitarRol
 GO
 
-IF OBJECT_ID(N'LOS_DE_GESTION.ModificacionPasswordCliente') IS NOT NULL
-DROP PROCEDURE LOS_DE_GESTION.ModificacionPasswordCliente
-GO
-
 IF OBJECT_ID(N'LOS_DE_GESTION.ModificarCliente') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.ModificarCliente
 GO
 
 IF OBJECT_ID(N'LOS_DE_GESTION.ModificarEmpresa') IS NOT NULL
 DROP PROCEDURE LOS_DE_GESTION.ModificarEmpresa
-GO
-
-IF OBJECT_ID(N'LOS_DE_GESTION.ModificarPasswordEmpresa') IS NOT NULL
-DROP PROCEDURE LOS_DE_GESTION.ModificarPasswordEmpresa
 GO
 
 IF OBJECT_ID(N'LOS_DE_GESTION.ModificarRol') IS NOT NULL
@@ -1281,17 +1273,6 @@ AS
 	END
 GO
 
-CREATE PROCEDURE LOS_DE_GESTION.ModificacionPasswordCliente
-@username NVARCHAR(255),
-@password NVARCHAR(255)
-AS
-	BEGIN
-		UPDATE LOS_DE_GESTION.Usuario
-		SET password = @password
-		WHERE username = @username
-	END
-GO
-
 CREATE PROCEDURE LOS_DE_GESTION.ModificarCliente
 @nro_documentoOriginal NUMERIC(18,0),
 @cuil_original NVARCHAR(255),
@@ -1402,16 +1383,6 @@ AS
 	END
 GO
 
-CREATE PROCEDURE LOS_DE_GESTION.ModificarPasswordEmpresa
-@username NVARCHAR(255),
-@passwordNuevo NVARCHAR(255)
-AS
-	BEGIN
-		UPDATE LOS_DE_GESTION.Usuario
-		SET password = @passwordNuevo
-		WHERE username = @username
-	END
-GO
 
 CREATE PROCEDURE LOS_DE_GESTION.ModificarEmpresa
 @cuitOriginal NVARCHAR(255),
