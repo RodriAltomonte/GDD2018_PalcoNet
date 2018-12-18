@@ -30,6 +30,7 @@ using PalcoNet.Classes.CustomException;namespace PalcoNet.GenerarRendicionComisi
             InitializeComponent();
             this.previousForm = previousForm;
             this.InicializarForm();
+            
         }
 
         public GenerarRendicionForm()
