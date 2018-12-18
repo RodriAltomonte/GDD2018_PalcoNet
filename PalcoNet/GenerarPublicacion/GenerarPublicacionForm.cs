@@ -201,13 +201,23 @@ namespace PalcoNet.GenerarPublicacion
         
         private void btnRemoverFechaHora_Click(object sender, EventArgs e)
         {
-            if (lvFechaHora.Items.Count > 0)
+            if (lvFechaHora.Items.Count == 0)
             {
-                lvFechaHora.SelectedItems[0].Remove();
-                //if (lvFechaHora.Items.Count == 0)
-                //{
-                //    dtpFechaPublicacion.Enabled = true;
-                //}                
+                MessageBox.Show("Selecciona una fecha por favor");
+            }
+            else
+            {
+                if (lvFechaHora.SelectedItems.Count > 0)
+                {
+                    lvFechaHora.SelectedItems[0].Remove();
+                    //if (lvFechaHora.Items.Count == 0)
+                    //{
+                    //    dtpFechaPublicacion.Enabled = true;
+                    //}                
+                }
+                else {
+                    MessageBox.Show("Por favor seleccione una fecha");
+                }
             }
         }
 

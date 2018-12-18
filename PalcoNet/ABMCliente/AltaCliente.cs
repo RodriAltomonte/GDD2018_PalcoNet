@@ -44,16 +44,15 @@ namespace PalcoNet.ABMCliente
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             string username="",password = "";
-            decimal piso;
-
-            if(!TextFieldUtils.IsValidNumericField(Verificador1,DNI,DigitoVerificador,NroDocumento,Telefono,Piso,Numero,Tarjeta)
+         
+            if(!TextFieldUtils.IsValidNumericField(Verificador1,DNI,DigitoVerificador,NroDocumento,Telefono,Numero,Tarjeta)
                 || !TextFieldUtils.IsValidTextField(Nombre,Apellido,Localidad))
             {
                
             }
             else{
             var cuil = Verificador1.Text + DNI.Text + DigitoVerificador.Text;
-            if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text))
+            if (!VerificarCamposNoVacios() && StringUtil.MailUtil.IsValidEmail(Mail.Text))
             {
                 if (TextFieldUtils.CUIT.EsCuilValido(cuil) && NroDocumento.Text == DNI.Text)
                 {
@@ -70,8 +69,22 @@ namespace PalcoNet.ABMCliente
                     inputParameters.AddParameter("@telefono", Telefono.Text);
                     inputParameters.AddParameter("@direccion_calle", Calle.Text);
                     inputParameters.AddParameter("@numero_calle", decimal.Parse(Numero.Text));
-                    inputParameters.AddParameter("@numero_piso", decimal.Parse(Piso.Text));
-                    inputParameters.AddParameter("@departamento", Departamento.Text);
+                    if (Piso.Text == "")
+                    {
+                        inputParameters.AddParameter("@numero_piso", -1);
+                    }
+                    else
+                    {
+                        inputParameters.AddParameter("@numero_piso", decimal.Parse(Piso.Text));
+                    }
+                    if (Departamento.Text == "")
+                    {
+                        inputParameters.AddParameter("@departamento", -1);
+                    }
+                    else
+                    {
+                        inputParameters.AddParameter("@departamento", Departamento.Text);
+                    }
                     inputParameters.AddParameter("@localidad", Localidad.Text);
                     inputParameters.AddParameter("@codigo_postal", Codigo_Postal.Text);
                     inputParameters.AddParameter("@fecha_de_nacimiento", Convert.ToDateTime(dtpFechaNacimiento.Text));
@@ -128,6 +141,22 @@ namespace PalcoNet.ABMCliente
             NavigableFormUtil.BackwardTo(this, CallerForm);
         }
 
-               
+        #region Auxilliary Methods
+
+        public bool VerificarCamposNoVacios()
+        {
+            if (Nombre.Text == "" || Apellido.Text == "" || cboTipoDoc.Text == "" || NroDocumento.Text == ""
+                || Mail.Text == "" || Telefono.Text == "" || Calle.Text == "" || Numero.Text == "" ||
+                Codigo_Postal.Text == "" || Localidad.Text == "" || Verificador1.Text == "" || DNI.Text == ""
+                || DigitoVerificador.Text == "" || Tarjeta.Text == "")
+            {
+                MessageBox.Show("Complete los campos necesarios");
+                return true;
+            }
+            return false;
+        }
+
+
+        #endregion
     }
 }

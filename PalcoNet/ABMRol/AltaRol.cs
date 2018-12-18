@@ -75,6 +75,7 @@ namespace PalcoNet.ABMRol
                     }
                                     
                     MessageBox.Show("Rol dado de alta correctamente!");
+                    NavigableFormUtil.BackwardTo(this, CallerForm);
                 }
                 catch (StoredProcedureException ex) { MessageBox.Show(ex.Message); }
             }

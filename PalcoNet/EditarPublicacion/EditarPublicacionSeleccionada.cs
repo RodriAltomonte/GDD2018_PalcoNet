@@ -74,8 +74,15 @@ namespace PalcoNet.EditarPublicacion
 
         private void btnRemoveUbicacion_Click(object sender, EventArgs e)
         {
-            this.AddUbicacionAEliminar();
-            dgvUbicaciones.Rows.Remove(dgvUbicaciones.SelectedRows[0]);
+            if (dgvUbicaciones.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione una fila porfavor");
+            }
+            else
+            {
+                this.AddUbicacionAEliminar();
+                dgvUbicaciones.Rows.Remove(dgvUbicaciones.SelectedRows[0]);
+            }
         }
 
         private void btnAgregarUbicacion_Click(object sender, EventArgs e)

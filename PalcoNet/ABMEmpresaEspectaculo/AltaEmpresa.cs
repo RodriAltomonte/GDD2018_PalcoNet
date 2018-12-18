@@ -53,7 +53,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             else
             {
                 var cuit = Verificador1.Text + NroCuit.Text + DigitoVerificador.Text;
-                if (!TextFieldUtils.IsAnyFieldEmpty(this) && StringUtil.MailUtil.IsValidEmail(Mail.Text))
+                if (!VerificarCamposNoVacios() && StringUtil.MailUtil.IsValidEmail(Mail.Text))
                 {
                     if (TextFieldUtils.CUIT.EsCuitValido(cuit))
                     {
@@ -72,7 +72,22 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                         inputParameters.AddParameter("@ciudad", Ciudad.Text);
                         inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
                         inputParameters.AddParameter("@fecha_creacion",fecha_sistema );
-                        inputParameters.AddParameter("@nro_piso", decimal.Parse(Piso.Text));
+                        if (Piso.Text == "")
+                        {
+                            inputParameters.AddParameter("@nro_piso", -1);
+                        }
+                        else
+                        {
+                            inputParameters.AddParameter("@nro_piso", decimal.Parse(Piso.Text));
+                        }
+                        if (Departamento.Text == "")
+                        {
+                            inputParameters.AddParameter("@depto", -1);
+                        }
+                        else
+                        {
+                            inputParameters.AddParameter("@depto", Departamento.Text);
+                        }
           
                         if (newUser == null)
                         {
@@ -126,7 +141,19 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             NavigableFormUtil.BackwardTo(this, callerForm);
         }
 
-        
+        #region Auxilliary Methods
+        public bool VerificarCamposNoVacios()
+        {
+            if (RazonSocial.Text == "" || Mail.Text == "" || Telefono.Text == "" || DirCalle.Text == ""
+                || Numero.Text == "" || Localidad.Text == "" || CodPostal.Text == "" || Ciudad.Text == "" ||
+                Verificador1.Text == "" || DigitoVerificador.Text == "" || NroCuit.Text == "")
+            {
+                MessageBox.Show("Por favor complete los campos obligatorios");
+                    return true;
+            }else{return false;}
+        }
+        #endregion
+
     }
 
 }

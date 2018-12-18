@@ -35,7 +35,7 @@ namespace PalcoNet.EditarPublicacion
         {
             if (dgvPublicaciones.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Por favor seleccione una publicacion");
+                MessageBox.Show("Por favor seleccione una fila");
             }
             else
             {
