@@ -24,11 +24,11 @@ namespace PalcoNet.Comprar
         private Form previousForm;
         private RubroRepository rubroRepository;
 
-        public Comprar()
-        {
-              InitializeComponent();
-              inicializarPantalla();
-        }
+        //public Comprar()
+        //{
+        //    InitializeComponent();
+        //    inicializarPantalla();
+        //}
 
         public Comprar(Form previousForm)
         {
