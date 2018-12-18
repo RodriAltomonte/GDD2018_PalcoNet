@@ -46,7 +46,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         {
             string username = "", password = "";
             if (!TextFieldUtils.IsValidTextField(Ciudad, Localidad)
-                || !TextFieldUtils.IsValidNumericField(Verificador1, NroCuit, DigitoVerificador, Numero, Telefono))
+                || !TextFieldUtils.IsValidNumericField(Verificador1, NroCuit, DigitoVerificador,Piso,Numero, Telefono))
             {
                
             }

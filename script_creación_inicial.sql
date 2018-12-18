@@ -1358,6 +1358,7 @@ CREATE PROCEDURE LOS_DE_GESTION.AltaEmpresa
 @mail NVARCHAR(50),
 @telefono NUMERIC(18,0),
 @direccion_calle NVARCHAR(255),
+@nro_piso NUMERIC(18,0),
 @nro_calle NUMERIC(18,0),
 @codigo_postal NVARCHAR(50),
 @ciudad NVARCHAR(255),
@@ -1368,8 +1369,8 @@ BEGIN
 		IF(NOT EXISTS(SELECT razon_social FROM LOS_DE_GESTION.Empresa WHERE razon_social=@razon_social)
 			AND NOT EXISTS(SELECT cuit FROM Empresa WHERE cuit=@cuit))
 			BEGIN
-				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,nro_calle,codigo_postal,ciudad,cuit,fecha_creacion)
-				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@nro_calle,@codigo_postal,@ciudad,@cuit,@fecha_creacion)
+				INSERT INTO LOS_DE_GESTION.Empresa(username,razon_social,mail,telefono,calle,nro_calle,codigo_postal,ciudad,cuit,fecha_creacion,nro_piso)
+				VALUES(@username,@razon_social,@mail,@telefono,@direccion_calle,@nro_calle,@codigo_postal,@ciudad,@cuit,@fecha_creacion,@nro_piso)
 			END
 		ELSE
 			BEGIN
