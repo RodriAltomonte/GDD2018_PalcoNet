@@ -61,7 +61,7 @@ namespace PalcoNet.HistorialCliente
                                    //@"' group by fecha_compra,tarjeta_comprador ";
 
                 string final = @" ORDER BY fecha_compra 
-                                OFFSET " + x.ToString() + @" ROWS FETCH NEXT " + 5 + " ROWS ONLY";
+                                OFFSET " + x.ToString() + @" ROWS FETCH NEXT " + 10 + " ROWS ONLY";
 
                 select += final;
                  table = ConnectionFactory.Instance().CreateConnection().ExecuteDataTableSqlQuery(select);
