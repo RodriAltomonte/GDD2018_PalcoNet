@@ -25,6 +25,7 @@ namespace PalcoNet.Comprar
         string fechaFinal;
         List<String> categorias;
         int posicion;
+        int ultimaPagina;
 
         public ResPublicacion(Form previousForm,List<String> categorias,string descripcion,string fechaInicial,string fechaFinal )
         {
@@ -34,7 +35,7 @@ namespace PalcoNet.Comprar
             this.fechaInicial =fechaInicial;
             this.fechaFinal = fechaFinal;
             this.categorias = categorias;
-         
+            GenerarUltimaPagina();
             cargarResultados(1);
         }
 
@@ -88,7 +89,7 @@ namespace PalcoNet.Comprar
         #region Auxiliary methods
         private void cargarResultados(int pagina)
         {
-            if (pagina > 0)
+            if (pagina > 0 && pagina <= ultimaPagina)
             {
                 posicion = pagina;
                 pagina--;
@@ -154,8 +155,60 @@ namespace PalcoNet.Comprar
 
         private void btnUltima_Click(object sender, EventArgs e)
         {
-            int ultimaPagina = posicion; 
-            cargarResultados(ultimaPagina);
+           cargarResultados(ultimaPagina);
         }
+
+        private void GenerarUltimaPagina()
+        {
+              string select = @"SELECT count(*)"+
+                                "from LOS_DE_GESTION.Publicacion p join LOS_DE_GESTION.Rubro r on (p.id_Rubro = r.id_Rubro) ";
+
+                if (categorias.Count != 0 || descripcion != "" || fechaInicial != "" || fechaFinal != "")
+                {
+                    select += "where p.id_estado_publicacion = 1 and ";
+
+                    if (descripcion != "")
+                    {
+                        select += "p.descripcion like '%" + descripcion + "%' ";
+                        select += " and ";
+                    }
+
+                    if (fechaInicial != "")
+                    {
+                        select += "p.fecha_publicacion >= '" + fechaInicial + "' ";
+                        select += " and ";
+                    }
+                    if (fechaFinal != "")
+                    {
+                        select += "p.fecha_publicacion <= '" + fechaFinal + "' ";
+                        select += " and ";
+                    }
+                    string rDescripcion = "r.descripcion = ";
+
+                    foreach (var rubros in categorias)
+                    {
+                        select +=  rDescripcion ;
+                        select += "'" + rubros + "'";
+                        select += " or ";
+                    }
+
+                    if (categorias.Count > 0)
+                    {
+                        select = select.Substring(0, select.Length - 3);
+                    }
+                    else
+                    {
+                        select = select.Substring(0, select.Length - 4);
+                    }
+                }
+
+               int cantFilas = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<int>(select);
+               ultimaPagina = cantFilas / PAGE_SIZE;
+               if (cantFilas % PAGE_SIZE != 0)
+               {
+                   ultimaPagina++;
+               }
+            }
+        
     }
 }
