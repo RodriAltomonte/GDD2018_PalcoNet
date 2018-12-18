@@ -80,7 +80,7 @@ namespace PalcoNet.ABMCliente
                     if (newUser == null)
                     {   
                         //Si el usuario es creado desde el abm se genera el usuario y la contraseña de forma aleatoria
-                        username = StringUtil.GenerateRandomUsername(Nombre.Text,Telefono.Text);
+                        username = StringUtil.GenerateRandomUsername(Mail.Text,Convert.ToDateTime(dtpFechaNacimiento.Text).Year.ToString());
                         password = StringUtil.GenerateRandomPassword();
                         inputParameters.AddParameter("@username",username);
                         inputParameters.AddParameter("@password",password );

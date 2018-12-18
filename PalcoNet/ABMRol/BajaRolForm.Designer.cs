@@ -35,10 +35,9 @@
             // 
             // btnDeshabilitar
             // 
-            this.btnDeshabilitar.Location = new System.Drawing.Point(201, 50);
-            this.btnDeshabilitar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeshabilitar.Location = new System.Drawing.Point(151, 41);
             this.btnDeshabilitar.Name = "btnDeshabilitar";
-            this.btnDeshabilitar.Size = new System.Drawing.Size(205, 28);
+            this.btnDeshabilitar.Size = new System.Drawing.Size(154, 23);
             this.btnDeshabilitar.TabIndex = 1;
             this.btnDeshabilitar.Text = "Deshabilitar";
             this.btnDeshabilitar.UseVisualStyleBackColor = true;
@@ -46,10 +45,9 @@
             // 
             // btnHabilitar
             // 
-            this.btnHabilitar.Location = new System.Drawing.Point(201, 15);
-            this.btnHabilitar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnHabilitar.Location = new System.Drawing.Point(151, 12);
             this.btnHabilitar.Name = "btnHabilitar";
-            this.btnHabilitar.Size = new System.Drawing.Size(205, 28);
+            this.btnHabilitar.Size = new System.Drawing.Size(154, 23);
             this.btnHabilitar.TabIndex = 0;
             this.btnHabilitar.Text = "Habilitar";
             this.btnHabilitar.UseVisualStyleBackColor = true;
@@ -57,10 +55,9 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(16, 108);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVolver.Location = new System.Drawing.Point(12, 88);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(100, 28);
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
             this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "<< Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -68,13 +65,12 @@
             // 
             // BajaRolForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 166);
+            this.ClientSize = new System.Drawing.Size(501, 119);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnDeshabilitar);
             this.Controls.Add(this.btnHabilitar);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BajaRolForm";
             this.Text = "BajaRolForm";
             this.ResumeLayout(false);

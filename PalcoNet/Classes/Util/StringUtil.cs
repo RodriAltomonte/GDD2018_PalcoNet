@@ -126,14 +126,15 @@ namespace Classes.Util
             return ParseConfigurationFileLine(line);
         }
 
-        public static string GenerateRandomUsername(string input,string input2)
+        public static string GenerateRandomUsername(string mail,string anio)
         {
-            return input + input2.Substring(0,4);
+            string[] mailHost = mail.Split('@');
+            return mailHost[0] + anio;
         }
 
         public static string GenerateRandomPassword()
         {
-            return "Cambiame";
+            return "cambiame";
         }
 
         public static string ConcatSeparatedByComma<T>(IList<T> list)
