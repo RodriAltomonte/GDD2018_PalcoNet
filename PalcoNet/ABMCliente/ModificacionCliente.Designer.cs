@@ -133,6 +133,7 @@
             this.Departamento.Name = "Departamento";
             this.Departamento.Size = new System.Drawing.Size(53, 20);
             this.Departamento.TabIndex = 9;
+           
             // 
             // lblDpto
             // 
@@ -142,6 +143,7 @@
             this.lblDpto.Size = new System.Drawing.Size(30, 13);
             this.lblDpto.TabIndex = 93;
             this.lblDpto.Text = "Dpto";
+            this.lblDpto.Click += new System.EventHandler(this.lblDpto_Click);
             // 
             // Piso
             // 
@@ -149,6 +151,7 @@
             this.Piso.Name = "Piso";
             this.Piso.Size = new System.Drawing.Size(36, 20);
             this.Piso.TabIndex = 8;
+            this.Piso.TextChanged += new System.EventHandler(this.Piso_TextChanged);
             // 
             // lblPiso
             // 
@@ -158,6 +161,7 @@
             this.lblPiso.Size = new System.Drawing.Size(27, 13);
             this.lblPiso.TabIndex = 91;
             this.lblPiso.Text = "Piso";
+            this.lblPiso.Click += new System.EventHandler(this.lblPiso_Click);
             // 
             // dtpFechaNacimiento
             // 

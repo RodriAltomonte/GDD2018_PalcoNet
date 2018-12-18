@@ -207,13 +207,16 @@ namespace PalcoNet.GenerarPublicacion
             }
             else
             {
-                if (lvFechaHora.Items.Count > 0)
+                if (lvFechaHora.SelectedItems.Count > 0)
                 {
                     lvFechaHora.SelectedItems[0].Remove();
                     //if (lvFechaHora.Items.Count == 0)
                     //{
                     //    dtpFechaPublicacion.Enabled = true;
                     //}                
+                }
+                else {
+                    MessageBox.Show("Por favor seleccione una fecha");
                 }
             }
         }

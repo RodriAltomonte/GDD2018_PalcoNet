@@ -183,5 +183,22 @@ namespace PalcoNet.ABMCliente
 
         #endregion
 
+        private void lblPiso_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Piso_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblDpto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+      
+
     }
 }
