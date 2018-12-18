@@ -69,7 +69,7 @@ namespace PalcoNet.ABMCliente
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!TextFieldUtils.IsValidNumericField(Verificador1, DNI, DigitoVerificador, Documento, Telefono, Numero, Piso, txtTarjeta)
+            if (!TextFieldUtils.IsValidNumericField(Verificador1, DNI, DigitoVerificador, Documento, Telefono, Numero, txtTarjeta)
                 || !TextFieldUtils.IsValidTextField(Nombre, Apellido, Localidad))
             {}
 
@@ -81,6 +81,7 @@ namespace PalcoNet.ABMCliente
                 {
                     if (TextFieldUtils.CUIT.EsCuilValido(cuil) && DNI.Text == Documento.Text)
                     {
+                        decimal piso;
                         StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                         inputParameters.AddParameter("@nro_documentoOriginal", decimal.Parse(doc_original));
                         inputParameters.AddParameter("@cuil_original", cuil_original);

@@ -61,7 +61,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
       
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!TextFieldUtils.IsValidNumericField(Verificador1, NroCUIT, DigitoVerificador, Numero, Telefono, Piso)
+            if (!TextFieldUtils.IsValidNumericField(Verificador1, NroCUIT, DigitoVerificador, Numero, Telefono)
                 || !TextFieldUtils.IsValidTextField(Ciudad, RazonSocial, Localidad))
             {
                
@@ -71,6 +71,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                 var cuit = Verificador1.Text + NroCUIT.Text + DigitoVerificador.Text;
                 if (!TextFieldUtils.IsAnyFieldEmpty(this))
                 {
+                    
                     if (TextFieldUtils.CUIT.EsCuitValido(cuit))
                     {
                         StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
@@ -80,8 +81,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                         inputParameters.AddParameter("@telefono", decimal.Parse(Telefono.Text));
                         inputParameters.AddParameter("@direccion_calle", DirCalle.Text);
                         inputParameters.AddParameter("@numero_calle", decimal.Parse(Numero.Text));
-                        inputParameters.AddParameter("@nro_piso", decimal.Parse(Piso.Text));
-                        inputParameters.AddParameter("@depto", Departamento.Text);
+                        inputParameters.AddParameter("@nro_piso",decimal.Parse(Piso.Text));
+                         inputParameters.AddParameter("@depto", Departamento.Text);
                         inputParameters.AddParameter("@localidad", Localidad.Text);
                         inputParameters.AddParameter("@cod_postal", CodPostal.Text);
                         inputParameters.AddParameter("@ciudad", Ciudad.Text);

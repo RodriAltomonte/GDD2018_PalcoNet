@@ -44,8 +44,9 @@ namespace PalcoNet.ABMCliente
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             string username="",password = "";
+            decimal piso;
 
-            if(!TextFieldUtils.IsValidNumericField(Verificador1,DNI,DigitoVerificador,NroDocumento,Telefono,Numero,Piso,Tarjeta)
+            if(!TextFieldUtils.IsValidNumericField(Verificador1,DNI,DigitoVerificador,NroDocumento,Telefono,Numero,Tarjeta)
                 || !TextFieldUtils.IsValidTextField(Nombre,Apellido,Localidad))
             {
                
@@ -69,7 +70,7 @@ namespace PalcoNet.ABMCliente
                     inputParameters.AddParameter("@telefono", Telefono.Text);
                     inputParameters.AddParameter("@direccion_calle", Calle.Text);
                     inputParameters.AddParameter("@numero_calle", decimal.Parse(Numero.Text));
-                    inputParameters.AddParameter("@numero_piso", decimal.Parse(Piso.Text));
+                    inputParameters.AddParameter("@nro_piso", decimal.Parse(Piso.Text));
                     inputParameters.AddParameter("@departamento", Departamento.Text);
                     inputParameters.AddParameter("@localidad", Localidad.Text);
                     inputParameters.AddParameter("@codigo_postal", Codigo_Postal.Text);

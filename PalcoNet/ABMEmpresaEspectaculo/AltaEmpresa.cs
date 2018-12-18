@@ -46,7 +46,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         {
             string username = "", password = "";
             if (!TextFieldUtils.IsValidTextField(Ciudad, Localidad)
-                || !TextFieldUtils.IsValidNumericField(Verificador1, NroCuit, DigitoVerificador, Piso, Numero, Telefono))
+                || !TextFieldUtils.IsValidNumericField(Verificador1, NroCuit, DigitoVerificador, Numero, Telefono))
             {
                
             }
@@ -60,7 +60,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                         StoredProcedureParameterMap inputParameters = new StoredProcedureParameterMap();
                         StoredProcedureParameterMap userParameters = new StoredProcedureParameterMap();
                         var fecha_sistema = ConfigurationManager.Instance().GetSystemDateTime();
-
+                        decimal piso;
                         inputParameters.AddParameter("@habilitado", true);
                         inputParameters.AddParameter("@rol", 3);//3 rol Empresa
                         inputParameters.AddParameter("@razon_social", RazonSocial.Text);
@@ -72,7 +72,8 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                         inputParameters.AddParameter("@ciudad", Ciudad.Text);
                         inputParameters.AddParameter("@cuit", StringUtil.FormatCuil(cuit));
                         inputParameters.AddParameter("@fecha_creacion",fecha_sistema );
-
+                        inputParameters.AddParameter("@nro_piso", decimal.Parse(Piso.Text));
+          
                         if (newUser == null)
                         {
                             //Si el usuario es creado desde el abm se genera el usuario y la contraseña de forma aleatoria
