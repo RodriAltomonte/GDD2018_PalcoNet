@@ -140,9 +140,21 @@ namespace Classes.Util
         public static string ConcatSeparatedByComma<T>(IList<T> list)
         {
             string concat = "";
+            if (list.Count == 0)
+            {
+                return concat;
+            }
+
             foreach (T item in list)
             {
-                concat += item.ToString() + ",";
+                if (typeof(T).Equals(typeof(string)))
+                {
+                    concat += "'" + item.ToString() + "'" + ",";
+                }
+                else
+                {
+                    concat += item.ToString() + ",";
+                }
             }
             return concat.Substring(0,concat.Length-1);
         }

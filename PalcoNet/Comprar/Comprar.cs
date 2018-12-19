@@ -78,9 +78,9 @@ namespace PalcoNet.Comprar
 
 
                 }
-                catch (StoredProcedureException)
+                catch (StoredProcedureException ex)
                 {
-                    MessageBoxUtil.ShowError("Error al generar la publicacion.");
+                    MessageBoxUtil.ShowError("Error al mostrar las publicaciones.");
                 }
 
             }

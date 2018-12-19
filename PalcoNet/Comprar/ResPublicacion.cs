@@ -13,6 +13,8 @@ using Classes.DatabaseConnection;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.DatabaseConnection;
 using PalcoNet.Classes.Constants;
+using Classes.Configuration;
+using Classes.Util;
 
 namespace PalcoNet.Comprar
 {
@@ -113,26 +115,25 @@ namespace PalcoNet.Comprar
 
                     if (fechaInicial != "")
                     {
-                        select += "p.fecha_publicacion >= '" + fechaInicial + "' ";
+                        select += "p.fecha_hora_espectaculo >= '" + fechaInicial + "' ";
                         select += " and ";
                     }
                     if (fechaFinal != "")
                     {
-                        select += "p.fecha_publicacion <= '" + fechaFinal + "' ";
+                        select += "p.fecha_hora_espectaculo <= '" + fechaFinal + "' ";
                         select += " and ";
                     }
-                    string rDescripcion = "r.descripcion = ";
+                    select += "p.fecha_publicacion <= '" + ConfigurationManager.Instance().GetSystemDateTime().ToString("yyyy-dd-MM HH:mm:ss") + "'";
+                    select += " and ";
+                    select += "p.fecha_hora_espectaculo >= '" + ConfigurationManager.Instance().GetSystemDateTime().ToString("yyyy-dd-MM HH:mm:ss") + "'";
+                    select += " and ";
+                    string rDescripcion = "r.descripcion in ";
 
-                    foreach (var rubros in categorias)
-                    {
-                        select +=  rDescripcion ;
-                        select += "'" + rubros + "'";
-                        select += " or ";
-                    }
+                    string inRubro = StringUtil.ConcatSeparatedByComma<string>(categorias);
 
                     if (categorias.Count > 0)
                     {
-                        select = select.Substring(0, select.Length - 3);
+                        select += rDescripcion + "(" + inRubro + ")";
                     }
                     else
                     {
@@ -160,7 +161,7 @@ namespace PalcoNet.Comprar
 
         private void GenerarUltimaPagina()
         {
-              string select = @"SELECT count(*)"+
+              string select = @"SELECT count(*) "+
                                 "from LOS_DE_GESTION.Publicacion p join LOS_DE_GESTION.Rubro r on (p.id_Rubro = r.id_Rubro) ";
 
                 if (categorias.Count != 0 || descripcion != "" || fechaInicial != "" || fechaFinal != "")
@@ -175,26 +176,26 @@ namespace PalcoNet.Comprar
 
                     if (fechaInicial != "")
                     {
-                        select += "p.fecha_publicacion >= '" + fechaInicial + "' ";
+                        select += "p.fecha_hora_espectaculo >= '" + fechaInicial + "' ";
                         select += " and ";
                     }
                     if (fechaFinal != "")
                     {
-                        select += "p.fecha_publicacion <= '" + fechaFinal + "' ";
+                        select += "p.fecha_hora_espectaculo <= '" + fechaFinal + "' ";
                         select += " and ";
                     }
-                    string rDescripcion = "r.descripcion = ";
+                    select += "p.fecha_publicacion <= '" + ConfigurationManager.Instance().GetSystemDateTime().ToString("yyyy-dd-MM HH:mm:ss") + "'";
+                    select += " and ";
+                    select += "p.fecha_hora_espectaculo >= '" + ConfigurationManager.Instance().GetSystemDateTime().ToString("yyyy-dd-MM HH:mm:ss") + "'";
+                    select += " and ";
+                    
+                    string rDescripcion = "r.descripcion in ";
 
-                    foreach (var rubros in categorias)
-                    {
-                        select +=  rDescripcion ;
-                        select += "'" + rubros + "'";
-                        select += " or ";
-                    }
+                    string inRubro = StringUtil.ConcatSeparatedByComma<string>(categorias);
 
                     if (categorias.Count > 0)
                     {
-                        select = select.Substring(0, select.Length - 3);
+                        select += rDescripcion + "(" + inRubro + ")";
                     }
                     else
                     {
@@ -208,7 +209,6 @@ namespace PalcoNet.Comprar
                {
                    ultimaPagina++;
                }
-            }
-        
+        }        
     }
 }

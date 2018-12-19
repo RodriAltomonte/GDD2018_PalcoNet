@@ -490,7 +490,7 @@ CREATE TABLE LOS_DE_GESTION.Premio(
 
  CREATE TABLE LOS_DE_GESTION.Item_Rendicion(
 	id_Item_Rendicion numeric(18, 0) PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	id_Rendicion numeric(18, 0),
+	nro_Rendicion numeric(18, 0),
 	importe_venta numeric(18, 2),
 	importe_comision numeric(18, 2),
 	importe_rendicion numeric(18, 2),
@@ -1475,7 +1475,7 @@ CREATE PROCEDURE LOS_DE_GESTION.CrearItemRendicion
 AS
 BEGIN
 
-	INSERT INTO LOS_DE_GESTION.Item_Rendicion(id_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones,
+	INSERT INTO LOS_DE_GESTION.Item_Rendicion(nro_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones,
 											id_Compra)
 	VALUES(@id_Rendicion,@importe_venta,@importe_comision,@importe_rendicion,@descripcion,@cantidad_ubicaciones,@id_Compra)
 
@@ -1510,6 +1510,7 @@ BEGIN
 	JOIN LOS_DE_GESTION.Publicacion p ON u.cod_publicacion=p.cod_publicacion
 	JOIN LOS_DE_GESTION.Empresa e ON p.usuario_empresa_vendedora=e.username 
 	WHERE e.razon_social = @razon_social and c.id_Compra not in (select i.id_Compra from LOS_DE_GESTION.Item_Rendicion i)
+	group by c.id_Compra, c.monto_total, c.fecha_compra, c.cantidad_ubicaciones
 	order by c.fecha_compra 
 END
 GO
@@ -1665,21 +1666,26 @@ BEGIN
 /* inserto rendicion*/
 		 set IDENTITY_INSERT LOS_DE_GESTION.Rendicion on
 		 insert into LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
-		 SELECT distinct Factura_Nro, null,null,Factura_Total,Factura_Fecha,Espec_Empresa_Mail,Forma_Pago_Desc
+		 SELECT distinct Factura_Nro, null,Factura_Total,null,Factura_Fecha,Espec_Empresa_Mail,Forma_Pago_Desc
 		 FROM gd_esquema.Maestra where Factura_Nro is not null
 		set IDENTITY_INSERT LOS_DE_GESTION.Rendicion off
 		 
 /* inserto Item_Rendicion*/--revisar sum(Item_Factura_Monto)
-		 insert into LOS_DE_GESTION.Item_Rendicion(id_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones,id_Compra)
-		 SELECT Factura_Nro, sum(Ubicacion_Precio),sum(Ubicacion_Precio) - sum(Item_Factura_Monto),sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where sum(Ubicacion_Precio) = c.monto_total and c.fecha_compra =Compra_Fecha and Cli_Dni = c.usuario_cliente_comprador and sum(Compra_Cantidad) = c.cantidad_ubicaciones)
+		 insert into LOS_DE_GESTION.Item_Rendicion(nro_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones,id_Compra)
+		 SELECT Factura_Nro, sum(Ubicacion_Precio),sum(Item_Factura_Monto),sum(Ubicacion_Precio) - sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where sum(Ubicacion_Precio) = c.monto_total and c.fecha_compra =Compra_Fecha and Cli_Dni = c.usuario_cliente_comprador and sum(Compra_Cantidad) = c.cantidad_ubicaciones)
 		 FROM gd_esquema.Maestra where Factura_Nro is not null 
 		 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad,Compra_Fecha,Cli_Dni
+
+/* Actualizo montos de rendicion*/
+		 update LOS_DE_GESTION.Rendicion
+		set importe_rendicion_total = (select sum(i.importe_rendicion) from LOS_DE_GESTION.Item_Rendicion i where i.nro_Rendicion = id_Rendicion),
+		importe_total_ventas = (select sum(i.importe_venta) from LOS_DE_GESTION.Item_Rendicion i where i.nro_Rendicion = id_Rendicion)
 		 
 /* inserto Ubicacion*/
 		 insert into LOS_DE_GESTION.Ubicacion(cod_publicacion,fila,asiento,ubicacion_sin_numerar,precio,id_Tipo_Ubicacion,id_Compra)
 		 SELECT p.cod_publicacion, Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,Ubicacion_tipo_codigo,
 		 (select c.id_Compra from LOS_DE_GESTION.Compra c join LOS_DE_GESTION.Item_Rendicion i on (c.id_Compra = i.id_Compra) 
-			where c.usuario_cliente_comprador = Cli_Dni and i.id_Rendicion = Factura_Nro and i.descripcion = Item_Factura_Descripcion and i.cantidad_ubicaciones = Item_Factura_Cantidad  and c.fecha_compra = Compra_Fecha)
+			where c.usuario_cliente_comprador = Cli_Dni and i.nro_Rendicion = Factura_Nro and i.descripcion = Item_Factura_Descripcion and i.cantidad_ubicaciones = Item_Factura_Cantidad  and c.fecha_compra = Compra_Fecha)
 		 FROM gd_esquema.Maestra join  LOS_DE_GESTION.Publicacion p on p.maestra_Espectaculo_Cod = espectaculo_cod
 		 where Factura_Nro is not null
 		 
@@ -1828,7 +1834,7 @@ ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Grado_Publi
 ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Empresa FOREIGN KEY (usuario_empresa_vendedora) REFERENCES [LOS_DE_GESTION].Empresa
 ALTER TABLE LOS_DE_GESTION.Publicacion ADD CONSTRAINT FK_Publicacion_Estado_Publicacion FOREIGN KEY (id_Estado_Publicacion) REFERENCES [LOS_DE_GESTION].Estado_Publicacion
 
-ALTER TABLE LOS_DE_GESTION.Item_Rendicion ADD CONSTRAINT FK_Item_Rendicion_Rendicion FOREIGN KEY (id_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
+ALTER TABLE LOS_DE_GESTION.Item_Rendicion ADD CONSTRAINT FK_Item_Rendicion_Rendicion FOREIGN KEY (nro_Rendicion) REFERENCES [LOS_DE_GESTION].Rendicion
 ALTER TABLE LOS_DE_GESTION.Item_Rendicion ADD CONSTRAINT FK_Item_Rendicion_Compra FOREIGN KEY (id_Compra) REFERENCES [LOS_DE_GESTION].Compra
 
 ALTER TABLE LOS_DE_GESTION.Rendicion ADD CONSTRAINT FK_Rendicion_Empresa FOREIGN KEY (usuario_empresa_a_rendir) REFERENCES [LOS_DE_GESTION].Empresa
