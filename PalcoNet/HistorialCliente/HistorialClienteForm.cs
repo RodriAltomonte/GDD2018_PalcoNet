@@ -25,8 +25,6 @@ namespace PalcoNet.HistorialCliente
 {
     public partial class HistorialClienteForm : Form
     {
-        int PAGE_SIZE = 10;
-        int ULTIMA_PAGINA;
         private Form previousForm;
         int posicion = -1;
         string username;
@@ -37,17 +35,8 @@ namespace PalcoNet.HistorialCliente
             InitializeComponent();
             this.previousForm = previousForm;
             username = Session.Instance().LoggedUsername;
-            GenerarUltimaPagina();
             cargarResultados(1);
         }
-
-        //public HistorialClienteForm()
-        //{
-        //    InitializeComponent();
-        //    username = "10125617";
-        //    GenerarUltimaPagina();
-        //    cargarResultados(1);
-        //}
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
@@ -56,7 +45,7 @@ namespace PalcoNet.HistorialCliente
 
         private void cargarResultados(int pagina)
         {
-            if (pagina > 0  && pagina <= ULTIMA_PAGINA)
+            if (pagina > 0 )
             {
                 posicion = pagina;
                 pagina--;
@@ -66,7 +55,7 @@ namespace PalcoNet.HistorialCliente
                                    //@"' group by fecha_compra,tarjeta_comprador ";
 
                 string final = @" ORDER BY fecha_compra 
-                                OFFSET " + x.ToString() + @" ROWS FETCH NEXT " + PAGE_SIZE + " ROWS ONLY";
+                                OFFSET " + x.ToString() + @" ROWS FETCH NEXT " + 10 + " ROWS ONLY";
 
                 select += final;
                  table = ConnectionFactory.Instance().CreateConnection().ExecuteDataTableSqlQuery(select);
@@ -92,29 +81,6 @@ namespace PalcoNet.HistorialCliente
             cargarResultados(posicion + 1);
         }
 
-        private void btnPrimeraPag_Click(object sender, EventArgs e)
-        {
-            cargarResultados(1);
-        }
-
-        private void btnUltima_Click(object sender, EventArgs e)
-        {
-            cargarResultados(ULTIMA_PAGINA);
-
-        }
-
-        private void GenerarUltimaPagina()
-        {
-            string select = @"select count(*) from LOS_DE_GESTION.Compra where usuario_cliente_comprador = '" + 
-                                    username + "' ";
-
-            int cantFilas = ConnectionFactory.Instance().CreateConnection().ExecuteSingleOutputSqlQuery<int>(select);
-            ULTIMA_PAGINA = cantFilas / PAGE_SIZE;
-            if (cantFilas % PAGE_SIZE != 0)
-            {
-                ULTIMA_PAGINA++;
-            }
-        }
    
     }
 }

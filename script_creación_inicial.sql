@@ -760,7 +760,7 @@ go
 CREATE PROCEDURE LOS_DE_GESTION.PR_BUSCAR_USUARIOS @usernameFilter nvarchar(255)
 AS
 BEGIN
-	select u.username from LOS_DE_GESTION.Usuario u where u.username like '%'+ @usernameFilter +'%' and habilitado = 1
+	select u.username from LOS_DE_GESTION.Usuario u where u.username like '%'+ @usernameFilter +'%'
 END
 go
 
@@ -796,7 +796,14 @@ AS
 BEGIN
 	if exists(select * from LOS_DE_GESTION.Grado_Publicacion where id_Grado_Publicacion = @idGrado)
 	begin
-		delete from LOS_DE_GESTION.Grado_Publicacion where id_Grado_Publicacion = @idGrado
+		if not exists(select * from LOS_DE_GESTION.Publicacion where id_Grado_Publicacion = @idGrado)
+		begin
+			delete from LOS_DE_GESTION.Grado_Publicacion where id_Grado_Publicacion = @idGrado
+		end
+		else
+		begin
+			throw 50002, 'Hay publicaciones con el grado de publicacion asignado. No es posible eliminarlo'
+		end
 	end
 	else
 	begin

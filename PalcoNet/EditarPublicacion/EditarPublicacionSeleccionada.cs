@@ -11,6 +11,7 @@ using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.Util.Form;
 using PalcoNet.Classes.Util;
+using Classes.Configuration;
 
 namespace PalcoNet.EditarPublicacion
 {
@@ -171,6 +172,12 @@ namespace PalcoNet.EditarPublicacion
 
         private bool ValidateDates()
         {
+            if (DateTimeUtil.Before(publicacionSeleccionada.FechaHoraDeEspectaculo, ConfigurationManager.Instance().GetSystemDateTime()))
+            {
+                MessageBoxUtil.ShowError("La fecha y hora de espectaculo no puede ser anterior a la fecha de hoy.");
+                return false;
+            }
+
             if (!DateTimeUtil.Before(publicacionSeleccionada.FechaDePublicacion, publicacionSeleccionada.FechaHoraDeEspectaculo))
             {
                 MessageBoxUtil.ShowError("La fecha y hora de espectaculo debe ser posterior a la fecha de publicacion.");

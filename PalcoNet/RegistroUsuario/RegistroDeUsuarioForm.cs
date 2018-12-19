@@ -15,7 +15,6 @@ using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.Interfaces;
 using PalcoNet.Classes.Misc;
-using TFUtilites;
 
 namespace PalcoNet.RegistroUsuario
 {
@@ -40,12 +39,6 @@ namespace PalcoNet.RegistroUsuario
 
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            if (txtPassword.Text == "" || txtUsername.Text =="" || cmbRoles.Text == "" )
-            {
-                MessageBox.Show("Por favor completa todos los campos");
-            }
-            else
-            {
             decimal selectedRolId = ((ComboBoxItem<decimal>)cmbRoles.SelectedItem).Value;
 
             Usuario newUser = UsuarioFactory.CrearNuevoUsuario(selectedRolId, txtUsername.Text, txtPassword.Text);
@@ -58,7 +51,6 @@ namespace PalcoNet.RegistroUsuario
             catch (StoredProcedureException ex)
             {
                 MessageBoxUtil.ShowError(ex.Message);
-            }
             }
         }
 

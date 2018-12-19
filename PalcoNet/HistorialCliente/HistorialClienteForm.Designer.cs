@@ -33,16 +33,12 @@
             this.BtnAnterior = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvResultados = new System.Windows.Forms.DataGridView();
-            this.btnPrimeraPag = new System.Windows.Forms.Button();
-            this.btnUltima = new System.Windows.Forms.Button();
             this.grpResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResultados)).BeginInit();
             this.SuspendLayout();
             // 
             // grpResultados
             // 
-            this.grpResultados.Controls.Add(this.btnUltima);
-            this.grpResultados.Controls.Add(this.btnPrimeraPag);
             this.grpResultados.Controls.Add(this.BtnSiguiente);
             this.grpResultados.Controls.Add(this.BtnAnterior);
             this.grpResultados.Controls.Add(this.btnVolver);
@@ -58,7 +54,7 @@
             // 
             // BtnSiguiente
             // 
-            this.BtnSiguiente.Location = new System.Drawing.Point(403, 396);
+            this.BtnSiguiente.Location = new System.Drawing.Point(536, 396);
             this.BtnSiguiente.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSiguiente.Name = "BtnSiguiente";
             this.BtnSiguiente.Size = new System.Drawing.Size(100, 28);
@@ -69,7 +65,7 @@
             // 
             // BtnAnterior
             // 
-            this.BtnAnterior.Location = new System.Drawing.Point(270, 396);
+            this.BtnAnterior.Location = new System.Drawing.Point(413, 396);
             this.BtnAnterior.Margin = new System.Windows.Forms.Padding(4);
             this.BtnAnterior.Name = "BtnAnterior";
             this.BtnAnterior.Size = new System.Drawing.Size(100, 28);
@@ -102,28 +98,6 @@
             this.dgvResultados.TabIndex = 0;
             this.dgvResultados.TabStop = false;
             // 
-            // btnPrimeraPag
-            // 
-            this.btnPrimeraPag.Location = new System.Drawing.Point(149, 396);
-            this.btnPrimeraPag.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrimeraPag.Name = "btnPrimeraPag";
-            this.btnPrimeraPag.Size = new System.Drawing.Size(100, 28);
-            this.btnPrimeraPag.TabIndex = 3;
-            this.btnPrimeraPag.Text = "Primera";
-            this.btnPrimeraPag.UseVisualStyleBackColor = true;
-            this.btnPrimeraPag.Click += new System.EventHandler(this.btnPrimeraPag_Click);
-            // 
-            // btnUltima
-            // 
-            this.btnUltima.Location = new System.Drawing.Point(536, 396);
-            this.btnUltima.Margin = new System.Windows.Forms.Padding(4);
-            this.btnUltima.Name = "btnUltima";
-            this.btnUltima.Size = new System.Drawing.Size(100, 28);
-            this.btnUltima.TabIndex = 4;
-            this.btnUltima.Text = "Ultima";
-            this.btnUltima.UseVisualStyleBackColor = true;
-            this.btnUltima.Click += new System.EventHandler(this.btnUltima_Click);
-            // 
             // HistorialClienteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -145,7 +119,5 @@
         private System.Windows.Forms.Button BtnAnterior;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.DataGridView dgvResultados;
-        private System.Windows.Forms.Button btnUltima;
-        private System.Windows.Forms.Button btnPrimeraPag;
     }
 }
