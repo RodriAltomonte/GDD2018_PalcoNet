@@ -40,7 +40,7 @@ namespace PalcoNet.RegistroUsuario
 
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            if (!TextFieldUtils.IsAnyFieldEmpty(this))
+            if (txtPassword.Text == "" || txtUsername.Text =="" || cmbRoles.Text == "" )
             {
                 MessageBox.Show("Por favor completa todos los campos");
             }
