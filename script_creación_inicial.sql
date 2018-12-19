@@ -1075,9 +1075,9 @@ BEGIN
 	inner join LOS_DE_GESTION.Publicacion p on p.usuario_empresa_vendedora = e.username
 	inner join LOS_DE_GESTION.Grado_Publicacion g on g.id_Grado_Publicacion = p.id_Grado_Publicacion
 	inner join LOS_DE_GESTION.Ubicacion u on u.cod_publicacion = p.cod_publicacion
-	where p.fecha_vencimiento_publicacion between @fechaDesde and @fechaHasta and and p.id_Estado_Publicacion = 3 and u.id_Compra is null and p.id_Estado_Publicacion in (1,3)
+	where p.fecha_vencimiento_publicacion between @fechaDesde and @fechaHasta and p.id_Estado_Publicacion = 3 and u.id_Compra is null and p.id_Estado_Publicacion in (1,3)
 	group by e.razon_social, g.id_Grado_Publicacion, year(p.fecha_publicacion), month(p.fecha_publicacion)
-	order by year(p.fecha_publicacion), month(p.fecha_publicacion), g.id_Grado_Publicacion desc
+	order by year(p.fecha_publicacion) desc, month(p.fecha_publicacion) desc, g.id_Grado_Publicacion asc
 END
 go
 
