@@ -13,6 +13,7 @@ using PalcoNet.Classes.Util;
 using PalcoNet.Classes.Model;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.Session;
+using PalcoNet.Classes.Validator;
 
 namespace PalcoNet.GenerarPublicacion
 {
@@ -25,6 +26,7 @@ namespace PalcoNet.GenerarPublicacion
         private TipoDeUbicacionRepository tipoUbicacionRepository;
         private PublicacionRepository publicacionRepository;
         private UbicacionRepository ubicacionRepository;
+        private ControlValidator validator;
 
         public GenerarPublicacionForm()
         {
@@ -40,13 +42,14 @@ namespace PalcoNet.GenerarPublicacion
             this.previousForm = previousForm;
             this.InitializeRepositories();
             this.InitializeControls();
+            this.InitializeValidator();
         }
 
         private void btnCrear_Click(object sender, EventArgs e)
         {            
             try
             {
-                if (ValidarExistenciaDeUbicaciones() && ValidarExistenciaDeFechas() && ValidarFechaDeVencimiento() && ValidarFechaDePublicacion())
+                if (ValidarExistenciaDeUbicaciones() && ValidarExistenciaDeFechas() && ValidarFechaDeVencimiento() && ValidarFechaDePublicacion() && this.validator.Validate())
                 {
                     IList<Publicacion> publicaciones = this.CrearListaDePublicaciones();
                     foreach (Publicacion publicacion in publicaciones)
@@ -285,6 +288,16 @@ namespace PalcoNet.GenerarPublicacion
                 return false;
             }
             return true;
+        }
+
+        private void InitializeValidator() 
+        {
+            this.validator = new ControlValidator();
+            validator.Add(new ControlValidation(rTxtDescripcion, control => control.Text != "", "Complete el campo descripcion."));
+            validator.Add(new ControlValidation(cmbRubro, control => ((ComboBox)control).SelectedItem != null, "Elija un rubro de publicacion."));
+            validator.Add(new ControlValidation(txtDireccion, control => control.Text != "", "Complete el campo dirección."));
+            validator.Add(new ControlValidation(cmbGrado, control => ((ComboBox)control).SelectedItem != null, "Elija un grado de publicacion." ));
+            validator.Add(new ControlValidation(cmbEstado, control => ((ComboBox)control).SelectedItem != null, "Elija un estado de publicacion."));
         }
         #endregion
     }

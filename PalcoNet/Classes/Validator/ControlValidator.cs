@@ -8,7 +8,7 @@ namespace PalcoNet.Classes.Validator
 {
     class ControlValidator
     {
-        public IList<ControlValidation> validations;
+        private IList<ControlValidation> validations;
 
         public ControlValidator()
         {
