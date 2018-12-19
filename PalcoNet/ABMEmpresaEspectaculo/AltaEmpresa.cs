@@ -26,11 +26,13 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         private Form callerForm;
         private Usuario newUser;
         private IAccionPostCreacionUsuario accionPostCreacion = new NoVolverALogin();
+        int HABILITADO;
 
         public AltaEmpresa(Form caller)
         {
             InitializeComponent();
             callerForm = caller;
+            HABILITADO = -1;
         }
 
         public AltaEmpresa(Form callerForm, Usuario newUser, IAccionPostCreacionUsuario accionPostCreacion)
@@ -40,6 +42,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
             this.newUser = newUser;
             this.accionPostCreacion = accionPostCreacion;
             this.callerForm = callerForm;
+            HABILITADO = 0;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -74,7 +77,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                         inputParameters.AddParameter("@fecha_creacion",fecha_sistema );
                         if (Piso.Text == "")
                         {
-                            inputParameters.AddParameter("@nro_piso", -1);
+                            inputParameters.AddParameter("@nro_piso", null);
                         }
                         else
                         {
@@ -82,7 +85,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                         }
                         if (Departamento.Text == "")
                         {
-                            inputParameters.AddParameter("@depto", -1);
+                            inputParameters.AddParameter("@depto", null);
                         }
                         else
                         {
@@ -112,6 +115,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                             userParameters.AddParameter("@username", username);
                             userParameters.AddParameter("@password", password);
                             userParameters.AddParameter("@idRol", 3);
+                            userParameters.AddParameter("@intentos_login", HABILITADO);
                             ConnectionFactory.Instance()
                                              .CreateConnection()
                                              .ExecuteDataTableStoredProcedure(SpNames.AltaDeUsuario, userParameters);
@@ -154,6 +158,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
         }
         #endregion
 
+     
     }
 
 }

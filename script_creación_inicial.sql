@@ -692,13 +692,13 @@ end
 go
 
 /*3.REGISTRO DE USUARIO*/
-CREATE PROCEDURE LOS_DE_GESTION.PR_ALTA_DE_USUARIO @username nvarchar(255), @password nvarchar(255), @idRol numeric(18,0)
+CREATE PROCEDURE LOS_DE_GESTION.PR_ALTA_DE_USUARIO @username nvarchar(255), @password nvarchar(255), @idRol numeric(18,0),@intentos_login int
 AS
 BEGIN
 	BEGIN TRY
 		INSERT INTO GD2C2018.LOS_DE_GESTION.Usuario
-		(username, password, intentos_login, bloqueado_login_fallidos, habilitado)
-		VALUES(@username, LOS_DE_GESTION.FN_HASHPASS(@password), 0, 0, 1)
+		(username, [password], intentos_login, bloqueado_login_fallidos, habilitado)
+		VALUES(@username, LOS_DE_GESTION.FN_HASHPASS(@password), @intentos_login, 0, 1)
 
 		INSERT INTO GD2C2018.LOS_DE_GESTION.Usuario_X_Rol
 		(username, id_Rol)
@@ -802,7 +802,7 @@ BEGIN
 		end
 		else
 		begin
-			throw 50002, 'Hay publicaciones con el grado de publicacion asignado. No es posible eliminarlo'
+			throw 50002, 'Hay publicaciones con el grado de publicacion asignado. No es posible eliminarlo',1
 		end
 	end
 	else

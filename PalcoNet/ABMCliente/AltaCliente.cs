@@ -26,11 +26,13 @@ namespace PalcoNet.ABMCliente
         private Form CallerForm;
         private Usuario newUser;
         private IAccionPostCreacionUsuario accionPostCreacion = new NoVolverALogin();
+        int HABILITADO;
 
         public AltaCliente(Form caller)
         {
             InitializeComponent();
             CallerForm = caller;
+            HABILITADO = -1;
         }
 
         public AltaCliente(Form callerForm, Usuario newUser, IAccionPostCreacionUsuario accionPostCreacion) 
@@ -39,6 +41,7 @@ namespace PalcoNet.ABMCliente
             CallerForm = callerForm;
             this.newUser = newUser;
             this.accionPostCreacion = accionPostCreacion;
+            HABILITADO = 0;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -71,7 +74,7 @@ namespace PalcoNet.ABMCliente
                     inputParameters.AddParameter("@numero_calle", decimal.Parse(Numero.Text));
                     if (Piso.Text == "")
                     {
-                        inputParameters.AddParameter("@numero_piso", -1);
+                        inputParameters.AddParameter("@numero_piso", null);
                     }
                     else
                     {
@@ -79,7 +82,7 @@ namespace PalcoNet.ABMCliente
                     }
                     if (Departamento.Text == "")
                     {
-                        inputParameters.AddParameter("@departamento", -1);
+                        inputParameters.AddParameter("@departamento", null);
                     }
                     else
                     {
@@ -113,6 +116,7 @@ namespace PalcoNet.ABMCliente
                         userParameters.AddParameter("@username",username);
                         userParameters.AddParameter("@password",password);
                         userParameters.AddParameter("@idRol", 2);
+                        userParameters.AddParameter("@intentos_login", HABILITADO);
                         ConnectionFactory.Instance().CreateConnection().ExecuteDataTableStoredProcedure(SpNames.AltaDeUsuario,userParameters);
 
                         //Crear Cliente
