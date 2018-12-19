@@ -26,16 +26,15 @@ namespace PalcoNet.RegistroUsuario
             this.usuarioAModificar = usuarioAModificar;
             this.callerForm = callerForm;           
         }
-        /*
+       
         public ModificarPasswordUsuarioForm(Form previousForm)
         {
             InitializeComponent();
             this.usuarioRepository = new UsuarioRepository();
             this.usuarioAModificar = Session.Instance().LoggedUsername;
             callerForm = previousForm;
-            this.usuarioAModificar = usuarioAModificar;
         }
-        */
+         
         private void btnModificarPassword_Click(object sender, EventArgs e)
         {
             if (this.ValidarPasswordNoVacio())
