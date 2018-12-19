@@ -1685,7 +1685,7 @@ BEGIN
 		 
 /*Decisiones de migracion*/
 		 update LOS_DE_GESTION.Cliente
-		 set puntos_acum_validos = 10000, puntos_vencidos = 0, fecha_vencimiento_puntos = convert(datetime,'2018-12-31 23:59:59',120)
+		 set puntos_acum_validos = 10000, puntos_vencidos = 0, fecha_vencimiento_puntos = convert(datetime,'2020-12-31 23:59:59',120)
 		 
 		 update LOS_DE_GESTION.Tipo_Ubicacion
 		 set puntos_cliente_frecuente = 100
@@ -1776,7 +1776,7 @@ go
 /*CREACION DE ADMIN*/
 INSERT INTO LOS_DE_GESTION.Usuario
 (username, password, intentos_login, bloqueado_login_fallidos, habilitado)
-VALUES('admin', LOS_DE_GESTION.FN_HASHPASS('pass'), 0, 0, 1)
+VALUES('admin', LOS_DE_GESTION.FN_HASHPASS('w23e'), 0, 0, 1)
 go
 
 INSERT INTO LOS_DE_GESTION.Usuario_X_Rol
@@ -1796,7 +1796,7 @@ go
 /*PREMIOS*/
 INSERT INTO GD2C2018.LOS_DE_GESTION.Premio
 (descripcion, puntos_requeridos)
-VALUES('Entrada de cine', 1000),('Entrada de concierto', 8000),('Entrada de teatro', 5000),('Entrada de partido de futbol', 3000)
+VALUES('Entrada de cine', 1000),('Entrada de partido de futbol', 3000),('Entrada de teatro', 5000),('Entrada de concierto', 8000)
 go
 
 -----------------------GENERACION DE ADMINISTRADOR GENERAL----------------
