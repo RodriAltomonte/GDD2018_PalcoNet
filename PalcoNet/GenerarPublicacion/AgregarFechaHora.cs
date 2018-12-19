@@ -39,7 +39,7 @@ namespace PalcoNet.GenerarPublicacion
         {
             if (DateTimeUtil.Before(ConfigurationManager.Instance().GetSystemDateTime(), DateTimeUtil.Of(dtpFecha.Value, dtpHora.Value)))
             {
-                MessageBoxUtil.ShowError("La fecha y hora de espectaculo no puede ser anterior a la fecha de hoy.")
+                MessageBoxUtil.ShowError("La fecha y hora de espectaculo no puede ser anterior a la fecha de hoy.");
                 return false;
             }
 
