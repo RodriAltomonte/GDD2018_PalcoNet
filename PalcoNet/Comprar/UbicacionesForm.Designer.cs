@@ -90,6 +90,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UbicacionesForm";
             this.Text = "UbicacionesForm";
+            this.Shown += new System.EventHandler(this.UbicacionesForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUbicaciones)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);

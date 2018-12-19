@@ -11,6 +11,7 @@ using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.Session;
 using PalcoNet.Classes.Util.Form;
 using TFUtilites;
+using PalcoNet.Classes.Validator;
 
 namespace PalcoNet.EditarPublicacion
 {
@@ -18,17 +19,22 @@ namespace PalcoNet.EditarPublicacion
     {
         private PublicacionRepository publicacionRepository;
         private Form callerForm;
+        private ControlValidator validator;
 
         public EditarPublicacionForm(Form callerForm)
         {
             InitializeComponent();
             this.publicacionRepository = new PublicacionRepository();
             this.callerForm = callerForm;
+            this.InitializeValidator();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            dgvPublicaciones.DataSource = publicacionRepository.BuscarPublicacionesEditables(Session.Instance().LoggedUsername, txtDescripcion.Text);
+            if (this.validator.Validate())
+            {
+                dgvPublicaciones.DataSource = publicacionRepository.BuscarPublicacionesEditables(Session.Instance().LoggedUsername, txtDescripcion.Text);
+            }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -55,6 +61,12 @@ namespace PalcoNet.EditarPublicacion
         private void btnVolver_Click(object sender, EventArgs e)
         {
             NavigableFormUtil.BackwardTo(this, callerForm);
+        }
+
+        private void InitializeValidator()
+        {
+            this.validator = new ControlValidator();
+            validator.Add(new ControlValidation(txtDescripcion, control => control.Text.Length >= 3, "El campo descripcion es obligatorio y debe escribir al menos tres caracteres."));
         }
     }
 }

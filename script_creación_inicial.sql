@@ -1383,7 +1383,6 @@ AS
 	END
 GO
 
-
 CREATE PROCEDURE LOS_DE_GESTION.ModificarEmpresa
 @cuitOriginal NVARCHAR(255),
 @razon_social NVARCHAR(255),
@@ -1534,19 +1533,6 @@ END
 go
 
 
-CREATE PROCEDURE LOS_DE_GESTION.NuevaCompra
-@monto_total NUMERIC(18, 2),
-@fecha_compra DATETIME,
-@usuario_cliente_comprador nvarchar(255),
-@tarjeta_comprador nvarchar(255),
-@cantidad_ubicaciones numeric(18, 0)
-AS
-BEGIN
-	INSERT INTO LOS_DE_GESTION.Compra(monto_total,fecha_compra,usuario_cliente_comprador,tarjeta_comprador,cantidad_ubicaciones)
-	VALUES(@monto_total,@fecha_compra,@usuario_cliente_comprador,@tarjeta_comprador,@cantidad_ubicaciones)
-END
-GO
-
 CREATE PROCEDURE LOS_DE_GESTION.PR_CLIENTE_TIENE_TARJETA @username nvarchar(255), @tieneTarjeta bit output
 AS
 BEGIN
@@ -1654,9 +1640,8 @@ BEGIN
 	values (2,'Borrador'), (3,'Finalizada')
 
 /*decision de implementacion*/
-/* inserto rubro vacio*/
 	insert into  LOS_DE_GESTION.Rubro(id_Rubro,descripcion) 
-	values (1,' ')
+	values (1,'General')
 
 /*decision de implementacion*/ -- fecha_publicacion,id_Rubro,direccion_espectaculo,id_Grado_Publicacion estan en null y id_Estado_Publicacion,id_Rubro en 1
 /* inserto Publicacion*/
@@ -1716,9 +1701,6 @@ BEGIN
 		
 		update LOS_DE_GESTION.Publicacion
 		set id_Grado_Publicacion = 1, fecha_publicacion = dateadd(year, -1, fecha_vencimiento_publicacion), direccion_espectaculo = ''
-		
-		update LOS_DE_GESTION.Rubro set descripcion = 'General' where id_Rubro = 1
-
 END
 GO
 
