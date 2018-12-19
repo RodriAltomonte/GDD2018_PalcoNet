@@ -468,7 +468,7 @@ CREATE TABLE LOS_DE_GESTION.Premio(
  go
 
  CREATE TABLE LOS_DE_GESTION.Rendicion(
-	id_Rendicion numeric(18, 0) PRIMARY KEY,
+	id_Rendicion numeric(18, 0) IDENTITY(1,1) PRIMARY KEY,
 	importe_total_ventas numeric(18, 2),
 	importe_comision_total numeric(18, 2),
 	importe_rendicion_total numeric(18, 2),
@@ -1447,22 +1447,17 @@ END
 GO
 */
 
-
 CREATE PROCEDURE LOS_DE_GESTION.CrearRendicion
 @fecha_rendicion DATETIME,
 @razon_social NVARCHAR(255),
 @idRendicion numeric output
 AS
 BEGIN
-
-	 declare @id numeric;
-	 set @id = ((select Max(id_Rendicion) from LOS_DE_GESTION.Rendicion)+1)
-	INSERT INTO LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,
+	INSERT INTO LOS_DE_GESTION.Rendicion(importe_total_ventas,importe_comision_total,importe_rendicion_total,
 										fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
-	VALUES(@id,-1,-1,-1,@fecha_rendicion,(select username from LOS_DE_GESTION.Empresa e where e.razon_social = @razon_social ),'efectivo')
-	set @idRendicion = @id;
+	VALUES(-1,-1,-1,@fecha_rendicion,(select username from LOS_DE_GESTION.Empresa e where e.razon_social = @razon_social ),'Efectivo')
+	set @idRendicion = SCOPE_IDENTITY();
 	return
-
 END
 GO
 
@@ -1668,16 +1663,18 @@ BEGIN
 		 group by Espec_Empresa_Razon_Social ,Cli_Dni, Compra_Fecha,Espectaculo_Cod,Factura_Nro							       
 		 
 /* inserto rendicion*/
+		 set IDENTITY_INSERT LOS_DE_GESTION.Rendicion on
 		 insert into LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
 		 SELECT distinct Factura_Nro, null,null,Factura_Total,Factura_Fecha,Espec_Empresa_Mail,Forma_Pago_Desc
 		 FROM gd_esquema.Maestra where Factura_Nro is not null
-
+		set IDENTITY_INSERT LOS_GESTION.Rendicion off
+		 
 /* inserto Item_Rendicion*/--revisar sum(Item_Factura_Monto)
 		 insert into LOS_DE_GESTION.Item_Rendicion(id_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones,id_Compra)
 		 SELECT Factura_Nro, sum(Ubicacion_Precio),sum(Ubicacion_Precio) - sum(Item_Factura_Monto),sum(Item_Factura_Monto),Item_Factura_Descripcion,Item_Factura_Cantidad,(select top 1 c.id_Compra from LOS_DE_GESTION.Compra c where sum(Ubicacion_Precio) = c.monto_total and c.fecha_compra =Compra_Fecha and Cli_Dni = c.usuario_cliente_comprador and sum(Compra_Cantidad) = c.cantidad_ubicaciones)
 		 FROM gd_esquema.Maestra where Factura_Nro is not null 
 		 group by Factura_Nro,Item_Factura_Descripcion,Item_Factura_Cantidad,Compra_Fecha,Cli_Dni
-
+		 
 /* inserto Ubicacion*/
 		 insert into LOS_DE_GESTION.Ubicacion(cod_publicacion,fila,asiento,ubicacion_sin_numerar,precio,id_Tipo_Ubicacion,id_Compra)
 		 SELECT p.cod_publicacion, Ubicacion_Fila, Ubicacion_Asiento,Ubicacion_Sin_numerar,Ubicacion_Precio,Ubicacion_tipo_codigo,
@@ -1792,7 +1789,7 @@ VALUES('admin', 'Administrador', 'Administrador', 'DNI', 99999999, '20-99999999-
 GO
 INSERT INTO GD2C2018.LOS_DE_GESTION.Empresa
 (username, razon_social, cuit, mail, telefono, calle, nro_calle, nro_piso, depto, localidad, codigo_postal, ciudad, fecha_creacion)
-VALUES('admin', 'Administrador', '20-999999999-0', 'admin@mail.com', 99999999, 'Calle 1', 1234, 1, '1', 'Localidad admin', '1234', 'Ciudad admin', convert(datetime,'2018-01-01 00:00:00',120))
+VALUES('admin', 'Administrador', '20-99999999-0', 'admin@mail.com', 99999999, 'Calle 1', 1234, 1, '1', 'Localidad admin', '1234', 'Ciudad admin', convert(datetime,'2018-01-01 00:00:00',120))
 go
 
 
