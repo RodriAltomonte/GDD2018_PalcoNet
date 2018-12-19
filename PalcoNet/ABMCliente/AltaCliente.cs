@@ -74,7 +74,7 @@ namespace PalcoNet.ABMCliente
                     inputParameters.AddParameter("@numero_calle", decimal.Parse(Numero.Text));
                     if (Piso.Text == "")
                     {
-                        inputParameters.AddParameter("@numero_piso", null);
+                        inputParameters.AddParameter("@numero_piso", DBNull.Value);
                     }
                     else
                     {
@@ -82,7 +82,7 @@ namespace PalcoNet.ABMCliente
                     }
                     if (Departamento.Text == "")
                     {
-                        inputParameters.AddParameter("@departamento", null);
+                        inputParameters.AddParameter("@departamento", DBNull.Value);
                     }
                     else
                     {

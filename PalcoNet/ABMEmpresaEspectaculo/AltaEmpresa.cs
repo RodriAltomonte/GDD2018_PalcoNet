@@ -77,7 +77,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                         inputParameters.AddParameter("@fecha_creacion",fecha_sistema );
                         if (Piso.Text == "")
                         {
-                            inputParameters.AddParameter("@nro_piso", null);
+                            inputParameters.AddParameter("@nro_piso", DBNull.Value);
                         }
                         else
                         {
@@ -85,7 +85,7 @@ namespace PalcoNet.ABMEmpresaEspectaculo
                         }
                         if (Departamento.Text == "")
                         {
-                            inputParameters.AddParameter("@depto", null);
+                            inputParameters.AddParameter("@depto", DBNull.Value);
                         }
                         else
                         {
