@@ -760,7 +760,7 @@ go
 CREATE PROCEDURE LOS_DE_GESTION.PR_BUSCAR_USUARIOS @usernameFilter nvarchar(255)
 AS
 BEGIN
-	select u.username from LOS_DE_GESTION.Usuario u where u.username like '%'+ @usernameFilter +'%'
+	select u.username from LOS_DE_GESTION.Usuario u where u.username like '%'+ @usernameFilter +'%' and habilitado = 1
 END
 go
 

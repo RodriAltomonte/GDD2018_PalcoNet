@@ -39,6 +39,7 @@ namespace PalcoNet.RegistroUsuario
             {
                 usuarioRepository.DarDeBajaUnUsuarioPorAdmin(txtUsuarioSeleccionado.Text);
                 MessageBoxUtil.ShowInfo("Usuario dado de baja correctamente.");
+                dgvUsuarios.DataSource = usuarioRepository.BuscarUsuarios(txtBuscar.Text);
             }
         }
 
