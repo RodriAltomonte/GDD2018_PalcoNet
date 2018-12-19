@@ -1667,7 +1667,7 @@ BEGIN
 		 insert into LOS_DE_GESTION.Rendicion(id_Rendicion,importe_total_ventas,importe_comision_total,importe_rendicion_total,fecha_rendicion,usuario_empresa_a_rendir,forma_pago_a_empresa)
 		 SELECT distinct Factura_Nro, null,null,Factura_Total,Factura_Fecha,Espec_Empresa_Mail,Forma_Pago_Desc
 		 FROM gd_esquema.Maestra where Factura_Nro is not null
-		set IDENTITY_INSERT LOS_GESTION.Rendicion off
+		set IDENTITY_INSERT LOS_DE_GESTION.Rendicion off
 		 
 /* inserto Item_Rendicion*/--revisar sum(Item_Factura_Monto)
 		 insert into LOS_DE_GESTION.Item_Rendicion(id_Rendicion,importe_venta,importe_comision,importe_rendicion,descripcion,cantidad_ubicaciones,id_Compra)
