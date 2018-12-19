@@ -15,6 +15,8 @@ using PalcoNet.Classes.Repository;
 using PalcoNet.Classes.CustomException;
 using PalcoNet.Classes.Interfaces;
 using PalcoNet.Classes.Misc;
+using PalcoNet.Classes.Validator;
+
 
 namespace PalcoNet.RegistroUsuario
 {
@@ -23,6 +25,7 @@ namespace PalcoNet.RegistroUsuario
         private Form previousForm;
         private RolRepository rolRepository;
         private UsuarioRepository usuarioRepository;
+        private ControlValidator controlValidator;
 
         public RegistroDeUsuarioForm(Form previousForm)
         {
@@ -30,7 +33,11 @@ namespace PalcoNet.RegistroUsuario
             this.previousForm = previousForm;
             this.rolRepository = new RolRepository();
             this.usuarioRepository = new UsuarioRepository();
+            this.controlValidator = new ControlValidator();
+            controlValidator.Add(new ControlValidation(txtPassword, control => control.Text != "", "Ingrese Contraseña"));
+            controlValidator.Add(new ControlValidation(txtUsername, control => control.Text != "", "Ingrese Nombre de Usuario"));
 
+            controlValidator.Add(new ControlValidation(cmbRoles, control => ((ComboBox)control).SelectedItem != null, "Complete todos los Campos"));
             ComboBoxFiller<Rol, decimal>.Fill(cmbRoles)
                 .KeyAs(rol => rol.IdRol)
                 .ValueAs(rol => rol.Descripcion)
@@ -39,18 +46,21 @@ namespace PalcoNet.RegistroUsuario
 
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            decimal selectedRolId = ((ComboBoxItem<decimal>)cmbRoles.SelectedItem).Value;
-
-            Usuario newUser = UsuarioFactory.CrearNuevoUsuario(selectedRolId, txtUsername.Text, txtPassword.Text);
-
-            try
+            if (controlValidator.Validate())
             {
-                IAccionPostCreacionUsuario accionPostCreacion = new VolverALogin(this);
-                NavigableFormUtil.ForwardTo(this, ABMClienteEmpresaFormFactory.CrearForm(selectedRolId, this, newUser, accionPostCreacion));
-            }
-            catch (StoredProcedureException ex)
-            {
-                MessageBoxUtil.ShowError(ex.Message);
+                decimal selectedRolId = ((ComboBoxItem<decimal>)cmbRoles.SelectedItem).Value;
+
+                Usuario newUser = UsuarioFactory.CrearNuevoUsuario(selectedRolId, txtUsername.Text, txtPassword.Text);
+
+                try
+                {
+                    IAccionPostCreacionUsuario accionPostCreacion = new VolverALogin(this);
+                    NavigableFormUtil.ForwardTo(this, ABMClienteEmpresaFormFactory.CrearForm(selectedRolId, this, newUser, accionPostCreacion));
+                }
+                catch (StoredProcedureException ex)
+                {
+                    MessageBoxUtil.ShowError(ex.Message);
+                }
             }
         }
 
